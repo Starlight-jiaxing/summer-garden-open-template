@@ -1,0 +1,836 @@
+/* ==========================================================================
+   「Summer Diary · 夏日个人宇宙」杂志封面排版 (home.css)
+   设计理念：日系画报、纸质日记感、图二艺术自述卡片、透明手绘少女走入画面
+   色彩：米白 (#FAF8F2) + 天空蓝 (#A8D8F0) + 植物绿 (#8AAA6A) + 墨色深灰 (#1E293B)
+   ========================================================================== */
+
+/* 全局基底：米白胶片纸质质感 */
+html, body.summer-diary-page {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	min-height: 100vh;
+	background-color: #FAF8F2; /* 米白日记纸张色 */
+	font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+	color: #1e293b;
+	overflow-x: hidden;
+	position: relative;
+}
+
+/* 胶片颗粒与纸张肌理叠加层 (手账特种纸微肌理 + 点阵 + 极浅横格) */
+.paper-grain-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: 
+		radial-gradient(rgba(45, 55, 72, 0.045) 1px, transparent 0),
+		linear-gradient(rgba(45, 55, 72, 0.015) 1px, transparent 0);
+	background-size: 24px 24px, 100% 36px;
+	pointer-events: none;
+	z-index: 0;
+}
+
+/* ==========================================================================
+   主容器：杂志全景排版画布
+   ========================================================================== */
+.diary-container {
+	position: relative;
+	z-index: 1;
+	min-height: 100vh;
+	width: 100%;
+	max-width: 1560px;
+	margin: 0 auto;
+	box-sizing: border-box;
+	/* 避开左侧胶囊导航（胶囊占 56px + 20px 边距 = 76px） */
+	padding: 24px clamp(20px, 3.5vw, 56px) 36px clamp(88px, 6.5vw, 110px);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+/* ==========================================================================
+   1. 顶部报头标线 (Magazine Masthead Bar)
+   ========================================================================== */
+.masthead-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 16px;
+	border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+	font-size: 11.5px;
+	font-weight: 700;
+	letter-spacing: 1.5px;
+	text-transform: uppercase;
+	color: #64748b;
+	margin-bottom: clamp(20px, 2.5vw, 40px);
+}
+
+.masthead-left, .masthead-center, .masthead-right {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.masthead-left .issue-tag {
+	color: #8AAA6A; /* 植物绿 */
+	font-weight: 800;
+}
+
+.masthead-center .geo-coord {
+	letter-spacing: 2px;
+	color: #94a3b8;
+	font-family: monospace;
+}
+
+.masthead-right .weather-clock {
+	color: #1e293b;
+	font-family: monospace;
+	font-size: 13px;
+}
+
+.divider-dot {
+	color: #cbd5e1;
+}
+
+/* ==========================================================================
+   2. 杂志核心主区 (双栏艺术排版：左上大自述 + 右侧手绘少女)
+   ========================================================================== */
+.diary-main {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: clamp(24px, 3.5vw, 64px);
+	flex: 1;
+	min-height: calc(100vh - 120px);
+	position: relative;
+}
+
+/* ==========================================================================
+   背景天体装饰：右上中部「个人宇宙」星图轨迹线 (带星轨徐徐描出动画)
+   ========================================================================== */
+.celestial-orbit-track {
+	position: absolute;
+	top: clamp(20px, 4vh, 60px);
+	right: clamp(100px, 12vw, 240px);
+	width: clamp(380px, 46vw, 680px);
+	height: auto;
+	pointer-events: none;
+	z-index: 1;
+	opacity: 0.85; /* 清晰优雅的纸面手绘水彩墨线质感 */
+	overflow: visible;
+}
+
+.orbit-path {
+	stroke: rgba(140, 160, 185, 0.55);
+}
+
+.orbit-subpath {
+	stroke: rgba(140, 160, 185, 0.28);
+}
+
+/* 星芒微点 (率先淡入浮现) */
+.orbit-sparkle {
+	opacity: 0;
+	animation: sparkleFadeIn 0.8s ease 0.4s forwards;
+}
+
+@keyframes sparkleFadeIn {
+	0% { opacity: 0; transform: scale(0.3); }
+	100% { opacity: 0.65; transform: scale(1); }
+}
+
+/* 遮罩描边：控制虚线星轨自左下往右上缓缓画出 (持续 1.5s) */
+.orbit-mask-stroke {
+	stroke-dasharray: 850;
+	stroke-dashoffset: 850;
+	animation: drawOrbitLine 1.5s cubic-bezier(0.25, 0.8, 0.25, 1) 0.65s forwards;
+}
+
+@keyframes drawOrbitLine {
+	0% { stroke-dashoffset: 850; }
+	100% { stroke-dashoffset: 0; }
+}
+
+/* 伴随天体微环 (星轨画过时轻盈泛光点亮) */
+.orbit-node {
+	opacity: 0;
+	transform-origin: center;
+	animation: nodeGentlyGlow 0.65s ease-out 1.7s forwards;
+}
+
+.orbit-node.node-2 {
+	animation-delay: 1.9s;
+}
+
+@keyframes nodeGentlyGlow {
+	0% { opacity: 0; transform: scale(0.8); }
+	60% { opacity: 0.85; transform: scale(1.1); }
+	100% { opacity: 0.7; transform: scale(1); }
+}
+
+/* 轨迹坐标小字 (延迟柔和淡入) */
+.orbit-coord-text {
+	opacity: 0;
+	animation: coordFadeIn 0.7s ease 2.1s forwards;
+}
+
+@keyframes coordFadeIn {
+	0% { opacity: 0; transform: translateY(4px); }
+	100% { opacity: 0.65; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   左栏：编辑叙事与私人手账自述区 (Journal Narrative)
+   ========================================================================== */
+.diary-editorial {
+	flex: 1 1 580px;
+	width: 55%;
+	max-width: 680px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-self: stretch;
+	padding: clamp(14px, 2.2vw, 32px) 0 clamp(8px, 1.5vh, 20px) 0;
+	z-index: 3;
+}
+
+/* 手账自述卡片容器 */
+.journal-narrative-card {
+	display: flex;
+	align-items: stretch;
+	gap: clamp(16px, 2vw, 24px);
+	position: relative;
+}
+
+/* 左侧雅致书页批注竖线 (向下柔和伸展生长动效) */
+.journal-accent-bar {
+	width: 3.5px;
+	min-width: 3.5px;
+	background: linear-gradient(180deg, #8AAA6A 0%, #A3C584 60%, rgba(138, 170, 106, 0.25) 100%);
+	border-radius: 3px;
+	transform-origin: top center;
+	animation: barGrow 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+}
+
+/* 文字流动区 */
+.journal-text-flow {
+	flex: 1;
+}
+
+/* 首句强调句 (大字号、墨色深、手账第一句) */
+.narrative-lead {
+	font-family: 'Noto Serif SC', 'Songti SC', Georgia, serif;
+	font-size: clamp(22px, 2.2vw, 28px);
+	font-weight: 600;
+	color: #1e293b;
+	line-height: 1.55;
+	letter-spacing: 0.6px;
+	margin: 0 0 24px 0;
+}
+
+/* 正文段落 (舒展大行距、温润安静阅读感) */
+.narrative-para {
+	font-family: 'Noto Serif SC', 'PingFang SC', Georgia, serif;
+	font-size: clamp(15.5px, 1.35vw, 17.5px);
+	color: #334155;
+	line-height: 2.18;
+	letter-spacing: 0.45px;
+	margin: 0 0 20px 0;
+}
+
+/* ==========================================================================
+   中下部：兴趣胶片条预告 (Film Strip Negative Chips)
+   ========================================================================== */
+.interest-film-strip {
+	margin-top: clamp(24px, 3.5vh, 38px);
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	position: relative;
+	z-index: 4;
+}
+
+.film-chips-wrap {
+	display: flex;
+	align-items: center;
+	gap: clamp(8px, 1.2vw, 14px);
+	flex-wrap: wrap;
+}
+
+.film-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	padding: 6px 12px 6px 9px;
+	background: rgba(255, 255, 255, 0.72);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	border: 1px solid rgba(226, 232, 240, 0.88);
+	border-radius: 6px;
+	text-decoration: none;
+	color: inherit;
+	box-shadow: 
+		0 4px 12px rgba(30, 41, 59, 0.03),
+		inset 0 0 0 1px rgba(255, 255, 255, 0.65);
+	transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+	position: relative;
+	opacity: 0;
+	transform: translateY(4px);
+}
+
+/* 标签逐个轻柔淡入，不大幅弹跳 */
+.film-chip.chip-1 {
+	animation: chipGentleIn 0.5s ease-out 2.0s forwards;
+	--chip-rot: -1.5deg;
+}
+.film-chip.chip-2 {
+	animation: chipGentleIn 0.5s ease-out 2.12s forwards;
+	--chip-rot: 1.2deg;
+}
+.film-chip.chip-3 {
+	animation: chipGentleIn 0.5s ease-out 2.24s forwards;
+	--chip-rot: -1deg;
+}
+.film-chip.chip-4 {
+	animation: chipGentleIn 0.5s ease-out 2.36s forwards;
+	--chip-rot: 1.6deg;
+}
+
+@keyframes chipGentleIn {
+	0% {
+		opacity: 0;
+		transform: translateY(5px) rotate(var(--chip-rot, 0deg));
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0) rotate(var(--chip-rot, 0deg));
+	}
+}
+
+/* 胶片左侧打孔微线条 */
+.chip-holes {
+	width: 3px;
+	height: 12px;
+	border-left: 2px dotted rgba(148, 163, 184, 0.55);
+	margin-right: 1px;
+}
+
+.chip-num {
+	font-family: 'Playfair Display', Georgia, serif;
+	font-size: 13px;
+	font-weight: 700;
+	color: #8AAA6A; /* 植物绿 */
+	line-height: 1;
+}
+
+.chip-name {
+	font-family: 'Noto Serif SC', 'PingFang SC', serif;
+	font-size: 13px;
+	font-weight: 500;
+	color: #1e293b;
+	line-height: 1;
+}
+
+.chip-en {
+	font-family: 'Inter', monospace;
+	font-size: 9px;
+	font-weight: 600;
+	letter-spacing: 1px;
+	color: #94a3b8;
+	line-height: 1;
+}
+
+/* 标签 hover 时轻轻抬起 */
+.film-chip:hover {
+	transform: translateY(-3px) rotate(0deg) scale(1.02);
+	background: rgba(255, 255, 255, 0.95);
+	border-color: rgba(138, 170, 106, 0.5);
+	box-shadow: 0 6px 16px rgba(30, 41, 59, 0.06);
+}
+
+.film-chip:hover .chip-num {
+	color: #0284c7; /* 悬停点亮天空蓝 */
+}
+
+.film-chip.is-lifting {
+	opacity: 1;
+	transform: translateY(-8px) rotate(0deg) scale(1.04);
+	border-color: rgba(85, 124, 95, 0.68);
+	box-shadow: 0 12px 24px rgba(53, 90, 64, 0.13);
+}
+
+/* ==========================================================================
+   网页左下角手账信息生态 (Footer Stamp & Meta Cluster)
+   ========================================================================== */
+.journal-left-footer {
+	margin-top: auto;
+	padding-top: clamp(24px, 4vh, 48px);
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 10px;
+	position: relative;
+	z-index: 4;
+}
+
+/* 1. 落款组：签名与邮戳紧凑相伴，宛如一组印记落款 (轻微缩放 0.96 到 1) */
+.footer-signoff-cluster {
+	display: flex;
+	align-items: center;
+	gap: clamp(10px, 1.2vw, 16px);
+	opacity: 0;
+	animation: signoffLand 0.6s cubic-bezier(0.22, 1, 0.36, 1) 1.8s forwards;
+}
+
+@keyframes signoffLand {
+	0% {
+		opacity: 0;
+		transform: scale(0.96);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+.signoff-signature-wrap {
+	display: flex;
+	align-items: center;
+	transform: rotate(-2deg);
+}
+
+.kean-pure-signature {
+	height: clamp(42px, 3.8vw, 54px);
+	width: auto;
+	max-width: 145px;
+	object-fit: contain;
+	filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.03));
+	transition: transform 0.3s ease;
+	user-select: none;
+	cursor: default;
+}
+
+.kean-pure-signature:hover {
+	transform: scale(1.05) rotate(-1deg);
+}
+
+/* 极淡复古双环圆形日期旅行邮戳 */
+.vintage-postal-stamp {
+	width: clamp(62px, 5.5vw, 74px);
+	height: clamp(62px, 5.5vw, 74px);
+	color: rgba(95, 115, 138, 0.55);
+	transform: rotate(-6deg);
+	transition: transform 0.35s ease, color 0.3s ease;
+	cursor: default;
+	user-select: none;
+	flex-shrink: 0;
+}
+
+.vintage-postal-stamp:hover {
+	transform: rotate(-2deg) scale(1.05);
+	color: rgba(138, 170, 106, 0.85);
+}
+
+.postal-stamp-svg {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+.stamp-arc-text {
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 6.8px;
+	font-weight: 700;
+	letter-spacing: 1.2px;
+	fill: currentColor;
+}
+
+.stamp-date-main {
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 10.5px;
+	font-weight: 800;
+	letter-spacing: 1.2px;
+	fill: currentColor;
+}
+
+.stamp-date-sub {
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 6.8px;
+	font-weight: 700;
+	letter-spacing: 1.2px;
+	opacity: 0.85;
+	fill: currentColor;
+}
+
+/* 2. 作者旁白小句子：位于签名下方 */
+.whisper-note {
+	font-family: 'Noto Serif SC', 'Cormorant Garamond', Georgia, serif;
+	font-style: italic;
+	font-size: clamp(13px, 1.1vw, 14px);
+	color: #64748b;
+	letter-spacing: 0.6px;
+	margin: 0;
+	opacity: 0;
+	animation: noteAwake 0.5s ease 2.05s forwards;
+}
+
+@keyframes noteAwake {
+	0% { opacity: 0; transform: translateY(4px); }
+	100% { opacity: 0.85; transform: translateY(0); }
+}
+
+/* 3. 手账页脚细线与出版标 (PAGE 01 / INTRODUCTION / 35MM · MEMORY SAVED) */
+.journal-footer-rule {
+	width: 100%;
+	max-width: 420px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	margin-top: 2px;
+	opacity: 0;
+	animation: ruleAwake 0.5s ease 2.25s forwards;
+}
+
+@keyframes ruleAwake {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+.rule-line {
+	height: 1px;
+	width: 100%;
+	background: linear-gradient(90deg, rgba(203, 213, 225, 0.75) 0%, rgba(203, 213, 225, 0.4) 75%, transparent 100%);
+}
+
+.rule-meta {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-family: 'Courier New', monospace;
+	font-size: 9.5px;
+	font-weight: 700;
+	letter-spacing: 1.4px;
+	color: #94a3b8;
+	text-transform: uppercase;
+}
+
+.rule-page {
+	color: #8aaa6a;
+}
+
+.rule-dot {
+	color: #cbd5e1;
+}
+
+.rule-status {
+	color: #94a3b8;
+	font-size: 8.5px;
+	letter-spacing: 1.8px;
+}
+
+/* ==========================================================================
+   正文文字淡入显影系统 (逐行微移浮现)
+   ========================================================================== */
+.journal-anim-line {
+	opacity: 0;
+	transform: translateY(10px);
+	will-change: transform, opacity;
+}
+
+@keyframes barGrow {
+	0% {
+		transform: scaleY(0);
+		opacity: 0;
+	}
+	100% {
+		transform: scaleY(1);
+		opacity: 1;
+	}
+}
+
+@keyframes journalLineFadeIn {
+	0% {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.line-1 {
+	animation: journalLineFadeIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards;
+}
+
+.line-2 {
+	animation: journalLineFadeIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
+}
+
+.line-3 {
+	animation: journalLineFadeIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.75s forwards;
+}
+
+.line-4 {
+	animation: journalLineFadeIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) 1.0s forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.journal-anim-line,
+	.journal-accent-bar,
+	.orbit-sparkle,
+	.orbit-mask-stroke,
+	.orbit-node,
+	.orbit-coord-text,
+	.celestial-orbit-track,
+	.character-cutout-img,
+	.washi-tape-strip,
+	.handwritten-notes,
+	.footer-signoff-cluster,
+	.whisper-note,
+	.journal-footer-rule,
+	.film-chip {
+		animation: none !important;
+		opacity: 1 !important;
+		transform: none !important;
+	}
+}
+
+/* ==========================================================================
+   右栏：视觉与艺术展台 (Visual Stage - 沉稳静谧、舒展呼吸感)
+   ========================================================================== */
+.diary-visual {
+	flex: 0 1 480px;
+	width: 44%;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-end;
+	align-self: flex-end;
+	margin-bottom: -36px; /* 沉底贴合视口下边缘，自然消解裙摆裁切感 */
+}
+
+/* 中心视觉：手绘少女舞台 */
+.character-stage {
+	position: relative;
+	z-index: 2;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+/* 半透明日系和纸胶带 (Washi Tape Accent) */
+.washi-tape-strip {
+	position: absolute;
+	top: clamp(0px, 1.2vh, 18px);
+	right: clamp(40px, 5vw, 85px);
+	width: 72px;
+	height: 20px;
+	z-index: 4;
+	background: rgba(226, 232, 218, 0.58);
+	backdrop-filter: blur(2px);
+	border-left: 2px dashed rgba(175, 192, 165, 0.45);
+	border-right: 2px dashed rgba(175, 192, 165, 0.45);
+	transform: rotate(-3.5deg);
+	box-shadow: 0 1px 4px rgba(30, 41, 59, 0.04);
+	pointer-events: none;
+	opacity: 0;
+	animation: tapeFadeIn 0.6s ease 1.2s forwards;
+}
+
+@keyframes tapeFadeIn {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+/* 手绘少女透明线稿：开场即以 0.12 淡铅笔底稿形式存在于纸面，随后平缓加深至 0.75，无大幅位移 */
+.character-cutout-img {
+	max-width: 100%;
+	height: clamp(380px, 66vh, 610px);
+	width: auto;
+	object-fit: contain;
+	object-position: bottom center;
+	display: block;
+	/* 底部铅笔线稿自然渐隐柔化微遮罩，消解横切线 */
+	-webkit-mask-image: linear-gradient(to bottom, #000 84%, rgba(0, 0, 0, 0.4) 96%, transparent 100%);
+	mask-image: linear-gradient(to bottom, #000 84%, rgba(0, 0, 0, 0.4) 96%, transparent 100%);
+	/* 细腻柔和环境光阴影 */
+	filter: drop-shadow(0 20px 36px rgba(15, 23, 42, 0.05));
+	/* 开场即以淡铅笔草稿状态在纸面上，消除断层空屏感 */
+	opacity: 0.12;
+	animation: charPencilDarken 1.2s ease-out 0.8s forwards;
+	user-select: none;
+	pointer-events: none;
+}
+
+@keyframes charPencilDarken {
+	0% {
+		opacity: 0.12;
+	}
+	100% {
+		opacity: 0.75;
+	}
+}
+
+/* ==========================================================================
+   人物周围：手写小批注 (Handwritten Margin Notes)
+   ========================================================================== */
+.handwritten-notes {
+	position: absolute;
+	top: clamp(16px, 3vh, 42px);
+	left: clamp(-45px, -4.5vw, -15px);
+	z-index: 5;
+	pointer-events: none;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	transform: rotate(-3deg);
+	opacity: 0;
+	animation: noteFadeIn 0.6s ease 1.3s forwards;
+}
+
+@keyframes noteFadeIn {
+	0% { opacity: 0; transform: translateY(4px) rotate(-3deg); }
+	100% { opacity: 1; transform: translateY(0) rotate(-3deg); }
+}
+
+.note-item {
+	display: inline-flex;
+	align-items: baseline;
+	gap: 6px;
+	background: rgba(255, 255, 255, 0.45);
+	backdrop-filter: blur(4px);
+	padding: 2px 8px;
+	border-radius: 4px;
+}
+
+.note-corner {
+	font-family: 'Cormorant Garamond', Georgia, serif;
+	font-style: italic;
+	font-size: 13.5px;
+	color: #64748b;
+	letter-spacing: 0.8px;
+}
+
+.note-asterisk {
+	font-size: 10px;
+	color: #8AAA6A;
+}
+
+.note-poetic {
+	font-family: 'Noto Serif SC', Georgia, serif;
+	font-size: 12.5px;
+	color: #475569;
+}
+
+.note-cn {
+	font-style: italic;
+	color: #334155;
+}
+
+.note-tag {
+	font-family: 'Courier New', monospace;
+	font-size: 10px;
+	color: #94a3b8;
+	font-style: normal;
+	letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   响应式断点适配：平板与手机优雅排版
+   ========================================================================== */
+@media (max-width: 1120px) {
+	.diary-main {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 32px;
+	}
+
+	.celestial-orbit-track {
+		display: none; /* 平板及窄屏隐藏背景虚线避免遮挡内容 */
+	}
+
+	.diary-editorial {
+		width: 100%;
+		max-width: 100%;
+		padding: 10px 0 0 0;
+	}
+
+	.diary-visual {
+		width: 100%;
+		align-self: center;
+		min-height: auto;
+		margin-bottom: -20px;
+	}
+
+	.character-cutout-img {
+		max-height: 48vh;
+	}
+}
+
+@media (max-width: 600px) {
+	.diary-container {
+		padding: 16px 20px 84px;
+	}
+	.journal-anim-line { animation-duration: .4s; }
+	.line-1 { animation-delay: .08s; }
+	.line-2 { animation-delay: .16s; }
+	.line-3 { animation-delay: .24s; }
+	.line-4 { animation-delay: .32s; }
+
+	.masthead-bar {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 6px;
+	}
+
+	.narrative-lead {
+		font-size: 20px;
+		margin-bottom: 16px;
+	}
+
+	.narrative-para {
+		font-size: 15px;
+		line-height: 2.0;
+		margin-bottom: 14px;
+	}
+
+	.film-chips-wrap {
+		gap: 6px;
+	}
+
+	.film-chip {
+		padding: 5px 9px;
+	}
+
+	.handwritten-notes {
+		left: 0;
+		top: 10px;
+	}
+
+	.footer-signoff-cluster {
+		gap: 10px;
+	}
+
+	.kean-pure-signature {
+		height: 38px;
+	}
+
+	.vintage-postal-stamp {
+		width: 56px;
+		height: 56px;
+	}
+
+	.journal-footer-rule {
+		max-width: 100%;
+	}
+
+	.character-cutout-img {
+		max-height: 38vh;
+	}
+}

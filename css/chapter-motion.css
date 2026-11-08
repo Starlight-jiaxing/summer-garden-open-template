@@ -1,0 +1,293 @@
+/* Chapter entrances keep their final layout in the document flow. */
+.glass-capsule-nav .capsule-header {
+	width: 100%;
+	border: 0;
+	background: transparent;
+	font: inherit;
+}
+.glass-capsule-nav .capsule-header:focus-visible { outline: 2px solid #477354; outline-offset: -2px; }
+#photo.photo-universe-section { z-index: 0; }
+
+.camp-section.chapter-ready:not(.chapter-title-in) .section-header-block .section-eyebrow,
+.camp-section.chapter-ready:not(.chapter-title-in) .section-header-block .game-checkpoint-badge,
+.camp-section.chapter-ready:not(.chapter-title-in) .section-header-block .section-clean-subtitle {
+	opacity: 0;
+}
+
+.camp-section.chapter-title-in .section-header-block .section-eyebrow,
+.camp-section.chapter-title-in .section-header-block .game-checkpoint-badge {
+	animation: chapterFade .3s ease both;
+}
+
+.camp-section.chapter-title-in .section-header-block .section-clean-subtitle {
+	animation: chapterFade .3s ease .12s both;
+}
+
+.camp-section.chapter-ready:not(.chapter-title-in) .splash-heading .splash-char {
+	opacity: .16;
+	filter: blur(5px);
+	transform: translateY(3px) scale(.98);
+	text-shadow: 0 0 14px var(--splash-glow, rgba(76, 119, 55, .3));
+}
+
+.camp-section .splash-heading { letter-spacing: 0; }
+.camp-section .section-header-block .section-eyebrow { display: block; }
+.camp-section .section-header-block .splash-heading {
+	display: block;
+	width: max-content;
+	max-width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.camp-section.chapter-title-in .splash-heading .splash-char {
+	animation: chapterTypeResolve .58s cubic-bezier(.2, .7, .25, 1) var(--char-delay, 0ms) both;
+}
+
+@keyframes chapterTypeResolve {
+	0% { opacity: .16; filter: blur(5px); transform: translateY(3px) scale(.98); text-shadow: 0 0 14px var(--splash-glow); }
+	48% { opacity: .78; filter: blur(1.4px); transform: translateY(0) scale(1.012); text-shadow: 0 0 22px var(--splash-glow), 0 0 28px var(--splash-glow-secondary); }
+	100% { opacity: 1; filter: blur(0); transform: none; text-shadow: none; }
+}
+
+#reading.chapter-title-in .splash-heading .splash-char { animation-name: readingInkResolve; }
+@keyframes readingInkResolve {
+	0% { opacity: .14; filter: blur(6px); transform: translateY(2px); text-shadow: 0 0 5px rgba(70, 50, 38, .22); }
+	50% { opacity: .72; filter: blur(2px); transform: none; text-shadow: 0 0 12px rgba(70, 50, 38, .3); }
+	100% { opacity: 1; filter: none; transform: none; text-shadow: none; }
+}
+
+@keyframes chapterFade {
+	from { opacity: 0; transform: translateY(4px); }
+	to { opacity: 1; transform: none; }
+}
+
+.camp-section.chapter-ready:not(.chapter-visual-in) > .section-hero-visual,
+.camp-section.chapter-ready:not(.chapter-details-in) > .section-content-body,
+#photo.chapter-ready:not(.chapter-details-in) > .gallery-dock,
+#photo.chapter-ready:not(.chapter-details-in) > .photo-counter {
+	opacity: 0;
+	transform: translateY(12px);
+	pointer-events: none;
+}
+
+.camp-section.chapter-visual-in > .section-hero-visual,
+.camp-section.chapter-details-in > .section-content-body,
+#photo.chapter-details-in > .gallery-dock,
+#photo.chapter-details-in > .photo-counter {
+	animation: chapterStageIn .32s cubic-bezier(.2, .7, .25, 1) both;
+}
+
+@keyframes chapterStageIn {
+	from { opacity: 0; transform: translateY(12px); }
+	to { opacity: 1; transform: none; }
+}
+
+.camp-section.chapter-instant .section-hero-visual,
+.camp-section.chapter-instant .section-content-body,
+.camp-section.chapter-instant .gallery-dock,
+.camp-section.chapter-instant .photo-counter,
+.camp-section.chapter-instant .photo-3d-world,
+.camp-section.chapter-instant .card-photo-wrapper img,
+.camp-section.chapter-instant .card-film-note,
+.camp-section.chapter-instant .section-header-block *,
+.camp-section.chapter-instant .splash-char {
+	animation: none !important;
+	opacity: 1 !important;
+	filter: none !important;
+	transform: none !important;
+	text-shadow: none !important;
+	pointer-events: auto;
+}
+
+/* A brief record-groove sweep and a single save pulse. */
+.camp-section.chapter-title-in .music-splash::after {
+	animation: vinylSheenSweep .46s ease-out .14s both;
+}
+.checkpoint-beacon { animation: none; opacity: .65; }
+#game.chapter-title-in .checkpoint-beacon { animation: checkpointArrival .48s ease-out .1s both; }
+@keyframes checkpointArrival {
+	0% { opacity: .35; transform: scale(.9); text-shadow: none; }
+	55% { opacity: 1; transform: scale(1.1); text-shadow: 0 0 8px rgba(56, 130, 92, .3); }
+	100% { opacity: .85; transform: none; text-shadow: none; }
+}
+
+/* The listening note follows playback only while audio is running. */
+#music .np-quiet-quote {
+	white-space: normal;
+	overflow: visible;
+	text-overflow: clip;
+	text-align: left;
+	line-height: 1.5;
+	transition: none;
+}
+#music .np-quiet-quote.is-playing {
+	color: transparent;
+	background: linear-gradient(90deg, #385f43 var(--playback-pct, 0%), #58635a var(--playback-pct, 0%));
+	background-clip: text;
+	-webkit-background-clip: text;
+	text-shadow: none;
+}
+
+/* The supplied Genshin image stays legible as an image, with notes below it. */
+#game.game-section-modern {
+	background: #f5f8f3;
+	border: 0;
+	box-shadow: none;
+}
+#game .game-checkpoint-badge { display: flex; width: max-content; max-width: 100%; margin: 0 auto 10px; border-radius: 3px; }
+#game .game-splash { display: block; width: max-content; max-width: 100%; margin: 0 auto 8px; }
+#game .game-hero-showcase { margin-bottom: 32px; }
+#game .game-screen-frame {
+	background: #fbfcf8;
+	border: 1px solid #d8e1d7;
+	border-radius: 6px;
+	box-shadow: 0 10px 25px rgba(41, 69, 49, .09);
+}
+#game .game-screen-frame:hover { transform: none; border-color: #b5c9b7; box-shadow: 0 12px 28px rgba(41, 69, 49, .12); }
+#game .game-screen-meta-top {
+	background: #e8eee7;
+	color: #58725d;
+	border-bottom: 1px solid #d8e1d7;
+	gap: 16px;
+	flex-wrap: wrap;
+}
+#game .screen-dot-rec { color: #386349; }
+#game .screen-world-title { color: #2c4033; }
+#game .screen-id-tag { color: #617367; }
+#game .game-screen-media { height: auto; aspect-ratio: 1327 / 568; background: #d7e2de; }
+#game .game-screen-img { object-fit: contain; object-position: center; }
+#game .game-screen-frame:hover .game-screen-img { transform: none; }
+#game.chapter-visual-in .game-screen-img { animation: gameImageDevelop .58s ease-out .06s both; }
+@keyframes gameImageDevelop {
+	from { opacity: .35; filter: blur(4px); clip-path: inset(0 0 7% 0); }
+	to { opacity: 1; filter: none; clip-path: inset(0); }
+}
+#game .game-screen-overlay {
+	position: static;
+	display: block;
+	padding: 20px 24px 22px;
+	background: #fbfcf8;
+}
+#game .screen-caption-box { max-width: 840px; }
+#game .screen-tags span,
+#game .screen-stats-mini .stat-pill {
+	background: #eaf2e9;
+	color: #365a40;
+	border: 1px solid #cbdccf;
+	border-radius: 3px;
+	backdrop-filter: none;
+}
+#game .screen-memory-quote {
+	color: #34493b;
+	text-shadow: none;
+	font-size: 15px;
+	line-height: 1.7;
+}
+#game .screen-stats-mini { gap: 7px; }
+#game .game-dossier-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+#game .game-dossier-card {
+	display: block;
+	border-radius: 6px;
+	padding: 0;
+	box-shadow: none;
+	background: #fbfcf9;
+}
+#game .game-dossier-card:hover { transform: none; box-shadow: none; border-color: #aac6ae; }
+#game .dossier-card-head {
+	padding: 17px 20px;
+	margin: 0;
+	border: 0;
+	align-items: center;
+	cursor: pointer;
+	list-style: none;
+}
+#game .dossier-card-head::-webkit-details-marker { display: none; }
+#game .dossier-card-head::after {
+	content: "";
+	width: 9px;
+	height: 9px;
+	margin-left: 18px;
+	border-right: 2px solid #5b7a61;
+	border-bottom: 2px solid #5b7a61;
+	transform: rotate(45deg);
+	transition: transform .2s ease;
+}
+#game .game-dossier-card[open] .dossier-card-head::after { transform: rotate(225deg); }
+#game .dossier-card-head:focus-visible { outline: 2px solid #4d7958; outline-offset: -3px; }
+#game .dossier-icon-mark { margin-left: auto; }
+#game .dossier-card-body { padding: 0 20px 20px; }
+#game .game-dossier-card[open] .dossier-card-body { animation: chapterFade .3s ease both; }
+#game .indie-games { border-radius: 6px; border: 1px solid #dce8dd; box-shadow: none; }
+
+/* A contact date precedes development; the handwritten note follows it. */
+#photo.chapter-ready:not(.chapter-title-in) #photoAmbientDate { opacity: 0; }
+#photo.chapter-title-in #photoAmbientDate { animation: chapterFade .25s ease .18s both; }
+#photo.chapter-ready:not(.chapter-visual-in) > .photo-stage-viewport { opacity: 1; transform: none; }
+#photo.chapter-ready:not(.chapter-visual-in) .photo-3d-world { opacity: 0; }
+#photo.chapter-visual-in .photo-3d-world { animation: photoWorldReveal .55s ease .12s both; }
+#photo.chapter-visual-in .is-hero-card .card-photo-wrapper img { animation: photoDevelop .65s ease .14s both; }
+#photo.chapter-visual-in .is-hero-card .card-film-note { animation: chapterFade .3s ease .52s both; }
+#photo #photoAmbientDate.date-stamp-in { animation: chapterFade .25s ease both; }
+@keyframes photoDevelop {
+	from { opacity: .3; filter: grayscale(.45) blur(4px); }
+	to { opacity: 1; filter: none; }
+}
+@keyframes photoWorldReveal {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+.lightbox-modal { overflow-y: auto; justify-content: safe center; }
+.lightbox-caption { max-height: 25vh; overflow-y: auto; flex-shrink: 0; }
+
+@media (max-width: 768px) {
+	#game .game-screen-meta-top { font-size: 10px; }
+	#game .game-screen-overlay { padding: 17px; }
+}
+
+@media (max-width: 600px) {
+	.box-right:not(.somersault-cloud-btn) { display: none; }
+	.camp-section.chapter-ready:not(.chapter-title-in) .splash-heading { opacity: .2; filter: blur(2px); }
+	.camp-section.chapter-title-in .splash-heading { animation: chapterFade .38s ease both; }
+	.camp-section.chapter-visual-in > .section-hero-visual,
+	.camp-section.chapter-details-in > .section-content-body { animation-duration: .35s; }
+	#game .game-screen-media { aspect-ratio: 16 / 10; }
+	#game .game-screen-img { object-fit: contain; }
+	#game .screen-memory-quote { font-size: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.np-disc-spin { animation: none !important; }
+	.vinyl-clean-card .card-disc-img,
+	.modal-spinning-disc,
+	.glass-capsule-nav a.capsule-item.active .nav-svg-icon,
+	.glass-capsule-nav .traveler-beacon::after,
+	.camp-section.chapter-title-in .music-splash::after,
+	#game .game-dossier-card[open] .dossier-card-body { animation: none !important; }
+	.camp-section.chapter-ready .section-hero-visual,
+	.camp-section.chapter-ready .section-content-body,
+	.camp-section.chapter-ready .gallery-dock,
+	.camp-section.chapter-ready .photo-counter,
+	.camp-section.chapter-ready .section-header-block *,
+	.camp-section.chapter-ready .splash-char,
+		#game.chapter-ready .game-screen-img,
+		#photo.chapter-ready #photoAmbientDate,
+		#photo.chapter-ready .photo-3d-world,
+	#photo.chapter-ready .card-photo-wrapper img {
+		animation: none !important;
+		transition: none !important;
+		opacity: 1 !important;
+		filter: none !important;
+		transform: none !important;
+		clip-path: none !important;
+	}
+}
+
+/* Preserve the long page layout while resting decorative motion off screen. */
+.has-viewport-motion .camp-section:not(.is-motion-visible) *,
+.has-viewport-motion .camp-section:not(.is-motion-visible) *::before,
+.has-viewport-motion .camp-section:not(.is-motion-visible) *::after,
+.somersault-cloud-btn:not(.is-visible):not(.is-ascending) * {
+    animation-play-state: paused !important;
+}

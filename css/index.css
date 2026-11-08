@@ -1,0 +1,1104 @@
+/* ==========================================================================
+   封面页样式 (index.css) - 入口大厅气度、分层排版与内嵌头像优雅视觉
+   ========================================================================== */
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	overflow: hidden;
+	background-color: #0b192c;
+}
+
+/* ==========================================================================
+   1. 动感电影级背景层 (Ken Burns 缓慢呼吸式镜头平移与微缩放)
+   ========================================================================== */
+.bg-animated-layer {
+	position: fixed;
+	top: -5%;
+	left: -5%;
+	width: 110%;
+	height: 110%;
+	background: url(../img/demo.svg) no-repeat center center;
+	background-size: cover;
+	z-index: 0;
+	animation: kenBurns 26s ease-in-out infinite alternate;
+	will-change: transform;
+	pointer-events: none;
+}
+
+@keyframes kenBurns {
+	0% {
+		transform: scale(1) translate(0, 0);
+	}
+	50% {
+		transform: scale(1.07) translate(-1.2%, -0.8%);
+	}
+	100% {
+		transform: scale(1.04) translate(1%, 0.6%);
+	}
+}
+
+/* 背景轻透遮罩 */
+body::before {
+	content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.12);
+	z-index: 1;
+	pointer-events: none;
+}
+
+/* ==========================================================================
+   2. 灵动夏日光斑微浮尘粒子 (Floating Sunlight Particles)
+   ========================================================================== */
+.floating-particles {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	pointer-events: none;
+	overflow: hidden;
+}
+
+.floating-particles span {
+	position: absolute;
+	bottom: -30px;
+	border-radius: 50%;
+	background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 235, 180, 0.4) 60%, transparent 100%);
+	box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+	animation: floatMote linear infinite;
+}
+
+@keyframes floatMote {
+	0% {
+		transform: translateY(0) translateX(0) scale(0.8);
+		opacity: 0;
+	}
+	15% {
+		opacity: 0.85;
+	}
+	85% {
+		opacity: 0.85;
+	}
+	100% {
+		transform: translateY(-115vh) translateX(40px) scale(1.2);
+		opacity: 0;
+	}
+}
+
+#bkground {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 40px 20px;
+	z-index: 2;
+	position: relative;
+}
+
+/* ==========================================================================
+   3. 扩容升级版“入口大厅”卡片 (Grand Entrance Lounge)
+   优化点：
+   - 宽度扩大 13% (530px)，高度与内边距舒展增加
+   - 上半部分极致隐形透亮，整体沉浸悬浮于夏日车站场景中
+   ========================================================================== */
+#bkground .my-information {
+	width: 530px; /* 宽度扩大 13%，视野更阔朗有大厅感 */
+	max-width: 92%;
+	margin: 0 auto;
+	padding: 46px 42px 44px 42px; /* 内边距舒展增加，上下左右呼吸感充盈 */
+	position: relative;
+	/* 
+	   渐变半透明滤镜：
+	   顶部仅 8% 不透明度（极度通透，背景完全透出），向下自然过渡托住文字
+	*/
+	background: linear-gradient(
+		180deg,
+		rgba(12, 22, 38, 0.08) 0%,
+		rgba(12, 22, 38, 0.28) 45%,
+		rgba(12, 22, 38, 0.52) 100%
+	);
+	backdrop-filter: none;
+	-webkit-backdrop-filter: none;
+	border-radius: 28px;
+	/* 极细微弱晶质边缘线 (15%透明度) */
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	box-shadow: 
+		0 24px 60px rgba(0, 0, 0, 0.22),
+		inset 0 1px 0 rgba(255, 255, 255, 0.2);
+	text-align: center;
+	animation: floatUp .65s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+}
+
+@keyframes floatUp {
+	from {
+		opacity: 0;
+		transform: translateY(28px) scale(0.97);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+/* ==========================================================================
+   4. 头像内嵌下压：不再“顶出去”，舒适居于卡片上部，不贴近顶部边界
+   ========================================================================== */
+#bkground .my-information .avatar-wrapper {
+	position: relative;
+	width: 124px;
+	height: 124px;
+	/* 💡 彻底移除 -110px 负外边距，自然优雅下移入框内，上方留足充裕空间 */
+	margin: 4px auto 16px auto;
+}
+
+#bkground .my-information .avatar-box {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	background: url(../img/demo.svg) no-repeat center center;
+	background-size: cover;
+	border: 3.5px solid #ffffff;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+	display: inline-block;
+	transition: transform 0.4s ease;
+}
+
+#bkground .my-information .avatar-box:hover {
+	transform: rotate(8deg) scale(1.08);
+}
+
+/* 头像柔光呼吸光环 */
+#bkground .my-information .avatar-wrapper::after {
+	content: "";
+	position: absolute;
+	top: -4px;
+	left: -4px;
+	right: -4px;
+	bottom: -4px;
+	border-radius: 50%;
+	border: 2px solid #ff8595;
+	animation: pulseGlow 2.5s infinite;
+	pointer-events: none;
+}
+
+@keyframes pulseGlow {
+	0% {
+		transform: scale(1);
+		opacity: 0.9;
+	}
+	50% {
+		transform: scale(1.1);
+		opacity: 0.35;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 0.9;
+	}
+}
+
+/* ==========================================================================
+   5. 签名艺术标题（保持 38px 优雅尺度，不喧宾夺主）
+   ========================================================================== */
+#bkground .my-information .signature-title {
+	font-family: 'Great Vibes', 'Alex Brush', cursive, 'Brush Script MT', serif;
+	font-size: 38px;
+	font-weight: 400;
+	color: rgba(255, 255, 255, 0.92);
+	line-height: 44px;
+	margin-top: 2px;
+	margin-bottom: 4px;
+	letter-spacing: 1.5px;
+	text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+	transform: rotate(-1.5deg);
+	display: inline-block;
+}
+
+/* ==========================================================================
+   6. 车辆工程档案铭牌 (Vehicle Engineering Spec Plate)
+   工程档案 / 机械轨规 / 车辆编号风格
+   ========================================================================== */
+#bkground .my-information .eng-spec-plate {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 8px auto 14px auto;
+	padding: 4px 16px;
+	cursor: default;
+	user-select: none;
+	transition: all 0.3s ease;
+}
+
+#bkground .my-information .eng-spec-plate .eng-main-row {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+
+/* 中间英文字：意大利手写体艺术字 (Italian Chancery / Cursive Script) */
+#bkground .my-information .eng-spec-plate .eng-title {
+	font-family: 'Italianno', 'Alex Brush', cursive, Georgia, serif;
+	font-size: 30px;
+	font-weight: 400;
+	letter-spacing: 1.2px;
+	color: #ffffff;
+	line-height: 1;
+	text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85), 0 0 14px rgba(255, 255, 255, 0.2);
+	display: inline-flex;
+	align-items: center;
+	user-select: none;
+	transition: all 0.3s ease;
+}
+
+/* 右侧 @ YOUR WORLD：方案 B - 雅致古典罗马衬线斜体旁注，无厚重框体，宛如诗集/出版物题注 */
+#bkground .my-information .eng-spec-plate .eng-affil {
+	font-family: 'Cormorant Garamond', 'Lora', Georgia, serif;
+	font-style: italic;
+	font-size: 15.5px;
+	font-weight: 600;
+	letter-spacing: 1.6px;
+	color: rgba(255, 255, 255, 0.82);
+	line-height: 1;
+	padding-bottom: 2px;
+	border-bottom: 1px dotted rgba(255, 255, 255, 0.35);
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+	display: inline-flex;
+	align-items: center;
+	user-select: none;
+	transition: all 0.28s ease;
+}
+
+/* 铭牌下方的细轨规与刻度线 */
+#bkground .my-information .eng-spec-plate .eng-rail-track {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	max-width: 320px;
+	margin-top: 6px;
+	position: relative;
+}
+
+#bkground .my-information .eng-spec-plate .track-line {
+	flex: 1;
+	height: 1px;
+	background: linear-gradient(
+		90deg,
+		rgba(255, 255, 255, 0.05) 0%,
+		rgba(255, 255, 255, 0.4) 50%,
+		rgba(255, 255, 255, 0.05) 100%
+	);
+	transform-origin: center center;
+	transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.35s ease;
+}
+
+#bkground .my-information .eng-spec-plate .track-tick {
+	width: 1px;
+	height: 5px;
+	background: rgba(255, 255, 255, 0.45);
+	transition: all 0.3s ease;
+}
+
+/* 轨道下方辅助行 */
+#bkground .my-information .eng-spec-plate .eng-sub-row {
+	margin-top: 5px;
+	font-family: "Space Mono", "SF Mono", monospace;
+	font-size: 8px;
+	letter-spacing: 2.2px;
+	color: rgba(195, 225, 220, 0.72);
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+	transition: color 0.3s ease;
+}
+
+/* 铭牌悬停微动效：意大利体光芒、@ YOUR WORLD 点亮提纯、轨道微扩 */
+#bkground .my-information .eng-spec-plate:hover .eng-title {
+	text-shadow: 0 0 16px rgba(255, 255, 255, 0.6), 0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+#bkground .my-information .eng-spec-plate:hover .eng-affil {
+	color: #ffffff;
+	border-bottom-color: rgba(255, 255, 255, 0.75);
+	text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+#bkground .my-information .eng-spec-plate:hover .track-line {
+	transform: scaleX(1.06);
+	background: linear-gradient(
+		90deg,
+		rgba(255, 255, 255, 0.1) 0%,
+		rgba(255, 255, 255, 0.75) 50%,
+		rgba(255, 255, 255, 0.1) 100%
+	);
+}
+
+#bkground .my-information .eng-spec-plate:hover .track-tick {
+	background: rgba(255, 255, 255, 0.8);
+}
+
+#bkground .my-information .eng-spec-plate:hover .track-line {
+	transform: scaleX(1.06);
+	background: linear-gradient(
+		90deg,
+		rgba(255, 255, 255, 0.1) 0%,
+		rgba(255, 255, 255, 0.75) 50%,
+		rgba(255, 255, 255, 0.1) 100%
+	);
+}
+
+#bkground .my-information .eng-spec-plate:hover .track-tick {
+	background: #ffffff;
+	box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+	height: 7px;
+}
+
+#bkground .my-information .eng-spec-plate:hover .eng-sub-row {
+	color: rgba(240, 250, 246, 0.95);
+}
+
+/* ==========================================================================
+   7. 站台诗意短句氛围文字 (Lora 衬线体)
+   ========================================================================== */
+#bkground .my-information .poetry-intro {
+	margin: 14px auto 14px auto;
+	max-width: 92%;
+	font-family: 'Lora', 'Noto Serif', 'Libre Baskerville', Georgia, serif;
+}
+
+#bkground .my-information .poetry-intro .quote-line {
+	font-size: 14.5px;
+	line-height: 25px;
+	font-style: italic;
+	color: rgba(255, 255, 255, 0.92);
+	margin: 3px 0;
+	letter-spacing: 0.4px;
+	text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
+}
+
+/* ==========================================================================
+   8. 章节轻量文字索引 (Next Stops Text Index - 无边框)
+   ========================================================================== */
+#bkground .my-information .chapter-index-nav {
+	width: min(100%, 500px);
+	margin: 13px auto 14px auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	font-family: "Space Mono", "SF Mono", monospace;
+	font-size: 9px;
+	letter-spacing: 1.45px;
+	color: rgba(165, 205, 192, 0.62);
+	user-select: none;
+}
+
+#bkground .my-information .chapter-index-nav .index-lead {
+	font-weight: 600;
+	color: rgba(205, 229, 218, 0.84);
+	white-space: nowrap;
+}
+
+#bkground .my-information .chapter-index-nav .index-lead-note {
+	color: rgba(180, 211, 198, 0.56);
+	font-size: 8px;
+	letter-spacing: 1.1px;
+	font-weight: 400;
+}
+
+#bkground .my-information .chapter-index-nav .index-links {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 2px 5px;
+}
+
+#bkground .my-information .chapter-index-nav .index-item {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	min-height: 44px;
+	padding: 3px 7px;
+	border: 1px solid transparent;
+	border-radius: 999px;
+	color: rgba(211, 231, 221, 0.72);
+	transition: all 0.25s ease;
+	cursor: pointer;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+#bkground .my-information .chapter-index-nav .index-num {
+	color: rgba(157, 226, 167, 0.78);
+	font-size: 8px;
+	letter-spacing: 0.5px;
+}
+
+#bkground .my-information .chapter-index-nav .index-item:hover {
+	color: #f2fff8;
+	background: rgba(20, 41, 35, 0.54);
+	border-color: rgba(181, 232, 197, 0.34);
+	box-shadow: 0 0 14px rgba(90, 158, 98, 0.15);
+}
+
+#bkground .my-information .chapter-index-nav .index-item:focus-visible {
+	color: #f2fff8;
+	outline: 2px solid rgba(188, 237, 199, 0.9);
+	outline-offset: 2px;
+	border-radius: 3px;
+}
+
+/* ==========================================================================
+   9. 沉静半透明车站入口牌 (Enter the Journey →)
+   纯净玻璃铭牌 / 车站入口门牌质感
+   ========================================================================== */
+#bkground .my-information a.enter-btn {
+	position: relative;
+	overflow: hidden;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+	font-size: 14.5px;
+	font-weight: 500;
+	letter-spacing: 1.4px;
+	color: rgba(242, 247, 245, 0.92);
+	padding: 9px 30px;
+	text-decoration: none;
+	border-radius: 9px;
+	border: 1px solid rgba(240, 245, 242, 0.26);
+	background: rgba(10, 25, 35, 0.38);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+	transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+#bkground .my-information a.enter-btn::before {
+	content: "";
+	position: absolute;
+	inset: -80% 35% -80% -35%;
+	z-index: 0;
+	background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.5) 49%, transparent 58%);
+	transform: translateX(-120%) rotate(8deg);
+	transition: transform 0s;
+	pointer-events: none;
+}
+
+#bkground .my-information a.enter-btn::after {
+	content: "";
+	position: absolute;
+	top: 5px;
+	right: 45px;
+	bottom: 5px;
+	border-left: 1px dashed rgba(240, 245, 242, 0.34);
+	pointer-events: none;
+}
+
+#bkground .my-information a.enter-btn .btn-text {
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+}
+
+#bkground .my-information a.enter-btn .btn-arrow {
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	font-size: 15px;
+	line-height: 1;
+	color: rgba(242, 247, 245, 0.85);
+	transition: transform 0.25s ease;
+}
+
+/* 悬停时像一张纸票被灯光扫过，暗色玻璃翻成浅色票面。 */
+#bkground .my-information a.enter-btn:hover {
+	background: rgba(247, 244, 233, 0.94);
+	border-color: rgba(250, 248, 239, 0.98);
+	color: #203039;
+	transform: translateY(-2px) scale(1.015);
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24), 0 0 18px rgba(255, 248, 220, 0.24);
+	text-shadow: none;
+}
+
+#bkground .my-information a.enter-btn:hover::before {
+	transform: translateX(230%) rotate(8deg);
+	transition: transform 0.72s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+#bkground .my-information a.enter-btn:hover::after {
+	border-color: rgba(32, 48, 57, 0.34);
+}
+
+#bkground .my-information a.enter-btn:hover .btn-arrow {
+	color: #203039;
+	transform: translateX(7px);
+}
+
+#bkground .my-information a.enter-btn:active {
+	transform: translateY(0) scale(0.98);
+	background: rgba(255, 253, 244, 0.98);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#bkground .my-information a.enter-btn.is-departing {
+	animation: enterTicketDepart 0.42s cubic-bezier(0.3, 0.8, 0.2, 1) both;
+}
+
+@keyframes enterTicketDepart {
+	0% { opacity: 1; transform: translateY(-2px) scale(1.015); }
+	35% { opacity: 1; transform: translateX(8px) translateY(-2px) scale(1.03); }
+	100% { opacity: 0; transform: translateX(26px) translateY(-2px) scale(1.06); }
+}
+
+/* ==========================================================================
+   9. 四周档案感氛围细节 (Station Archive Details)
+   ========================================================================== */
+.station-archive-marks {
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	z-index: 5;
+	font-family: "Space Mono", "SF Mono", "Consolas", monospace;
+	color: rgba(255, 255, 255, 0.65);
+	user-select: none;
+}
+
+.archive-mark {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.mark-top-left {
+	top: 28px;
+	left: 36px;
+	font-size: 11px;
+	letter-spacing: 1.5px;
+	color: rgba(255, 255, 255, 0.72);
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.mark-top-left .mark-vol {
+	font-weight: 700;
+	color: #9de2a7;
+}
+
+.mark-top-left .mark-dot {
+	color: rgba(255, 255, 255, 0.35);
+}
+
+.mark-top-left .mark-coord {
+	margin-left: 10px;
+	color: rgba(255, 255, 255, 0.45);
+	font-size: 10px;
+}
+
+.mark-top-right {
+	top: 24px;
+	right: 36px;
+	align-items: center;
+	gap: 16px;
+}
+
+.mark-station-meta {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 2px;
+	font-size: 10px;
+	letter-spacing: 1.2px;
+	color: rgba(255, 255, 255, 0.55);
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.mark-station-meta .mark-sys {
+	font-weight: 700;
+	color: rgba(255, 255, 255, 0.85);
+}
+
+/* 复古双环旅行邮戳 */
+.archive-post-stamp {
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	border: 1.5px dashed rgba(162, 218, 180, 0.55);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: 8px;
+	font-weight: 700;
+	color: rgba(162, 218, 180, 0.85);
+	transform: rotate(12deg);
+	letter-spacing: 1px;
+	line-height: 1.1;
+	box-shadow: inset 0 0 8px rgba(90, 158, 98, 0.15);
+}
+
+/* 留白区淡淡手写便签 */
+.mark-handwritten-note {
+	right: 48px;
+	bottom: 120px;
+	font-family: 'Lora', 'Songti SC', serif;
+	font-style: italic;
+	font-size: 12.5px;
+	color: rgba(240, 248, 242, 0.78);
+	background: rgba(16, 28, 22, 0.35);
+	backdrop-filter: blur(6px);
+	padding: 6px 14px;
+	border-radius: 6px;
+	border-left: 2px solid rgba(90, 158, 98, 0.7);
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+.mark-handwritten-note .note-pin {
+	color: #9de2a7;
+	font-style: normal;
+	font-size: 10px;
+}
+
+.mark-bottom-center {
+	bottom: 18px;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 9.5px;
+	letter-spacing: 2px;
+	color: rgba(255, 255, 255, 0.35);
+}
+
+/* ==========================================================================
+   10. 行程轨道线与经停站点 (Journey Route Track)
+   ========================================================================== */
+.journey-route-layer {
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	z-index: 12;
+}
+
+.journey-route-layer .route-svg {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.route-track-bg {
+	fill: none;
+	stroke: rgba(255, 255, 255, 0.12);
+	stroke-width: 1.5;
+	stroke-dasharray: 4 6;
+}
+
+.route-track-glow {
+	fill: none;
+	stroke: rgba(140, 225, 175, 0.65);
+	stroke-width: 2;
+	stroke-dasharray: 8 12;
+	stroke-linecap: round;
+	filter: drop-shadow(0 0 6px rgba(90, 158, 98, 0.7));
+	animation: routeDashFlow 24s linear infinite;
+}
+
+@keyframes routeDashFlow {
+	to {
+		stroke-dashoffset: -400;
+	}
+}
+
+.route-station {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	min-width: 44px;
+	min-height: 44px;
+	padding: 0 7px;
+	border: 1px solid transparent;
+	border-radius: 999px;
+	background: transparent;
+	text-decoration: none;
+	cursor: pointer;
+	pointer-events: auto;
+	font-family: "Space Mono", monospace;
+	font-size: 8px;
+	letter-spacing: 0.55px;
+	color: rgba(238, 250, 245, 0.9);
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75);
+	transform: translateY(50%);
+	transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.route-station .station-dot {
+	flex: 0 0 7px;
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: rgba(157, 226, 167, 0.68);
+	border: 1px solid rgba(255, 255, 255, 0.35);
+	box-shadow: 0 0 5px rgba(90, 158, 98, 0.4);
+	animation: stationPulse 3.5s ease-in-out infinite alternate;
+}
+
+.route-station .station-label {
+	white-space: nowrap;
+	padding: 4px 6px;
+	border: 1px solid rgba(216, 239, 227, 0.18);
+	border-radius: 999px;
+	background: rgba(12, 27, 25, 0.5);
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+}
+
+.route-station:hover,
+.route-station:focus-visible {
+	color: #f2fff8;
+	background: rgba(15, 38, 31, 0.62);
+	border-color: rgba(181, 232, 197, 0.74);
+	box-shadow: 0 0 0 3px rgba(181, 232, 197, 0.18), 0 6px 18px rgba(0, 0, 0, 0.2);
+	outline: none;
+}
+
+.route-station:hover .station-dot,
+.route-station:focus-visible .station-dot {
+	background: #c8f4ce;
+	box-shadow: 0 0 10px rgba(157, 226, 167, 0.95);
+	transform: scale(1.2);
+}
+
+.route-station:focus-visible {
+	outline: 2px solid #e4ffe8;
+	outline-offset: 3px;
+}
+
+@keyframes stationPulse {
+	from {
+		transform: scale(0.9);
+		opacity: 0.55;
+	}
+	to {
+		transform: scale(1.15);
+		opacity: 0.85;
+	}
+}
+
+#stationNextStop {
+	transform: translate(-50%, 50%);
+	color: rgba(185, 225, 215, 0.65);
+	font-weight: 500;
+}
+
+
+.route-station.is-highlighted .station-dot {
+	background: #d5f3ad;
+	box-shadow: 0 0 10px rgba(188, 237, 159, 0.86);
+	transform: scale(1.3);
+}
+
+.route-station.is-highlighted {
+	color: #efffe7;
+}
+
+
+
+/* ==========================================================================
+   12. 声音控制开关 (右下角优雅胶囊)
+   ========================================================================== */
+.audio-control-wrap {
+	position: fixed;
+	bottom: 28px;
+	right: 32px;
+	z-index: 15;
+}
+
+.audio-toggle-btn {
+	background: rgba(20, 32, 26, 0.65);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 20px;
+	padding: 6px 14px;
+	font-family: "Space Mono", monospace;
+	font-size: 10.5px;
+	letter-spacing: 1px;
+	color: rgba(255, 255, 255, 0.85);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	transition: all 0.25s ease;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.audio-toggle-btn:hover {
+	background: rgba(30, 50, 40, 0.85);
+	border-color: rgba(90, 158, 98, 0.6);
+	color: #9de2a7;
+	transform: translateY(-2px);
+	box-shadow: 0 6px 18px rgba(46, 125, 50, 0.35);
+}
+
+.audio-toggle-btn.is-active {
+	background: rgba(46, 125, 50, 0.6);
+	border-color: #5a9e62;
+	color: #ffffff;
+	box-shadow: 0 0 14px rgba(90, 158, 98, 0.5);
+}
+
+/* ==========================================================================
+   13. 2.8s 电影级开场展开动效时序 (Opening Cinematic Sequence)
+   ========================================================================== */
+body.is-loading .bg-animated-layer {
+	opacity: 0;
+	animation: bgDevelop .65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes bgDevelop {
+	0% { opacity: 0; filter: contrast(1.3) brightness(0.7); }
+	100% { opacity: 1; filter: contrast(1) brightness(1); }
+}
+
+body.is-loading .station-archive-marks {
+	opacity: 0;
+	animation: fadeInStage .4s ease .05s forwards;
+}
+
+body.is-loading .journey-route-layer {
+	opacity: 0;
+	animation: fadeInStage .5s ease .1s forwards;
+}
+
+body.is-loading #bkground .my-information .avatar-wrapper {
+	opacity: 0;
+	animation: avatarDevelop .45s cubic-bezier(0.16, 1, 0.3, 1) .08s forwards;
+}
+
+@keyframes avatarDevelop {
+	0% { opacity: 0; filter: blur(10px); transform: scale(0.9); }
+	100% { opacity: 1; filter: blur(0); transform: scale(1); }
+}
+
+body.is-loading #bkground .my-information .signature-title,
+body.is-loading #bkground .my-information .eng-spec-plate {
+	opacity: 0;
+	animation: textFloatStage .45s cubic-bezier(0.16, 1, 0.3, 1) .14s forwards;
+}
+
+body.is-loading #bkground .my-information .poetry-intro {
+	opacity: 0;
+	animation: textFloatStage .45s cubic-bezier(0.16, 1, 0.3, 1) .2s forwards;
+}
+
+body.is-loading #bkground .my-information .chapter-index-nav {
+	opacity: 0;
+	animation: textFloatStage .4s cubic-bezier(0.16, 1, 0.3, 1) .26s forwards;
+}
+
+body.is-loading #bkground .my-information a.enter-btn {
+	opacity: 0;
+	animation: btnAppearQuiet .35s cubic-bezier(0.16, 1, 0.3, 1) .1s forwards;
+}
+
+@keyframes btnAppearQuiet {
+	0% { opacity: 0; transform: translateY(8px); }
+	100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInStage {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes textFloatStage {
+	from { opacity: 0; transform: translateY(14px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   14. 页面推镜启程转场 (Page Transition)
+   ========================================================================== */
+body.page-transitioning {
+	pointer-events: none;
+}
+
+body.page-transitioning #bkground {
+	transform: scale(1.12) translateY(-25px);
+	filter: blur(6px);
+	opacity: 0;
+	transition: all 0.48s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.page-transitioning .station-archive-marks,
+body.page-transitioning .journey-route-layer {
+	opacity: 0;
+	transition: opacity 0.35s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	#bkground .my-information a.enter-btn,
+	#bkground .my-information a.enter-btn:hover,
+	#bkground .my-information a.enter-btn:active {
+		transform: none;
+		transition: none;
+	}
+	#bkground .my-information a.enter-btn::before,
+	#bkground .my-information a.enter-btn.is-departing {
+		animation: none;
+		transition: none;
+	}
+}
+
+/* ==========================================================================
+   15. 响应式与可访问性 (Responsive & a11y)
+   ========================================================================== */
+@media (max-width: 900px) {
+	.mark-handwritten-note {
+		right: 24px;
+		bottom: 90px;
+		transform: scale(0.88);
+		transform-origin: bottom right;
+	}
+}
+
+@media (max-width: 768px) {
+	#bkground {
+		padding: 24px 14px 80px 14px;
+	}
+	#bkground .my-information {
+		padding: 28px 18px 24px 18px;
+	}
+	/* 移动端铭牌与章节索引精致自适应 */
+	#bkground .my-information .eng-spec-plate .eng-main-row {
+		justify-content: center;
+		white-space: nowrap;
+	}
+	#bkground .my-information .eng-spec-plate .eng-title {
+		font-size: 24px;
+		letter-spacing: 1px;
+	}
+	#bkground .my-information .eng-spec-plate .eng-affil {
+		font-size: 13px;
+		letter-spacing: 1.2px;
+	}
+	#bkground .my-information .eng-spec-plate .eng-sub-row {
+		font-size: 7.5px;
+		letter-spacing: 1.6px;
+	}
+	#bkground .my-information .chapter-index-nav {
+		width: 100%;
+		font-size: 8px;
+		letter-spacing: 1px;
+		gap: 4px;
+		margin: 10px auto 12px;
+	}
+	#bkground .my-information .chapter-index-nav .index-lead-note {
+		font-size: 7px;
+		letter-spacing: 0.7px;
+	}
+	#bkground .my-information .chapter-index-nav .index-links {
+		gap: 0 1px;
+	}
+	#bkground .my-information .chapter-index-nav .index-item {
+		padding: 3px 5px;
+		gap: 4px;
+		font-size: 7.5px;
+	}
+	/* 移动端完整保留档案细节，微调尺度与垂直分层避免重叠 */
+	.station-archive-marks .mark-top-left {
+		top: 10px;
+		left: 12px;
+		font-size: 8.5px;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 2px;
+	}
+	.station-archive-marks .mark-top-left .mark-coord {
+		margin-left: 0;
+		font-size: 7.5px;
+		opacity: 0.65;
+	}
+	.station-archive-marks .mark-top-right {
+		top: 10px;
+		right: 12px;
+		gap: 6px;
+	}
+	.station-archive-marks .mark-top-right .mark-station-meta {
+		font-size: 7.5px;
+	}
+	.station-archive-marks .archive-post-stamp {
+		width: 28px;
+		height: 28px;
+		font-size: 6.5px;
+	}
+	.station-archive-marks .mark-bottom-center {
+		bottom: 8px;
+		font-size: 8px;
+		opacity: 0.45;
+	}
+	.mark-handwritten-note {
+		display: none; /* 超窄屏下避免盖住人物手臂 */
+	}
+	/* 移动端保留发光轨道和可触达站点；文字路线索引仍提供明确入口 */
+	.journey-route-layer {
+		opacity: 0.58;
+	}
+	.route-station .station-label {
+		display: none;
+	}
+	.route-station {
+		padding: 0;
+		justify-content: center;
+		transform: translateY(50%);
+	}
+	#stationNextStop {
+		transform: translate(-50%, 50%);
+	}
+	/* 移动端声音开关置于右下角 */
+	.audio-control-wrap {
+		bottom: 14px;
+		right: 14px;
+	}
+	.audio-toggle-btn {
+		padding: 5px 10px;
+		font-size: 9px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*, *::before, *::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+	body.is-loading .bg-animated-layer,
+	body.is-loading .station-archive-marks,
+	body.is-loading .journey-route-layer,
+	body.is-loading #bkground .my-information .avatar-wrapper,
+	body.is-loading #bkground .my-information .signature-title,
+	body.is-loading #bkground .my-information .eng-spec-plate,
+	body.is-loading #bkground .my-information .poetry-intro,
+	body.is-loading #bkground .my-information .chapter-index-nav,
+	body.is-loading #bkground .my-information a.enter-btn {
+		opacity: 1 !important;
+		transform: none !important;
+		filter: none !important;
+	}
+}

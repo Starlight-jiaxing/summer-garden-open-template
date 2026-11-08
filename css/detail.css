@@ -1,0 +1,6746 @@
+/* ==========================================================================
+   森林树屋营地 · 兴趣营地详情样式 (detail.css)
+   ========================================================================== */
+
+/* 顶部导言卡片 */
+#intro {
+	width: 100%;
+	padding-top: 30px;
+}
+
+#intro .intro-content {
+	max-width: 1100px;
+	margin: 0 auto 30px;
+	padding: 30px 40px;
+	background: rgba(255, 255, 255, 0.9);
+	backdrop-filter: blur(10px);
+	border-radius: 20px;
+	box-shadow: 0 10px 25px rgba(46, 125, 50, 0.12);
+	text-align: center;
+	border: 1px solid rgba(255, 255, 255, 0.8);
+	animation: fadeIn 0.8s ease-out;
+}
+
+#intro .intro-content h2 {
+	color: var(--primary-green);
+	font-size: 32px;
+	margin-bottom: 12px;
+	font-weight: 800;
+}
+
+#intro .intro-content p {
+	line-height: 28px;
+	font-size: 16px;
+	color: #555555;
+}
+
+/* 顶部杂志目录式文本导航 (Magazine Directory Navigation) */
+#nav,
+.magazine-nav {
+	text-align: center;
+	margin: 20px auto 38px;
+	max-width: 820px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 16px;
+	padding: 10px 16px;
+	background: transparent;
+}
+
+.magazine-nav a,
+.magazine-nav .nav-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 12px;
+	color: #4a544c;
+	font-weight: 500;
+	font-size: 15px;
+	letter-spacing: 0.5px;
+	text-decoration: none;
+	background: transparent;
+	border-radius: 6px;
+	box-shadow: none;
+	transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.magazine-nav a:hover,
+.magazine-nav .nav-link:hover {
+	color: #1a281b;
+	background-color: rgba(0, 0, 0, 0.04);
+	transform: none;
+	box-shadow: none;
+}
+
+.magazine-nav .nav-slash {
+	color: #d2d8ce;
+	font-size: 13px;
+	font-weight: 300;
+	user-select: none;
+}
+
+.magazine-nav a.is-active,
+.magazine-nav .nav-link.is-active {
+	color: #1e3a20;
+	font-weight: 700;
+	background-color: rgba(86, 138, 90, 0.08);
+}
+
+.magazine-nav .nav-active-dot {
+	width: 5px;
+	height: 5px;
+	background-color: #4a8c50;
+	border-radius: 50%;
+	display: inline-block;
+}
+
+/* 公共板块容器样式 */
+.camp-section {
+	max-width: 1200px;
+	margin: 0 auto 50px auto;
+	padding: 50px 30px;
+	border-radius: 24px;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+	background-color: #ffffff;
+	scroll-margin-top: 40px;
+}
+
+/* ==========================================================================
+   兴趣营地 · 章节进入节奏与溅出聚合字体系统 (Camp Chapter Staged Entrance & Splash Typography)
+   参考视频：文字从画面中溅出、渐变聚合成形，克制、清晰、不晃动，色影扩散到消退
+   ========================================================================== */
+
+/* 3-Stage 编排：各板块内的三个层级元素 */
+/* 第 1 拍：标题区 */
+.section-header-block {
+	position: relative;
+	text-align: center;
+	margin-bottom: 34px;
+	opacity: 1; /* 默认可见，保障无 JS 或首屏的绝对可读性 */
+	z-index: 2;
+}
+
+/* 标题上方眉标 / 短标 (Stage 1 Eyebrow) */
+.section-eyebrow,
+.music-meta-en,
+.reading-archive-tag,
+.sport-meta-en,
+.photo-meta-en {
+	display: inline-block;
+	font-family: "Georgia", "Songti SC", "PingFang SC", serif;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 2px;
+	color: #7b887f;
+	text-transform: uppercase;
+	margin-bottom: 8px;
+	opacity: 0.9;
+	transition: opacity 0.4s ease;
+}
+
+/* 统一纯净主标题 */
+.section-clean-title,
+.music-clean-title,
+.section-title {
+	font-size: 32px;
+	font-weight: 800;
+	color: #1f2a22;
+	letter-spacing: 2.5px;
+	margin: 0 0 10px 0;
+	line-height: 1.3;
+	display: inline-block;
+}
+
+/* 统一诗意副标 */
+.section-clean-subtitle,
+.music-clean-subtitle,
+.reading-subtitle-main,
+.photo-intro,
+.section-subtitle {
+	font-size: 14.5px;
+	color: #5c685f;
+	letter-spacing: 0.6px;
+	max-width: 680px;
+	margin: 0 auto;
+	line-height: 1.7;
+	font-style: italic;
+	font-family: "Georgia", "Songti SC", "PingFang SC", serif;
+	transition: opacity 0.4s ease;
+}
+
+/* 聚合字体 Splash Heading */
+.splash-heading {
+	position: relative;
+	display: inline-block;
+	will-change: transform, filter, opacity;
+}
+
+.splash-heading .splash-char {
+	display: inline-block;
+	white-space: pre;
+	transition: none;
+	transform-origin: center bottom;
+	will-change: transform, filter, opacity;
+}
+
+/* JS 初始化后，尚未进入视口时的淡雅色影预备态 */
+.splash-prep .splash-char {
+	opacity: 0.08;
+	filter: blur(8px);
+	transform: scale(0.96) translateY(4px);
+	text-shadow: 0 0 18px var(--splash-glow, rgba(76, 119, 55, 0.45)),
+	             0 0 32px var(--splash-glow-secondary, rgba(140, 194, 105, 0.25));
+}
+
+/* 触发显现动效：文字从画面中溅出、渐变聚合成形 */
+.camp-section.is-revealed .splash-heading .splash-char {
+	animation: splashAggregate 0.68s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+	animation-delay: calc(var(--char-i, 0) * 0.045s);
+}
+
+@keyframes splashAggregate {
+	0% {
+		opacity: 0.1;
+		filter: blur(8px);
+		transform: scale(0.95) translateY(4px);
+		text-shadow: 0 0 20px var(--splash-glow, rgba(76, 119, 55, 0.5)),
+		             0 0 36px var(--splash-glow-secondary, rgba(140, 194, 105, 0.3));
+	}
+	45% {
+		opacity: 0.72;
+		filter: blur(2.5px);
+		transform: scale(1.02) translateY(-1px);
+		/* 色影向外轻微扩散并提亮 */
+		text-shadow: 0 0 14px var(--splash-glow, rgba(76, 119, 55, 0.65)),
+		             0 0 26px var(--splash-glow-secondary, rgba(140, 194, 105, 0.4));
+	}
+	75% {
+		opacity: 0.95;
+		filter: blur(0.4px);
+		transform: scale(1) translateY(0);
+		/* 色影快速收敛消退 */
+		text-shadow: 0 0 6px var(--splash-glow, rgba(76, 119, 55, 0.25));
+	}
+	100% {
+		opacity: 1;
+		filter: blur(0px);
+		transform: scale(1) translateY(0);
+		text-shadow: none; /* 完全消退，留下稳定、清晰易读的高清字体 */
+	}
+}
+
+/* 各章节专属色影与入场特征 */
+/* 1. 音乐：墨绿光晕 + 黑胶沟槽微光掠影 */
+.music-splash {
+	--splash-glow: rgba(58, 122, 70, 0.55);
+	--splash-glow-secondary: rgba(140, 194, 105, 0.35);
+}
+
+.music-splash::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.85) 50%, transparent 100%);
+	transform: translateX(-120%) skewX(-20deg);
+	pointer-events: none;
+	opacity: 0;
+}
+
+.camp-section.is-revealed .music-splash::after {
+	animation: vinylSheenSweep 0.75s ease-out 0.65s forwards;
+}
+
+@keyframes vinylSheenSweep {
+	0% { transform: translateX(-120%) skewX(-20deg); opacity: 0; }
+	30% { opacity: 0.6; }
+	100% { transform: translateX(180%) skewX(-20deg); opacity: 0; }
+}
+
+/* 2. 游戏：翡翠晶石与香槟金光晕 + 存档点亮标志 */
+.game-splash {
+	--splash-glow: rgba(46, 125, 50, 0.6);
+	--splash-glow-secondary: rgba(245, 158, 11, 0.35);
+}
+
+.game-checkpoint-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 5px 15px;
+	background: rgba(39, 103, 73, 0.08);
+	border: 1px solid rgba(46, 125, 50, 0.22);
+	border-radius: 20px;
+	font-size: 11px;
+	letter-spacing: 1.4px;
+	color: #276749;
+	margin-bottom: 12px;
+	font-weight: 700;
+	box-shadow: 0 2px 8px rgba(46, 125, 50, 0.06);
+}
+
+.checkpoint-beacon {
+	color: #38a169;
+	font-size: 12px;
+	animation: checkpointPulse 2s ease-in-out infinite;
+}
+
+@keyframes checkpointPulse {
+	0%, 100% { opacity: 0.55; transform: scale(1); text-shadow: 0 0 3px rgba(56, 161, 105, 0.4); }
+	50% { opacity: 1; transform: scale(1.3); text-shadow: 0 0 10px rgba(56, 161, 105, 0.85); }
+}
+
+.checkpoint-state {
+	font-size: 9.5px;
+	background: #2e7d32;
+	color: #ffffff;
+	padding: 1px 6px;
+	border-radius: 4px;
+	letter-spacing: 1px;
+}
+
+/* 3. 阅读：沉静墨水与古籍琥珀光晕 */
+.reading-splash {
+	--splash-glow: rgba(70, 50, 38, 0.5);
+	--splash-glow-secondary: rgba(160, 110, 60, 0.3);
+}
+
+/* 4. 运动：暖橙与阳光金芒 */
+.sport-splash {
+	--splash-glow: rgba(245, 158, 11, 0.55);
+	--splash-glow-secondary: rgba(239, 68, 68, 0.25);
+}
+
+/* 5. 照片：暗房显影冷青与橄榄绿光晕 */
+.photo-splash {
+	--splash-glow: rgba(74, 112, 88, 0.55);
+	--splash-glow-secondary: rgba(90, 158, 98, 0.35);
+}
+
+/* 第 2 拍 & 第 3 拍 编排级联动画 */
+/* 初始未进入视口时的预备态 (由 JS 添加 stage-prep) */
+.stage-prep .section-hero-visual {
+	opacity: 0;
+	transform: translateY(22px);
+}
+
+.stage-prep .section-content-body {
+	opacity: 0;
+	transform: translateY(28px);
+}
+
+/* 进入视口后触发 */
+.camp-section.is-revealed .section-hero-visual {
+	animation: stageVisualReveal 0.72s cubic-bezier(0.16, 1, 0.3, 1) 0.22s forwards;
+}
+
+.camp-section.is-revealed .section-content-body {
+	animation: stageBodyReveal 0.72s cubic-bezier(0.16, 1, 0.3, 1) 0.44s forwards;
+}
+
+@keyframes stageVisualReveal {
+	from {
+		opacity: 0;
+		transform: translateY(22px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes stageBodyReveal {
+	from {
+		opacity: 0;
+		transform: translateY(28px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* ==========================================================================
+   1. 🎵 音乐板块 (Music) · 私人歌单手账 / 黑胶收藏页
+   风格：克制、呼吸感、浅色纸质、夏日微风、私人记忆
+   ========================================================================== */
+#music.vinyl-section-quiet {
+	position: relative;
+	background-color: #faf9f5;
+	border: 1px solid #eae6dc;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+	padding: 48px 36px 56px;
+	overflow: hidden;
+}
+
+/* 极淡雅纸张氛围背景 (细微水准线) */
+.quiet-paper-lines {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	opacity: 0.5;
+	z-index: 0;
+}
+
+.paper-line {
+	position: absolute;
+	left: 5%;
+	width: 90%;
+	height: 1px;
+	background: linear-gradient(90deg, transparent 0%, rgba(180, 175, 160, 0.25) 20%, rgba(180, 175, 160, 0.25) 80%, transparent 100%);
+}
+
+.paper-line:nth-child(1) { top: 46px; }
+.paper-line:nth-child(2) { top: 52px; }
+
+/* 极简手账标题区 */
+.music-header-clean {
+	position: relative;
+	z-index: 1;
+	text-align: center;
+	margin-bottom: 28px;
+}
+
+.music-meta-en {
+	display: block;
+	font-family: "Georgia", "Songti SC", serif;
+	font-style: italic;
+	font-size: 13px;
+	letter-spacing: 1.5px;
+	color: #9aa49d;
+	margin-bottom: 6px;
+}
+
+.music-clean-title {
+	font-size: 30px;
+	font-weight: 700;
+	color: #242c26;
+	letter-spacing: 2px;
+	margin: 0 0 8px 0;
+	font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+.music-clean-subtitle {
+	font-size: 14px;
+	color: #6a746d;
+	letter-spacing: 0.5px;
+	margin: 0;
+}
+
+/* ==========================================================================
+   2. 轻量私人播放横条 (Quiet Minimal Bar)
+   ========================================================================== */
+.now-playing-quiet {
+	position: relative;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+	background: #ffffff;
+	border: 1px solid #eae6dd;
+	border-radius: 14px;
+	padding: 12px 22px;
+	max-width: 860px;
+	margin: 0 auto 38px auto;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+	transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.now-playing-quiet:hover {
+	border-color: #dcd7cb;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+/* 音频轻量浮动提示框 */
+.audio-toast-tip {
+	position: absolute;
+	top: -38px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: rgba(36, 44, 38, 0.9);
+	color: #f7faf7;
+	font-size: 12px;
+	padding: 5px 14px;
+	border-radius: 20px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	pointer-events: none;
+	white-space: nowrap;
+	z-index: 10;
+	letter-spacing: 0.3px;
+	animation: toastFadeIn 0.25s ease-out;
+}
+
+@keyframes toastFadeIn {
+	from {
+		opacity: 0;
+		transform: translate(-50%, 6px);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, 0);
+	}
+}
+
+/* 左侧微缩黑胶与歌名 */
+.np-quiet-left {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	min-width: 170px;
+}
+
+.np-quiet-disc {
+	width: 38px;
+	height: 38px;
+	flex-shrink: 0;
+}
+
+.np-disc-spin {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+	animation: vinylSlowSpin 14s linear infinite;
+	display: block;
+}
+
+.now-playing-quiet.is-paused .np-disc-spin {
+	animation-play-state: paused;
+}
+
+.np-quiet-meta {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.np-quiet-title-row {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.np-quiet-dot {
+	width: 5px;
+	height: 5px;
+	background: #5a9e62;
+	border-radius: 50%;
+}
+
+.now-playing-quiet.is-paused .np-quiet-dot {
+	background: #b5c2b7;
+}
+
+.np-quiet-title {
+	font-size: 14px;
+	font-weight: 700;
+	color: #242c26;
+	line-height: 18px;
+}
+
+.np-quiet-artist {
+	font-size: 12px;
+	color: #7b867e;
+}
+
+/* 中部记忆与极细淡雅时间轴 */
+.np-quiet-center {
+	flex: 1;
+	max-width: 480px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.np-quiet-quote {
+	font-size: 12.5px;
+	color: #58635a;
+	font-style: italic;
+	font-family: "Georgia", "Songti SC", serif;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: center;
+	position: relative;
+	transition: color 0.35s ease, text-shadow 0.35s ease;
+}
+
+.now-playing-quiet:not(.is-paused) .np-quiet-quote,
+.np-quiet-quote.is-playing {
+	color: #1e3a20;
+	font-weight: 600;
+	text-shadow: 0 0 10px rgba(90, 158, 98, 0.28);
+}
+
+.np-quiet-track-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.np-quiet-time {
+	font-size: 11px;
+	font-family: monospace;
+	color: #9aa49d;
+	min-width: 32px;
+}
+
+.np-quiet-track {
+	position: relative;
+	flex: 1;
+	height: 3px;
+	background: #edeae2;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.np-quiet-progress {
+	height: 100%;
+	background: #629c69;
+	border-radius: 3px;
+	transition: width 0.3s ease;
+}
+
+/* 右侧极简控制 */
+.np-quiet-right {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	flex-shrink: 0;
+}
+
+.np-quiet-playbtn {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	border: 1px solid #ded9cd;
+	background: #faf8f2;
+	color: #3b453d;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	font-size: 11px;
+	transition: all 0.2s ease;
+}
+
+.np-quiet-playbtn:hover {
+	background: #eae5d9;
+	color: #1a221b;
+	border-color: #ccc5b6;
+}
+
+.np-quiet-notelink {
+	background: transparent;
+	border: none;
+	color: #7b867e;
+	font-size: 12px;
+	cursor: pointer;
+	padding: 4px 6px;
+	letter-spacing: 0.5px;
+	transition: color 0.2s ease;
+}
+
+.np-quiet-notelink:hover {
+	color: #2e7d32;
+}
+
+/* ==========================================================================
+   3. 黑胶手账展墙 (Vinyl Clean Grid)
+   ========================================================================== */
+.vinyl-wall-clean {
+	position: relative;
+	z-index: 1;
+	margin-bottom: 30px;
+}
+
+/* SIDE A / SIDE B 章节淡标 */
+.shelf-section-header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	margin: 24px 0 20px;
+}
+
+.shelf-section-header.side-b-header {
+	margin-top: 36px;
+}
+
+.shelf-section-mark {
+	font-family: monospace;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 2px;
+	color: #8c968e;
+}
+
+.shelf-section-sep {
+	color: #cbd3cc;
+}
+
+.shelf-section-title {
+	font-size: 13px;
+	color: #556057;
+	letter-spacing: 1px;
+}
+
+/* 网格排版 */
+.vinyl-clean-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 24px;
+}
+
+/* 唱片卡片 (纯净手账纸张质感) */
+.vinyl-clean-card {
+	position: relative;
+	background: #ffffff;
+	border: 1px solid #ece8de;
+	border-radius: 14px;
+	padding: 20px 18px 18px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.025);
+	cursor: pointer;
+	transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+/* 随手贴在手账里的微小自然倾角 */
+.vinyl-clean-card.tilt-left       { transform: rotate(-1deg); }
+.vinyl-clean-card.tilt-right      { transform: rotate(1deg); }
+.vinyl-clean-card.tilt-soft-left  { transform: rotate(-0.5deg); }
+.vinyl-clean-card.tilt-soft-right { transform: rotate(0.6deg); }
+
+.vinyl-clean-card:hover {
+	transform: translateY(-4px) rotate(0deg) !important;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+	border-color: #ded8cb;
+}
+
+/* 正在播放选中态 */
+.vinyl-clean-card.is-playing {
+	border-color: #84b889;
+	box-shadow: 0 6px 18px rgba(104, 159, 56, 0.12);
+	background: #fbfdf9;
+}
+
+/* 唱片与封套展示区 */
+.card-vinyl-holder {
+	position: relative;
+	width: 100%;
+	height: 146px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 6px 0 14px;
+}
+
+.card-vinyl-jacket {
+	position: relative;
+	width: 126px;
+	height: 126px;
+	background: #202621;
+	border-radius: 6px;
+	box-shadow: -3px 4px 12px rgba(0, 0, 0, 0.18);
+	overflow: hidden;
+	z-index: 2;
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	transition: transform 0.3s ease;
+}
+
+.card-jacket-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+/* 黑胶碟片从封套露出 */
+.card-vinyl-disc {
+	position: absolute;
+	width: 120px;
+	height: 120px;
+	left: 50%;
+	margin-left: -32px;
+	z-index: 1;
+	transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.card-disc-img {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.28);
+	transition: transform 0.4s ease;
+	display: block;
+}
+
+/* 悬停微移 */
+.vinyl-clean-card:hover .card-vinyl-disc {
+	transform: translateX(28px);
+}
+
+/* 正在播放时缓慢匀速旋转 */
+.vinyl-clean-card.is-playing .card-vinyl-disc {
+	transform: translateX(34px);
+}
+
+.vinyl-clean-card.is-playing .card-disc-img {
+	animation: vinylSlowSpin 14s linear infinite;
+}
+
+.vinyl-clean-card.is-paused .card-disc-img {
+	animation-play-state: paused;
+}
+
+@keyframes vinylSlowSpin {
+	from { transform: rotate(0deg); }
+	to   { transform: rotate(360deg); }
+}
+
+/* 唱片信息区 */
+.card-clean-info {
+	margin-top: 4px;
+	text-align: left;
+}
+
+.card-song-head {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 8px;
+	margin-bottom: 8px;
+}
+
+.card-song-title {
+	font-size: 16px;
+	font-weight: 700;
+	color: #242c26;
+	margin: 0;
+	line-height: 1.3;
+}
+
+.card-song-artist {
+	font-size: 12px;
+	color: #7b867e;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* 一句私人真实记忆 */
+.card-memory-note {
+	font-size: 12.5px;
+	line-height: 20px;
+	color: #4b544d;
+	background: #faf8f2;
+	border: 1px solid #f0ecdf;
+	border-radius: 8px;
+	padding: 8px 11px;
+	margin: 0;
+	font-family: "Georgia", "Songti SC", serif;
+	letter-spacing: 0.2px;
+	transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.vinyl-clean-card:hover .card-memory-note {
+	background: #fdfbf6;
+	border-color: #e8e2d2;
+}
+
+/* ==========================================================================
+   4. 抽屉式手写歌词卡 / 故事卡弹窗 (Parchment Slip Modal)
+   ========================================================================== */
+.lyric-modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 10000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.25s ease, visibility 0.25s ease;
+	padding: 20px;
+}
+
+.lyric-modal-overlay.is-open {
+	opacity: 1;
+	visibility: visible;
+}
+
+.lyric-modal-backdrop {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(26, 32, 28, 0.55);
+	backdrop-filter: blur(6px);
+}
+
+.lyric-paper-card {
+	position: relative;
+	width: 100%;
+	max-width: 540px;
+	max-height: 86vh;
+	overflow-y: auto;
+	background: #fffdf9;
+	border-radius: 16px;
+	padding: 28px 26px;
+	box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22);
+	transform: translateY(24px) scale(0.97);
+	transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+	border: 1px solid #ebe5d8;
+}
+
+.lyric-modal-overlay.is-open .lyric-paper-card {
+	transform: translateY(0) scale(1);
+}
+
+.lyric-card-close {
+	position: absolute;
+	top: 16px;
+	right: 18px;
+	width: 32px;
+	height: 32px;
+	background: #f2ece0;
+	border: none;
+	border-radius: 50%;
+	font-size: 18px;
+	color: #665f54;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	z-index: 10;
+}
+
+.lyric-card-close:hover {
+	background: #e4ddcf;
+	color: #211c16;
+}
+
+.paper-header {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	border-bottom: 1px dashed #ded7c8;
+	padding-bottom: 18px;
+	margin-bottom: 18px;
+}
+
+.paper-disc-badge {
+	width: 58px;
+	height: 58px;
+	flex-shrink: 0;
+}
+
+.modal-spinning-disc {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+	animation: vinylSlowSpin 14s linear infinite;
+}
+
+.paper-header-info {
+	flex: 1;
+}
+
+.paper-tag-row {
+	margin-bottom: 4px;
+}
+
+.paper-quiet-label {
+	font-size: 11px;
+	color: #8c8273;
+	font-family: monospace;
+	letter-spacing: 1px;
+}
+
+.paper-song-title {
+	font-size: 20px;
+	font-weight: 700;
+	color: #2c251e;
+	margin: 0 0 2px 0;
+}
+
+.paper-song-artist {
+	font-size: 13px;
+	color: #70685e;
+	margin: 0;
+}
+
+.paper-quote-block {
+	position: relative;
+	background: #fcf9f1;
+	border-left: 3px solid #7cb382;
+	padding: 14px 16px;
+	border-radius: 6px;
+	margin-bottom: 18px;
+}
+
+.paper-quote-text {
+	font-size: 15px;
+	line-height: 24px;
+	color: #383127;
+	font-weight: 500;
+	font-style: italic;
+	font-family: "Georgia", "Songti SC", serif;
+	margin: 0;
+}
+
+.paper-quote-deco {
+	position: absolute;
+	font-size: 32px;
+	color: rgba(124, 179, 130, 0.25);
+	font-family: serif;
+	line-height: 1;
+}
+
+.paper-quote-deco.left { top: -6px; left: 6px; }
+.paper-quote-deco.right { bottom: -14px; right: 8px; }
+
+.paper-sec-title {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 13px;
+	font-weight: 700;
+	color: #4a4237;
+	margin-bottom: 8px;
+}
+
+.paper-memory-section {
+	margin-bottom: 18px;
+}
+
+.paper-memory-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.paper-memory-tags span {
+	background: #faf7ef;
+	color: #5d5445;
+	font-size: 12px;
+	padding: 3px 10px;
+	border-radius: 6px;
+	border: 1px solid #ede6d8;
+}
+
+.paper-story-section {
+	background: #faf8f2;
+	border: 1px dashed #ded8c9;
+	padding: 14px 16px;
+	border-radius: 10px;
+	margin-bottom: 20px;
+}
+
+.paper-story-text {
+	font-size: 13.5px;
+	line-height: 24px;
+	color: #463e33;
+	margin: 0;
+	text-align: justify;
+}
+
+.paper-footer {
+	border-top: 1px dashed #ded7c8;
+	padding-top: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.paper-nav-btns {
+	display: flex;
+	gap: 10px;
+	justify-content: space-between;
+}
+
+.paper-nav-btn {
+	background: #f4efe4;
+	border: 1px solid #e7dfd2;
+	color: #5c5344;
+	padding: 7px 12px;
+	border-radius: 6px;
+	font-size: 12px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.paper-nav-btn:hover {
+	background: #e8e0d1;
+	color: #1f1a14;
+}
+
+.paper-play-btn {
+	flex: 1;
+	background: #46794b;
+	color: #ffffff;
+	border: none;
+	padding: 7px 14px;
+	border-radius: 6px;
+	font-size: 12px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.paper-play-btn:hover {
+	background: #35603a;
+}
+
+.paper-author-sign {
+	text-align: center;
+	font-size: 11px;
+	color: #a09788;
+	font-family: monospace;
+	letter-spacing: 1px;
+}
+
+/* 自适应 */
+@media (max-width: 768px) {
+	.now-playing-quiet {
+		flex-direction: column;
+		align-items: stretch;
+		padding: 14px;
+	}
+	.np-quiet-left {
+		justify-content: center;
+	}
+	.np-quiet-center {
+		max-width: 100%;
+	}
+	.np-quiet-right {
+		justify-content: center;
+	}
+	.vinyl-clean-grid {
+		grid-template-columns: 1fr;
+	}
+	.magazine-nav {
+		gap: 10px;
+	}
+}
+
+/* ==========================================================================
+   🎵 私人常听双辑手账卡带 (Tape & Sleeve Mixtape Archive)
+   方案 A：实体卡带内封歌词纸质感 · 双辑复古手账卡片
+   ========================================================================== */
+.singer-row,
+.mixtape-archive-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 32px;
+	justify-content: center;
+	align-items: stretch;
+	margin-top: 40px;
+	padding: 16px 8px 24px;
+	perspective: 1200px;
+}
+
+.mixtape-card {
+	position: relative;
+	flex: 1 1 480px;
+	max-width: 540px;
+	min-width: 320px;
+	background-color: #faf7f2;
+	background-image: 
+		linear-gradient(rgba(215, 203, 182, 0.22) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(215, 203, 182, 0.08) 1px, transparent 1px);
+	background-size: 100% 26px, 26px 100%;
+	border: 1px solid rgba(206, 195, 177, 0.85);
+	border-radius: 14px;
+	padding: 26px 26px 20px;
+	box-shadow: 
+		0 12px 30px rgba(44, 38, 30, 0.08),
+		0 3px 10px rgba(44, 38, 30, 0.04),
+		inset 0 0 0 1px rgba(255, 255, 255, 0.65);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* 微微的手账纸张倾角，破除生硬的机械对齐感 */
+.tape-zhoushen {
+	transform: rotate(-0.7deg);
+}
+
+.tape-genshin {
+	transform: rotate(0.8deg);
+}
+
+.mixtape-card {
+	cursor: pointer;
+	transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.mixtape-card:hover {
+	transform: rotate(0deg) translateY(-5px);
+	box-shadow: 
+		0 18px 40px rgba(44, 38, 30, 0.13),
+		0 6px 16px rgba(44, 38, 30, 0.06),
+		inset 0 0 0 1px rgba(255, 255, 255, 0.9);
+}
+
+.mixtape-card.is-active-tape {
+	transform: rotate(0deg) translateY(-4px) !important;
+	border-color: #53755c;
+	box-shadow: 
+		0 18px 40px rgba(44, 38, 30, 0.16),
+		0 0 0 2px rgba(83, 117, 92, 0.3),
+		inset 0 0 0 1px rgba(255, 255, 255, 0.95);
+}
+
+.mixtape-card.is-active-tape .tape-spool-overlay {
+	animation: tapeSpin 5s linear infinite;
+	opacity: 0.95;
+	border-color: #f7e0b5;
+}
+
+.mixtape-card.is-active-tape .tape-pill-side {
+	background: #2d4c38;
+	color: #f8faf6;
+	box-shadow: 0 0 10px rgba(76, 119, 55, 0.35);
+}
+
+@keyframes tapeSpin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+/* 顶部半透明和纸胶带装饰 */
+.tape-washi-strip {
+	position: absolute;
+	top: -12px;
+	width: 96px;
+	height: 24px;
+	z-index: 3;
+	pointer-events: none;
+	border-radius: 2px;
+}
+
+.tape-washi-left {
+	left: 36px;
+	background: rgba(220, 232, 222, 0.82);
+	border-left: 2px dashed rgba(162, 185, 166, 0.7);
+	border-right: 2px dashed rgba(162, 185, 166, 0.7);
+	box-shadow: 0 2px 8px rgba(40, 56, 44, 0.08);
+	transform: rotate(-3.5deg);
+}
+
+.tape-washi-right {
+	right: 36px;
+	background: rgba(238, 230, 212, 0.85);
+	border-left: 2px dashed rgba(195, 180, 150, 0.7);
+	border-right: 2px dashed rgba(195, 180, 150, 0.7);
+	box-shadow: 0 2px 8px rgba(60, 48, 32, 0.08);
+	transform: rotate(2.8deg);
+}
+
+/* 封套顶栏元数据 */
+.tape-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 14px;
+	border-bottom: 1px dashed rgba(195, 182, 162, 0.7);
+	margin-bottom: 20px;
+}
+
+.tape-tag-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.tape-pill-side {
+	font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.8px;
+	padding: 2px 7px;
+	background: #2b3930;
+	color: #f6f3ed;
+	border-radius: 4px;
+	line-height: 1.2;
+	white-space: nowrap;
+	flex-shrink: 0;
+}
+
+.tape-tag-name {
+	font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+	font-size: 10.5px;
+	font-weight: 600;
+	letter-spacing: 1.2px;
+	color: #726859;
+	white-space: nowrap;
+}
+
+.tape-catalog-no {
+	font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+	font-size: 11px;
+	color: #9c8e7b;
+	letter-spacing: 0.6px;
+	font-weight: 500;
+	white-space: nowrap;
+}
+
+/* 卡片主体 */
+.tape-body {
+	display: flex;
+	gap: 22px;
+	align-items: flex-start;
+	flex: 1;
+}
+
+/* 封面包装区 */
+.tape-cover-wrap {
+	flex-shrink: 0;
+	width: 130px;
+	text-align: center;
+}
+
+.tape-cover-frame {
+	position: relative;
+	width: 130px;
+	height: 130px;
+	background: #ffffff;
+	padding: 6px 6px 14px 6px;
+	border-radius: 8px;
+	border: 1px solid rgba(210, 200, 185, 0.85);
+	box-shadow: 
+		0 6px 16px rgba(45, 38, 28, 0.08),
+		0 1px 3px rgba(45, 38, 28, 0.05);
+	overflow: hidden;
+}
+
+.tape-artist-photo {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 4px;
+	display: block;
+	filter: contrast(1.02) saturate(0.96);
+	transition: transform 0.4s ease;
+}
+
+.mixtape-card:hover .tape-artist-photo {
+	transform: scale(1.03);
+}
+
+.tape-spool-overlay {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	border: 1.5px dashed rgba(255, 255, 255, 0.85);
+	box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.15);
+	opacity: 0.7;
+	pointer-events: none;
+}
+
+.tape-artist-caption {
+	margin-top: 10px;
+}
+
+.artist-name-zh {
+	display: block;
+	font-family: 'Noto Serif SC', 'Songti SC', STSong, Georgia, serif;
+	font-size: 16px;
+	font-weight: 700;
+	color: #242c26;
+	letter-spacing: 0.5px;
+	line-height: 1.3;
+}
+
+.artist-genre-en {
+	display: block;
+	font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+	font-size: 10px;
+	color: #887b6c;
+	letter-spacing: 0.6px;
+	margin-top: 2px;
+}
+
+/* 曲目列表包装 */
+.tape-tracklist-wrap {
+	flex: 1;
+	min-width: 0;
+}
+
+.tracklist-header {
+	margin-bottom: 14px;
+}
+
+.tracklist-title {
+	font-family: 'Noto Serif SC', 'Songti SC', STSong, Georgia, serif;
+	font-size: 15px;
+	font-weight: 700;
+	color: #232b26;
+	letter-spacing: 0.3px;
+	margin-bottom: 3px;
+}
+
+.tracklist-curator-note {
+	font-size: 12px;
+	color: #797166;
+	font-style: italic;
+	line-height: 1.45;
+}
+
+/* 曲目单 */
+.mixtape-tracklist {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 11px;
+}
+
+.mixtape-track-item {
+	display: flex;
+	align-items: baseline;
+	gap: 10px;
+	padding: 4px 8px 7px 8px;
+	margin: 0 -8px;
+	border-bottom: 1px dotted rgba(210, 198, 180, 0.55);
+	border-radius: 6px;
+	cursor: pointer;
+	transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.mixtape-track-item:hover {
+	background: rgba(226, 216, 200, 0.4);
+	transform: translateX(4px);
+}
+
+.mixtape-track-item:active {
+	transform: scale(0.98);
+}
+
+.mixtape-track-item:focus-visible {
+	outline: 2px solid rgba(63, 103, 73, 0.72);
+	outline-offset: 2px;
+}
+
+.track-play-state {
+	align-self: center;
+	flex: 0 0 auto;
+	font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+	font-size: 9px;
+	font-weight: 700;
+	color: #52705a;
+	white-space: nowrap;
+	letter-spacing: 0;
+}
+
+.mixtape-track-item.is-unavailable {
+	cursor: help;
+}
+
+.mixtape-track-item.is-unavailable .track-play-state {
+	color: #a06e3a;
+}
+
+.mixtape-track-item.is-unavailable:hover {
+	background: rgba(177, 126, 71, 0.09);
+}
+
+.mixtape-track-item.is-playing-track {
+	background: rgba(83, 117, 92, 0.13);
+	border-bottom-color: transparent;
+}
+
+.mixtape-track-item.is-playing-track .track-name {
+	color: #244630;
+	font-weight: 700;
+}
+
+.mixtape-track-item.is-playing-track .track-idx {
+	color: #9d7b42;
+}
+
+.mixtape-track-item:last-child {
+	border-bottom: none;
+	padding-bottom: 4px;
+}
+
+.track-idx {
+	font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+	font-size: 11px;
+	font-weight: 700;
+	color: #968875;
+	min-width: 18px;
+	flex-shrink: 0;
+}
+
+.track-meta {
+	flex: 1;
+	min-width: 0;
+}
+
+.track-title-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+	line-height: 1.35;
+}
+
+.track-name {
+	font-family: 'Noto Serif SC', 'Songti SC', STSong, Georgia, serif;
+	font-size: 14px;
+	font-weight: 600;
+	color: #232b26;
+	letter-spacing: 0.2px;
+}
+
+.track-artist-tag {
+	font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+	font-size: 9.5px;
+	padding: 1px 6px;
+	border-radius: 3px;
+	background: rgba(76, 119, 55, 0.08);
+	color: #3b5f30;
+	border: 1px solid rgba(76, 119, 55, 0.22);
+	letter-spacing: 0.3px;
+}
+
+.track-tag-badge {
+	font-size: 9.5px;
+	padding: 1px 6px;
+	border-radius: 3px;
+	background: rgba(148, 115, 60, 0.09);
+	color: #7d5b24;
+	border: 1px solid rgba(148, 115, 60, 0.24);
+	font-weight: 500;
+	letter-spacing: 0.2px;
+}
+
+.track-note {
+	display: block;
+	font-size: 11.5px;
+	color: #726b61;
+	line-height: 1.45;
+	margin-top: 2px;
+}
+
+/* 底部落款章 */
+.tape-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
+	padding-top: 12px;
+	border-top: 1px dashed rgba(195, 182, 162, 0.7);
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.tape-stamp-text {
+	font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+	font-size: 10px;
+	font-weight: 600;
+	color: #7e7161;
+	letter-spacing: 0.8px;
+}
+
+.tape-duration-tag {
+	font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+	font-size: 10px;
+	color: #988a78;
+	letter-spacing: 0.4px;
+}
+
+/* ==========================================================================
+   2. 🎮 游戏驿站 (Gaming) · 原神与黑神话双核特展
+   ========================================================================== */
+#game,
+#game.game-section-modern {
+	background: linear-gradient(180deg, #faf7f2 0%, #f4eee3 100%);
+	border: 1px solid rgba(210, 198, 178, 0.85);
+	box-shadow: 0 8px 30px rgba(45, 38, 28, 0.05);
+	border-radius: 24px;
+	padding: 48px 32px 56px;
+}
+
+/* ==========================================================================
+   特展一：《原神》提瓦特漫游手记（左右对景结构）
+   ========================================================================== */
+.game-showcase-genshin {
+	display: grid;
+	grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+	gap: 32px;
+	align-items: start;
+	max-width: 1080px;
+	margin: 0 auto 52px auto;
+	min-height: 350vh;
+	position: relative;
+}
+
+/* 左侧：提瓦特沉浸视界画框 (52% 宽度) */
+.genshin-visual-side {
+	min-width: 320px;
+	position: sticky;
+	top: min(13vh, 112px);
+	height: min(76vh, 680px);
+}
+
+.genshin-frame-container {
+	background: #121b16;
+	border-radius: 16px;
+	overflow: hidden;
+	border: 1px solid rgba(212, 175, 55, 0.35);
+	box-shadow: 0 14px 36px rgba(18, 28, 22, 0.16);
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.25, 1), box-shadow 0.45s ease, border-color 0.45s ease;
+	contain: layout paint;
+}
+
+.genshin-frame-container:hover {
+	box-shadow: 0 20px 45px rgba(18, 28, 22, 0.22);
+	border-color: rgba(220, 185, 70, 0.75);
+}
+
+.genshin-top-meta {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 11px 18px;
+	background: rgba(16, 24, 19, 0.96);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+	font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+	font-size: 11px;
+	color: #a4b8a8;
+	letter-spacing: 0.8px;
+}
+
+.genshin-meta-pill {
+	color: #e5b95f;
+	font-weight: 700;
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.genshin-meta-region {
+	color: #8fa593;
+	font-size: 10.5px;
+}
+
+.genshin-media-wrap {
+	position: relative;
+	width: 100%;
+	flex: 1;
+	min-height: 0;
+	overflow: hidden;
+	background:
+		radial-gradient(circle at 50% 42%, rgba(116, 151, 130, 0.16), transparent 42%),
+		linear-gradient(155deg, #111c17 0%, #0a110e 100%);
+	perspective: 1500px;
+	isolation: isolate;
+}
+
+.teyvat-card-stack {
+	position: absolute;
+	inset: 0;
+	transform-style: preserve-3d;
+}
+
+.teyvat-archive-card {
+	--archive-x: 36px;
+	--archive-y: 104px;
+	--archive-scale: 0.86;
+	--archive-opacity: 0.36;
+	--archive-rotate: 2deg;
+	--archive-rotate-y: 10deg;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: min(78%, 430px);
+	height: min(82%, 510px);
+	margin: 0;
+	opacity: var(--archive-opacity);
+	filter: blur(var(--archive-blur, 0));
+	transform: translate(-50%, -50%) translate3d(var(--archive-x), var(--archive-y), 0) rotateY(var(--archive-rotate-y)) rotateZ(var(--archive-rotate)) scale(var(--archive-scale));
+	transform-origin: 50% 90%;
+	transform-style: preserve-3d;
+	will-change: transform, opacity, filter;
+	pointer-events: none;
+}
+
+.teyvat-archive-card.is-landscape {
+	width: min(91%, 510px);
+	height: min(64%, 350px);
+}
+
+.teyvat-archive-card.is-portrait {
+	width: min(69%, 360px);
+	height: min(90%, 540px);
+}
+
+.teyvat-card-paper {
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	background: #e9e5d9;
+	border: 1px solid rgba(237, 228, 205, 0.72);
+	padding: 12px 12px 9px;
+	display: grid;
+	grid-template-rows: minmax(0, 1fr) auto;
+	box-shadow:
+		0 24px 42px rgba(0, 0, 0, 0.34),
+		0 5px 0 -2px #cbc5b6,
+		inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+	position: relative;
+	overflow: hidden;
+}
+
+.teyvat-archive-card:nth-child(2n) .teyvat-card-paper { background: #dfe5df; }
+.teyvat-archive-card:nth-child(3n) .teyvat-card-paper { background: #e2e6e8; }
+
+.teyvat-card-paper::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(112deg, transparent 36%, rgba(255,255,255,0.22) 48%, transparent 59%);
+	transform: translateX(calc(-120% + var(--archive-progress, 0) * 210%));
+	pointer-events: none;
+	z-index: 3;
+}
+
+.teyvat-photo-window {
+	position: relative;
+	min-height: 0;
+	overflow: hidden;
+	background: #142019;
+	box-shadow: inset 0 0 0 1px rgba(17, 29, 22, 0.28);
+}
+
+.teyvat-photo-window img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: cover;
+	object-position: center;
+}
+
+.teyvat-photo-collage img { object-position: center 44%; }
+
+.teyvat-archive-card.is-landscape .teyvat-photo-window {
+	background: #18221d;
+}
+
+.teyvat-archive-card.is-landscape .teyvat-photo-window img {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 58%;
+	height: auto;
+	max-width: none;
+	transform: translate(-50%, -50%) rotate(90deg);
+	object-fit: contain;
+}
+
+.teyvat-archive-card.is-landscape.rotate-ccw .teyvat-photo-window img {
+	transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+.teyvat-archive-card.is-portrait .teyvat-photo-window img {
+	object-position: center 22%;
+}
+
+.teyvat-card-paper figcaption {
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	align-items: baseline;
+	gap: 9px;
+	padding: 8px 2px 0;
+	font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+	color: #47544c;
+}
+
+.teyvat-card-paper figcaption span,
+.teyvat-card-paper figcaption em {
+	font-size: 8px;
+	font-style: normal;
+	letter-spacing: 0.8px;
+	opacity: 0.68;
+}
+
+.teyvat-card-paper figcaption strong {
+	font-family: 'Noto Serif SC', 'Songti SC', STSong, serif;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 1px;
+}
+
+.teyvat-orbit-line {
+	position: absolute;
+	left: 8%;
+	right: 8%;
+	top: 50%;
+	height: 42%;
+	border: 1px solid rgba(202, 181, 119, 0.13);
+	border-radius: 50%;
+	transform: translateY(-50%) rotate(-8deg);
+	pointer-events: none;
+}
+
+.teyvat-focus-corners {
+	position: absolute;
+	inset: 20px;
+	z-index: 130;
+	pointer-events: none;
+	background:
+		linear-gradient(#d8bd69, #d8bd69) left top / 20px 1px no-repeat,
+		linear-gradient(#d8bd69, #d8bd69) left top / 1px 20px no-repeat,
+		linear-gradient(#d8bd69, #d8bd69) right bottom / 20px 1px no-repeat,
+		linear-gradient(#d8bd69, #d8bd69) right bottom / 1px 20px no-repeat;
+	opacity: 0.34;
+}
+
+.genshin-media-glimmer {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background: linear-gradient(
+		to top,
+		rgba(10, 18, 12, 0.4) 0%,
+		transparent 25%
+	);
+	z-index: 120;
+}
+
+.genshin-bottom-bar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 18px;
+	background: rgba(16, 24, 19, 0.96);
+	border-top: 1px solid rgba(255, 255, 255, 0.08);
+	font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+	font-size: 11px;
+	color: #9bb0a0;
+}
+
+.genshin-coord {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.genshin-map-status {
+	color: #4ade80;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+}
+
+.teyvat-index {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.teyvat-index-dot {
+	width: 15px;
+	height: 2px;
+	border: 0;
+	padding: 0;
+	background: rgba(149, 171, 154, 0.34);
+	cursor: pointer;
+	transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.teyvat-index-dot.is-active {
+	width: 28px;
+	background: #dcbf63;
+}
+
+/* ========================================================================== 
+   提瓦特明室接触印样 · 单张主视窗与始终可见的五格索引
+   ========================================================================== */
+.contact-print-container {
+	background: #f4f2e9;
+	border-color: rgba(126, 148, 129, 0.42);
+	box-shadow: 0 18px 40px rgba(58, 68, 58, 0.12);
+}
+
+.contact-print-container:hover {
+	box-shadow: 0 22px 48px rgba(58, 68, 58, 0.15);
+	border-color: rgba(93, 126, 99, 0.58);
+}
+
+.contact-print-container .genshin-top-meta {
+	background: #eeece2;
+	border-bottom-color: rgba(89, 112, 94, 0.2);
+	color: #657468;
+}
+
+.contact-print-container .genshin-meta-pill {
+	color: #41604a;
+}
+
+.contact-print-container .genshin-meta-region {
+	color: #7c897e;
+}
+
+.contact-print-container .genshin-media-wrap {
+	display: grid;
+	grid-template-rows: minmax(0, 1fr) auto auto;
+	gap: 10px;
+	padding: 12px;
+	box-sizing: border-box;
+	background:
+		linear-gradient(rgba(105, 127, 110, 0.055) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(105, 127, 110, 0.055) 1px, transparent 1px),
+		#e9ebe4;
+	background-size: 22px 22px;
+	perspective: none;
+}
+
+.contact-main-view {
+	position: relative;
+	min-height: 0;
+	overflow: hidden;
+	background: #d9ded7;
+	border: 1px solid rgba(77, 101, 83, 0.24);
+	box-shadow: inset 0 0 0 6px rgba(250, 249, 244, 0.56);
+}
+
+.contact-main-slide {
+	position: absolute;
+	inset: 0;
+	margin: 0;
+	display: none;
+	overflow: hidden;
+	background: #d9ded7;
+}
+
+.contact-main-slide.is-active {
+	display: block;
+}
+
+.contact-main-slide.contact-print-reveal {
+	animation: contactPrintReveal 0.62s cubic-bezier(0.18, 0.78, 0.2, 1) both;
+}
+
+@keyframes contactPrintReveal {
+	0% {
+		clip-path: inset(0 100% 0 0);
+		filter: saturate(0.58) brightness(1.15);
+		transform: scale(1.025);
+	}
+	55% {
+		filter: saturate(0.82) brightness(1.05);
+	}
+	100% {
+		clip-path: inset(0 0 0 0);
+		filter: saturate(1) brightness(1);
+		transform: scale(1);
+	}
+}
+
+.contact-main-media,
+.contact-thumb-media {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: #d5dbd3;
+}
+
+.contact-main-media img,
+.contact-thumb-media img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: contain;
+	object-position: center;
+}
+
+.contact-main-media.is-collage {
+	background: #d9ded7;
+}
+
+.contact-main-media.is-collage img { object-position: center; }
+
+.contact-main-media.is-portrait img {
+	object-fit: contain;
+	object-position: center;
+	background: #d9ded7;
+}
+
+.contact-main-media.is-landscape img,
+.contact-thumb-media.is-landscape img {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 57%;
+	height: auto;
+	max-width: none;
+	object-fit: contain;
+}
+
+.contact-main-media.rotate-ccw img,
+.contact-thumb-media.rotate-ccw img {
+	transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+.contact-main-media.rotate-cw img,
+.contact-thumb-media.rotate-cw img {
+	transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.contact-main-caption {
+	position: relative;
+	left: auto;
+	bottom: auto;
+	z-index: 12;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-height: 29px;
+	box-sizing: border-box;
+	gap: 9px;
+	padding: 5px 9px;
+	background: #f5f3eb;
+	border: 1px solid rgba(78, 103, 84, 0.2);
+	border-left: 3px solid #54725d;
+	box-shadow: 0 2px 8px rgba(28, 39, 31, 0.06);
+}
+
+.contact-main-caption span {
+	font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+	font-size: 10px;
+	letter-spacing: 0.8px;
+	color: #78857b;
+}
+
+.contact-main-caption strong {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+	font-size: 13px;
+	font-weight: 600;
+	color: #2b3d30;
+	letter-spacing: 0.5px;
+}
+
+.contact-main-caption em {
+	font-family: 'Noto Serif SC', 'Songti SC', STSong, serif;
+	font-size: 9px;
+	font-style: normal;
+	color: #8a958b;
+	letter-spacing: 0.5px;
+}
+
+.contact-focus-mark {
+	position: absolute;
+	inset: 14px;
+	z-index: 10;
+	pointer-events: none;
+	background:
+		linear-gradient(#f0eee4, #f0eee4) left top / 18px 1px no-repeat,
+		linear-gradient(#f0eee4, #f0eee4) left top / 1px 18px no-repeat,
+		linear-gradient(#f0eee4, #f0eee4) right bottom / 18px 1px no-repeat,
+		linear-gradient(#f0eee4, #f0eee4) right bottom / 1px 18px no-repeat;
+	opacity: 0.82;
+}
+
+.contact-sheet-overview {
+	position: relative;
+	padding-top: 1px;
+}
+
+.contact-sheet-label {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 5px;
+	font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+	font-size: 10px;
+	letter-spacing: 1px;
+	color: #68766b;
+}
+
+.contact-sheet-label em {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+	font-style: normal;
+	font-size: 11px;
+	letter-spacing: 0.3px;
+	color: #79857a;
+}
+
+.contact-thumbnail-grid {
+	position: relative;
+	display: grid;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+	gap: 6px;
+	padding: 4px;
+	background: rgba(246, 245, 238, 0.74);
+	border: 1px solid rgba(104, 126, 109, 0.19);
+}
+
+.contact-thumb {
+	position: relative;
+	z-index: 2;
+	min-width: 0;
+	border: 0;
+	padding: 2px 2px 4px;
+	background: transparent;
+	color: #5f6e62;
+	cursor: pointer;
+	opacity: 0.72;
+	transition: opacity 0.24s ease, transform 0.24s ease;
+}
+
+.contact-thumb:hover,
+.contact-thumb.is-active {
+	opacity: 1;
+	transform: translateY(-2px);
+}
+
+.contact-thumb-media {
+	height: 54px;
+	border: 1px solid rgba(70, 91, 75, 0.16);
+}
+
+.contact-thumb-media.is-portrait img { object-position: center 24%; }
+
+.contact-thumb-label {
+	display: block;
+	margin-top: 4px;
+	font-family: 'Noto Serif SC', 'Songti SC', STSong, serif;
+	font-size: 8px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.contact-thumb-label b {
+	font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+	font-size: 7px;
+	color: #829086;
+	margin-right: 2px;
+}
+
+.contact-moving-viewfinder {
+	position: absolute;
+	z-index: 4;
+	left: calc(4px + var(--viewfinder-left, 0%));
+	top: 2px;
+	bottom: 2px;
+	width: calc(20% - 4px);
+	border: 1.5px solid #4f765b;
+	box-shadow: 0 0 0 2px rgba(248, 247, 241, 0.78), 0 4px 12px rgba(53, 77, 59, 0.12);
+	pointer-events: none;
+	transition: none;
+}
+
+.contact-moving-viewfinder::before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: -8px;
+	width: 1px;
+	height: 7px;
+	background: #4f765b;
+}
+
+.contact-print-container .genshin-bottom-bar {
+	background: #eeece2;
+	border-top-color: rgba(89, 112, 94, 0.2);
+	color: #536559;
+}
+
+.contact-sheet-status {
+	font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+	font-size: 8px;
+	letter-spacing: 0.8px;
+	color: #7d897f;
+}
+
+.contact-sheet-status b {
+	color: #3f684a;
+}
+
+/* 右侧：旅行者手账自述与心境笔记 (48% 宽度) */
+.genshin-dossier-side {
+	min-width: 320px;
+	display: flex;
+	flex-direction: column;
+	background: #fbf9f4;
+	border: 1px solid rgba(215, 203, 180, 0.85);
+	border-radius: 16px;
+	padding: 24px 26px 22px;
+	box-shadow: 0 8px 24px rgba(45, 38, 28, 0.06);
+	position: relative;
+	position: sticky;
+	top: min(13vh, 112px);
+	min-height: min(76vh, 680px);
+	box-sizing: border-box;
+	gap: 16px;
+}
+
+.genshin-dossier-header {
+	margin-bottom: 2px;
+}
+
+.genshin-header-top {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	margin-bottom: 10px;
+	flex-wrap: wrap;
+}
+
+.genshin-fate-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+	font-size: 11px;
+	font-weight: 700;
+	color: #916f27;
+	background: rgba(225, 185, 90, 0.16);
+	border: 1px solid rgba(225, 185, 90, 0.38);
+	padding: 3px 10px;
+	border-radius: 6px;
+	width: fit-content;
+}
+
+/* 显眼精致的旅行者专属 UID 铭牌 */
+.genshin-traveler-uid-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-family: 'SFMono-Regular', Consolas, Menlo, Monaco, 'JetBrains Mono', monospace;
+	background: #fdfbf7;
+	border: 1.5px solid #d4af37;
+	border-radius: 8px;
+	padding: 3px 10px;
+	box-shadow: 0 2px 8px rgba(212, 175, 55, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+	transition: all 0.22s ease;
+	user-select: all;
+}
+
+.genshin-traveler-uid-pill:hover {
+	background: #ffffff;
+	border-color: #e5be3a;
+	box-shadow: 0 4px 14px rgba(212, 175, 55, 0.3);
+	transform: translateY(-1px);
+}
+
+.genshin-traveler-uid-pill .uid-tag {
+	font-size: 10px;
+	font-weight: 800;
+	letter-spacing: 0.8px;
+	color: #916f27;
+	background: rgba(212, 175, 55, 0.18);
+	padding: 1px 5px;
+	border-radius: 4px;
+}
+
+.genshin-traveler-uid-pill .uid-star {
+	color: #d4af37;
+	font-size: 11px;
+	animation: primogemPulse 2.4s ease-in-out infinite alternate;
+}
+
+.genshin-traveler-uid-pill .uid-number {
+	font-size: 13.5px;
+	font-weight: 800;
+	letter-spacing: 1px;
+	color: #1f2721;
+}
+
+.genshin-star-symbol {
+	color: #d4af37;
+	font-weight: 900;
+	animation: primogemPulse 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes primogemPulse {
+	0% {
+		transform: scale(1);
+		filter: drop-shadow(0 0 1px rgba(212, 175, 55, 0.4));
+	}
+	100% {
+		transform: scale(1.18);
+		filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.9));
+	}
+}
+
+.genshin-game-title {
+	font-family: 'Noto Serif SC', 'Songti SC', STSong, serif;
+	font-size: 24px;
+	font-weight: 800;
+	color: #1f2a22;
+	margin: 0 0 3px 0;
+	letter-spacing: 0.3px;
+}
+
+.genshin-sub-title {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+	font-size: 12px;
+	font-weight: 500;
+	color: #72685a;
+	letter-spacing: 0.3px;
+}
+
+/* 旅行者专属心境札记自述 */
+.genshin-reflection-card {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background: #ffffff;
+	border: 1px solid rgba(210, 200, 180, 0.8);
+	border-left: 3.5px solid #d4af37;
+	border-radius: 10px;
+	padding: 18px 22px 16px;
+	margin: 0;
+	box-shadow: 0 3px 10px rgba(45, 38, 28, 0.04);
+	position: relative;
+}
+
+.reflection-quote-mark {
+	font-family: 'Georgia', serif;
+	font-size: 20px;
+	font-weight: bold;
+	color: #d4af37;
+	line-height: 1;
+}
+
+.reflection-quote-open {
+	margin-bottom: 6px;
+}
+
+.reflection-quote-close {
+	text-align: right;
+	margin-top: 6px;
+}
+
+.reflection-text {
+	font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", -apple-system, sans-serif;
+	font-size: 13.5px;
+	line-height: 1.82;
+	color: #2e2b26;
+	margin: 0;
+	letter-spacing: 0.25px;
+	-webkit-font-smoothing: antialiased;
+}
+
+.reflection-signature {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+	font-size: 11.5px;
+	font-style: normal;
+	font-weight: 500;
+	color: #827566;
+	text-align: right;
+	margin-top: 10px;
+	letter-spacing: 0.4px;
+}
+
+/* 简洁克制的 B站纳塔交响现场跳转按钮 */
+.genshin-bili-wrap {
+	margin: 0;
+}
+
+.genshin-bili-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	width: 100%;
+	box-sizing: border-box;
+	background: #ffffff;
+	border: 1px solid rgba(212, 175, 55, 0.42);
+	border-radius: 9px;
+	padding: 10px 14px;
+	text-decoration: none;
+	color: #2b2823;
+	box-shadow: 0 2px 6px rgba(45, 38, 28, 0.035);
+	transition: all 0.22s ease-in-out;
+	cursor: pointer;
+}
+
+.genshin-bili-btn:hover {
+	background: #fdfbf7;
+	border-color: #d4af37;
+	box-shadow: 0 4px 14px rgba(212, 175, 55, 0.16);
+	transform: translateY(-1px);
+}
+
+.bili-btn-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	background: rgba(212, 175, 55, 0.15);
+	color: #916f27;
+	flex-shrink: 0;
+}
+
+.bili-btn-badge {
+	font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+	font-size: 10px;
+	font-weight: 700;
+	color: #916f27;
+	background: rgba(225, 185, 90, 0.16);
+	padding: 2px 6px;
+	border-radius: 4px;
+	letter-spacing: 0.4px;
+	flex-shrink: 0;
+}
+
+.bili-btn-title {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+	font-size: 12px;
+	font-weight: 600;
+	color: #262420;
+	letter-spacing: 0.2px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	flex: 1;
+}
+
+.bili-btn-arrow {
+	font-size: 13px;
+	font-weight: 700;
+	color: #a48238;
+	transition: transform 0.2s ease;
+	flex-shrink: 0;
+}
+
+.genshin-bili-btn:hover .bili-btn-arrow {
+	transform: translate(2px, -2px);
+	color: #916f27;
+}
+
+/* 底部个人印章徽标 */
+.genshin-badges-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 8px;
+}
+
+.genshin-seal-pill {
+	background: #f4efe6;
+	border: 1px solid rgba(205, 192, 170, 0.75);
+	border-radius: 8px;
+	padding: 7px 9px;
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.genshin-seal-pill:hover {
+	background: #efe8dc;
+	transform: translateY(-1px);
+}
+
+.seal-star {
+	color: #d4af37;
+	font-size: 12px;
+	flex-shrink: 0;
+}
+
+.seal-info {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.seal-val {
+	font-family: 'Noto Serif SC', 'Songti SC', STSong, serif;
+	font-size: 11.5px;
+	font-weight: 700;
+	color: #232c25;
+	white-space: nowrap;
+}
+
+.seal-key {
+	font-size: 9.5px;
+	color: #857b6d;
+	margin-top: 1px;
+	white-space: nowrap;
+}
+
+/* ==========================================================================
+   特展二：《黑神话：悟空》西行云海 · 天命长卷（一体化东方暗金展台）
+   ========================================================================== */
+/* ==========================================================================
+   《黑神话：悟空》西行长卷展台 (Black Myth Wukong Unified Showcase)
+   沉稳克制的东方暗金电影档案美学 · 去除浮夸荧光与繁复标签
+   ========================================================================== */
+/* ==========================================================================
+   《黑神话：悟空》西行长卷展台 (Black Myth Wukong Unified Journal)
+   沉稳克制的东方暗金电影档案美学 · 去除浮夸荧光与繁复标签 · 纯粹游玩手记
+   ========================================================================== */
+.game-showcase-wukong.wukong-unified-scroll {
+	max-width: 1080px;
+	margin: 0 auto;
+	background: #0d0c0a;
+	border: 1px solid rgba(195, 155, 80, 0.28);
+	border-radius: 18px;
+	overflow: hidden;
+	box-shadow: 0 16px 44px rgba(0, 0, 0, 0.45);
+	transition: border-color 0.4s ease, box-shadow 0.4s ease;
+	position: relative;
+}
+
+.game-showcase-wukong.wukong-unified-scroll:hover {
+	border-color: rgba(203, 176, 122, 0.48);
+	box-shadow: 0 20px 54px rgba(0, 0, 0, 0.55);
+}
+
+/* 顶部元信息栏：纯净标题与卷册编号（大标题第一视觉焦点，合并重复标签） */
+.wukong-scroll-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 16px 28px;
+	background: rgba(16, 14, 12, 0.96);
+	border-bottom: 1px solid rgba(195, 155, 80, 0.18);
+}
+
+.wukong-scroll-title-wrap {
+	display: flex;
+	align-items: baseline;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.wukong-scroll-main-title {
+	font-family: 'Noto Serif SC', 'Songti SC', STSong, serif;
+	font-size: 21px;
+	font-weight: 800;
+	color: #fff7eb;
+	margin: 0;
+	letter-spacing: 0.8px;
+}
+
+.wukong-scroll-sub-tag {
+	font-family: 'Noto Serif SC', 'Songti SC', serif;
+	font-size: 13px;
+	color: #cbb07a;
+	letter-spacing: 0.6px;
+	font-weight: 500;
+}
+
+.wukong-scroll-meta-right {
+	display: flex;
+	align-items: center;
+}
+
+.wukong-scroll-code {
+	font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+	color: #8f7f6c;
+	font-size: 11px;
+	letter-spacing: 1px;
+}
+
+/* 主画卷视界：四大天王宽幅原画 + 纯净视觉留白（仅底部过渡暗渐变） */
+.wukong-unified-hero {
+	position: relative;
+	width: 100%;
+}
+
+.wukong-hero-media-wrap {
+	position: relative;
+	width: 100%;
+	height: 480px;
+	overflow: hidden;
+	background: #000000;
+}
+
+.wukong-hero-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center 30%;
+	display: block;
+	filter: contrast(1.03) brightness(1.02);
+	transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wukong-unified-scroll:hover .wukong-hero-img {
+	transform: scale(1.015);
+}
+
+/* 底部水墨过渡遮罩：仅底部渐暗承托文字，不遮盖悟空主体与色彩 */
+.wukong-mist-gradient-overlay {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background: linear-gradient(
+		to bottom,
+		rgba(13, 12, 10, 0) 0%,
+		rgba(13, 12, 10, 0) 52%,
+		rgba(13, 12, 10, 0.45) 72%,
+		rgba(13, 12, 10, 0.88) 90%,
+		#0d0c0a 100%
+	);
+}
+
+/* 首屏底部：个人引言与查看游玩记录入口（清晰阅读层级，不遮挡角色焦点） */
+.wukong-hero-prologue-bar {
+	position: absolute;
+	bottom: 20px;
+	left: 28px;
+	right: 28px;
+	z-index: 5;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 24px;
+}
+
+.wukong-hero-quote {
+	margin: 0;
+	font-family: 'Noto Serif SC', 'Songti SC', serif;
+	font-size: 14.5px;
+	color: #f5ede0;
+	font-style: italic;
+	line-height: 1.75;
+	letter-spacing: 0.6px;
+	text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+	max-width: 680px;
+}
+
+/* 查看游玩记录锚点（低调明确的功能性按钮，触控区 >= 44px） */
+.wukong-entry-anchor {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 20px;
+	min-height: 44px;
+	background: rgba(20, 18, 14, 0.85);
+	border: 1px solid rgba(203, 176, 122, 0.45);
+	border-radius: 22px;
+	font-family: 'Noto Serif SC', serif;
+	font-size: 13px;
+	font-weight: 600;
+	color: #ecdcc1;
+	letter-spacing: 0.8px;
+	text-decoration: none;
+	backdrop-filter: blur(8px);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.55);
+	transition: all 0.25s ease;
+	flex-shrink: 0;
+}
+
+.wukong-entry-anchor:hover {
+	background: rgba(203, 176, 122, 0.2);
+	border-color: #dfbe7b;
+	color: #ffffff;
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.65), 0 0 12px rgba(203, 176, 122, 0.25);
+}
+
+.entry-anchor-icon {
+	font-size: 13px;
+}
+
+.entry-anchor-arrow {
+	font-size: 12px;
+	color: #dfbe7b;
+	transition: transform 0.25s ease;
+}
+
+.wukong-entry-anchor:hover .entry-anchor-arrow {
+	transform: translateY(2px);
+}
+
+/* 听觉灵魂：黄风岭“陕北说书 · 听风令”互动胶囊条 */
+.wukong-storyteller-bar {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	margin: 20px 28px 20px;
+	padding: 13px 22px;
+	background: linear-gradient(90deg, rgba(26, 23, 19, 0.95), rgba(18, 16, 13, 0.95));
+	border: 1px solid rgba(195, 155, 80, 0.22);
+	border-left: 3px solid #cbb07a;
+	border-radius: 8px;
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+	transition: border-color 0.3s ease;
+}
+
+.wukong-storyteller-bar:hover {
+	border-color: rgba(203, 176, 122, 0.45);
+}
+
+.storyteller-play-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 16px;
+	min-height: 44px;
+	background: rgba(203, 176, 122, 0.14);
+	border: 1px solid rgba(203, 176, 122, 0.4);
+	border-radius: 6px;
+	color: #f6e6cb;
+	cursor: pointer;
+	font-family: 'Noto Serif SC', serif;
+	font-size: 12.5px;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+	transition: all 0.25s ease;
+	flex-shrink: 0;
+}
+
+.storyteller-play-btn:hover {
+	background: rgba(203, 176, 122, 0.26);
+	border-color: #dfbe7b;
+	color: #ffffff;
+}
+
+.storyteller-play-btn.is-playing {
+	background: rgba(184, 50, 50, 0.25);
+	border-color: #e84545;
+	color: #ffb4b4;
+	box-shadow: 0 0 14px rgba(232, 69, 69, 0.35);
+}
+
+.storyteller-icon {
+	font-size: 14px;
+}
+
+.storyteller-lyric-track {
+	flex: 1;
+	font-family: 'Noto Serif SC', 'Songti SC', serif;
+	font-size: 13.5px;
+	color: #ded3bb;
+	font-style: italic;
+	letter-spacing: 0.6px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.storyteller-quote-mark {
+	color: #cbb07a;
+	font-weight: 700;
+	font-size: 15px;
+}
+
+.storyteller-status-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+	font-size: 11px;
+	color: #9c8a74;
+	flex-shrink: 0;
+}
+
+.storyteller-pulse-dot {
+	width: 7px;
+	height: 7px;
+	background: #cbb07a;
+	border-radius: 50%;
+	display: inline-block;
+	transition: background-color 0.3s ease;
+}
+
+.wukong-storyteller-bar.is-active .storyteller-pulse-dot {
+	background: #4ade80;
+	box-shadow: 0 0 8px #4ade80;
+	animation: pulseGreen 1.2s infinite;
+}
+
+/* 核心手札内容区 */
+.wukong-journal-content {
+	padding: 0 28px 28px;
+}
+
+/* 可交互章节导航：缘起 · 入局 → 磨砺 · 破局 → 直面 · 天命 */
+.wukong-chapter-nav {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	margin: 8px auto 24px;
+	padding: 5px 14px;
+	background: rgba(18, 16, 13, 0.65);
+	border: 1px solid rgba(195, 155, 80, 0.16);
+	border-radius: 30px;
+	width: fit-content;
+	max-width: 100%;
+}
+
+.chapter-nav-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 7px 16px;
+	min-height: 44px;
+	background: transparent;
+	border: 1px solid transparent;
+	border-radius: 20px;
+	font-family: 'Noto Serif SC', serif;
+	font-size: 13px;
+	font-weight: 600;
+	color: #9c8a74;
+	cursor: pointer;
+	letter-spacing: 0.6px;
+	transition: all 0.25s ease;
+}
+
+.nav-btn-dot {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: #6e6150;
+	transition: all 0.25s ease;
+}
+
+.chapter-nav-btn:hover {
+	color: #e5ded2;
+	border-color: rgba(203, 176, 122, 0.3);
+	background: rgba(255, 255, 255, 0.03);
+}
+
+.chapter-nav-btn.is-active {
+	color: #fff7eb;
+	background: rgba(203, 176, 122, 0.14);
+	border-color: rgba(223, 190, 123, 0.55);
+	box-shadow: 0 0 12px rgba(223, 190, 123, 0.15);
+}
+
+.chapter-nav-btn.is-active .nav-btn-dot {
+	background: #dfbe7b;
+	box-shadow: 0 0 6px #dfbe7b;
+	transform: scale(1.2);
+}
+
+.nav-connector {
+	color: rgba(195, 155, 80, 0.3);
+	font-size: 11px;
+	user-select: none;
+}
+
+/* 对开古卷画卷流 (Book Spread) */
+.wukong-book-spread {
+	display: flex;
+	gap: 28px;
+	position: relative;
+	margin-bottom: 24px;
+}
+
+.wukong-page-column {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	background: linear-gradient(155deg, rgba(22, 19, 16, 0.88), rgba(16, 14, 12, 0.96));
+	border: 1px solid rgba(195, 155, 80, 0.18);
+	border-radius: 12px;
+	padding: 24px 26px;
+	transition: border-color 0.3s ease;
+	scroll-margin-top: 24px;
+}
+
+.wukong-page-column:hover {
+	border-color: rgba(203, 176, 122, 0.38);
+}
+
+.wukong-page-header {
+	display: flex;
+	align-items: center;
+	padding-bottom: 12px;
+	border-bottom: 1px dashed rgba(195, 155, 80, 0.2);
+}
+
+.page-chapter-title {
+	font-family: 'Noto Serif SC', 'Songti SC', serif;
+	font-size: 15px;
+	font-weight: 700;
+	color: #f2e2c4;
+	letter-spacing: 0.8px;
+}
+
+/* 章节开头突出个人真实感受金句 (Hero Quote Callout) */
+.wukong-quote-highlight {
+	position: relative;
+	padding: 13px 18px;
+	background: 
+		linear-gradient(90deg, rgba(185, 44, 44, 0.12) 0%, rgba(30, 62, 86, 0.14) 60%, transparent 100%);
+	border-left: 3.5px solid #b92c2c;
+	border-radius: 0 6px 6px 0;
+	margin-bottom: 6px;
+	box-shadow: inset 1px 0 0 rgba(223, 190, 123, 0.2);
+}
+
+.wukong-quote-highlight p {
+	margin: 0;
+	font-family: 'Noto Serif SC', 'Songti SC', serif;
+	font-size: 14.5px;
+	line-height: 1.85;
+	color: #f5ede0;
+	font-style: italic;
+	letter-spacing: 0.5px;
+}
+
+.wukong-passage {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.passage-title {
+	font-family: 'Noto Serif SC', 'Songti SC', STSong, serif;
+	font-size: 15.5px;
+	font-weight: 700;
+	color: #fff8ee;
+	margin: 0;
+	letter-spacing: 0.6px;
+}
+
+.passage-text {
+	font-family: 'Noto Serif SC', 'Songti SC', serif;
+	font-size: 14.5px;
+	line-height: 2.05;
+	color: #e5ded2;
+	margin: 0;
+	letter-spacing: 0.3px;
+	max-width: 520px;
+}
+
+/* 柔和旧金色强调（非刺眼高亮荧光黄） */
+.passage-text strong {
+	color: #dfbe7b;
+	font-weight: 700;
+	text-shadow: none;
+}
+
+/* 章节短句收尾 */
+.passage-closing {
+	display: flex;
+	align-items: baseline;
+	gap: 8px;
+	margin-top: 4px;
+	padding-top: 10px;
+	border-top: 1px dashed rgba(195, 155, 80, 0.15);
+}
+
+.closing-dash {
+	color: #cbb07a;
+	font-weight: 700;
+	font-size: 14px;
+}
+
+.closing-text {
+	font-family: 'Noto Serif SC', serif;
+	font-size: 13.5px;
+	color: #cfc2ad;
+	font-style: italic;
+	margin: 0;
+	line-height: 1.7;
+	letter-spacing: 0.4px;
+}
+
+/* 中轴极简微光细线 */
+.wukong-book-spine {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 1px;
+}
+
+.spine-line {
+	flex: 1;
+	width: 1px;
+	background: linear-gradient(to bottom, transparent, rgba(195, 155, 80, 0.25), transparent);
+}
+
+/* 底部：这段旅程留下的三个词（简洁记忆轴与交互节点） */
+.wukong-memory-section {
+	margin-top: 8px;
+	padding: 22px 24px;
+	background: rgba(20, 17, 14, 0.88);
+	border: 1px solid rgba(195, 155, 80, 0.2);
+	border-radius: 12px;
+	scroll-margin-top: 24px;
+}
+
+.memory-header {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 18px;
+}
+
+.memory-seal-dot {
+	color: #dfbe7b;
+	font-size: 13px;
+}
+
+.memory-title {
+	font-family: 'Noto Serif SC', serif;
+	font-size: 15px;
+	font-weight: 700;
+	color: #fff7eb;
+	margin: 0;
+	letter-spacing: 0.6px;
+}
+
+.memory-hint {
+	font-size: 12px;
+	color: #8f7f6c;
+	font-weight: normal;
+}
+
+.wukong-memory-timeline {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	margin-bottom: 16px;
+}
+
+.timeline-node {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+	padding: 12px 14px;
+	min-height: 64px;
+	background: rgba(255, 255, 255, 0.02);
+	border: 1px solid rgba(195, 155, 80, 0.18);
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.25s ease;
+}
+
+.timeline-node:hover {
+	border-color: rgba(203, 176, 122, 0.4);
+	background: rgba(203, 176, 122, 0.06);
+}
+
+.timeline-node.is-active {
+	background: rgba(203, 176, 122, 0.12);
+	border-color: #dfbe7b;
+	box-shadow: 0 0 12px rgba(223, 190, 123, 0.18);
+}
+
+.node-marker {
+	font-family: 'SFMono-Regular', monospace;
+	font-size: 10px;
+	letter-spacing: 1px;
+	color: #8f7f6c;
+}
+
+.timeline-node.is-active .node-marker {
+	color: #dfbe7b;
+	font-weight: 700;
+}
+
+.node-name {
+	font-family: 'Noto Serif SC', serif;
+	font-size: 15px;
+	font-weight: 700;
+	color: #ded3bb;
+	letter-spacing: 0.6px;
+}
+
+.timeline-node.is-active .node-name {
+	color: #ffffff;
+}
+
+.node-sub {
+	font-size: 11px;
+	color: #8f7f6c;
+}
+
+.timeline-node.is-active .node-sub {
+	color: #cbb07a;
+}
+
+.timeline-connector-bar {
+	width: 24px;
+	height: 1px;
+	background: rgba(195, 155, 80, 0.25);
+	flex-shrink: 0;
+}
+
+/* 记忆轴展开详情卡片（克制平滑切换） */
+.wukong-memory-cards {
+	position: relative;
+	min-height: 72px;
+}
+
+.memory-detail-panel {
+	display: none;
+	align-items: flex-start;
+	gap: 18px;
+	padding: 16px 20px;
+	background: rgba(26, 22, 18, 0.7);
+	border: 1px solid rgba(203, 176, 122, 0.28);
+	border-radius: 8px;
+	animation: panelFadeIn 0.3s ease;
+}
+
+.memory-detail-panel.is-active {
+	display: flex;
+}
+
+@keyframes panelFadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(4px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Black Myth: pinned cloud-sea reveal and rising journal sheet */
+.game-showcase-wukong.wukong-unified-scroll {
+	--wukong-paper: #eee6d6;
+	--wukong-ink: #171113;
+	--wukong-burgundy: #211416;
+	--wukong-gold: #c8a76c;
+	position: relative;
+	left: 50%;
+	width: 100vw;
+	max-width: none;
+	margin: 0 0 0 -50vw;
+	padding: 0;
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+	overflow: visible;
+	box-shadow: none;
+}
+
+.game-showcase-wukong.wukong-unified-scroll:hover {
+	border: 0;
+	box-shadow: none;
+}
+
+.wukong-reveal-track {
+	position: relative;
+	height: auto;
+	width: 100%;
+}
+
+.wukong-pinned-scene {
+	position: relative;
+	height: min(86vh, 900px);
+	min-height: 520px;
+	overflow: hidden;
+	isolation: isolate;
+	background: #101316;
+}
+
+.wukong-hero-media-wrap {
+	position: absolute;
+	inset: 0;
+	height: auto;
+	overflow: hidden;
+	background: #101316;
+}
+
+.wukong-hero-media-wrap::before {
+	content: "";
+	position: absolute;
+	inset: -3%;
+	z-index: 0;
+	background: url("../img/demo.svg") center / cover no-repeat;
+	filter: blur(18px) brightness(0.42) saturate(0.8);
+	transform: scale(1.04);
+}
+
+.wukong-hero-img {
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	max-width: none;
+	height: 100%;
+	object-fit: contain;
+	object-position: center;
+	filter: none;
+	transform: translate3d(0, var(--wukong-parallax-y, 0px), 0);
+	transition: none;
+}
+
+.wukong-mist-gradient-overlay {
+	z-index: 2;
+	background: linear-gradient(180deg, rgba(10, 12, 15, 0.12), transparent 26%, transparent 56%, rgba(12, 10, 11, 0.38) 72%, rgba(12, 10, 11, 0.88));
+}
+
+.wukong-cinematic-copy {
+	position: absolute;
+	z-index: 3;
+	left: 50%;
+	bottom: clamp(220px, 31vh, 320px);
+	width: min(92%, 920px);
+	color: #fff7e7;
+	text-align: center;
+	transform: translate(-50%, var(--wukong-title-rise, 0px));
+}
+
+.wukong-cinematic-kicker {
+	display: block;
+	margin-bottom: 14px;
+	color: #dfc58d;
+	font-family: Consolas, Menlo, monospace;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0;
+	text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+}
+
+.wukong-cinematic-copy h2 {
+	margin: 0;
+	color: #fff4dc;
+	font-family: 'Noto Serif SC', 'Songti SC', STSong, serif;
+	font-size: clamp(52px, 6rem, 96px);
+	font-weight: 800;
+	line-height: 1.08;
+	letter-spacing: 0;
+	text-shadow: 0 3px 24px rgba(0, 0, 0, 0.9), 0 0 42px rgba(213, 177, 104, 0.24);
+}
+
+.wukong-cinematic-copy p {
+	max-width: 620px;
+	margin: 16px auto 0;
+	color: rgba(255, 247, 231, 0.92);
+	font-family: 'Noto Serif SC', 'Songti SC', serif;
+	font-size: 16px;
+	line-height: 1.8;
+	letter-spacing: 0;
+	text-shadow: 0 2px 12px rgba(0, 0, 0, 0.88);
+}
+
+.wukong-entry-anchor {
+	position: absolute;
+	z-index: 4;
+	left: 50%;
+	bottom: max(26px, env(safe-area-inset-bottom));
+	width: 96px;
+	height: 96px;
+	min-height: 44px;
+	padding: 12px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	border: 1px solid rgba(222, 192, 132, 0.76);
+	border-radius: 50%;
+	background: rgba(18, 17, 16, 0.5);
+	color: #fff0d0;
+	text-align: center;
+	text-decoration: none;
+	font-family: 'Noto Serif SC', serif;
+	font-size: 12px;
+	letter-spacing: 0;
+	backdrop-filter: blur(8px);
+	box-shadow: 0 0 0 5px rgba(222, 192, 132, 0.1), 0 6px 24px rgba(0, 0, 0, 0.32);
+	transform: translateX(-50%);
+	transition: background-color 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.wukong-entry-anchor:hover,
+.wukong-entry-anchor:focus-visible {
+	border-color: #f0d598;
+	background: rgba(46, 31, 23, 0.8);
+	color: #fff9ec;
+	box-shadow: 0 0 0 7px rgba(222, 192, 132, 0.17), 0 8px 28px rgba(0, 0, 0, 0.46);
+	transform: translateX(-50%) translateY(-2px);
+}
+
+.entry-anchor-arrow {
+	color: #dfc58d;
+	font-size: 18px;
+	line-height: 1;
+}
+
+.wukong-curtain-sheet {
+	display: none;
+}
+
+.has-scroll-experience .wukong-reveal-track {
+	height: 370vh;
+	height: 370svh;
+}
+
+.has-scroll-experience .wukong-pinned-scene {
+	position: sticky;
+	top: 0;
+	height: 100vh;
+	height: 100svh;
+	min-height: 0;
+	border-bottom: 1px solid rgba(210, 179, 120, 0.42);
+}
+
+.has-scroll-experience .wukong-curtain-sheet {
+	position: absolute;
+	inset: 0;
+	z-index: 5;
+	display: block;
+	overflow: hidden;
+	color: #211d19;
+	background-color: var(--wukong-paper);
+	background-image: linear-gradient(rgba(112, 92, 62, 0.045) 1px, transparent 1px);
+	background-size: 100% 42px;
+	box-shadow: 0 22px 60px rgba(15, 12, 10, 0.24);
+	transform: translate3d(0, var(--wukong-cover-offset, 0%), 0);
+	will-change: transform;
+	pointer-events: none;
+}
+
+.wukong-curtain-sheet::before {
+	content: "";
+	position: absolute;
+	inset: 28px;
+	border: 1px solid rgba(139, 116, 77, 0.25);
+	pointer-events: none;
+}
+
+.wukong-curtain-meta {
+	position: absolute;
+	top: 48px;
+	left: max(44px, calc((100vw - 1420px) / 2));
+	right: max(44px, calc((100vw - 1420px) / 2));
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-bottom: 14px;
+	border-bottom: 1px solid rgba(112, 92, 62, 0.24);
+	color: #756448;
+	font-family: Consolas, Menlo, monospace;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0;
+}
+
+.wukong-curtain-copy {
+	position: absolute;
+	left: max(9vw, calc((100vw - 1320px) / 2));
+	top: 50%;
+	width: min(720px, 72vw);
+	transform: translateY(-48%);
+}
+
+.wukong-curtain-eyebrow,
+.wukong-sheet-overline {
+	color: #8b744e;
+	font-family: Consolas, Menlo, monospace;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0;
+}
+
+.wukong-curtain-copy h3 {
+	margin: 22px 0 18px;
+	color: #211d19;
+	font-family: 'Noto Serif SC', 'Songti SC', STSong, serif;
+	font-size: clamp(52px, 5.5rem, 88px);
+	font-weight: 800;
+	line-height: 1.26;
+	letter-spacing: 0;
+}
+
+.wukong-curtain-copy h3 em {
+	color: #7b302d;
+	font-style: normal;
+}
+
+.wukong-curtain-copy p {
+	max-width: 540px;
+	margin: 0;
+	color: #5f574c;
+	font-family: 'Noto Serif SC', 'Songti SC', serif;
+	font-size: 17px;
+	line-height: 1.9;
+	letter-spacing: 0;
+}
+
+.wukong-curtain-prompt {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	margin-top: 34px;
+	color: #806b48;
+	font-family: 'Noto Serif SC', serif;
+	font-size: 13px;
+	letter-spacing: 0;
+}
+
+.wukong-curtain-prompt span:last-child {
+	width: 34px;
+	height: 34px;
+	display: grid;
+	place-items: center;
+	border: 1px solid rgba(123, 48, 45, 0.32);
+	border-radius: 50%;
+	color: #7b302d;
+	font-size: 17px;
+}
+
+.wukong-curtain-index {
+	position: absolute;
+	right: max(8vw, calc((100vw - 1420px) / 2));
+	bottom: 12%;
+	color: rgba(123, 48, 45, 0.18);
+	font-family: 'Noto Serif SC', serif;
+	font-size: 64px;
+	font-weight: 800;
+	line-height: 1.06;
+	text-align: center;
+}
+
+.has-scroll-experience .wukong-cinematic-copy {
+	opacity: var(--wukong-title-opacity, 0);
+}
+
+.wukong-bottom-sheet {
+	position: relative;
+	z-index: 6;
+	width: 100vw;
+	margin: 0 0 0 -50vw;
+	left: 50%;
+	padding: 68px 0 78px;
+	border-top: 1px solid rgba(205, 170, 103, 0.62);
+	background: var(--wukong-burgundy);
+	color: #f3e9d8;
+	box-shadow: 0 -24px 70px rgba(11, 8, 8, 0.26);
+}
+
+.has-scroll-experience .wukong-bottom-sheet {
+	margin-top: -75vh;
+	margin-top: -75svh;
+}
+
+.wukong-sheet-inner {
+	--sheet-content-inset: max(188px, calc((100vw - 1400px) / 2 + 188px));
+	width: min(calc(100vw - var(--sheet-content-inset) - 28px), 1400px);
+	margin: 0 28px 0 var(--sheet-content-inset);
+}
+
+.wukong-sheet-heading {
+	display: flex;
+	align-items: end;
+	justify-content: space-between;
+	gap: 24px;
+	padding: 0 0 26px;
+	margin: 0 0 28px;
+	border-bottom: 1px solid rgba(205, 170, 103, 0.22);
+}
+
+.wukong-sheet-heading h3 {
+	display: flex;
+	align-items: baseline;
+	flex-wrap: wrap;
+	gap: 14px;
+	margin: 10px 0 0;
+	color: #f7efdf;
+	font-family: 'Noto Serif SC', 'Songti SC', STSong, serif;
+	font-size: 34px;
+	font-weight: 700;
+	line-height: 1.35;
+	letter-spacing: 0;
+}
+
+.wukong-sheet-heading h3 span {
+	color: #baa98f;
+	font-family: 'Noto Serif SC', serif;
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.wukong-sheet-words {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding-bottom: 5px;
+	color: #d5bd8d;
+	font-family: 'Noto Serif SC', serif;
+	font-size: 15px;
+	white-space: nowrap;
+}
+
+.wukong-sheet-words i {
+	color: #8f7559;
+	font-style: normal;
+}
+
+.wukong-bottom-sheet .wukong-storyteller-bar {
+	margin: 0 0 28px;
+	background: rgba(13, 11, 12, 0.32);
+	border-color: rgba(205, 170, 103, 0.2);
+	border-left-color: var(--wukong-gold);
+	box-shadow: none;
+}
+
+.wukong-bottom-sheet .wukong-journal-content {
+	max-width: none;
+	padding: 0;
+}
+
+.wukong-bottom-sheet .wukong-chapter-nav {
+	margin: 0 auto 30px;
+	background: rgba(12, 10, 11, 0.36);
+	border-color: rgba(205, 170, 103, 0.18);
+}
+
+.wukong-bottom-sheet .wukong-page-column,
+.wukong-bottom-sheet .wukong-memory-section {
+	background: #281b1c;
+	border-color: rgba(205, 170, 103, 0.2);
+	border-radius: 8px;
+}
+
+.wukong-bottom-sheet .wukong-page-column:hover {
+	border-color: rgba(205, 170, 103, 0.42);
+}
+
+.wukong-bottom-sheet .wukong-memory-section {
+	background: rgba(17, 12, 13, 0.42);
+}
+
+.wukong-reveal-item {
+	opacity: 1;
+	clip-path: none;
+	transform: none;
+}
+
+.wukong-reveal-item.is-in-view {
+	animation: wukong-note-rise 760ms cubic-bezier(0.18, 0.72, 0.2, 1) both;
+}
+
+.wukong-sheet-words > span {
+	display: inline-block;
+}
+
+.wukong-sheet-heading.is-in-view .wukong-sheet-words > span {
+	animation: wukong-word-rise 620ms cubic-bezier(0.18, 0.72, 0.2, 1) both;
+}
+
+.wukong-sheet-heading.is-in-view .wukong-sheet-words > span:nth-of-type(2) {
+	animation-delay: 100ms;
+}
+
+.wukong-sheet-heading.is-in-view .wukong-sheet-words > span:nth-of-type(3) {
+	animation-delay: 200ms;
+}
+
+@keyframes wukong-note-rise {
+	from { opacity: 0; clip-path: inset(100% 0 0); transform: translateY(22px); }
+	to { opacity: 1; clip-path: inset(0); transform: translateY(0); }
+}
+
+@keyframes wukong-word-rise {
+	from { opacity: 0; clip-path: inset(100% 0 0); transform: translateY(18px); }
+	to { opacity: 1; clip-path: inset(0); transform: translateY(0); }
+}
+
+@media (max-width: 860px) {
+	.game-showcase-wukong.wukong-unified-scroll {
+		left: 0 !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		width: 100% !important;
+	}
+
+	.has-scroll-experience .wukong-reveal-track {
+		height: 320vh;
+		height: 320svh;
+	}
+
+	.has-scroll-experience .wukong-pinned-scene {
+		height: 100vh;
+		height: 100svh;
+	}
+
+	.wukong-curtain-meta {
+		top: 38px;
+		left: 32px;
+		right: 32px;
+		font-size: 10px;
+	}
+
+	.wukong-curtain-sheet::before {
+		inset: 18px;
+	}
+
+	.wukong-curtain-copy {
+		left: 9%;
+		top: 47%;
+		width: 82%;
+	}
+
+	.wukong-curtain-copy h3 {
+		margin: 18px 0 14px;
+		font-size: 54px;
+	}
+
+	.wukong-curtain-copy p {
+		font-size: 15px;
+	}
+
+	.wukong-curtain-index {
+		right: 10%;
+		bottom: 10%;
+		font-size: 48px;
+	}
+
+	.wukong-cinematic-copy {
+		bottom: clamp(136px, 19vh, 168px);
+		width: calc(100% - 32px);
+	}
+
+	.has-scroll-experience .wukong-bottom-sheet {
+		margin-top: -80vh;
+		margin-top: -80svh;
+	}
+
+	.wukong-cinematic-kicker {
+		font-size: 10px;
+	}
+
+	.wukong-cinematic-copy h2 {
+		font-size: 48px;
+	}
+
+	.wukong-cinematic-copy p {
+		max-width: 440px;
+		font-size: 14px;
+	}
+
+	.wukong-entry-anchor {
+		width: 84px;
+		height: 84px;
+		bottom: max(22px, env(safe-area-inset-bottom));
+		font-size: 11px;
+	}
+
+	.wukong-bottom-sheet {
+		left: 0 !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		width: 100% !important;
+		padding: 36px 0 48px !important;
+		box-sizing: border-box !important;
+	}
+
+	.wukong-sheet-inner {
+		--sheet-content-inset: 0px !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		margin: 0 auto !important;
+		padding: 0 16px !important;
+		box-sizing: border-box !important;
+	}
+
+	.wukong-sheet-heading {
+		align-items: flex-start;
+		flex-direction: column;
+		gap: 14px;
+		padding-bottom: 20px;
+		margin-bottom: 20px;
+	}
+
+	.wukong-sheet-heading h3 {
+		font-size: 28px;
+	}
+
+	.wukong-sheet-words {
+		font-size: 13px;
+	}
+
+	.wukong-bottom-sheet .wukong-storyteller-bar {
+		margin-bottom: 20px;
+	}
+
+	.wukong-bottom-sheet .wukong-chapter-nav {
+		margin-bottom: 18px;
+	}
+
+	.wukong-bottom-sheet .wukong-page-column {
+		padding: 18px 16px;
+	}
+}
+
+@media (max-width: 600px) {
+	.wukong-pinned-scene {
+		min-height: 440px;
+	}
+
+	.wukong-hero-img {
+		object-fit: contain;
+		transform: none;
+	}
+
+	.wukong-curtain-meta {
+		left: 26px;
+		right: 26px;
+	}
+
+	.wukong-curtain-copy h3 {
+		font-size: 46px;
+	}
+
+	.wukong-curtain-eyebrow {
+		font-size: 10px;
+	}
+
+	.wukong-curtain-prompt {
+		margin-top: 24px;
+	}
+
+	.wukong-cinematic-copy {
+		bottom: 136px;
+	}
+
+	.wukong-cinematic-copy h2 {
+		font-size: 42px;
+	}
+
+	.wukong-cinematic-copy p {
+		font-size: 13px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.has-scroll-experience .wukong-reveal-track {
+		height: auto;
+	}
+
+	.has-scroll-experience .wukong-pinned-scene {
+		position: relative;
+		height: min(84vh, 900px);
+	}
+
+	.has-scroll-experience .wukong-curtain-sheet {
+		display: none;
+	}
+
+	.has-scroll-experience .wukong-bottom-sheet {
+		margin-top: 0;
+	}
+
+	.wukong-reveal-item.is-in-view,
+	.wukong-sheet-heading.is-in-view .wukong-sheet-words > span {
+		animation: none;
+	}
+}
+
+.panel-seal {
+	width: 44px;
+	height: 44px;
+	min-width: 44px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: 'Noto Serif SC', serif;
+	font-size: 14px;
+	font-weight: 800;
+	color: #ff5252;
+	background: rgba(184, 50, 50, 0.14);
+	border: 1.5px solid #b83232;
+	border-radius: 6px;
+	box-shadow: 0 0 8px rgba(184, 50, 50, 0.25);
+	user-select: none;
+}
+
+.panel-text {
+	flex: 1;
+}
+
+.panel-heading {
+	font-family: 'Noto Serif SC', serif;
+	font-size: 13.5px;
+	font-weight: 700;
+	color: #dfbe7b;
+	margin: 0 0 6px 0;
+	letter-spacing: 0.5px;
+}
+
+.panel-desc {
+	font-size: 13.5px;
+	line-height: 1.85;
+	color: #e5ded2;
+	margin: 0;
+	letter-spacing: 0.3px;
+}
+
+/* 动效偏好适配：支持减少动态效果设置 */
+@media (prefers-reduced-motion: reduce) {
+	.wukong-hero-img,
+	.wukong-entry-anchor,
+	.storyteller-play-btn,
+	.chapter-nav-btn,
+	.timeline-node,
+	.memory-detail-panel {
+		transition: none !important;
+		animation: none !important;
+		transform: none !important;
+	}
+}
+
+/* 移动端与平板自适应响应（零溢出 · 纯粹流式 · 舒适触控） */
+@media (max-width: 860px) {
+	.game-showcase-wukong.wukong-unified-scroll {
+		border-radius: 14px;
+		margin: 0 auto;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	.wukong-scroll-header {
+		padding: 14px 16px;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 6px;
+		box-sizing: border-box;
+	}
+
+	.wukong-scroll-main-title {
+		font-size: 18px;
+	}
+
+	.wukong-scroll-sub-tag {
+		font-size: 12px;
+	}
+
+	.wukong-hero-media-wrap {
+		height: 330px;
+	}
+
+	.wukong-hero-prologue-bar {
+		bottom: 12px;
+		left: 14px;
+		right: 14px;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 10px;
+		box-sizing: border-box;
+	}
+
+	.wukong-hero-quote {
+		font-size: 12.5px;
+		line-height: 1.6;
+	}
+
+	.wukong-entry-anchor {
+		padding: 8px 16px;
+		font-size: 12px;
+		min-height: 44px;
+	}
+
+	.wukong-storyteller-bar {
+		margin: 14px 14px 16px;
+		padding: 12px 14px;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 10px;
+		box-sizing: border-box;
+	}
+
+	.storyteller-lyric-track {
+		white-space: normal;
+		font-size: 13px;
+		line-height: 1.65;
+		word-break: break-word;
+	}
+
+	.wukong-journal-content {
+		padding: 0 14px 18px;
+		box-sizing: border-box;
+	}
+
+	.wukong-chapter-nav {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 6px;
+		width: 100%;
+		border-radius: 12px;
+		padding: 6px;
+		box-sizing: border-box;
+		margin: 4px auto 18px;
+	}
+
+	.chapter-nav-btn {
+		width: 100%;
+		justify-content: center;
+		padding: 8px 4px;
+		font-size: 12px;
+		min-height: 44px;
+		gap: 5px;
+		box-sizing: border-box;
+	}
+
+	.chapter-nav-btn .nav-btn-dot {
+		width: 5px;
+		height: 5px;
+	}
+
+	.nav-connector {
+		display: none;
+	}
+
+	.wukong-book-spread {
+		flex-direction: column;
+		gap: 16px;
+		margin-bottom: 18px;
+	}
+
+	.wukong-book-spine {
+		display: none;
+	}
+
+	.wukong-page-column {
+		padding: 18px 16px;
+		box-sizing: border-box;
+	}
+
+	.wukong-quote-highlight {
+		padding: 10px 12px;
+	}
+
+	.wukong-quote-highlight p {
+		font-size: 13.5px;
+		line-height: 1.75;
+	}
+
+	.passage-title {
+		font-size: 14.5px;
+	}
+
+	.passage-text {
+		font-size: 13.5px;
+		line-height: 1.95;
+		max-width: 100%;
+	}
+
+	.wukong-memory-section {
+		padding: 16px 14px;
+		box-sizing: border-box;
+	}
+
+	.memory-header {
+		margin-bottom: 14px;
+	}
+
+	.memory-title {
+		font-size: 14px;
+	}
+
+	.memory-hint {
+		font-size: 11px;
+	}
+
+	.wukong-memory-timeline {
+		flex-direction: column;
+		gap: 8px;
+		align-items: stretch;
+		width: 100%;
+		box-sizing: border-box;
+		margin-bottom: 12px;
+	}
+
+	.timeline-connector-bar {
+		display: none;
+	}
+
+	.timeline-node {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		min-height: 48px;
+		padding: 10px 14px;
+		box-sizing: border-box;
+		width: 100%;
+	}
+
+	.timeline-node .node-name {
+		font-size: 14px;
+	}
+
+	.timeline-node .node-sub {
+		font-size: 11px;
+	}
+
+	.memory-detail-panel {
+		padding: 12px 14px;
+		gap: 12px;
+		box-sizing: border-box;
+	}
+
+	.panel-seal {
+		width: 36px;
+		height: 36px;
+		min-width: 36px;
+		font-size: 12.5px;
+	}
+
+	.panel-heading {
+		font-size: 13px;
+	}
+
+	.panel-desc {
+		font-size: 12.5px;
+		line-height: 1.75;
+	}
+}
+
+/* ==========================================================================
+   3. 📚 阅读书阁 (Reading)
+   ========================================================================== */
+/* ==========================================================================
+   3. 📚 阅读书阁 (Reading - 翻页式私人阅读札记)
+   ========================================================================== */
+.reading-section-journal {
+	background: #faf8f3 !important;
+	border-radius: 24px;
+	padding: 44px 36px 40px !important;
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.03);
+	position: relative;
+	border: 1px solid rgba(226, 220, 208, 0.6);
+	overflow: hidden;
+}
+
+/* 顶部轻盈卷首标题 */
+.reading-header-clean {
+	text-align: center;
+	margin-bottom: 28px;
+}
+
+.reading-archive-tag {
+	display: block;
+	font-family: "Playfair Display", "Georgia", serif;
+	font-size: 11px;
+	letter-spacing: 3px;
+	color: #929d95;
+	margin-bottom: 6px;
+	font-weight: 500;
+}
+
+.reading-title-main {
+	font-family: "Noto Serif SC", "Songti SC", "SimSun", "STSong", serif;
+	font-size: 26px;
+	font-weight: 600;
+	color: #2c352e;
+	letter-spacing: 2px;
+	margin: 0 0 8px;
+}
+
+.reading-subtitle-main {
+	font-family: "Noto Serif SC", "Songti SC", serif;
+	font-size: 14px;
+	color: #637066;
+	margin: 0;
+	letter-spacing: 0.5px;
+}
+
+/* 笔记本容器与桌面背景 */
+.notebook-desk-container {
+	position: relative;
+	max-width: 980px;
+	margin: 0 auto;
+	perspective: 1600px;
+}
+
+/* 顶部垂下的丝带书签 */
+.notebook-ribbon {
+	position: absolute;
+	top: -6px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 18px;
+	height: 48px;
+	background: linear-gradient(180deg, #44614e 0%, #2e4436 100%);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.22);
+	clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+	z-index: 15;
+	pointer-events: none;
+	transition: transform 0.3s ease;
+}
+
+.notebook-desk-container:hover .notebook-ribbon {
+	transform: translateX(-50%) translateY(4px);
+}
+
+/* 摊开的实体笔记本主体 (更像书，带有真实厚度和页边叠层) */
+.open-notebook {
+	display: flex;
+	background: #fdfbf7;
+	border-radius: 10px;
+	box-shadow:
+		0 20px 48px rgba(45, 38, 28, 0.08),
+		0 4px 12px rgba(45, 38, 28, 0.04),
+		-6px 0 0 -2px #f3ece0,
+		-10px 0 0 -4px #ebe2d0,
+		6px 0 0 -2px #f3ece0,
+		10px 0 0 -4px #ebe2d0;
+	border: 1px solid rgba(216, 207, 192, 0.65);
+	min-height: 540px;
+	position: relative;
+	overflow: hidden;
+}
+
+/* 真实书页自然右下折角 */
+.notebook-corner-fold {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 22px;
+	height: 22px;
+	background: linear-gradient(135deg, transparent 50%, rgba(205, 195, 180, 0.45) 50%, #eee4d4 100%);
+	box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.04);
+	border-bottom-right-radius: 10px;
+	pointer-events: none;
+	z-index: 10;
+}
+
+/* 笔记本页面公共属性 */
+.notebook-page {
+	flex: 1;
+	box-sizing: border-box;
+	position: relative;
+}
+
+/* 左页：书籍封面展示与丰富阅读痕迹 */
+.notebook-page.page-left {
+	flex: 0.95;
+	padding: 34px 26px 28px 36px;
+	background: #fbf8f2;
+	border-radius: 10px 0 0 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	border-right: 1px solid rgba(210, 200, 185, 0.35);
+}
+
+.page-left .page-inner-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	max-width: 290px;
+	height: 100%;
+	justify-content: space-between;
+}
+
+/* 书籍立体封套外框与侧夹书签 */
+.book-cover-frame {
+	position: relative;
+	width: 195px;
+	border-radius: 5px;
+	overflow: visible;
+	box-shadow: -4px 4px 12px rgba(0, 0, 0, 0.12), 10px 18px 28px rgba(45, 35, 25, 0.18);
+	transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+}
+
+.book-cover-frame:hover {
+	transform: translateY(-4px) scale(1.02);
+	box-shadow: -6px 6px 16px rgba(0, 0, 0, 0.14), 12px 24px 34px rgba(45, 35, 25, 0.22);
+}
+
+/* 侧边微夹细书签 */
+.book-cover-ribbon-marker {
+	position: absolute;
+	top: -9px;
+	right: 18px;
+	width: 13px;
+	height: 38px;
+	background: linear-gradient(180deg, #466752 0%, #304a39 100%);
+	clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.22);
+	z-index: 5;
+	pointer-events: none;
+}
+
+.book-spine-ridge {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 12px;
+	background: linear-gradient(90deg, rgba(255,255,255,0.35) 0%, rgba(0,0,0,0.18) 70%, rgba(255,255,255,0.08) 100%);
+	z-index: 2;
+	pointer-events: none;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.journal-cover-img {
+	width: 100%;
+	height: auto;
+	aspect-ratio: 3 / 4.2;
+	object-fit: cover;
+	display: block;
+	border-radius: 5px;
+	transition: opacity 0.3s ease;
+}
+
+/* 手写边注小纸片 */
+.handwritten-marginalia-note {
+	width: 100%;
+	margin-top: 14px;
+	background: rgba(248, 243, 233, 0.75);
+	border-left: 2px dashed rgba(160, 145, 125, 0.6);
+	padding: 8px 12px;
+	border-radius: 0 6px 6px 0;
+	transform: rotate(-0.8deg);
+	transition: all 0.3s ease;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.marginalia-pin {
+	font-size: 10px;
+	color: #947e68;
+	flex-shrink: 0;
+}
+
+.marginalia-text {
+	font-family: "Noto Serif SC", "Kaiti", "STKaiti", serif;
+	font-style: italic;
+	font-size: 12.5px;
+	color: #4a3e32;
+	margin: 0;
+	line-height: 1.5;
+	letter-spacing: 0.5px;
+}
+
+/* 个人藏书阅读痕迹与专属手账物件 */
+.book-meta-stamp {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 14px;
+	padding-top: 12px;
+	border-top: 1px dashed rgba(195, 185, 170, 0.55);
+}
+
+.book-reading-log {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	flex: 1;
+}
+
+.log-item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 11px;
+}
+
+.log-key {
+	color: #909d93;
+	font-family: "Playfair Display", "Noto Serif SC", serif;
+	font-size: 10px;
+	letter-spacing: 0.8px;
+	min-width: 48px;
+}
+
+.log-val {
+	color: #48544a;
+	font-size: 11.5px;
+}
+
+/* 实体书 / 电子书 专属媒介标签 */
+.log-val.medium-tag {
+	font-size: 10.5px;
+	font-weight: 600;
+	color: #3b5240;
+	background: rgba(228, 222, 210, 0.7);
+	padding: 1px 7px;
+	border-radius: 6px;
+	border: 1px solid rgba(206, 198, 184, 0.6);
+	letter-spacing: 0.3px;
+}
+
+/* 阅读状态小胶囊 */
+.log-val.status-pill {
+	font-size: 10.5px;
+	font-weight: 600;
+	color: #274b2c;
+	background: rgba(90, 158, 98, 0.14);
+	padding: 1px 8px;
+	border-radius: 10px;
+}
+
+/* 读后状态梗 / 状态弹幕徽章 (笑着破防 / 后劲很大 / 在读中 / 夯爆了) */
+.log-val.status-meme-badge {
+	font-size: 11px;
+	font-weight: 700;
+	color: #8c3b2e;
+	background: rgba(246, 232, 226, 0.85);
+	border: 1px dashed rgba(195, 105, 90, 0.5);
+	padding: 1px 7px;
+	border-radius: 5px;
+	letter-spacing: 0.5px;
+	display: inline-flex;
+	align-items: center;
+	transform: rotate(-1.5deg);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.log-val.coord-badge {
+	font-weight: 600;
+	color: #2e4a36;
+	background: rgba(75, 110, 85, 0.12);
+	padding: 1px 7px;
+	border-radius: 10px;
+	font-size: 10.5px;
+}
+
+/* 专属手账角落图腾/票根物件容器 */
+.journal-corner-artifact {
+	position: relative;
+	width: 78px;
+	height: 64px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	margin-left: 8px;
+	user-select: none;
+	transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
+/* 1. 《围城》出入城随心往返票根 */
+.artifact-ticket {
+	position: relative;
+	width: 74px;
+	background: #fcf7ed;
+	border: 1px dashed #b58c65;
+	border-radius: 4px;
+	padding: 4px 5px;
+	box-shadow: 1px 2px 5px rgba(60, 40, 20, 0.08);
+	transform: rotate(-5deg);
+	text-align: center;
+}
+
+.artifact-ticket::before,
+.artifact-ticket::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	width: 8px;
+	height: 8px;
+	background: #fbf8f2;
+	border-radius: 50%;
+	transform: translateY(-50%);
+	border: 1px dashed #b58c65;
+}
+
+.artifact-ticket::before { left: -5px; }
+.artifact-ticket::after { right: -5px; }
+
+.ticket-head {
+	font-size: 6.5px;
+	letter-spacing: 1px;
+	color: #9c6842;
+	border-bottom: 0.5px dashed rgba(181, 140, 101, 0.5);
+	padding-bottom: 2px;
+	font-weight: 700;
+	font-family: monospace;
+}
+
+.ticket-route {
+	font-family: "Noto Serif SC", serif;
+	font-size: 8.5px;
+	font-weight: 700;
+	color: #7b3232;
+	margin: 2px 0;
+	letter-spacing: 0.5px;
+}
+
+.ticket-no {
+	font-family: monospace;
+	font-size: 6.5px;
+	color: #a08c77;
+}
+
+/* 2. 《额尔古纳河右岸》白桦叶与河流足迹 */
+.artifact-birch {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	transform: rotate(3deg);
+	opacity: 0.85;
+}
+
+.artifact-birch svg {
+	width: 44px;
+	height: 38px;
+	stroke: #3c5443;
+	fill: none;
+}
+
+.artifact-birch .birch-caption {
+	font-size: 7px;
+	color: #556b5c;
+	letter-spacing: 0.8px;
+	font-family: "Noto Serif SC", serif;
+	margin-top: 1px;
+}
+
+/* 3. 《奥德赛》古希腊帆船与归航罗盘 */
+.artifact-odyssey {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	transform: rotate(-4deg);
+	opacity: 0.85;
+}
+
+.artifact-odyssey svg {
+	width: 44px;
+	height: 38px;
+	stroke: #36516b;
+	fill: none;
+}
+
+.artifact-odyssey .odyssey-caption {
+	font-size: 6.5px;
+	color: #3b5a75;
+	font-family: monospace;
+	letter-spacing: 0.5px;
+	margin-top: 1px;
+}
+
+/* 4. 《三体》三颗星体星轨与宇宙坐标 */
+.artifact-santi {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	transform: rotate(2deg);
+	opacity: 0.85;
+}
+
+.artifact-santi svg {
+	width: 48px;
+	height: 38px;
+	stroke: #253344;
+	fill: none;
+}
+
+.artifact-santi .santi-caption {
+	font-size: 6.5px;
+	color: #384d63;
+	font-family: monospace;
+	letter-spacing: 0.5px;
+	margin-top: 1px;
+}
+
+/* 笔记本中间立体柔和折缝 */
+.notebook-spine-crease {
+	width: 32px;
+	background: linear-gradient(90deg, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.12) 50%, rgba(0,0,0,0.03) 100%);
+	box-shadow: inset 1.5px 0 3px rgba(255,255,255,0.4), inset -1.5px 0 3px rgba(255,255,255,0.4);
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	padding: 40px 0;
+	flex-shrink: 0;
+	z-index: 5;
+}
+
+.crease-shadow-overlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	pointer-events: none;
+}
+
+.spine-stitch {
+	width: 2px;
+	height: 15px;
+	background: rgba(255, 255, 255, 0.55);
+	border-radius: 1px;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+}
+
+/* 右页：私人阅读札记四部曲 */
+.notebook-page.page-right {
+	flex: 1.25;
+	padding: 34px 38px 28px 32px;
+	background: #fdfbf7;
+	border-radius: 0 10px 10px 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	transform-origin: left center;
+	transform-style: preserve-3d;
+	backface-visibility: hidden;
+	transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.45s ease;
+}
+
+.page-right .page-inner-content {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	justify-content: space-between;
+}
+
+/* 页眉与阅读坐标 */
+.journal-page-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-bottom: 7px;
+	border-bottom: 1px solid rgba(215, 206, 192, 0.55);
+	margin-bottom: 12px;
+}
+
+.journal-page-no {
+	font-family: "Playfair Display", serif;
+	font-size: 11px;
+	letter-spacing: 2px;
+	color: #929d95;
+	font-weight: 600;
+}
+
+.journal-coordinate-tag {
+	font-size: 11px;
+	color: #486150;
+	font-weight: 600;
+	background: #edf3ee;
+	padding: 2px 10px;
+	border-radius: 12px;
+	letter-spacing: 0.5px;
+}
+
+/* 书名与作者大标 */
+.journal-book-heading {
+	display: flex;
+	align-items: baseline;
+	gap: 12px;
+	margin-bottom: 12px;
+}
+
+.journal-book-heading h3 {
+	font-family: "Noto Serif SC", serif;
+	font-size: 22px;
+	color: #242e27;
+	margin: 0;
+	letter-spacing: 0.5px;
+}
+
+.journal-book-author {
+	font-size: 13px;
+	color: #69786d;
+}
+
+/* 4 大手记板块公共样式 */
+.journal-note-section {
+	margin-bottom: 11px;
+}
+
+.note-section-title {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 11.5px;
+	font-weight: 600;
+	color: #556b5c;
+	margin-bottom: 5px;
+	letter-spacing: 0.5px;
+}
+
+.section-dot {
+	font-size: 11px;
+	opacity: 0.85;
+}
+
+/* 1. 摘一句 */
+.journal-quote-box {
+	position: relative;
+	background: rgba(246, 242, 234, 0.75);
+	border-left: 3px solid #5a7561;
+	border-radius: 0 6px 6px 0;
+	padding: 9px 14px 9px 18px;
+}
+
+.quote-mark {
+	position: absolute;
+	top: -5px;
+	left: 5px;
+	font-family: "Georgia", serif;
+	font-size: 24px;
+	color: rgba(90, 117, 97, 0.35);
+	line-height: 1;
+	pointer-events: none;
+}
+
+.quote-content {
+	font-family: "Noto Serif SC", serif;
+	font-style: italic;
+	font-size: 13px;
+	line-height: 1.65;
+	color: #2d3830;
+	margin: 0;
+}
+
+/* 2. 我读到的东西 */
+.insight-content {
+	font-size: 12.8px;
+	line-height: 1.75;
+	color: #404d43;
+	margin: 0;
+	background: rgba(255, 255, 255, 0.55);
+	border: 1px solid rgba(222, 214, 202, 0.6);
+	border-radius: 6px;
+	padding: 8px 12px;
+	text-align: justify;
+}
+
+/* 3. 留下的关键词 */
+.keywords-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.keyword-tag {
+	font-size: 11.5px;
+	padding: 2px 9px;
+	background: #f1ede4;
+	border: 1px solid #dfd8cc;
+	border-radius: 16px;
+	color: #556358;
+	transition: all 0.25s ease;
+}
+
+.keyword-tag:hover {
+	background: #e8e3d8;
+	color: #2c352e;
+}
+
+/* 4. 读后余味 */
+.epilogue-content {
+	font-size: 12.2px;
+	line-height: 1.65;
+	color: #5a685e;
+	font-style: italic;
+	margin: 0;
+	padding-left: 8px;
+	border-left: 2px solid #b8a68b;
+}
+
+/* 页脚翻页按钮控制 */
+.journal-page-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 10px;
+	border-top: 1px dashed rgba(215, 206, 192, 0.6);
+	margin-top: auto;
+}
+
+.page-turn-btn {
+	background: transparent;
+	border: 1px solid rgba(175, 166, 152, 0.5);
+	padding: 5px 12px;
+	border-radius: 5px;
+	font-size: 11.5px;
+	color: #58665b;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	font-family: inherit;
+}
+
+.page-turn-btn:hover {
+	background: #f1ede4;
+	border-color: #4f6b57;
+	color: #242f27;
+}
+
+.reading-hint {
+	font-size: 11.5px;
+	color: #929f95;
+	font-style: italic;
+}
+
+/* 800ms 逼真 3D 纸张翻折卷角动效 (Realistic 3D Page Peel & Curl) */
+.turning-page-forward {
+	animation: pagePeelTurnForward 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+.turning-page-backward {
+	animation: pagePeelTurnBackward 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+@keyframes pagePeelTurnForward {
+	0% {
+		transform: rotateY(0deg) skewY(0deg) scale(1);
+		box-shadow: inset 0 0 0 rgba(0, 0, 0, 0), 0 0 0 rgba(0, 0, 0, 0);
+	}
+	25% {
+		/* 右下角开始轻轻翘起卷曲，纸面微弯曲，产生立体投影 */
+		transform: rotateY(-32deg) skewY(-2.6deg) scale(0.995);
+		box-shadow: inset 18px 0 25px rgba(215, 200, 180, 0.35), -14px 10px 24px rgba(45, 35, 25, 0.15);
+	}
+	48% {
+		/* 翻折接近 90 度立面中线，旧内容完全隐退 */
+		transform: rotateY(-88deg) skewY(-1deg) scale(0.985);
+		box-shadow: inset 24px 0 35px rgba(195, 180, 160, 0.45), -22px 14px 32px rgba(45, 35, 25, 0.2);
+		opacity: 0.15;
+	}
+	52% {
+		/* 翻折从中线另一侧平滑展开，新内容开始显现 */
+		transform: rotateY(-92deg) skewY(1deg) scale(0.985);
+		box-shadow: inset -24px 0 35px rgba(195, 180, 160, 0.45), 22px 14px 32px rgba(45, 35, 25, 0.2);
+		opacity: 0.2;
+	}
+	75% {
+		/* 舒展平摊，纸张恢复平整张力 */
+		transform: rotateY(-25deg) skewY(2deg) scale(0.995);
+		box-shadow: inset -15px 0 20px rgba(215, 200, 180, 0.3), 12px 8px 20px rgba(45, 35, 25, 0.12);
+		opacity: 0.85;
+	}
+	100% {
+		transform: rotateY(0deg) skewY(0deg) scale(1);
+		box-shadow: inset 0 0 0 rgba(0, 0, 0, 0), 0 0 0 rgba(0, 0, 0, 0);
+		opacity: 1;
+	}
+}
+
+@keyframes pagePeelTurnBackward {
+	0% {
+		transform: rotateY(0deg) skewY(0deg) scale(1);
+		box-shadow: inset 0 0 0 rgba(0, 0, 0, 0), 0 0 0 rgba(0, 0, 0, 0);
+	}
+	25% {
+		transform: rotateY(32deg) skewY(2.6deg) scale(0.995);
+		box-shadow: inset -18px 0 25px rgba(215, 200, 180, 0.35), 14px 10px 24px rgba(45, 35, 25, 0.15);
+	}
+	48% {
+		transform: rotateY(88deg) skewY(1deg) scale(0.985);
+		box-shadow: inset -24px 0 35px rgba(195, 180, 160, 0.45), 22px 14px 32px rgba(45, 35, 25, 0.2);
+		opacity: 0.15;
+	}
+	52% {
+		transform: rotateY(92deg) skewY(-1deg) scale(0.985);
+		box-shadow: inset 24px 0 35px rgba(195, 180, 160, 0.45), -22px 14px 32px rgba(45, 35, 25, 0.2);
+		opacity: 0.2;
+	}
+	75% {
+		transform: rotateY(25deg) skewY(-2deg) scale(0.995);
+		box-shadow: inset 15px 0 20px rgba(215, 200, 180, 0.3), -12px 8px 20px rgba(45, 35, 25, 0.12);
+		opacity: 0.85;
+	}
+	100% {
+		transform: rotateY(0deg) skewY(0deg) scale(1);
+		box-shadow: inset 0 0 0 rgba(0, 0, 0, 0), 0 0 0 rgba(0, 0, 0, 0);
+		opacity: 1;
+	}
+}
+
+/* 翻页落定后，新书文字如墨迹洇开般显现 (Ink bloom diffusion) */
+.page-inner-content.ink-bloom-in {
+	animation: inkBloomIn 0.48s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes inkBloomIn {
+	0% {
+		opacity: 0.1;
+		filter: blur(4px);
+		transform: translateY(6px);
+	}
+	60% {
+		opacity: 0.85;
+		filter: blur(1px);
+	}
+	100% {
+		opacity: 1;
+		filter: blur(0px);
+		transform: translateY(0);
+	}
+}
+
+
+/* 翻页时书脊折痕阴影同步加深 */
+.notebook-spine-crease.flipping {
+	animation: spineShadowDeepen 0.8s ease-in-out forwards;
+}
+
+@keyframes spineShadowDeepen {
+	0% {
+		background: linear-gradient(90deg, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.12) 50%, rgba(0,0,0,0.03) 100%);
+	}
+	50% {
+		background: linear-gradient(90deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.28) 50%, rgba(0,0,0,0.08) 100%);
+	}
+	100% {
+		background: linear-gradient(90deg, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.12) 50%, rgba(0,0,0,0.03) 100%);
+	}
+}
+
+.cover-fade-transition {
+	animation: coverFade 0.8s ease forwards;
+}
+
+@keyframes coverFade {
+	0% { opacity: 1; transform: scale(1); }
+	45% { opacity: 0.25; transform: scale(0.975); }
+	100% { opacity: 1; transform: scale(1); }
+}
+
+/* ==========================================================================
+   底部书脊索引架 (Book Spines Shelf)
+   ========================================================================== */
+.bookshelf-index-wrapper {
+	max-width: 860px;
+	margin: 32px auto 0;
+	position: relative;
+	padding-top: 10px;
+}
+
+/* 书脊行排布 */
+.book-spines-row {
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	gap: 24px;
+	position: relative;
+	z-index: 2;
+	padding-bottom: 0;
+}
+
+/* 单个精装书脊 */
+.book-spine {
+	width: 58px;
+	height: 200px;
+	background: var(--spine-color, #4a5d6e);
+	border-radius: 5px 5px 0 0;
+	box-shadow: inset 3px 0 5px rgba(255, 255, 255, 0.2), inset -4px 0 6px rgba(0, 0, 0, 0.35), 0 4px 10px rgba(0, 0, 0, 0.12);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	padding: 14px 0 10px;
+	cursor: pointer;
+	position: relative;
+	transform: translateY(0);
+	transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+	user-select: none;
+}
+
+/* 书脊天然高度差异感 */
+.book-spine:nth-child(1) { height: 205px; width: 60px; }
+.book-spine:nth-child(2) { height: 218px; width: 62px; }
+.book-spine:nth-child(3) { height: 210px; width: 62px; }
+.book-spine:nth-child(4) { height: 200px; width: 58px; }
+
+/* 烫金细装饰线 */
+.spine-top-lines {
+	width: 80%;
+	height: 4px;
+	border-top: 1.5px solid var(--spine-accent, #eedfbe);
+	border-bottom: 1.5px solid var(--spine-accent, #eedfbe);
+	opacity: 0.85;
+}
+
+/* 竖排书名 */
+.spine-title-vertical {
+	writing-mode: vertical-rl;
+	text-orientation: mixed;
+	white-space: nowrap;
+	font-family: "Noto Serif SC", serif;
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 2.5px;
+	color: var(--spine-accent, #fcf8ee);
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+	margin: auto 0;
+}
+
+.book-spine:nth-child(2) .spine-title-vertical {
+	font-size: 12px;
+	letter-spacing: 1.5px;
+}
+
+/* 竖排作者 */
+.spine-author-vertical {
+	writing-mode: vertical-rl;
+	text-orientation: mixed;
+	white-space: nowrap;
+	font-size: 11px;
+	letter-spacing: 2px;
+	color: rgba(255, 255, 255, 0.7);
+	margin-bottom: 8px;
+}
+
+.spine-bottom-tag {
+	font-family: "Playfair Display", serif;
+	font-size: 8px;
+	color: var(--spine-accent, #eedfbe);
+	opacity: 0.75;
+	letter-spacing: 1px;
+}
+
+/* 书脊悬浮抽拉与激活状态 (悬浮提拔，激活平滑升起 14px) */
+.book-spine:hover {
+	transform: translateY(-9px);
+	box-shadow: inset 3px 0 5px rgba(255, 255, 255, 0.25), inset -4px 0 6px rgba(0, 0, 0, 0.4), 0 10px 18px rgba(35, 25, 15, 0.2);
+}
+
+.book-spine.active {
+	transform: translateY(-14px);
+	box-shadow: inset 4px 0 6px rgba(255, 255, 255, 0.35), inset -5px 0 8px rgba(0, 0, 0, 0.45), 0 14px 26px rgba(35, 25, 15, 0.26);
+	filter: brightness(1.05);
+}
+
+/* 实木书架横板与刻度小绿点 */
+.bookshelf-shelf-ledge {
+	position: relative;
+	width: 64%;
+	min-width: 400px;
+	max-width: 540px;
+	margin: 0 auto;
+	height: 16px;
+	z-index: 1;
+}
+
+.shelf-wood-surface {
+	height: 9px;
+	background: linear-gradient(180deg, #d8ccb8 0%, #c2b49d 100%);
+	border-radius: 4px 4px 0 0;
+	box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05);
+	position: relative;
+}
+
+.shelf-wood-bevel {
+	height: 7px;
+	background: linear-gradient(180deg, #aa9a82 0%, #8c7c65 100%);
+	border-radius: 0 0 4px 4px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* 书架上的 4 个刻度指示小绿点 */
+.shelf-indicator-track {
+	display: flex;
+	justify-content: center;
+	gap: 82px;
+	height: 100%;
+	align-items: center;
+}
+
+.shelf-slot-dot {
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
+	background: rgba(120, 100, 80, 0.35);
+	transition: all 0.3s ease;
+}
+
+.shelf-slot-dot.active {
+	background: #466850;
+	box-shadow: 0 0 6px rgba(70, 104, 80, 0.8);
+	transform: scale(1.35);
+}
+
+.bookshelf-instruction-caption {
+	text-align: center;
+	margin-top: 14px;
+	font-size: 12px;
+	color: #8c978e;
+	letter-spacing: 1.5px;
+}
+
+/* 响应式适配 */
+@media (max-width: 900px) {
+	.open-notebook {
+		flex-direction: column;
+		min-height: auto;
+	}
+	.notebook-page.page-left {
+		border-right: none;
+		border-bottom: 1px solid rgba(210, 200, 185, 0.4);
+		border-radius: 10px 10px 0 0;
+		padding: 28px 20px;
+	}
+	.notebook-spine-crease {
+		width: 100%;
+		height: 20px;
+		flex-direction: row;
+		padding: 0 40px;
+	}
+	.spine-stitch {
+		width: 16px;
+		height: 2px;
+	}
+	.notebook-page.page-right {
+		border-radius: 0 0 10px 10px;
+		padding: 28px 22px;
+	}
+	.notebook-ribbon {
+		display: none;
+	}
+	.book-spines-row {
+		gap: 14px;
+	}
+	.book-spine {
+		width: 48px;
+	}
+	.shelf-indicator-track {
+		gap: 60px;
+	}
+}
+
+@media (max-width: 600px) {
+	.book-spines-row {
+		gap: 10px;
+	}
+	.book-spine {
+		width: 44px;
+		height: 175px !important;
+	}
+	.spine-title-vertical {
+		font-size: 12px;
+	}
+	.reading-section-journal {
+		padding: 28px 16px !important;
+	}
+	.shelf-indicator-track {
+		gap: 50px;
+	}
+}
+
+@media (max-width: 420px) {
+	.game-grid {
+		grid-template-columns: minmax(0, 1fr);
+	}
+	.bookshelf-shelf-ledge {
+		width: 100%;
+		min-width: 0;
+	}
+	.shelf-indicator-track {
+		gap: 24px;
+	}
+}
+
+/* ==========================================================================
+   4. 📷 胶片切片 · 3D 记忆星轨 (Photo - 3D Celestial Memory Orbit)
+   ========================================================================== */
+.photo-universe-section {
+	background: #ffffff;
+	padding-bottom: 50px;
+}
+
+.photo-header-clean {
+	text-align: center;
+	margin-bottom: 24px;
+}
+
+.photo-meta-en {
+	display: inline-block;
+	font-size: 11px;
+	letter-spacing: 2.5px;
+	text-transform: uppercase;
+	color: #7b887d;
+	font-family: "Georgia", serif;
+	font-style: italic;
+	margin-bottom: 6px;
+}
+
+.photo-intro {
+	text-align: center;
+	font-size: 15px;
+	color: #5d695f;
+	margin-top: 8px;
+	font-family: "Georgia", "Songti SC", serif;
+}
+
+/* 极轻文字式分类筛选导航 (Mood Filter Nav) */
+/* ── 照片档案索引 (Archive Index Nav) ── */
+.photo-archive-index {
+	display: inline-flex;
+	align-items: flex-end;
+	justify-content: center;
+	gap: 28px;
+	margin-top: 14px;
+	padding: 0;
+	background: transparent;
+	border: none;
+}
+
+.photo-archive-btn {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 4px 0 6px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2px;
+	font-family: inherit;
+	position: relative;
+	transition: color 0.22s ease;
+}
+
+.photo-archive-btn .archive-idx {
+	font-family: "SF Mono", "Cascadia Code", "Consolas", monospace;
+	font-size: 10px;
+	letter-spacing: 1px;
+	color: #b5c2b7;
+	transition: color 0.22s ease;
+}
+
+.photo-archive-btn .archive-label {
+	font-size: 13.5px;
+	color: #637165;
+	letter-spacing: 0.5px;
+	transition: color 0.22s ease;
+}
+
+.photo-archive-btn::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%) scaleX(0);
+	width: 18px;
+	height: 2px;
+	background: #5a9e62;
+	border-radius: 1px;
+	transition: transform 0.28s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.photo-archive-btn:hover .archive-label {
+	color: #2e4a32;
+}
+
+.photo-archive-btn:hover .archive-idx {
+	color: #8a9c8c;
+}
+
+.photo-archive-btn.is-active .archive-label {
+	color: #1e3a22;
+	font-weight: 700;
+}
+
+.photo-archive-btn.is-active .archive-idx {
+	color: #5a9e62;
+}
+
+.photo-archive-btn.is-active::after {
+	transform: translateX(-50%) scaleX(1);
+}
+
+/* 3D 视口舞台容器 (3D Stage Viewport) */
+.photo-stage-viewport {
+	position: relative;
+	width: 100%;
+	max-width: 1160px;
+	height: 680px;
+	margin: 0 auto;
+	border-radius: 24px;
+	overflow: hidden;
+	background: radial-gradient(ellipse at 50% 45%, #ffffff 0%, #faf7ee 55%, #f2ebdd 100%);
+	border: 1px solid #e8e2d4;
+	box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.9), 0 16px 40px rgba(35, 48, 38, 0.06);
+	perspective: 1200px;
+	perspective-origin: 50% 45%;
+	user-select: none;
+	cursor: grab;
+	touch-action: none;
+}
+
+.photo-stage-viewport:active {
+	cursor: grabbing;
+}
+
+/* ── 展厅氛围装饰层 (Exhibition Ambient) ── */
+.exhibition-ambient {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	overflow: hidden;
+}
+
+.ambient-orbit-svg {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* 四角相机对焦标记 (L形角线) */
+.ambient-focus-mark {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+}
+
+.ambient-focus-mark::before,
+.ambient-focus-mark::after {
+	content: "";
+	position: absolute;
+	background: rgba(140, 158, 142, 0.18);
+}
+
+.ambient-focus-mark::before {
+	width: 1px;
+	height: 100%;
+	left: 0;
+	top: 0;
+}
+
+.ambient-focus-mark::after {
+	width: 100%;
+	height: 1px;
+	left: 0;
+	top: 0;
+}
+
+/* 右上角镜像 */
+.ambient-focus-mark[style*="right"]::after {
+	left: auto;
+	right: 0;
+}
+
+.ambient-focus-mark[style*="right"]::before {
+	left: auto;
+	right: 0;
+}
+
+/* 底部角镜像 */
+.ambient-focus-mark[style*="bottom"]::before {
+	top: auto;
+	bottom: 0;
+}
+
+.ambient-focus-mark[style*="bottom"]::after {
+	top: auto;
+	bottom: 0;
+}
+
+/* 散落坐标/胶片编号微文字 */
+.ambient-coord-text {
+	position: absolute;
+	font-family: "SF Mono", "Cascadia Code", "Consolas", monospace;
+	font-size: 9px;
+	letter-spacing: 1.5px;
+	color: rgba(140, 158, 142, 0.22);
+	text-transform: uppercase;
+	user-select: none;
+}
+
+/* 3D 旋转卡片世界容器 (置于 39%，为底部控制岛留足开阔安全空间) */
+.photo-3d-world {
+	position: absolute;
+	top: 39%;
+	left: 50%;
+	width: 0;
+	height: 0;
+	transform-style: preserve-3d;
+	will-change: transform;
+}
+
+/* 记忆切片基础卡片 */
+.photo-polaroid-card {
+	position: absolute;
+	width: 215px;
+	height: 285px;
+	left: -107px;
+	top: -142px;
+	border-radius: 8px;
+	padding: 9px 9px 12px 9px;
+	box-shadow: 0 16px 36px rgba(35, 48, 38, 0.12), 0 3px 8px rgba(0, 0, 0, 0.04);
+	cursor: pointer;
+	transform-style: preserve-3d;
+	backface-visibility: hidden;
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	transition: box-shadow 0.35s ease;
+}
+
+/* 1. 经典白底拍立得 (Polaroid Style) */
+.photo-polaroid-card.frame-polaroid {
+	background: #ffffff;
+	border: 1px solid rgba(228, 222, 212, 0.95);
+}
+
+.photo-polaroid-card.frame-polaroid::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	background: linear-gradient(112deg, rgba(255, 255, 255, 0.75) 0%, rgba(248, 245, 238, 0.25) 50%, rgba(235, 230, 220, 0.5) 100%);
+	pointer-events: none;
+}
+
+/* 2. 35mm 胶片负片边框 (35mm Film Strip Style) */
+.photo-polaroid-card.frame-film {
+	background: #222923;
+	border: 1px solid #3c483e;
+	box-shadow: 0 16px 36px rgba(20, 28, 22, 0.25), 0 4px 10px rgba(0, 0, 0, 0.15);
+	color: #f1f4f1;
+}
+
+.photo-polaroid-card.frame-film .card-photo-wrapper {
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.photo-polaroid-card.frame-film .card-frame-badge {
+	background: rgba(90, 158, 98, 0.3);
+	color: #9de2a7;
+	border: 1px solid rgba(90, 158, 98, 0.45);
+}
+
+.photo-polaroid-card.frame-film .card-date-badge {
+	color: #8da190;
+}
+
+/* 胶片打孔齿孔装饰 (仅在胶片框显示) */
+.photo-polaroid-card.frame-film .film-sprockets {
+	position: absolute;
+	left: 8px;
+	right: 8px;
+	height: 6px;
+	background-image: radial-gradient(circle, #4a574c 35%, transparent 40%);
+	background-size: 13px 6px;
+	background-repeat: repeat-x;
+	opacity: 0.75;
+	pointer-events: none;
+}
+.photo-polaroid-card.frame-film .film-sprockets-top {
+	top: 2px;
+}
+.photo-polaroid-card.frame-film .film-sprockets-bottom {
+	bottom: 3px;
+}
+
+.photo-polaroid-card:not(.frame-film) .film-sprockets {
+	display: none !important;
+}
+
+/* 3. 和纸胶带手账明信片 (Scrapbook Postcard Style) */
+.photo-polaroid-card.frame-postcard {
+	background: #faf6ee;
+	border: 1px solid #dfd7c5;
+	box-shadow: 0 16px 36px rgba(45, 52, 42, 0.12), 0 3px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* 顶部倾斜和纸胶带装饰 (仅在明信片框显示) */
+.photo-polaroid-card.frame-postcard .card-washi-tape {
+	position: absolute;
+	top: -7px;
+	left: 18px;
+	width: 46px;
+	height: 14px;
+	background: rgba(162, 198, 168, 0.75);
+	border-left: 2px dashed rgba(255, 255, 255, 0.55);
+	border-right: 2px dashed rgba(255, 255, 255, 0.55);
+	transform: rotate(-3deg);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+	pointer-events: none;
+	z-index: 5;
+}
+
+.photo-polaroid-card:not(.frame-postcard) .card-washi-tape {
+	display: none !important;
+}
+
+/* 右上角轻微手折角装饰 (在明信片与主照片显示) */
+.photo-polaroid-card.frame-postcard .card-folded-corner,
+.photo-polaroid-card.is-hero-card .card-folded-corner {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 16px 16px 0;
+	border-color: transparent #ede6d6 transparent transparent;
+	filter: drop-shadow(-1px 1px 1.5px rgba(0, 0, 0, 0.12));
+	pointer-events: none;
+	z-index: 6;
+}
+
+.photo-polaroid-card:not(.frame-postcard):not(.is-hero-card) .card-folded-corner {
+	display: none !important;
+}
+
+/* 右下角复古邮戳水印 (仅在明信片显示) */
+.photo-polaroid-card.frame-postcard .card-airmail-stamp {
+	position: absolute;
+	bottom: 8px;
+	right: 8px;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	border: 1.5px dashed rgba(180, 110, 95, 0.45);
+	color: rgba(180, 110, 95, 0.65);
+	font-family: monospace;
+	font-size: 7.5px;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	line-height: 1.1;
+	transform: rotate(14deg);
+	pointer-events: none;
+}
+
+.photo-polaroid-card:not(.frame-postcard) .card-airmail-stamp {
+	display: none !important;
+}
+
+/* 前景焦点主卡片星光强化 (Hero Card Aura) */
+.photo-polaroid-card.is-hero-card {
+	box-shadow: 0 24px 55px rgba(46, 125, 50, 0.24), 0 0 0 2.5px rgba(90, 158, 98, 0.65), 0 0 28px rgba(90, 158, 98, 0.22);
+}
+.photo-polaroid-card.is-hero-card .card-frame-badge {
+	background: #5a9e62 !important;
+	color: #ffffff !important;
+}
+.photo-polaroid-card.is-hero-card:hover {
+	box-shadow: 0 30px 68px rgba(46, 125, 50, 0.32), 0 0 0 2.5px rgba(90, 158, 98, 0.8), 0 0 36px rgba(90, 158, 98, 0.28) !important;
+}
+
+/* 顶部相片开孔视窗 */
+.card-photo-wrapper {
+	width: 100%;
+	height: 195px;
+	border-radius: 4px;
+	overflow: hidden;
+	background: #eeeae2;
+	position: relative;
+}
+
+.card-photo-wrapper img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	transition: transform 0.4s ease;
+}
+
+/* 底部胶片底签 */
+.card-film-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 8px;
+	font-size: 10px;
+	color: #889488;
+	font-family: monospace;
+	letter-spacing: 0.5px;
+}
+
+.card-frame-badge {
+	font-weight: 700;
+	color: #3b523f;
+	background: #edf3ee;
+	padding: 1px 5px;
+	border-radius: 3px;
+	transition: background 0.2s ease, color 0.2s ease;
+}
+
+.card-film-title {
+	font-size: 13px;
+	font-weight: 700;
+	color: #202b22;
+	margin-top: 4px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-height: 1.25;
+}
+
+.card-film-note {
+	font-size: 11px;
+	color: #58685b;
+	margin-top: 3px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-style: italic;
+	font-family: "Georgia", "Songti SC", serif;
+}
+
+/* 仅在当前主照片显示完整标题与读后短句；背景/环绕卡片彻底隐藏，消除文字噪音与遮挡 */
+.photo-polaroid-card:not(.is-hero-card) .card-film-title,
+.photo-polaroid-card:not(.is-hero-card) .card-film-note {
+	display: none !important;
+}
+
+/* 分类筛选静音淡化 */
+.photo-polaroid-card.is-dimmed {
+	opacity: 0.12 !important;
+	filter: blur(2.5px) !important;
+	pointer-events: none;
+}
+
+/* 胶片显影入场动效 */
+@keyframes filmDeveloping {
+	from {
+		opacity: 0;
+		filter: blur(10px) contrast(0.7) brightness(1.25);
+		transform: scale(0.92);
+	}
+	to {
+		opacity: 1;
+		filter: blur(0px) contrast(1) brightness(1);
+	}
+}
+
+/* 舞台顶部操作引导 */
+.photo-universe-hint {
+	position: absolute;
+	top: 14px;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 11.5px;
+	color: #68766a;
+	background: rgba(255, 255, 255, 0.88);
+	backdrop-filter: blur(8px);
+	padding: 5px 18px;
+	border-radius: 20px;
+	border: 1px solid #e7e1d4;
+	pointer-events: none;
+	white-space: nowrap;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	z-index: 10;
+}
+
+.photo-universe-hint .hint-icon {
+	color: #5a9e62;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.photo-polaroid-card {
+		animation: none !important;
+		transition: none !important;
+	}
+	.gallery-dock, .dock-thumb-chip, .photo-archive-btn {
+		transition: none !important;
+	}
+}
+
+/* 舞台左下角：巡航状态指示胶囊 (独立悬浮岛，z-index 1000 保证不被卡片覆盖) */
+/* ==========================================================================
+   展厅底部居中微型控制岛与缩略图胶片轨道 (Bottom Memory Dock)
+   ========================================================================== */
+.gallery-dock {
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 10000;
+	pointer-events: auto;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 6px 14px;
+	background: rgba(30, 36, 32, 0.78);
+	backdrop-filter: blur(14px);
+	border: 1px solid rgba(90, 100, 92, 0.35);
+	border-radius: 30px;
+	box-shadow: 0 8px 24px rgba(10, 16, 12, 0.2), 0 2px 6px rgba(0, 0, 0, 0.08);
+	user-select: none;
+	max-width: 90%;
+}
+
+.dock-btn {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	border: 1px solid rgba(120, 135, 122, 0.45);
+	background: rgba(255, 255, 255, 0.1);
+	color: #c8d5ca;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+	flex-shrink: 0;
+	padding: 0;
+}
+
+.dock-btn:hover {
+	background: #5a9e62;
+	border-color: #5a9e62;
+	color: #ffffff;
+	transform: scale(1.08);
+	box-shadow: 0 4px 12px rgba(46, 125, 50, 0.35);
+}
+
+.dock-btn:active {
+	transform: scale(0.96);
+}
+
+.dock-btn-play {
+	width: 34px;
+	height: 34px;
+	background: rgba(90, 158, 98, 0.2);
+	border-color: rgba(90, 158, 98, 0.5);
+	color: #9de2a7;
+	font-size: 11px;
+}
+
+.dock-thumb-container {
+	max-width: 380px;
+	overflow-x: auto;
+	overflow-y: hidden;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+	padding: 2px 4px;
+	display: flex;
+	align-items: center;
+}
+
+.dock-thumb-container::-webkit-scrollbar {
+	display: none;
+}
+
+.dock-thumb-track {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	padding: 3px 0;
+	border-top: 1px solid rgba(255, 255, 255, 0.06);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+	background-image: repeating-linear-gradient(
+		90deg,
+		transparent,
+		transparent 3px,
+		rgba(255, 255, 255, 0.03) 3px,
+		rgba(255, 255, 255, 0.03) 4px
+	);
+}
+
+.dock-thumb-chip {
+	width: 24px;
+	height: 28px;
+	border-radius: 2px;
+	border: 1px solid rgba(180, 195, 182, 0.3);
+	background: #1a2018;
+	cursor: pointer;
+	overflow: hidden;
+	position: relative;
+	transition: all 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
+	flex-shrink: 0;
+	opacity: 0.55;
+}
+
+.dock-thumb-chip img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	pointer-events: none;
+}
+
+.dock-thumb-chip:hover {
+	opacity: 0.9;
+	transform: translateY(-2px) scale(1.12);
+	border-color: #5a9e62;
+}
+
+.dock-thumb-chip.is-active {
+	opacity: 1;
+	width: 28px;
+	height: 32px;
+	border-color: #5a9e62;
+	box-shadow: 0 0 0 1.5px #5a9e62, 0 3px 8px rgba(46, 125, 50, 0.4);
+	transform: translateY(-1px);
+}
+
+/* 尾声致辞卡片 (手账明信片信笺质感) */
+#end {
+	max-width: 860px;
+	margin: 50px auto 40px;
+	padding: 38px 42px;
+	background: #fbf9f4;
+	border-radius: 16px;
+	box-shadow: 
+		0 14px 32px rgba(44, 38, 30, 0.08),
+		0 2px 8px rgba(44, 38, 30, 0.04),
+		inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+	text-align: center;
+	border: 1px dashed #d5cab9;
+	position: relative;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#end h3 {
+	font-family: 'Noto Serif SC', 'Songti SC', STSong, Georgia, serif;
+	font-size: 22px;
+	color: #232e26;
+	letter-spacing: 0.8px;
+	margin-bottom: 14px;
+}
+
+#end p {
+	font-size: 14.5px;
+	color: #535c56;
+	line-height: 28px;
+	margin: 6px 0;
+	letter-spacing: 0.2px;
+}
+
+#end a.invite-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	margin-top: 22px;
+	padding: 13px 36px;
+	background: #2d4c38;
+	color: #f7f9f5;
+	font-size: 15px;
+	font-weight: 600;
+	letter-spacing: 0.5px;
+	border-radius: 28px;
+	box-shadow: 0 6px 18px rgba(45, 76, 56, 0.22);
+	transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease, background 0.25s ease;
+	text-decoration: none;
+}
+
+#end a.invite-btn:hover {
+	transform: translateY(-2px) scale(1.02);
+	background: #243e2d;
+	box-shadow: 0 10px 24px rgba(45, 76, 56, 0.32);
+}
+
+#end a.invite-btn:active {
+	transform: translateY(1px) scale(0.98);
+}
+
+/* 金属微章流光动效 (Metallic Shimmer for Game Badges) */
+@keyframes metallicShimmer {
+	0% { background-position: -200% 0; }
+	100% { background-position: 200% 0; }
+}
+
+.genshin-hero-tag,
+.destiny-pill,
+.wukong-meta-callout {
+	position: relative;
+	overflow: hidden;
+}
+
+.genshin-hero-tag:hover::after,
+.destiny-pill:hover::after,
+.wukong-meta-callout:hover::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+	background-size: 200% 100%;
+	animation: metallicShimmer 1.4s ease-in-out infinite;
+	pointer-events: none;
+}
+
+/* Lightbox 全屏大图放映室 (Safe Margins & Centered Caption Card) */
+.lightbox-modal {
+	position: fixed;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(14, 20, 16, 0.92);
+	z-index: 99999;
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 24px 20px 32px 20px;
+	box-sizing: border-box;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.lightbox-modal.show {
+	display: flex;
+	opacity: 1;
+}
+
+.lightbox-viewport {
+	position: relative;
+	max-width: 88vw;
+	max-height: 62vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+}
+
+.lightbox-media-container {
+	position: relative;
+	width: min(76vw, 1080px);
+	height: 62vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.lightbox-modal img {
+	max-width: 100%;
+	max-height: 62vh;
+	object-fit: contain;
+	border-radius: 10px;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65);
+	animation: zoomIn 0.3s ease;
+	border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.lightbox-feedback { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; pointer-events: none; }
+.lightbox-feedback p { padding: 9px 16px; border-radius: 20px; background: rgba(14, 20, 16, .82); color: #f4f2df; font-size: 14px; }
+.lightbox-feedback button { min-height: 44px; padding: 8px 20px; border: 1px solid #9fb895; border-radius: 8px; background: #e8eddc; color: #244631; font: inherit; cursor: pointer; pointer-events: auto; }
+.lightbox-feedback button:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+.lightbox-modal .close-btn { min-width: 44px; min-height: 44px; }
+.lightbox-modal[data-photo-state="ready"] .lightbox-feedback { display: none; }
+body.has-photo-preview .camp-section *, body.has-photo-preview .camp-section::before, body.has-photo-preview .camp-section::after { animation-play-state: paused !important; }
+
+/* 左右导航按钮 */
+.lb-nav-btn {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.12);
+	border: 1px solid rgba(255, 255, 255, 0.25);
+	color: #ffffff;
+	font-size: 20px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	backdrop-filter: blur(8px);
+	transition: all 0.2s ease;
+	flex-shrink: 0;
+}
+
+.lb-nav-btn:hover {
+	background: rgba(255, 255, 255, 0.28);
+	border-color: rgba(255, 255, 255, 0.6);
+	transform: scale(1.08);
+}
+
+/* 关闭按钮 */
+.lightbox-modal .close-btn {
+	position: absolute;
+	top: 24px;
+	right: 32px;
+	background: rgba(255, 255, 255, 0.12);
+	border: 1px solid rgba(255, 255, 255, 0.22);
+	color: #ffffff;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	font-size: 24px;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.2s ease;
+}
+
+.lightbox-modal .close-btn:hover {
+	background: rgba(255, 255, 255, 0.28);
+	transform: scale(1.08);
+}
+
+/* 底部图说卡 (安全边距充足，不贴屏幕底边) */
+.lightbox-caption {
+	margin-top: 16px;
+	margin-bottom: 8px;
+	text-align: center;
+	max-width: 580px;
+	width: 90%;
+	padding: 10px 24px;
+	background: rgba(255, 255, 255, 0.08);
+	backdrop-filter: blur(12px);
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	border-radius: 16px;
+	color: #f0f5f1;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.lb-caption-head {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	margin-bottom: 4px;
+}
+
+.lb-frame-badge {
+	font-size: 11px;
+	font-weight: 700;
+	background: #5a9e62;
+	color: #ffffff;
+	padding: 2px 7px;
+	border-radius: 4px;
+	letter-spacing: 0.5px;
+}
+
+.lb-date-text {
+	font-size: 12px;
+	color: #c0ccc2;
+	font-family: monospace;
+}
+
+.lb-title-text {
+	font-size: 16px;
+	font-weight: 700;
+	color: #ffffff;
+	margin: 3px 0;
+	letter-spacing: 0.5px;
+}
+
+.lb-note-text {
+	font-size: 13px;
+	color: #b3c2b6;
+	font-style: italic;
+	font-family: "Georgia", "Songti SC", serif;
+	margin: 0;
+}
+
+@keyframes zoomIn {
+	from { transform: scale(0.9); opacity: 0; }
+	to { transform: scale(1); opacity: 1; }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+	.camp-section {
+		padding: 30px 16px;
+		margin-bottom: 30px;
+	}
+	.section-clean-title {
+		font-size: 26px;
+		letter-spacing: 1.5px;
+	}
+	.section-clean-subtitle {
+		font-size: 13.5px;
+	}
+	#game,
+	#game.game-section-modern {
+		padding: 32px 16px 40px;
+	}
+	.game-showcase-genshin {
+		display: flex;
+		flex-direction: column;
+		gap: 22px;
+		margin-bottom: 40px;
+		min-height: 0;
+	}
+	.genshin-visual-side,
+	.genshin-dossier-side {
+		width: 100%;
+		min-width: 0;
+		position: relative;
+		top: auto;
+		height: auto;
+		min-height: 0;
+	}
+	.genshin-media-wrap {
+		position: relative;
+		height: 430px;
+		min-height: 430px;
+	}
+	.teyvat-card-stack {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		overflow-x: auto;
+		overflow-y: hidden;
+		scroll-snap-type: x mandatory;
+		scroll-padding: 9%;
+		padding: 22px 9%;
+		box-sizing: border-box;
+		scrollbar-width: none;
+	}
+	.teyvat-card-stack::-webkit-scrollbar { display: none; }
+	.teyvat-archive-card,
+	.teyvat-archive-card.is-landscape,
+	.teyvat-archive-card.is-portrait {
+		position: relative;
+		left: auto;
+		top: auto;
+		width: 82%;
+		height: 354px;
+		flex: 0 0 82%;
+		opacity: 1;
+		filter: none;
+		transform: rotate(var(--mobile-tilt, 0deg)) !important;
+		will-change: auto;
+		scroll-snap-align: center;
+		pointer-events: auto;
+	}
+	.teyvat-archive-card:nth-child(2n) { --mobile-tilt: 0.8deg; }
+	.teyvat-archive-card:nth-child(2n + 1) { --mobile-tilt: -0.6deg; }
+	.teyvat-archive-card.is-landscape .teyvat-photo-window img { width: 64%; }
+	.teyvat-archive-card.is-landscape {
+		width: 88%;
+		height: 248px;
+		flex-basis: 88%;
+	}
+	.genshin-dossier-side { padding: 22px 18px 20px; }
+	.genshin-reflection-card { flex: none; height: auto; padding: 18px 16px; }
+	.aranara-cozy-haven {
+		margin: 0 auto 38px;
+		padding: 22px 16px 18px;
+	}
+	.aranara-speech-bubble {
+		width: 96%;
+		padding: 12px 14px 10px;
+	}
+	.bubble-text {
+		font-size: 13.5px;
+	}
+	.aranara-scene-viewport {
+		gap: 10px;
+		min-height: 300px;
+		padding: 20px 0 16px;
+	}
+	.aranara-character-wrapper {
+		width: clamp(176px, 49vw, 242px);
+		min-height: 270px;
+	}
+	.aranara-nameplate {
+		margin-top: -4px;
+	}
+	.aranara-roster { gap: 6px; margin-top: -6px; }
+	.aranara-roster-choice { min-width: 82px; min-height: 44px; gap: 5px; padding-right: 9px; }
+	.aranara-roster-choice img { width: 34px; height: 34px; }
+	.scene-prop.prop-left {
+		display: none;
+	}
+	.scene-prop.prop-right {
+		max-width: 84px;
+	}
+	.fruit-basket-card {
+		padding: 8px 10px;
+	}
+	.sunsettia-stack {
+		font-size: 18px;
+	}
+	.tray-label {
+		display: none;
+	}
+	.haven-footer-quote {
+		font-size: 11.5px;
+	}
+	.genshin-badges-grid {
+		grid-template-columns: 1fr;
+		gap: 8px;
+	}
+	.wukong-poster-wrap {
+		height: 240px;
+	}
+	.wukong-dossier-bottom {
+		padding: 22px 18px 20px;
+	}
+	.wukong-stele-header {
+		flex-direction: column;
+		gap: 14px;
+	}
+	.wukong-stelae-grid {
+		grid-template-columns: 1fr;
+		gap: 10px;
+	}
+	.photo-stage-viewport {
+		height: 520px;
+	}
+	.photo-polaroid-card {
+		width: 170px;
+		height: 230px;
+		left: -85px;
+		top: -115px;
+	}
+	.card-photo-wrapper {
+		height: 150px;
+	}
+	.photo-universe-hint {
+		font-size: 10.5px;
+		padding: 4px 10px;
+		max-width: 90%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.bookcard {
+		flex-direction: column !important;
+	}
+	.bookcard img {
+		width: 100%;
+		height: 160px;
+	}
+	.singer-card,
+	.mixtape-card {
+		transform: none !important;
+		width: 100%;
+		max-width: 520px;
+		padding: 24px 18px 18px;
+		margin-top: 14px;
+	}
+	.mixtape-card .tape-header {
+		flex-wrap: wrap;
+		gap: 8px 12px;
+		justify-content: space-between;
+	}
+	.mixtape-card .tape-body {
+		flex-direction: column;
+		align-items: center;
+		gap: 18px;
+	}
+	.mixtape-card .tape-cover-wrap {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.mixtape-card .tape-tracklist-wrap {
+		width: 100%;
+	}
+	.mixtape-card .tracklist-header {
+		text-align: center;
+	}
+	.mixtape-card .tape-footer {
+		flex-direction: column;
+		text-align: center;
+		gap: 6px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.splash-heading .splash-char,
+	.music-splash::after,
+	.checkpoint-beacon,
+	.section-hero-visual,
+	.section-content-body,
+	.page-inner-content.ink-bloom-in {
+		animation: none !important;
+		transition: none !important;
+		opacity: 1 !important;
+		filter: none !important;
+		transform: none !important;
+		text-shadow: none !important;
+	}
+	.stage-prep .section-hero-visual,
+	.stage-prep .section-content-body {
+		opacity: 1 !important;
+		transform: none !important;
+	}
+	.teyvat-archive-card,
+	.teyvat-card-paper::before,
+	.teyvat-index-dot,
+	.aranara-figure-box,
+	.aranara-companion-art,
+	.aranara-roster-choice,
+	.aranara-pop-particle,
+	.firefly,
+	.lantern-firefly-glow {
+		transition: none !important;
+		animation: none !important;
+	}
+}
+
+/* 敦煌壁画 · 金青朱砂矿物调长卷底座 */
+.wukong-bottom-sheet {
+	background: 
+		radial-gradient(ellipse 90% 60% at 50% 12%, rgba(30, 62, 86, 0.32) 0%, transparent 72%),
+		radial-gradient(circle at 12% 45%, rgba(185, 44, 44, 0.1) 0%, transparent 48%),
+		radial-gradient(circle at 88% 70%, rgba(223, 190, 123, 0.12) 0%, transparent 50%),
+		linear-gradient(180deg, #080a0e 0%, #0c1117 42%, #08090d 100%) !important;
+	border-top: 1px solid rgba(223, 190, 123, 0.45) !important;
+}
+
+/* 卷册卡片：石青暗潮 + 泥金天杆 + 如意包角 + 宝相花水印 */
+.wukong-bottom-sheet .wukong-page-column {
+	position: relative;
+	overflow: hidden;
+	background: 
+		radial-gradient(ellipse 110% 80% at 85% 15%, rgba(30, 62, 86, 0.38) 0%, transparent 68%),
+		linear-gradient(160deg, rgba(16, 25, 36, 0.94) 0%, rgba(13, 18, 25, 0.96) 60%, rgba(18, 16, 14, 0.97) 100%);
+	border: 1px solid rgba(223, 190, 123, 0.32);
+	border-top: 2.5px solid #dfbe7b;
+	border-radius: 12px;
+	padding: 28px 28px 26px;
+	box-shadow: 
+		0 12px 36px rgba(0, 0, 0, 0.45),
+		0 0 20px rgba(30, 62, 86, 0.2),
+		inset 0 0 28px rgba(22, 40, 56, 0.25);
+	transition: all 0.35s cubic-bezier(0.2, 0.8, 0.25, 1);
+}
+
+.wukong-bottom-sheet .wukong-page-column:hover {
+	border-color: rgba(223, 190, 123, 0.58);
+	box-shadow: 
+		0 18px 48px rgba(0, 0, 0, 0.55),
+		0 0 28px rgba(30, 62, 86, 0.38),
+		inset 0 0 36px rgba(30, 62, 86, 0.35);
+	transform: translateY(-2px);
+}
+
+/* 四角如意回纹包角 */
+.corner-filigree {
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	pointer-events: none;
+	opacity: 0.72;
+	transition: opacity 0.3s ease, filter 0.3s ease;
+	z-index: 2;
+}
+
+.corner-tl { top: 8px; left: 8px; }
+.corner-tr { top: 8px; right: 8px; transform: scaleX(-1); }
+.corner-bl { bottom: 8px; left: 8px; transform: scaleY(-1); }
+.corner-br { bottom: 8px; right: 8px; transform: scale(-1); }
+
+.wukong-page-column:hover .corner-filigree {
+	opacity: 1;
+	filter: drop-shadow(0 0 5px rgba(223, 190, 123, 0.65));
+}
+
+/* 佛光宝相花金沙水印 */
+.wukong-column-watermark {
+	position: absolute;
+	right: -35px;
+	bottom: -35px;
+	width: 220px;
+	height: 220px;
+	pointer-events: none;
+	opacity: 0.055;
+	z-index: 1;
+	transition: opacity 0.4s ease, transform 0.5s ease;
+}
+
+.wukong-page-column:hover .wukong-column-watermark {
+	opacity: 0.095;
+	transform: rotate(5deg) scale(1.05);
+}
+
+/* 古法朱砂篆刻印章 */
+.wukong-chop-seal {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-family: 'Noto Serif SC', 'Songti SC', STSong, serif;
+	font-weight: 800;
+	background: linear-gradient(135deg, #c73232 0%, #9e1f1f 100%);
+	color: #fff9f0;
+	border: 1px solid rgba(255, 185, 185, 0.55);
+	border-radius: 2px;
+	box-shadow: 
+		0 2px 8px rgba(185, 44, 44, 0.45),
+		inset 0 0 3px rgba(0, 0, 0, 0.35);
+	user-select: none;
+	vertical-align: middle;
+	letter-spacing: 1px;
+	line-height: 1;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+	transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.wukong-chop-seal:hover {
+	transform: scale(1.08) rotate(-1deg);
+	box-shadow: 
+		0 4px 12px rgba(185, 44, 44, 0.65),
+		inset 0 0 4px rgba(255, 230, 200, 0.3);
+}
+
+.seal-header {
+	font-size: 11.5px;
+	padding: 3px 6px;
+	margin-left: 6px;
+	transform: translateY(-2px) rotate(-1.5deg);
+}
+
+.seal-inline {
+	font-size: 11px;
+	padding: 2.5px 5.5px;
+	margin-left: 8px;
+	align-self: center;
+	transform: rotate(1deg);
+}
+
+/* 中轴与如意金纹徽记 */
+.wukong-book-spine {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	width: 20px;
+	position: relative;
+}
+
+.spine-line {
+	width: 1px;
+	flex: 1;
+	background: linear-gradient(180deg, transparent, rgba(223, 190, 123, 0.35) 40%, rgba(223, 190, 123, 0.35) 60%, transparent);
+}
+
+.spine-emblem {
+	color: #dfbe7b;
+	font-size: 13px;
+	opacity: 0.8;
+	text-shadow: 0 0 8px rgba(223, 190, 123, 0.6);
+	user-select: none;
+}
+
+/* 听风令说书长卷条：三弦金漆皮影流光 */
+.wukong-bottom-sheet .wukong-storyteller-bar {
+	margin: 0 0 28px;
+	background: 
+		linear-gradient(90deg, rgba(16, 14, 12, 0.95) 0%, rgba(24, 42, 58, 0.9) 50%, rgba(16, 14, 12, 0.95) 100%);
+	border: 1px solid rgba(223, 190, 123, 0.35);
+	border-left: 3.5px solid #dfbe7b;
+	border-radius: 8px;
+	box-shadow: 
+		0 6px 22px rgba(0, 0, 0, 0.45),
+		inset 0 0 20px rgba(30, 62, 86, 0.25);
+}
+
+/* 记忆轴：石青玉色拓印 */
+.wukong-bottom-sheet .wukong-memory-section {
+	position: relative;
+	overflow: hidden;
+	background: 
+		radial-gradient(ellipse 90% 70% at 50% 0%, rgba(30, 62, 86, 0.28) 0%, transparent 70%),
+		linear-gradient(165deg, rgba(14, 21, 30, 0.95) 0%, rgba(12, 14, 18, 0.97) 100%);
+	border: 1px solid rgba(223, 190, 123, 0.3);
+	border-radius: 12px;
+	box-shadow: 
+		0 12px 32px rgba(0, 0, 0, 0.45),
+		inset 0 0 28px rgba(30, 62, 86, 0.22);
+}
+
+/* ==========================================================================
+   东方神话 · 筋斗云腾云直上返回顶部 (.somersault-cloud-btn) - 专属自洽设计
+   ========================================================================== */
+.somersault-cloud-btn {
+	position: fixed !important;
+	right: 32px !important;
+	bottom: 32px !important;
+	width: 52px !important;
+	height: 52px !important;
+	border-radius: 50% !important;
+	background: rgba(18, 16, 14, 0.92) !important;
+	-webkit-backdrop-filter: blur(14px) !important;
+	backdrop-filter: blur(14px) !important;
+	border: 1.5px solid rgba(223, 190, 123, 0.45) !important;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 14px rgba(223, 190, 123, 0.18) !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	cursor: pointer !important;
+	z-index: 9999 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	outline: none !important;
+	user-select: none !important;
+	-webkit-user-select: none !important;
+	touch-action: manipulation !important;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transform: translateY(20px) scale(0.88);
+	transition: opacity 0.35s cubic-bezier(0.2, 0.8, 0.25, 1),
+	            transform 0.35s cubic-bezier(0.2, 0.8, 0.25, 1),
+	            visibility 0.35s,
+	            border-color 0.25s ease,
+	            box-shadow 0.25s ease !important;
+}
+
+/* 激活入场显示状态 */
+.somersault-cloud-btn.is-visible {
+	opacity: 1 !important;
+	visibility: visible !important;
+	pointer-events: auto !important;
+	transform: translateY(0) scale(1) !important;
+}
+
+/* 键盘焦点样式 */
+.somersault-cloud-btn:focus-visible {
+	outline: 2px solid #dfbe7b !important;
+	outline-offset: 3px !important;
+	box-shadow: 0 0 0 4px rgba(223, 190, 123, 0.35), 0 8px 24px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* 1. 环形阅读进度圈 SVG */
+.somersault-cloud-btn .cloud-progress-svg {
+	position: absolute !important;
+	inset: 0 !important;
+	width: 100% !important;
+	height: 100% !important;
+	transform: rotate(-90deg) !important;
+	pointer-events: none !important;
+	border-radius: 50% !important;
+}
+
+.somersault-cloud-btn .cloud-progress-track {
+	fill: none !important;
+	stroke: rgba(223, 190, 123, 0.16) !important;
+	stroke-width: 2.4 !important;
+}
+
+.somersault-cloud-btn .cloud-progress-bar {
+	fill: none !important;
+	stroke: url(#cloudGoldGradient) !important;
+	stroke-width: 2.4 !important;
+	stroke-linecap: round !important;
+	stroke-dasharray: 157.08 !important;
+	stroke-dashoffset: 157.08;
+	transition: stroke-dashoffset 0.12s linear !important;
+}
+
+/* 2. 核心视觉容器 */
+.somersault-cloud-btn .cloud-core {
+	position: relative !important;
+	width: 34px !important;
+	height: 34px !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2) !important;
+}
+
+/* 如意金箍棒 (Golden Cudgel Needle) */
+.somersault-cloud-btn .cloud-cudgel {
+	position: absolute !important;
+	top: 3px !important;
+	left: 50% !important;
+	transform: translateX(-50%) !important;
+	width: 3.5px !important;
+	height: 22px !important;
+	display: flex !important;
+	flex-direction: column !important;
+	align-items: center !important;
+	z-index: 3 !important;
+	transition: transform 0.3s ease, filter 0.3s ease !important;
+}
+
+/* 尖头向上指针 */
+.somersault-cloud-btn .cudgel-arrow-tip {
+	width: 0 !important;
+	height: 0 !important;
+	border-left: 2.5px solid transparent !important;
+	border-right: 2.5px solid transparent !important;
+	border-bottom: 4px solid #ffd97d !important;
+	margin-bottom: -1px !important;
+	filter: drop-shadow(0 -1px 2px rgba(255, 217, 125, 0.6)) !important;
+}
+
+/* 金箍环 */
+.somersault-cloud-btn .cudgel-gold-cap {
+	width: 3.5px !important;
+	height: 3.5px !important;
+	background: linear-gradient(180deg, #ffe5a3, #dfbe7b) !important;
+	border-radius: 1px !important;
+	box-shadow: 0 0 3px rgba(255, 229, 163, 0.6) !important;
+}
+
+/* 棒身：朱砂红 */
+.somersault-cloud-btn .cudgel-shaft {
+	width: 2.5px !important;
+	flex: 1 !important;
+	background: linear-gradient(180deg, #991b1b, #7f1d1d) !important;
+	box-shadow: inset 0.5px 0 0 rgba(255, 255, 255, 0.25) !important;
+}
+
+/* 祥云矢量图形 */
+.somersault-cloud-btn .cloud-svg {
+	position: absolute !important;
+	bottom: 2px !important;
+	left: 50% !important;
+	transform: translateX(-50%) !important;
+	width: 30px !important;
+	height: 20px !important;
+	z-index: 2 !important;
+	overflow: visible !important;
+	transition: transform 0.3s ease, filter 0.3s ease !important;
+}
+
+.somersault-cloud-btn .cloud-body-fill {
+	fill: rgba(247, 242, 231, 0.14) !important;
+}
+
+.somersault-cloud-btn .cloud-contour {
+	stroke: #f7f2e7 !important;
+	stroke-width: 1.35 !important;
+	stroke-linecap: round !important;
+	stroke-linejoin: round !important;
+	filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5)) !important;
+}
+
+.somersault-cloud-btn .cloud-spiral {
+	stroke: #dfbe7b !important;
+	stroke-width: 1.1 !important;
+	stroke-linecap: round !important;
+	stroke-linejoin: round !important;
+	opacity: 0.9 !important;
+}
+
+/* 腾云尾迹水墨仙气 */
+.somersault-cloud-btn .cloud-wisps {
+	position: absolute !important;
+	bottom: -4px !important;
+	left: 50% !important;
+	transform: translateX(-50%) !important;
+	width: 24px !important;
+	height: 10px !important;
+	display: flex !important;
+	justify-content: space-around !important;
+	pointer-events: none !important;
+	opacity: 0;
+	transition: opacity 0.3s ease !important;
+}
+
+.somersault-cloud-btn .cloud-wisp {
+	width: 3px !important;
+	height: 7px !important;
+	background: radial-gradient(circle, rgba(255, 229, 163, 0.8) 0%, rgba(223, 190, 123, 0) 70%) !important;
+	border-radius: 50% !important;
+	animation: wispDrift 1.2s infinite ease-in-out !important;
+}
+.somersault-cloud-btn .wisp-1 { animation-delay: 0s !important; }
+.somersault-cloud-btn .wisp-2 { animation-delay: 0.4s !important; height: 9px !important; }
+.somersault-cloud-btn .wisp-3 { animation-delay: 0.8s !important; }
+
+/* 3. 悬浮印章微标 Tooltip (仅桌面端显示，位于按钮左侧外延，绝不占用按钮内部) */
+.somersault-cloud-btn .cloud-tooltip {
+	position: absolute !important;
+	right: calc(100% + 12px) !important;
+	top: 50% !important;
+	transform: translateY(-50%) translateX(6px) !important;
+	padding: 5px 11px !important;
+	border-radius: 6px !important;
+	background: rgba(16, 14, 12, 0.95) !important;
+	-webkit-backdrop-filter: blur(10px) !important;
+	backdrop-filter: blur(10px) !important;
+	border: 1px solid rgba(223, 190, 123, 0.45) !important;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+	white-space: nowrap !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	gap: 6px !important;
+	opacity: 0 !important;
+	visibility: hidden !important;
+	pointer-events: none !important;
+	transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.2, 0.8, 0.25, 1), visibility 0.25s !important;
+}
+
+.somersault-cloud-btn .cloud-tooltip::after {
+	content: "" !important;
+	position: absolute !important;
+	right: -5px !important;
+	top: 50% !important;
+	transform: translateY(-50%) rotate(45deg) !important;
+	width: 8px !important;
+	height: 8px !important;
+	background: rgba(16, 14, 12, 0.95) !important;
+	border-top: 1px solid rgba(223, 190, 123, 0.45) !important;
+	border-right: 1px solid rgba(223, 190, 123, 0.45) !important;
+}
+
+.somersault-cloud-btn .tooltip-text {
+	font-size: 12px !important;
+	font-weight: 500 !important;
+	letter-spacing: 0.08em !important;
+	color: #f7f2e7 !important;
+	line-height: 1.2 !important;
+}
+
+.somersault-cloud-btn .tooltip-percent {
+	font-size: 11px !important;
+	font-family: var(--font-mono, monospace) !important;
+	color: #dfbe7b !important;
+	font-weight: 600 !important;
+	line-height: 1.2 !important;
+}
+
+/* 4. 悬停交互态 (Hover State) */
+.somersault-cloud-btn:hover {
+	border-color: rgba(223, 190, 123, 0.75) !important;
+	box-shadow: 0 10px 28px rgba(0, 0, 0, 0.52), 0 0 20px rgba(223, 190, 123, 0.35) !important;
+	transform: translateY(-4px) scale(1.04) !important;
+}
+
+.somersault-cloud-btn:hover .cloud-core {
+	transform: translateY(-2px) !important;
+}
+
+.somersault-cloud-btn:hover .cloud-cudgel {
+	filter: drop-shadow(0 0 6px rgba(255, 217, 125, 0.85)) !important;
+	transform: translateX(-50%) translateY(-2px) !important;
+}
+
+.somersault-cloud-btn:hover .cloud-svg {
+	filter: drop-shadow(0 0 8px rgba(223, 190, 123, 0.5)) !important;
+}
+
+.somersault-cloud-btn:hover .cloud-wisps {
+	opacity: 1 !important;
+}
+
+.somersault-cloud-btn:hover .cloud-tooltip {
+	opacity: 1 !important;
+	visibility: visible !important;
+	transform: translateY(-50%) translateX(0) !important;
+}
+
+/* 5. 点击“腾云直上”升空飞驰动画 (.is-ascending) */
+.somersault-cloud-btn.is-ascending {
+	pointer-events: none !important;
+	animation: cloudLiftOff 0.7s cubic-bezier(0.1, 0.85, 0.25, 1) forwards !important;
+}
+
+.somersault-cloud-btn.is-ascending .cloud-wisps {
+	opacity: 1 !important;
+}
+
+.somersault-cloud-btn.is-ascending .cloud-wisp {
+	animation: cloudExhaustBurst 0.6s ease-out forwards !important;
+}
+
+/* 6. 移动端与小屏响应式适配 */
+@media (max-width: 768px) {
+	.somersault-cloud-btn {
+		width: 46px !important;
+		height: 46px !important;
+		right: 16px !important;
+		bottom: 18px !important;
+	}
+	.somersault-cloud-btn .cloud-core {
+		width: 28px !important;
+		height: 28px !important;
+	}
+	.somersault-cloud-btn .cloud-cudgel {
+		height: 18px !important;
+		top: 2px !important;
+	}
+	.somersault-cloud-btn .cloud-svg {
+		width: 25px !important;
+		height: 17px !important;
+	}
+	/* 触摸屏强制隐藏悬浮 Tooltip，杜绝任何挤占和遮挡 */
+	.somersault-cloud-btn .cloud-tooltip,
+	.cloud-tooltip {
+		display: none !important;
+	}
+}
+
+/* 7. 减弱动效偏好适配 */
+@media (prefers-reduced-motion: reduce) {
+	.somersault-cloud-btn,
+	.somersault-cloud-btn:hover,
+	.somersault-cloud-btn .cloud-core,
+	.somersault-cloud-btn .cloud-cudgel,
+	.somersault-cloud-btn .cloud-svg,
+	.somersault-cloud-btn .cloud-wisp {
+		transition: none !important;
+		animation: none !important;
+		transform: none !important;
+	}
+	.somersault-cloud-btn.is-ascending {
+		animation: none !important;
+		opacity: 0 !important;
+	}
+}
+
+/* 8. 筋斗云交互关键帧动画 */
+@keyframes wispDrift {
+	0%, 100% { transform: translateY(0) scale(0.8); opacity: 0.3; }
+	50% { transform: translateY(4px) scale(1.1); opacity: 0.8; }
+}
+
+@keyframes cloudLiftOff {
+	0% {
+		transform: translateY(0) scale(1);
+		opacity: 1;
+	}
+	15% {
+		/* 聚能下蹲微弹 */
+		transform: translateY(6px) scale(1.08, 0.92);
+		opacity: 1;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 24px rgba(223, 190, 123, 0.6);
+	}
+	30% {
+		/* 破空拔起 */
+		transform: translateY(-20px) scale(0.95, 1.05);
+		opacity: 0.95;
+	}
+	100% {
+		/* 极速冲霄直上并隐去 */
+		transform: translateY(-130px) scale(0.55);
+		opacity: 0;
+		box-shadow: 0 0 32px rgba(223, 190, 123, 0);
+	}
+}
+
+@keyframes cloudExhaustBurst {
+	0% {
+		transform: translateY(0) scale(1);
+		opacity: 0.8;
+	}
+	100% {
+		transform: translateY(22px) scale(0.2);
+		opacity: 0;
+	}
+}
+
+/* Audio feedback follows actual media events; the same button cancels a pending start. */
+.np-playback-status { display: block; min-height: 17px; margin-top: 2px; color: #586b5a; font-size: 11.5px; line-height: 1.45; }
+.np-quiet-playbtn { width: 44px; height: 44px; min-width: 44px; min-height: 44px; touch-action: manipulation; }
+.np-quiet-playbtn:focus-visible { outline: 2px solid #497250; outline-offset: 4px; }
+.now-playing-quiet.is-loading .np-quiet-dot { background: #9b8047; }
+.now-playing-quiet.is-error .np-quiet-dot { background: #9d5541; }
+.now-playing-quiet.is-error .np-playback-status { color: #8a4938; }
+.np-quiet-playbtn[aria-busy="true"] { background: #eeeddf; border-color: #9b9c78; }
+:root[data-garden-reading="night"] .np-playback-status { color: #bdcbb8; }
+

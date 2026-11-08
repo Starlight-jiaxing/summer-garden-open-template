@@ -1,0 +1,215 @@
+.fieldnote-library-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 10px;
+}
+
+.fieldnote-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.fieldnote-filters[hidden],
+.fieldnote[hidden],
+.fieldnote-empty[hidden] {
+  display: none !important;
+}
+
+.fieldnote-filters button,
+.fieldnote-empty button {
+  min-height: 44px;
+  padding: 0 15px;
+  border: 1px solid #cfd9cf;
+  border-radius: 999px;
+  background: rgba(255, 254, 248, .84);
+  color: #405448;
+  font: 500 13px/1.35 var(--notes-sans);
+  cursor: pointer;
+  transition: background-color .18s ease, border-color .18s ease, color .18s ease;
+}
+
+.fieldnote-filters button:hover,
+.fieldnote-empty button:hover {
+  border-color: #78947b;
+  background: #edf3e9;
+}
+
+.fieldnote-filters button[aria-pressed="true"] {
+  border-color: #284d3a;
+  background: #284d3a;
+  color: #fff;
+}
+
+.fieldnote-filters button:focus-visible,
+.fieldnote-empty button:focus-visible {
+  outline: 2px solid #416b4f;
+  outline-offset: 3px;
+}
+
+.fieldnote-updated {
+  flex: none;
+  margin: 0;
+  color: #63736a;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.fieldnote-updated time,
+.fieldnote-date time {
+  font-variant-numeric: tabular-nums;
+}
+
+.fieldnote-updated time { color: #405448; }
+.fieldnote-result-count { min-height: 19px; margin: 0 0 14px; color: #63736a; font-size: 12px; }
+
+.fieldnote-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 16px;
+}
+
+.fieldnote {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #d6dfd0;
+  border-radius: 10px;
+  background: rgba(255, 254, 248, .95);
+  box-shadow: 0 9px 23px rgba(38, 61, 53, .055);
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+
+.fieldnote:hover,
+.fieldnote[open] {
+  border-color: #b7c7b5;
+  box-shadow: 0 13px 30px rgba(38, 61, 53, .085);
+}
+
+.fieldnote > summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-areas: "topic date toggle" "title title title";
+  align-items: center;
+  gap: 8px 12px;
+  min-height: 116px;
+  padding: 18px 19px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.fieldnote > summary::-webkit-details-marker { display: none; }
+
+.fieldnote > summary .note-topic {
+  grid-area: topic;
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  max-width: 100%;
+  min-height: 25px;
+  padding: 2px 9px;
+  border: 1px solid #d2dfd1;
+  border-radius: 999px;
+  background: #eef4eb;
+  color: #416b4f;
+  font: 600 11px/1.25 var(--notes-sans);
+}
+
+.fieldnote > summary h3 {
+  grid-area: title;
+  min-width: 0;
+  margin: 0;
+  color: #243d35;
+  font: 500 clamp(17px, 1.7vw, 20px)/1.5 var(--notes-serif);
+  overflow-wrap: anywhere;
+}
+
+.fieldnote-date { grid-area: date; color: #778277; font-size: 10px; white-space: nowrap; }
+
+.fieldnote .detail-toggle {
+  grid-area: toggle;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #d6dfd0;
+  border-radius: 50%;
+  color: #416b4f;
+  transition: transform .2s ease, background-color .2s ease;
+}
+
+.fieldnote[open] > summary {
+  border-bottom: 1px solid #e1e7dc;
+  background: linear-gradient(110deg, rgba(238, 244, 235, .68), rgba(255, 254, 248, .78));
+}
+
+.fieldnote[open] .detail-toggle { background: #e6efe3; transform: rotate(45deg); }
+.fieldnote-body { padding: 17px 19px 20px; }
+
+.note-structure { display: grid; gap: 8px; margin: 0; }
+
+.note-structure > div {
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr);
+  gap: 10px;
+  padding: 9px 10px;
+  border-left: 2px solid #ccd9c8;
+  border-radius: 0 5px 5px 0;
+  background: rgba(239, 244, 235, .55);
+}
+
+.note-structure dt { color: #416b4f; font-size: 11px; font-weight: 700; line-height: 1.65; }
+.note-structure dd { margin: 0; color: #43534a; font-size: 13px; line-height: 1.7; overflow-wrap: anywhere; }
+
+.fieldnote-body .note-inline-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 8px;
+  color: #3c6a49;
+  font-size: 12px;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.fieldnote-body blockquote {
+  margin: 14px 0 9px;
+  padding: 13px 15px;
+  border-left: 3px solid #89a184;
+  border-radius: 0 6px 6px 0;
+  background: #f1f4eb;
+  color: #43534a;
+  font: 400 13px/1.75 var(--notes-sans);
+}
+
+.fieldnote-empty {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  padding: 28px;
+  border: 1px dashed #c3d0bf;
+  border-radius: 9px;
+  background: rgba(255, 254, 248, .66);
+  color: #63736a;
+  text-align: center;
+}
+
+.fieldnote-empty button { color: #284d3a; }
+
+@media (max-width: 700px) {
+  .fieldnote-library-bar { align-items: flex-start; flex-direction: column; }
+  .fieldnote-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .fieldnote > summary { min-height: 104px; padding: 15px; }
+  .fieldnote > summary h3 { font-size: 18px; }
+  .fieldnote-body { padding: 14px 15px 17px; }
+  .note-structure > div { grid-template-columns: 72px minmax(0, 1fr); gap: 7px; padding: 8px; }
+  .fieldnote-updated { align-self: flex-end; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fieldnote,
+  .fieldnote .detail-toggle,
+  .fieldnote-filters button { transition: none; }
+}

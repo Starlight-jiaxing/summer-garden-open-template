@@ -1,0 +1,447 @@
+/* ==========================================================================
+   私域转化双卡片弹窗 (Community & Contact Dual Modal)
+   完美复刻参考设计：深邃磨砂背板 + 双白底高清扫码卡片 + 胶囊操作按钮
+   ========================================================================== */
+
+.contact-modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 99999;
+	background: rgba(10, 12, 16, 0.82);
+	-webkit-backdrop-filter: blur(16px);
+	backdrop-filter: blur(16px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 24px 16px;
+	box-sizing: border-box;
+	overflow-y: auto;
+	overflow-x: hidden;
+	-webkit-overflow-scrolling: touch;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+}
+
+.contact-modal-overlay.is-open {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
+}
+
+.contact-modal-backdrop {
+	display: none;
+}
+
+.contact-modal-window {
+	position: relative;
+	z-index: 2;
+	width: 100%;
+	max-width: 820px;
+	margin: auto;
+	background: #14161b;
+	border: 1px solid rgba(255, 255, 255, 0.09);
+	border-radius: 24px;
+	box-shadow: 
+		0 25px 60px -10px rgba(0, 0, 0, 0.7),
+		0 0 0 1px rgba(255, 255, 255, 0.05),
+		inset 0 1px 0 rgba(255, 255, 255, 0.1);
+	padding: 28px 32px 34px;
+	box-sizing: border-box;
+	transform: scale(0.94) translateY(12px);
+	transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+	min-width: 0;
+}
+
+.contact-modal-overlay.is-open .contact-modal-window {
+	transform: scale(1) translateY(0);
+}
+
+/* 顶部栏：面包屑 + 关闭按钮 */
+.contact-modal-topbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 24px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.contact-modal-breadcrumb {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 13px;
+	color: #94a3b8;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+	letter-spacing: 0.5px;
+}
+
+.contact-modal-breadcrumb .crumb-lead {
+	color: #cbd5e1;
+	font-weight: 500;
+}
+
+.contact-modal-breadcrumb .crumb-slash {
+	color: #64748b;
+}
+
+.contact-modal-close-btn {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.07);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	color: #94a3b8;
+	font-size: 20px;
+	line-height: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	outline: none;
+	flex-shrink: 0;
+}
+
+.contact-modal-close-btn:hover {
+	background: rgba(255, 255, 255, 0.16);
+	color: #ffffff;
+	transform: rotate(90deg);
+}
+
+.contact-modal-close-btn:focus-visible,
+.contact-action-btn:focus-visible {
+	outline: 2px solid #7dd3fc;
+	outline-offset: 3px;
+}
+
+/* 双卡片网格布局 */
+.contact-modal-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	gap: 24px;
+	align-items: stretch;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+/* 单个卡片列 */
+.contact-column-card {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	min-width: 0;
+	box-sizing: border-box;
+}
+
+/* 头部介绍文字 */
+.column-intro {
+	text-align: center;
+	margin-bottom: 18px;
+	min-height: 52px;
+	box-sizing: border-box;
+}
+
+.column-title {
+	font-size: 18px;
+	font-weight: 700;
+	color: #f8fafc;
+	margin: 0 0 6px 0;
+	letter-spacing: 0.3px;
+	word-break: break-word;
+}
+
+.column-subtitle {
+	font-size: 13px;
+	color: #94a3b8;
+	margin: 0;
+	line-height: 1.45;
+	word-break: break-word;
+}
+
+/* 白底内板 (与参考图一模一样的高对比度白卡，左右高度自动对齐) */
+.column-white-board {
+	flex: 1;
+	background: #ffffff;
+	border-radius: 18px;
+	padding: 22px 20px 18px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	box-shadow: 
+		0 10px 25px -3px rgba(0, 0, 0, 0.3),
+		0 4px 6px -2px rgba(0, 0, 0, 0.05);
+	position: relative;
+	box-sizing: border-box;
+	min-width: 0;
+	width: 100%;
+}
+
+/* 头像与标识 */
+.board-header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 12px;
+	width: 100%;
+}
+
+.board-avatar-img {
+	width: 44px;
+	height: 44px;
+	border-radius: 10px;
+	object-fit: cover;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+	margin-bottom: 8px;
+}
+
+.board-avatar-img.board-group-avatar {
+	border-radius: 50%;
+}
+
+.board-name-tag {
+	font-size: 14px;
+	font-weight: 600;
+	color: #1e293b;
+	letter-spacing: 0.2px;
+}
+
+/* 二维码区域 */
+.board-qr-wrap {
+	width: 100%;
+	max-width: 210px;
+	aspect-ratio: 1 / 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 10px;
+}
+
+.board-qr-img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	display: block;
+	image-rendering: -webkit-optimize-contrast;
+	border-radius: 4px;
+}
+
+.board-qr-img.board-group-qr {
+	border-radius: 12px;
+}
+
+/* 补充信息：微信号条目 / 提示语 */
+.board-bottom-info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-height: 52px;
+	justify-content: center;
+	width: 100%;
+}
+
+.board-wxid-pill,
+.board-group-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	background: #f1f5f9;
+	border: 1px solid #e2e8f0;
+	border-radius: 6px;
+	padding: 3px 10px;
+	margin-bottom: 6px;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+	font-size: 12px;
+	color: #334155;
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
+.board-footer-hint {
+	font-size: 11.5px;
+	color: #64748b;
+	margin: 0;
+	text-align: center;
+	line-height: 1.45;
+}
+
+.board-footer-subhint {
+	font-size: 11px;
+	color: #94a3b8;
+	margin: 2px 0 0;
+	text-align: center;
+	line-height: 1.4;
+}
+
+/* 底部操作区 */
+.column-actions {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	margin-top: 18px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.contact-action-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	min-width: 110px;
+	height: 38px;
+	padding: 0 14px;
+	border-radius: 999px;
+	background: #1e2129;
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	color: #e2e8f0;
+	font-size: 13px;
+	font-weight: 500;
+	text-decoration: none;
+	cursor: pointer;
+	transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+	box-sizing: border-box;
+	user-select: none;
+	white-space: nowrap;
+}
+
+.contact-action-btn:hover {
+	background: #2b303c;
+	color: #ffffff;
+	border-color: rgba(255, 255, 255, 0.25);
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.contact-action-btn:active {
+	transform: translateY(0);
+}
+
+.contact-action-btn.btn-primary {
+	background: #232834;
+	border-color: rgba(148, 163, 184, 0.3);
+}
+
+.contact-action-btn.btn-primary:hover {
+	background: #333a4c;
+}
+
+.contact-action-btn.btn-full-width {
+	min-width: 136px;
+}
+
+.contact-action-btn .btn-icon {
+	font-size: 13px;
+}
+
+/* 复制成功的 Toast 浮动气泡 */
+.contact-toast-bubble {
+	position: fixed;
+	bottom: 36px;
+	left: 50%;
+	transform: translateX(-50%) translateY(20px);
+	background: #0f172a;
+	color: #f8fafc;
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	padding: 10px 22px;
+	border-radius: 999px;
+	font-size: 13px;
+	font-weight: 500;
+	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+	z-index: 100000;
+	opacity: 0;
+	pointer-events: none;
+	transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.contact-toast-bubble.is-visible {
+	opacity: 1;
+	transform: translateX(-50%) translateY(0);
+}
+
+/* 手机端自适应响应 */
+@media (max-width: 740px) {
+	.contact-modal-overlay {
+		padding: 20px 10px;
+		align-items: flex-start;
+	}
+
+	.contact-modal-window {
+		width: calc(100% - 10px);
+		max-width: 356px;
+		padding: 18px 12px 22px;
+		border-radius: 20px;
+		margin: 0 auto;
+		box-sizing: border-box;
+	}
+
+	.contact-modal-topbar {
+		margin-bottom: 14px;
+	}
+
+	.contact-modal-grid {
+		display: flex;
+		flex-direction: column;
+		gap: 22px;
+		width: 100%;
+	}
+
+	.contact-column-card {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.column-intro {
+		min-height: auto;
+		margin-bottom: 10px;
+		width: 100%;
+	}
+
+	.column-title {
+		font-size: 16px;
+	}
+
+	.column-subtitle {
+		font-size: 12px;
+		line-height: 1.4;
+	}
+
+	.column-white-board {
+		padding: 16px 12px 14px;
+		width: 100%;
+	}
+
+	.board-qr-wrap {
+		max-width: 180px;
+	}
+
+	.board-bottom-info {
+		min-height: auto;
+		margin-top: 4px;
+		width: 100%;
+	}
+
+	.column-actions {
+		margin-top: 12px;
+		gap: 8px;
+		width: 100%;
+	}
+
+	.contact-action-btn {
+		height: 36px;
+		font-size: 12px;
+		min-width: 0;
+		flex: 1 1 0;
+		padding: 0 6px;
+	}
+}

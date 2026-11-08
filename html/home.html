@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script>
+	(function () {
+		var r = document.documentElement;
+		window.JXStationBoot = { started: performance.now(), release: function () {
+			window.dispatchEvent(new Event("station:release"));
+			r.classList.remove("station-booting", "station-returning");
+			document.querySelectorAll("[data-station-inert]").forEach(function (e) { e.inert = false; delete e.dataset.stationInert; });
+		} };
+		if (performance.getEntriesByType("navigation")[0]?.type === "back_forward") return;
+		try { if (sessionStorage.getItem("jxgarden-station-entered")) r.classList.add("station-returning"); } catch (e) {}
+		r.classList.add("station-booting");
+		setTimeout(window.JXStationBoot.release, 4800);
+	})();
+	</script>
+	<script src="../js/station-loading.js?v=20261104-slim01" defer></script>
+	<title>Summer Diary · 夏日个人宇宙 | Your Name</title>
+	<link rel="icon" href="../img/demo.svg" sizes="16x16 32x32 48x48">
+	<link rel="icon" type="image/svg+xml" href="../img/demo.svg" sizes="any">
+	<link rel="apple-touch-icon" href="../img/demo.svg" sizes="180x180">
+	<link rel="preload" as="image" href="../img/demo.svg" fetchpriority="high">
+	<!-- 杂志排版字体：Playfair Display (大标题) + Cormorant Garamond (诗意衬线) + Inter (克制正文) + Noto Serif SC (中文雅致衬线) -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+	<link rel="stylesheet" href="../css/base.css?v=20261026-loading01" />
+	<link rel="stylesheet" href="../css/home.css?v=20261009" />
+	<link rel="stylesheet" href="../css/contact-modal.css?v=20261024-community01" />
+	<link rel="stylesheet" href="../css/page-transition.css?v=20261026-loading01" />
+	<link rel="stylesheet" href="../css/site-audio.css?v=20261101-score01" />
+	<script>
+	try { var j = JSON.parse(localStorage.getItem("jxgarden-journey-v1") || "null"); if (j && j.version === 1 && j.reading) { var r = document.documentElement; if (["paper","night"].indexOf(j.reading.mode) !== -1) r.dataset.gardenReading = j.reading.mode; if ([16,18,20].indexOf(j.reading.size) !== -1) r.style.setProperty("--journey-reading-size", j.reading.size + "px"); r.style.setProperty("--journey-reading-line", j.reading.space === "loose" ? "2.15" : "1.85"); } } catch (e) {}
+	setTimeout(function () { if (!window.JXGardenJourney) delete document.documentElement.dataset.gardenReading; }, 4500);
+	</script>
+	<link rel="stylesheet" href="../css/garden-journey.css?v=20261101-stardust02">
+	<script src="../js/garden-journey.js?v=20261027-journey01" defer></script>
+	<link rel="stylesheet" href="../css/garden-companion.css?v=20261101-stardust02">
+	<script src="../js/garden-companion.js?v=20261105-memory01" defer></script>
+<script src="../js/site-config.js" defer></script>
+</head>
+<body class="summer-diary-page" data-station-page="夏日手账" data-station-image="../img/demo.svg">
+	<aside id="stationLoader" class="station-loader" data-step="1" aria-hidden="true" aria-labelledby="stationLoaderTitle">
+		<div class="arrival-corner" aria-hidden="true"><strong>My Garden</strong>PERSONAL STATION · 35MM</div>
+		<section class="arrival-ticket">
+			<header class="arrival-ticket-head"><span class="arrival-ticket-code">JX / ARRIVAL TICKET</span><span>VOL. 09 · 2026</span></header>
+			<div class="arrival-ticket-main">
+				<p class="arrival-eyebrow">YOUR NEXT STOP / SUMMER DIARY</p>
+				<h2 id="stationLoaderTitle">下一站，夏日手账。</h2>
+				<p class="arrival-subtitle">A quiet place. A little room for your world.</p>
+				<svg class="arrival-landscape" viewBox="0 0 440 110" fill="none" aria-hidden="true" focusable="false">
+					<path d="M0 79C47 65 59 33 104 44S160 79 212 56 264 25 311 44 382 74 440 43V91H0Z" fill="#eef1df"/>
+					<path d="M0 78C47 64 62 34 104 44S162 79 212 56 267 26 312 44 383 74 440 43" stroke="#aaba9a" stroke-width="1.2"/>
+					<path d="M347 46V76M334 61L347 42 360 61M335 69L347 51 359 69" stroke="#82966d" stroke-linecap="round" stroke-linejoin="round"/>
+					<circle cx="395" cy="27" r="9" stroke="#c5bc87"/>
+					<path d="M0 91H440M0 97H440" stroke="#9aa98b"/>
+					<path d="M0 94H440" stroke="#c0c8b0" stroke-width="8" stroke-dasharray="1 12"/>
+					<g class="arrival-train">
+						<path d="M9 59H53C58 59 62 63 63 68L68 84H6V63C6 61 7 59 9 59Z" fill="#e2e7b9" stroke="#446749" stroke-width="1.5"/>
+						<path d="M6 77H65M17 59L22 53H41L47 59" stroke="#446749" stroke-width="1.5"/>
+						<path d="M13 64H25V74H13ZM30 64H42V74H30ZM47 64H57L61 74H47Z" fill="#b7d7cc" stroke="#446749"/>
+						<circle cx="20" cy="87" r="4" fill="#446749"/><circle cx="54" cy="87" r="4" fill="#446749"/>
+						<path d="M9 84H66" stroke="#446749" stroke-width="2"/>
+					</g>
+				</svg>
+			</div>
+			<div class="arrival-ticket-bottom">
+				<div><p class="arrival-status" data-station-status role="status" aria-live="polite">正在铺开这一页手账…</p><ol class="arrival-stops" aria-hidden="true"><li><i></i>车票</li><li><i></i>手账</li><li><i></i>风景</li></ol></div>
+				<button class="arrival-skip" type="button" onclick="window.JXStationBoot.release()">先进去看看<span aria-hidden="true">→</span></button>
+			</div>
+		</section>
+		<p class="arrival-note" aria-hidden="true">BLUE SKIES, RUSTED RAILS &amp; QUIET DAYS.</p>
+	</aside>
+
+	<!-- 胶片纸张微颗粒背景 -->
+	<div class="paper-grain-overlay"></div>
+
+	<!-- 杂志封面主视界容器 -->
+	<div class="diary-container">
+		<!-- 1. 顶部报头标线 (Magazine Masthead Bar) -->
+		<header class="masthead-bar">
+			<div class="masthead-left">
+				<span class="issue-tag">VOL. 09</span>
+				<span class="divider-dot">·</span>
+				<span class="issue-title">SUMMER DIARY · 个人宇宙</span>
+			</div>
+			<div class="masthead-center">
+				<span class="geo-coord">✦ 00.00°N 00.00°E · SUMMER EDITION</span>
+			</div>
+			<div class="masthead-right">
+				<span class="weather-clock" id="clock-text">19:49</span>
+				<span class="divider-dot">·</span>
+				<span class="date-tag" id="greeting-text">SATURDAY, SEP 19</span>
+			</div>
+		</header>
+
+		<!-- 2. 杂志核心主区 (双栏艺术排版：左上手账叙事 + 右侧手绘少女) -->
+		<main class="diary-main">
+			<!-- 背景天体装饰：右上中部「个人宇宙」星图轨迹线 (带星轨徐徐描出动画) -->
+			<svg class="celestial-orbit-track" viewBox="0 0 720 280" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+				<defs>
+					<!-- 动态描边遮罩：控制星轨虚线从左向右被缓缓画出 (双重保证：CSS + SMIL 原生矢量动画) -->
+					<mask id="orbit-draw-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="720" height="280">
+						<path class="orbit-mask-stroke" d="M 10 230 C 180 190, 360 80, 710 40" stroke="white" stroke-width="26" fill="none" stroke-linecap="round" stroke-dasharray="850" stroke-dashoffset="850">
+							<animate attributeName="stroke-dashoffset" from="850" to="0" dur="1.5s" begin="0.65s" fill="freeze" calcMode="spline" keySplines="0.25 0.8 0.25 1" keyTimes="0;1" />
+						</path>
+					</mask>
+				</defs>
+
+				<!-- 受遮罩控制的虚线星图主轨道与副弧 (像铅笔徐徐画出) -->
+				<g mask="url(#orbit-draw-mask)">
+					<path class="orbit-path" d="M 10 230 C 180 190, 360 80, 710 40" stroke="rgba(148, 163, 184, 0.44)" stroke-width="1.2" stroke-dasharray="4 6" />
+					<path class="orbit-subpath" d="M 100 270 C 260 220, 420 120, 690 90" stroke="rgba(148, 163, 184, 0.22)" stroke-width="1" stroke-dasharray="2 8" />
+				</g>
+				
+				<!-- 伴随天体微环 (依次轻弹点亮) -->
+				<g class="orbit-node node-1">
+					<circle cx="280" cy="145" r="15" stroke="rgba(138, 170, 106, 0.4)" stroke-width="1" stroke-dasharray="3 3" />
+					<circle cx="280" cy="145" r="3.5" fill="rgba(138, 170, 106, 0.7)" />
+				</g>
+				
+				<g class="orbit-node node-2">
+					<circle cx="510" cy="74" r="10" stroke="rgba(2, 132, 199, 0.35)" stroke-width="0.8" />
+					<circle cx="510" cy="74" r="2.5" fill="rgba(2, 132, 199, 0.6)" />
+				</g>
+
+				<!-- 星芒微点 (率先淡入浮现) -->
+				<g class="orbit-sparkle sparkle-1" transform="translate(180, 190)">
+					<path d="M0 -5 L1 -1 L5 0 L1 1 L0 5 L-1 1 L-5 0 L-1 -1 Z" fill="rgba(148, 163, 184, 0.65)" />
+				</g>
+				<g class="orbit-sparkle sparkle-2" transform="translate(400, 105)">
+					<path d="M0 -6 L1.2 -1.2 L6 0 L1.2 1.2 L0 6 L-1.2 1.2 L-6 0 L-1.2 -1.2 Z" fill="rgba(138, 170, 106, 0.75)" />
+				</g>
+				<g class="orbit-sparkle sparkle-3" transform="translate(630, 56)">
+					<path d="M0 -4 L0.8 -0.8 L4 0 L0.8 0.8 L0 4 L-0.8 0.8 L-4 0 L-0.8 -0.8 Z" fill="rgba(148, 163, 184, 0.6)" />
+				</g>
+
+				<!-- 轨迹坐标小字 (延迟淡入) -->
+				<text class="orbit-coord-text" x="315" y="132" font-family="'Courier New', monospace" font-size="9" fill="rgba(148, 163, 184, 0.6)" letter-spacing="1.5">✦ ORBIT · 00.00°N 00.00°E</text>
+			</svg>
+
+			<!-- 左侧：放大的中文手账自述与中下部兴趣胶片条 -->
+			<section class="diary-editorial">
+				<div class="journal-narrative-card">
+					<!-- 左侧雅致书页批注竖线 (带自上而下舒缓生长动效) -->
+					<div class="journal-accent-bar" aria-hidden="true"></div>
+
+					<div class="journal-text-flow">
+						<!-- 重点突出句：大字号、墨色深、手账第一句 -->
+						<h1 class="narrative-lead journal-anim-line line-1">你好呀，我的旅人，欢迎走进我的小天地。</h1>
+
+						<!-- 第二段：专业日常与生活节奏 -->
+						<p class="narrative-para journal-anim-line line-2">
+							我是这座小花园的主人，欢迎来到我的个人网站。<br>
+							这是我亲手搭建的第一个博客网站。在图纸与代码之外，我把所有属于自己的业余兴趣——听过的旋律、漫游过的游戏世界、读过的字句与拍下的生活切片，都毫无保留地收拢在这里。
+						</p>
+
+						<!-- 第三段：温柔共鸣与心动角落 -->
+						<p class="narrative-para journal-anim-line line-3">
+							衷心感谢在这个喧嚣庞大的网络世界里，你能循着铁轨的微光停靠在此。<br>
+							希望我的这些琐碎分享，也能在某一个瞬间，为你带来片刻的轻松与共鸣。
+						</p>
+					</div>
+				</div>
+
+				<!-- 中间偏下：兴趣胶片条预告 (Film Strip Negative Chips) -->
+				<nav class="interest-film-strip journal-anim-line line-4" aria-label="兴趣章节预告">
+					<div class="film-chips-wrap">
+						<a href="detail.html#music" class="film-chip chip-1" title="旋律 · 私藏黑胶">
+							<span class="chip-holes" aria-hidden="true"></span>
+							<span class="chip-num">01</span>
+							<span class="chip-name">旋律</span>
+							<span class="chip-en">VINYL</span>
+						</a>
+						<a href="detail.html#game" class="film-chip chip-2" title="游戏 · 精神驿站">
+							<span class="chip-holes" aria-hidden="true"></span>
+							<span class="chip-num">02</span>
+							<span class="chip-name">游戏</span>
+							<span class="chip-en">GAME</span>
+						</a>
+						<a href="detail.html#reading" class="film-chip chip-3" title="书阁 · 札记与沉淀">
+							<span class="chip-holes" aria-hidden="true"></span>
+							<span class="chip-num">03</span>
+							<span class="chip-name">书阁</span>
+							<span class="chip-en">BOOK</span>
+						</a>
+						<a href="detail.html#photo" class="film-chip chip-4" title="生活切片 · 35mm瞬息光影">
+							<span class="chip-holes" aria-hidden="true"></span>
+							<span class="chip-num">04</span>
+							<span class="chip-name">切片</span>
+							<span class="chip-en">35MM</span>
+						</a>
+					</div>
+				</nav>
+				<a href="detail.html#music" class="page-next-gateway" data-page-transition="rail">
+					<span class="next-route">NEXT STOP · 02</span>
+					<span class="next-title">查阅兴趣档案</span>
+					<span class="next-arrow" aria-hidden="true">→</span>
+				</a>
+
+				<!-- 网页左下角手账信息生态：落款组 (签名 + 邮戳) + 作者旁白 + 手账页脚细线 -->
+				<footer class="journal-left-footer">
+					<div class="footer-signoff-cluster">
+						<!-- 落款组：签名与邮戳紧凑相伴，宛如一组印记落款 -->
+						<div class="signoff-signature-wrap" title="示例签名落款">
+							<img src="../img/demo.svg" alt="示例签名" class="kean-pure-signature" loading="lazy" decoding="async" />
+						</div>
+
+						<!-- 极淡复古双环圆形日期旅行邮戳 (YOUR TOWN · SEP 2026 · 35MM MEMORY · 00.00°N 00.00°E) -->
+						<div class="vintage-postal-stamp" title="旅行邮戳 · SEP 2026">
+							<svg viewBox="0 0 100 100" class="postal-stamp-svg" aria-hidden="true">
+								<defs>
+									<path id="postmark-arc-top" d="M 18,50 A 32,32 0 0,1 82,50" fill="none" />
+									<path id="postmark-arc-bottom" d="M 18,50 A 32,32 0 0,0 82,50" fill="none" />
+								</defs>
+								<!-- 外环刻度虚线 -->
+								<circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.6" />
+								<!-- 内环实线 -->
+								<circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.5" />
+								
+								<!-- 上弧文字 -->
+								<text class="stamp-arc-text">
+									<textPath href="#postmark-arc-top" startOffset="50%" text-anchor="middle">
+										✦ YOUR TOWN · 35MM ✦
+									</textPath>
+								</text>
+
+								<!-- 中间两行核心日期 -->
+								<text x="50" y="46" class="stamp-date-main" text-anchor="middle">SEP 2026</text>
+								<text x="50" y="56" class="stamp-date-sub" text-anchor="middle">35MM MEMORY</text>
+
+								<!-- 下弧文字 (包含示例坐标) -->
+								<text class="stamp-arc-text">
+									<textPath href="#postmark-arc-bottom" startOffset="50%" text-anchor="middle">
+										00.00°N 00.00°E
+									</textPath>
+								</text>
+							</svg>
+						</div>
+					</div>
+
+					<!-- 作者旁白小句子：位于签名落款正下方 -->
+					<p class="whisper-note">“一些微小心动，正在慢慢收藏。”</p>
+
+					<!-- 手账淡雅页脚线与出版元信息 -->
+					<div class="journal-footer-rule">
+						<span class="rule-line" aria-hidden="true"></span>
+						<div class="rule-meta">
+							<span class="rule-page">PAGE 01 / INTRODUCTION / 35MM</span>
+							<span class="rule-dot">·</span>
+							<span class="rule-status">MEMORY SAVED</span>
+						</div>
+					</div>
+				</footer>
+			</section>
+
+			<!-- 右侧：纯透明漂浮手绘少女 + 周围手写边注 + 半透明和纸胶带 -->
+			<section class="diary-visual">
+				<!-- 中心视觉舞台 -->
+				<div class="character-stage">
+					<!-- 人物上方：半透明和纸胶带微痕 (Washi Tape Accent) -->
+					<div class="washi-tape-strip" aria-hidden="true"></div>
+
+					<!-- 人物周围手写小批注 (Handwritten Margin Notes) -->
+					<div class="handwritten-notes" aria-hidden="true">
+						<div class="note-item note-corner">
+							<span class="note-asterisk">✦</span>
+							<span class="note-en">quiet corner · summer diary</span>
+						</div>
+						<div class="note-item note-poetic">
+							<span class="note-cn">“在安静处发光”</span>
+							<span class="note-tag">35mm fragments</span>
+						</div>
+					</div>
+
+					<!-- 人物主体透明线稿 (开场以 0.12 透明度微弱底稿存在，随后渐浓至 0.75) -->
+					<img src="../img/demo.svg" alt="手绘少女线稿" class="character-cutout-img" width="640" height="606" fetchpriority="high" decoding="async" />
+				</div>
+			</section>
+		</main>
+	</div>
+
+	<!-- 左侧悬浮式手绘风玻璃胶囊导航 (Anime Doodle Glass Capsule Nav) -->
+	<nav class="glass-capsule-nav box" id="capsuleNav" aria-label="快捷导航">
+		<!-- 顶部品牌徽章 -->
+		<button type="button" class="capsule-header" title="展开 / 收起导航" aria-expanded="false" aria-label="展开快捷导航">
+			<span class="capsule-sparkle">✦</span>
+			<span class="capsule-title">MY WORLD</span>
+		</button>
+
+		<div class="capsule-divider"></div>
+
+		<!-- 导航项列表 (手绘线稿 SVG 图标 + 层次感尺寸) -->
+		<div class="capsule-menu">
+			<!-- 1. 启程站台 (木门线稿) -->
+			<a href="../index.html" class="capsule-item nav-door" title="启程站台">
+				<div class="icon-wrap">
+					<svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M5 21V9C5 5.134 8.134 2 12 2C15.866 2 19 5.134 19 9V21" />
+						<path d="M3 21H21" />
+						<path d="M12 2V21" />
+						<circle cx="9.5" cy="12" r="0.9" fill="currentColor" />
+					</svg>
+				</div>
+				<span class="item-label">启程站台</span>
+				<span class="item-arrow">›</span>
+			</a>
+
+			<!-- 2. 夏日手账 (指南针线稿 - 当前激活) -->
+			<a href="home.html" class="capsule-item nav-compass active" title="夏日手账">
+				<div class="icon-wrap">
+					<svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+						<circle cx="12" cy="12" r="9" />
+						<path d="M12 3V5.5" />
+						<polygon points="12,6.5 14.2,12 12,11.2 9.8,12" fill="currentColor" opacity="0.85" />
+						<polygon points="12,17.5 14.2,12 12,12.8 9.8,12" />
+						<circle cx="12" cy="1.2" fill="currentColor" />
+					</svg>
+				</div>
+				<span class="item-label">夏日手账</span>
+				<span class="item-arrow">›</span>
+			</a>
+
+			<!-- 3. 兴趣档案 (篝火线稿) -->
+			<a href="detail.html" class="capsule-item nav-fire" title="兴趣档案">
+				<div class="icon-wrap">
+					<svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M5 20L19 20" />
+						<path d="M6 21.5L18 18.5" />
+						<path d="M18 21.5L6 18.5" />
+						<path d="M12 3C10.2 6.2 7.8 8.5 7.8 12C7.8 14.5 9.7 16.5 12 16.5C14.3 16.5 16.2 14.5 16.2 12C16.2 8.5 13.8 6.2 12 3Z" />
+						<path d="M12 9.5C11.2 10.8 10.5 11.8 10.5 12.8C10.5 13.8 11.2 14.5 12 14.5C12.8 14.5 13.5 13.8 13.5 12.8C13.5 11.8 12.8 10.8 12 9.5Z" />
+					</svg>
+				</div>
+				<span class="item-label">兴趣档案</span>
+				<span class="item-arrow">›</span>
+			</a>
+			<!-- 电脑手记：工具与经验分享 -->
+			<a href="toolbox.html" class="capsule-item nav-tools" title="电脑手记">
+				<div class="icon-wrap"><svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 8h5M7 11h9M7 14h6"/></svg></div>
+				<span class="item-label">电脑手记</span><span class="item-arrow">›</span>
+			</a>
+
+			<!-- 4. 纸条信箱 (信箱/树洞线稿) -->
+			<a href="message.html" class="capsule-item nav-mail" title="纸条信箱">
+				<div class="icon-wrap">
+					<svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M12 15V21" />
+						<path d="M9 21H15" />
+						<path d="M6 15V9.5C6 6.8 8.2 4.5 11 4.5H15C16.7 4.5 18 5.8 18 7.5V15H6Z" />
+						<path d="M6 10H18" />
+						<path d="M18 9V6L21 7.5L18 9" />
+					</svg>
+				</div>
+				<span class="item-label">纸条信箱</span>
+				<span class="item-arrow">›</span>
+			</a>
+
+			<!-- 5. 联络 / 私域补给站 (微信·群聊) -->
+			
+		</div>
+
+		<!-- 底部角色感微章 (Traveler Badge) -->
+		<div class="capsule-footer" title="Personal Archive · 个人手账档案">
+			<span class="traveler-beacon"></span>
+			<span class="traveler-tag">PERSONAL ARCHIVE · 35MM</span>
+		</div>
+	</nav>
+
+	<!-- ==========================================================================
+	     私域与社群双卡片弹窗 (Community & Contact Dual Modal)
+	     左侧：个人微信联系 | 右侧：互帮互助群
+	     ========================================================================== -->
+	
+	<script src="../js/analytics.js?v=20261025-footprints01" defer></script>
+	<script src="../js/navigation.js?v=20261009" defer></script>
+	<script src="../js/main.js?v=20261104-slim01" defer></script>
+	
+	<script src="../js/ui-sound.js?v=20260921-audio" defer></script>
+	<script src="../js/page-transition.js?v=20261026-loading01" defer></script>
+	<script src="../js/site-audio.js?v=20261101-score01" defer></script>
+</body>
+</html>

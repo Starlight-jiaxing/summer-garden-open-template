@@ -1,0 +1,42 @@
+/* Public letter wall: make visibility and ownership clear before anyone posts. */
+.wall-guide {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(190px, .38fr);
+	align-items: center;
+	gap: 22px;
+	margin: 0 0 18px;
+	padding: 18px 21px;
+	border: 1px solid #cfd9cf;
+	border-left: 4px solid #477b53;
+	border-radius: 8px;
+	background: rgba(255, 255, 252, .82);
+	box-shadow: 0 7px 18px rgba(49, 76, 55, .045);
+}
+.wall-guide-copy > .section-index { margin-bottom: 7px; }
+.wall-guide-copy > p { max-width: 760px; margin: 0; color: #405448; font-size: 14px; line-height: 1.75; }
+.wall-guide-copy > p strong { color: #284d3a; }
+.wall-guide-copy > .wall-privacy-note { margin-top: 5px; color: #647369; font-size: 12px; }
+.wall-tally { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 12px; padding-left: 18px; border-left: 1px solid #d6dfd0; }
+.wall-tally > div { display: flex; align-items: baseline; gap: 6px; min-width: 0; }
+.wall-tally strong { color: #284d3a; font: 600 22px/1.2 Georgia, "Songti SC", serif; font-variant-numeric: tabular-nums; }
+.wall-tally span { color: #63736a; font-size: 11px; white-space: nowrap; }
+.wall-tally > p { grid-column: 1 / -1; min-height: 16px; margin: 2px 0 0; color: #69796d; font-size: 10px; line-height: 1.5; }
+.wall-tally [role="status"] { color: #586b5d; }
+.note-tools button { min-height: 44px; padding-inline: 9px; }
+.reply-thread-bar { align-items: center; justify-content: space-between; gap: 12px; }
+.reply-thread-heading { display: grid; gap: 2px; margin: 0; color: #304a38; font-size: 13px; }
+.reply-thread-heading span { color: #68766d; font-size: 11px; }
+.reply-close { min-height: 44px; }
+.reply-form input, .reply-form textarea { min-height: 44px; font-size: 13px; }
+.reply-form button { min-height: 44px; font-size: 13px; }
+.reply-form-help { grid-column: 1 / -1; margin: 0; color: #68766d; font-size: 11px; line-height: 1.5; }
+.reply-close:focus-visible, .reply-toggle:focus-visible, .stamp-btn:focus-visible { outline: 2px solid #315e3d; outline-offset: 2px; }
+
+@media (min-width: 769px) and (max-width: 1400px) {
+	.message-container { width: min(calc(100% - 132px), 1120px); margin-left: 104px; margin-right: 28px; }
+}
+
+@media (max-width: 700px) {
+	.wall-guide { grid-template-columns: 1fr; gap: 14px; padding: 16px; }
+	.wall-tally { padding: 11px 0 0; border-top: 1px solid #d6dfd0; border-left: 0; }
+}

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="站主的电脑手记：亲手试过的工具、解决小问题的办法，以及想和大家一起补全的经验。" />
+  <meta name="theme-color" content="#f6f8ef" />
+  <script>
+	(function () {
+		var r = document.documentElement;
+		window.JXStationBoot = { started: performance.now(), release: function () {
+			window.dispatchEvent(new Event("station:release"));
+			r.classList.remove("station-booting", "station-returning");
+			document.querySelectorAll("[data-station-inert]").forEach(function (e) { e.inert = false; delete e.dataset.stationInert; });
+		} };
+		if (performance.getEntriesByType("navigation")[0]?.type === "back_forward") return;
+		try { if (sessionStorage.getItem("jxgarden-station-entered")) r.classList.add("station-returning"); } catch (e) {}
+		r.classList.add("station-booting");
+		setTimeout(window.JXStationBoot.release, 4800);
+	})();
+	</script>
+	<script src="../js/station-loading.js?v=20261104-slim01" defer></script>
+	<title>电脑手记 · 慢慢学，一起折腾 | My Garden</title>
+  <link rel="icon" href="../img/demo.svg" sizes="16x16 32x32 48x48" />
+  <link rel="icon" type="image/svg+xml" href="../img/demo.svg" sizes="any" />
+  <link rel="apple-touch-icon" href="../img/demo.svg" sizes="180x180" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/base.css?v=20261026-loading01" />
+  <link rel="stylesheet" href="../css/contact-modal.css?v=20261024-community01" />
+  <link rel="stylesheet" href="../css/page-transition.css?v=20261026-loading01" />
+  <link rel="stylesheet" href="../css/toolbox.css?v=20261025-library01" />
+  <link rel="stylesheet" href="../css/toolbox-library.css?v=20261025-library01" />
+  <link rel="stylesheet" href="../css/site-audio.css?v=20261101-score01" />
+  <script src="../js/toolbox.js?v=20261025-library01" defer></script>
+	<script>
+	try { var j = JSON.parse(localStorage.getItem("jxgarden-journey-v1") || "null"); if (j && j.version === 1 && j.reading) { var r = document.documentElement; if (["paper","night"].indexOf(j.reading.mode) !== -1) r.dataset.gardenReading = j.reading.mode; if ([16,18,20].indexOf(j.reading.size) !== -1) r.style.setProperty("--journey-reading-size", j.reading.size + "px"); r.style.setProperty("--journey-reading-line", j.reading.space === "loose" ? "2.15" : "1.85"); } } catch (e) {}
+	setTimeout(function () { if (!window.JXGardenJourney) delete document.documentElement.dataset.gardenReading; }, 4500);
+	</script>
+	<link rel="stylesheet" href="../css/garden-journey.css?v=20261101-stardust02">
+	<script src="../js/garden-journey.js?v=20261027-journey01" defer></script>
+	<link rel="stylesheet" href="../css/garden-companion.css?v=20261101-stardust02">
+	<script src="../js/garden-companion.js?v=20261105-memory01" defer></script>
+<script src="../js/site-config.js" defer></script>
+</head>
+<body class="computer-notes-page" data-station-page="电脑手记">
+	<aside id="stationLoader" class="station-loader" data-step="1" aria-hidden="true" aria-labelledby="stationLoaderTitle">
+		<div class="arrival-corner" aria-hidden="true"><strong>My Garden</strong>PERSONAL STATION · 35MM</div>
+		<section class="arrival-ticket">
+			<header class="arrival-ticket-head"><span class="arrival-ticket-code">JX / ARRIVAL TICKET</span><span>VOL. 09 · 2026</span></header>
+			<div class="arrival-ticket-main">
+				<p class="arrival-eyebrow">YOUR NEXT STOP / COMPUTER FIELDNOTES</p>
+				<h2 id="stationLoaderTitle">下一站，电脑手记。</h2>
+				<p class="arrival-subtitle">A quiet place. A little room for your world.</p>
+				<svg class="arrival-landscape" viewBox="0 0 440 110" fill="none" aria-hidden="true" focusable="false">
+					<path d="M0 79C47 65 59 33 104 44S160 79 212 56 264 25 311 44 382 74 440 43V91H0Z" fill="#eef1df"/>
+					<path d="M0 78C47 64 62 34 104 44S162 79 212 56 267 26 312 44 383 74 440 43" stroke="#aaba9a" stroke-width="1.2"/>
+					<path d="M347 46V76M334 61L347 42 360 61M335 69L347 51 359 69" stroke="#82966d" stroke-linecap="round" stroke-linejoin="round"/>
+					<circle cx="395" cy="27" r="9" stroke="#c5bc87"/>
+					<path d="M0 91H440M0 97H440" stroke="#9aa98b"/>
+					<path d="M0 94H440" stroke="#c0c8b0" stroke-width="8" stroke-dasharray="1 12"/>
+					<g class="arrival-train">
+						<path d="M9 59H53C58 59 62 63 63 68L68 84H6V63C6 61 7 59 9 59Z" fill="#e2e7b9" stroke="#446749" stroke-width="1.5"/>
+						<path d="M6 77H65M17 59L22 53H41L47 59" stroke="#446749" stroke-width="1.5"/>
+						<path d="M13 64H25V74H13ZM30 64H42V74H30ZM47 64H57L61 74H47Z" fill="#b7d7cc" stroke="#446749"/>
+						<circle cx="20" cy="87" r="4" fill="#446749"/><circle cx="54" cy="87" r="4" fill="#446749"/>
+						<path d="M9 84H66" stroke="#446749" stroke-width="2"/>
+					</g>
+				</svg>
+			</div>
+			<div class="arrival-ticket-bottom">
+				<div><p class="arrival-status" data-station-status role="status" aria-live="polite">正在铺开这一页手账…</p><ol class="arrival-stops" aria-hidden="true"><li><i></i>车票</li><li><i></i>手账</li><li><i></i>风景</li></ol></div>
+				<button class="arrival-skip" type="button" onclick="window.JXStationBoot.release()">先进去看看<span aria-hidden="true">→</span></button>
+			</div>
+		</section>
+		<p class="arrival-note" aria-hidden="true">BLUE SKIES, RUSTED RAILS &amp; QUIET DAYS.</p>
+	</aside>
+
+  <a class="notes-skip" href="#notes-main">跳到电脑手记</a>
+  <svg class="notes-symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="note-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="note-out" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></symbol>
+    <symbol id="note-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+    <symbol id="note-compass" viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><path d="m20.5 11.5-3 6-6 3 3-6 6-3Z"/></symbol>
+    <symbol id="note-download" viewBox="0 0 32 32"><path d="M16 5v15m-6-6 6 6 6-6M6 22v5h20v-5"/></symbol>
+    <symbol id="note-film" viewBox="0 0 32 32"><rect x="5" y="5" width="22" height="22" rx="5"/><path d="m13 11 8 5-8 5V11ZM5 11h4M5 21h4M23 11h4M23 21h4"/></symbol>
+    <symbol id="note-cat" viewBox="0 0 32 32"><path d="m7 13-1-8 8 5h4l8-5-1 8a10 10 0 1 1-18 0Z"/><path d="M11 17h1m8 0h1m-7 5 2 1 2-1M4 21l6 1m12 0 6-1"/></symbol>
+    <symbol id="note-script" viewBox="0 0 32 32"><rect x="4" y="5" width="24" height="22" rx="4"/><path d="M4 11h24m-15 5-4 3 4 3m6-6 4 3-4 3"/></symbol>
+    <symbol id="note-cloud" viewBox="0 0 32 32"><path d="M8 23a6 6 0 1 1 1-12 8 8 0 0 1 15 0 6 6 0 0 1 0 12M16 15v12m-4-4 4 4 4-4"/></symbol>
+    <symbol id="note-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V4H4v12h4"/></symbol>
+    <symbol id="note-star" viewBox="0 0 24 24"><path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2Z"/></symbol>
+  </defs></svg>
+
+  <div class="notes-shell">
+    <header class="notes-masthead">
+      <a class="notes-brand" href="home.html"><span class="notes-brand-mark">jx</span><span>My Garden<small>站主的个人花园</small></span></a>
+      <span class="notes-page-label">电脑手记 <i aria-hidden="true"></i> 持续补全中</span>
+      <a class="masthead-back" href="home.html">回到夏日手账 <svg aria-hidden="true"><use href="#note-out"/></svg></a>
+    </header>
+
+    <main id="notes-main">
+      <section class="notes-hero" aria-labelledby="notes-title">
+        <div class="hero-copy">
+          <p class="chapter-label"><span></span>工具、经验，还有一点好奇心</p>
+          <h1 id="notes-title">我的电脑<br />折腾手记<span class="title-period">。</span></h1>
+          <p class="hero-intro">从第一次摸索电脑开始，把好用的工具、踩过的坑，<br class="wide-break" />和还没想明白的问题，慢慢放进这个抽屉。</p>
+          <div class="hero-actions"><a class="notes-button is-primary" href="#tool-drawer">打开工具抽屉 <svg aria-hidden="true"><use href="#note-arrow"/></svg></a><a class="hero-text-link" href="#my-start">先读我的起点 <span aria-hidden="true">↓</span></a></div>
+          <div class="hero-author"><img src="../img/demo.svg" alt="" width="32" height="32" /><span>站主的使用笔记<small>慢慢学，也欢迎一起折腾。</small></span></div>
+        </div>
+        <aside class="desk-note" aria-label="这份手记的想法">
+          <div class="desk-note-top"><span class="note-window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>一页正在生长的收藏</span><svg aria-hidden="true"><use href="#note-star"/></svg></div>
+          <p class="desk-note-question">遇到一个问题时，<br />我会多想一步——</p>
+          <p class="desk-note-answer">有没有别的做法，<br />哪种更适合自己？</p>
+          <div class="learning-route" aria-label="发现、尝试、分享"><span><b>发现</b>找到一条入口</span><i aria-hidden="true">→</i><span><b>尝试</b>解决一个问题</span><i aria-hidden="true">→</i><span><b>分享</b>留下一点经验</span></div>
+          <div class="desk-note-bottom"><img src="../img/demo.svg" alt="" width="105" height="70" loading="lazy" /><p>下一站，<br /><strong>比昨天多懂一点。</strong></p><span class="note-signature">Your Name</span></div>
+          <span class="paper-tab" aria-hidden="true">好奇心，常开。</span>
+        </aside>
+      </section>
+
+            <section class="story-chronicle" id="my-start" aria-labelledby="start-title">
+        <!-- 章节标头 -->
+        <header class="chronicle-masthead">
+          <div class="chronicle-head-text">
+            <span class="section-index">01 / 我的电脑成长路</span>
+            <h2 id="start-title">一切都从<br />「不会用」开始。</h2>
+            <p class="chronicle-lead">真要算起来，我接触电脑还不到两年。从连 Shift 键都不认识，到试着在终端里跑开源与 AI 协同——这里记录了一个普通小白一步一步自己趟水的真实过程。</p>
+          </div>
+          <aside class="chronicle-meta-card" aria-hidden="true">
+            <div class="meta-card-tape"></div>
+            <span class="meta-card-label">GROWTH LOG</span>
+            <span class="meta-card-time">2024 — 2026</span>
+            <p class="meta-card-quote">“能听懂、能跟着做，最后能解决自己的问题，就是好内容。”</p>
+            <div class="meta-card-footer">
+              <svg class="meta-card-star"><use href="#note-star"/></svg>
+              <span>站主的手记切片</span>
+            </div>
+          </aside>
+        </header>
+
+        <!-- 四章叙事卡片网格 -->
+        <div class="chronicle-grid">
+          <!-- 第一章 -->
+          <article class="chapter-card">
+            <header class="chapter-card-head">
+              <span class="chapter-badge">01 · 起点</span>
+              <span class="chapter-theme">两年前</span>
+            </header>
+            <h3 class="chapter-title">比“小白”还小白</h3>
+            <div class="chapter-body">
+              <p>接触电脑不到两年。刚开始的时候，讲真的我很害怕用电脑，因为几乎从没正经碰过。</p>
+              <p>大家第一次用电脑，可能大多是打游戏，至少知道键盘上的各个按键是干嘛的。而我呢——初升高报考上机填个人资料的时候，我甚至连 <strong>Shift 键在哪、有什么作用、为什么总要经常点它、边上的指示灯亮了是什么意思</strong>，全都不知道。</p>
+              <p>那张资料表，最后大多是同学在一旁帮我弄完的。你没看错，我就是从这样一个绝对的零起点开始的。</p>
+            </div>
+            <div class="chapter-takeaway">
+              <span class="takeaway-tag">当时的心情</span>
+              <p>“自嘲又忐忑，但好在硬着头皮迈出了第一步。”</p>
+            </div>
+          </article>
+
+          <!-- 第二章 -->
+          <article class="chapter-card">
+            <header class="chapter-card-head">
+              <span class="chapter-badge">02 · 过程</span>
+              <span class="chapter-theme">摸索建立秩序</span>
+            </header>
+            <h3 class="chapter-title">一切都需要一个过程</h3>
+            <div class="chapter-body">
+              <p>我自己也是从最迷茫的小白走过来的，深知一开始接触电脑有多头疼：整理自己的文件不知道放哪，怎么安全下载软件，打开稍微复杂的专业软件就两眼发黑。</p>
+              <p>但用久了你会发现，很多障碍只是因为没走过那段路：</p>
+              <ul class="chapter-checklist">
+                <li><strong>文件整理</strong>原来这么简单，找到顺手的分类习惯就好；</li>
+                <li><strong>软件下载与查找</strong>有官网与开源仓库，查找有 <code>Everything</code>、<code>Listary</code> 这种秒级定位神器；</li>
+                <li><strong>专业软件</strong>用多了，甚至会发现它们的操作逻辑都是相似的——因为优秀的软件都在互相学习、沿用类似的框架。</li>
+              </ul>
+            </div>
+            <div class="chapter-takeaway">
+              <span class="takeaway-tag">给同样新手的信心</span>
+              <p>“一切都需要一个过程，跨过第一道心理防线，就会越来越顺。”</p>
+            </div>
+          </article>
+
+          <!-- 第三章 -->
+          <article class="chapter-card">
+            <header class="chapter-card-head">
+              <span class="chapter-badge">03 · 视野</span>
+              <span class="chapter-theme">AI 辅助提效</span>
+            </header>
+            <h3 class="chapter-title">AI 时代，信息差变小了</h3>
+            <div class="chapter-body">
+              <p>现在大家都知道 AI 很强，不同职业都在用它提高效率。对我来说，最直观的感官是<strong>查找资料和解决未知变得极度方便</strong>——什么好用的资源网站，只要问问 AI，都能拿到优质的推荐。</p>
+              <p>看多了你就会觉得，很多自媒体分享的所谓“独家秘籍”，在今天就像公开的秘密。大部分人（也包括我自己）本质上都是大自然的搬运工。信息差被抹平之后，一切都好说了。</p>
+              <p class="chapter-highlight">建议大家都试一试现在最先进优秀的 AI 工具，它产出的内容绝对会让你感叹：“我到底在做啥呀？啥也没干，就做出了之前难以想象的内容。”</p>
+            </div>
+            <div class="chapter-takeaway">
+              <span class="takeaway-tag">我的感悟</span>
+              <p>“别把工具当门槛，信息差抹平后，动手做才是关键。”</p>
+            </div>
+          </article>
+
+          <!-- 第四章 -->
+          <article class="chapter-card">
+            <header class="chapter-card-head">
+              <span class="chapter-badge">04 · 进阶</span>
+              <span class="chapter-theme">敲开黑盒子</span>
+            </header>
+            <h3 class="chapter-title">打开那个“黑盒子”</h3>
+            <div class="chapter-body">
+              <p>除了日常图形软件，我还去啃了一些终端（命令行）的知识——就是很多人避之不及的那个黑底白字小窗口。毕竟一些基础的终端操作，迟早是要了解的。</p>
+              <p>学了之后才发现，许多困惑迎刃而解：</p>
+              <ul class="chapter-checklist">
+                <li>能大概明白 <strong>AI Agent 到底对我的电脑做了些什么</strong>，不再是盲目未知的黑箱；</li>
+                <li>知道怎么在 <strong>GitHub</strong> 上下载、克隆和使用开源项目。</li>
+              </ul>
+              <p>虽然看起来很吓人，但其实只要会几个基本命令，它就成了最靠谱的生产力助手。</p>
+            </div>
+            <div class="chapter-takeaway">
+              <span class="takeaway-tag">面对未知</span>
+              <p>“看似高深的黑盒子，拆开来看，其实也是一步一步拼成的。”</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- 总结：一步一步来 -->
+        <div class="chronicle-epilogue">
+          <div class="epilogue-stamp" aria-hidden="true"><span>NOTE</span></div>
+          <div class="epilogue-content">
+            <p class="epilogue-main">不到两年的时间，从连 Shift 键都不认识，到现在能在终端里跑命令、用 AI 辅助工作。<strong>不是因为天赋，只是愿意一步一步往前走。</strong></p>
+            <p class="epilogue-sub">如果你也在这条路上，那这些记录，就是留给你的。</p>
+          </div>
+          <span class="epilogue-signature">Your Name · 电脑手记</span>
+        </div>
+
+        <!-- 后续可以补充的方向（手账清单板） -->
+        <div class="chronicle-roadmap" aria-labelledby="roadmap-title">
+          <div class="roadmap-head">
+            <div>
+              <span class="roadmap-eyebrow">ROADMAP · CONTINUED IN NEXT CHAPTERS</span>
+              <h3 id="roadmap-title">后续想补充的方向</h3>
+            </div>
+            <span class="roadmap-hint">抽屉还在生长，这些话题很快会翻开 <svg aria-hidden="true"><use href="#note-star"/></svg></span>
+          </div>
+          <div class="roadmap-grid">
+            <div class="roadmap-card">
+              <div class="roadmap-card-top">
+                <span class="roadmap-topic-tag">01 · 真实教训</span>
+                <span class="roadmap-status">待翻开</span>
+              </div>
+              <h4>踩坑合集</h4>
+              <p>装错软件全家桶、误删系统文件、折腾崩溃又重装的具体故事。</p>
+            </div>
+            <div class="roadmap-card">
+              <div class="roadmap-card-top">
+                <span class="roadmap-topic-tag">02 · 认知顿悟</span>
+                <span class="roadmap-status">待翻开</span>
+              </div>
+              <h4>转折时刻</h4>
+              <p>记录某一次“啊！原来还可以这样玩”的关键顿悟瞬间。</p>
+            </div>
+            <div class="roadmap-card">
+              <div class="roadmap-card-top">
+                <span class="roadmap-topic-tag">03 · 装备变迁</span>
+                <span class="roadmap-status">待翻开</span>
+              </div>
+              <h4>工具变迁</h4>
+              <p>从最初手忙脚乱装的软件，到如今精简留存的工作流前后对比。</p>
+            </div>
+            <div class="roadmap-card">
+              <div class="roadmap-card-top">
+                <span class="roadmap-topic-tag">04 · 学习心法</span>
+                <span class="roadmap-status">待翻开</span>
+              </div>
+              <h4>学习方法</h4>
+              <p>看视频跟着做？翻官方文档？还是直接找 AI 盘问？我的真实心得。</p>
+            </div>
+            <div class="roadmap-card">
+              <div class="roadmap-card-top">
+                <span class="roadmap-topic-tag">05 · 给新朋友</span>
+                <span class="roadmap-status">待翻开</span>
+              </div>
+              <h4>给新手的建议</h4>
+              <p>如果能坐时光机回到两年前，我会对刚碰电脑的自己说什么。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+<section class="drawer-section" id="tool-drawer" aria-labelledby="drawer-title">
+        <header class="section-heading"><div><span class="section-index">02 / 工具抽屉</span><h2 id="drawer-title">有需要，再打开它。</h2><p>我在用的、试过的，以及文档里提到的备选，各有一个小标签。</p></div><span class="drawer-note"><svg aria-hidden="true"><use href="#note-compass"/></svg>先从一个小需求开始</span></header>
+        <div class="tools-controls" id="tools-controls" hidden>
+          <div class="tool-filters" role="group" aria-label="按用途筛选工具"><button type="button" data-filter="all" aria-pressed="true">全部工具</button><button type="button" data-filter="discover" aria-pressed="false">发现工具</button><button type="button" data-filter="download" aria-pressed="false">下载与媒体</button><button type="button" data-filter="browser" aria-pressed="false">浏览器</button></div>
+          <div class="tool-search"><svg aria-hidden="true"><use href="#note-search"/></svg><label class="notes-sr-only" for="tool-search">搜索工具名称或用途</label><input type="search" id="tool-search" placeholder="工具名、视频、下载…" autocomplete="off" aria-describedby="tool-result-count" /><button type="button" id="tool-search-clear" aria-label="清空搜索" hidden>×</button></div>
+        </div>
+        <div class="drawer-caption"><p id="tool-result-count" role="status" aria-live="polite">抽屉里有 6 件工具</p><span>外链前往官网或项目页 <svg aria-hidden="true"><use href="#note-out"/></svg></span></div>
+        <div class="tool-grid" id="tool-grid">
+          <article class="tool-card tone-green" id="tool-30tool" data-category="discover" data-keywords="导航 AI 资源 壁纸 软件 入门 发现 30tool 30">
+            <div class="tool-card-top"><span class="tool-icon"><svg aria-hidden="true"><use href="#note-compass"/></svg></span><span class="experience-tag">我的起点</span></div><div class="tool-name"><h3>30Tool</h3><span>工具导航</span></div><p class="tool-description">还不知道工具叫什么？<br />先找一个可以顺着逛的入口。</p><p class="personal-note">它让我发现：有些麻烦，原来早就有现成的办法。</p><details class="tool-detail"><summary>翻开这条手记 <span aria-hidden="true">＋</span></summary><p>从工具、资源到知识库，先围绕自己的小需求找一圈。看教程时，也不用把“大学生”当作硬标准，适合自己的更重要。</p></details><a class="tool-visit" href="https://www.30aitool.com/" target="_blank" rel="noopener noreferrer">逛逛 30Tool <svg aria-hidden="true"><use href="#note-out"/></svg><span class="notes-sr-only">，在新标签页打开</span></a>
+          </article>
+          <article class="tool-card tone-blue" id="tool-motrix" data-category="download" data-keywords="Motrix 下载 网盘 文件 磁力 HTTP">
+            <div class="tool-card-top"><span class="tool-icon"><svg aria-hidden="true"><use href="#note-download"/></svg></span><span class="experience-tag">我在用</span></div><div class="tool-name"><h3>Motrix</h3><span>开源下载器</span></div><p class="tool-description">让一个个下载任务，<br />在清楚的队列里慢慢完成。</p><p class="personal-note">找网盘下载方法时，我最后配合使用的是它。</p><details class="tool-detail"><summary>翻开这条手记 <span aria-hidden="true">＋</span></summary><p>下载器负责拿到下载地址后的传输。链接是否可用、账号是否有权限，还要回到资源来源处确认。先找卡在哪一步，再决定换什么工具。</p></details><a class="tool-visit" href="https://motrix.app/" target="_blank" rel="noopener noreferrer">访问 Motrix 官网 <svg aria-hidden="true"><use href="#note-out"/></svg><span class="notes-sr-only">，在新标签页打开</span></a>
+          </article>
+          <article class="tool-card tone-peach" id="tool-stacher" data-category="download" data-keywords="Stacher yt-dlp 网页 视频 下载 保存 媒体">
+            <div class="tool-card-top"><span class="tool-icon"><svg aria-hidden="true"><use href="#note-film"/></svg></span><span class="experience-tag">我在用</span></div><div class="tool-name"><h3>Stacher</h3><span>桌面视频工具</span></div><p class="tool-description">复制一个网页地址，<br />试着把需要的片段留下来。</p><p class="personal-note">这是我现在处理网页视频时，常打开的工具。</p><details class="tool-detail"><summary>翻开这条手记 <span aria-hidden="true">＋</span></summary><p>用于保存自己有权下载的内容。具体支持哪些网站，以工具说明为准。配置时把电脑系统、目标和遇到的报错讲清楚，一步一步来就好。</p></details><a class="tool-visit" href="https://stacher.io/" target="_blank" rel="noopener noreferrer">访问 Stacher 官网 <svg aria-hidden="true"><use href="#note-out"/></svg><span class="notes-sr-only">，在新标签页打开</span></a>
+          </article>
+          <article class="tool-card tone-yellow" id="tool-catcatch" data-category="browser download" data-keywords="猫抓 cat catch 网页 视频 嗅探 资源 浏览器 扩展">
+            <div class="tool-card-top"><span class="tool-icon"><svg aria-hidden="true"><use href="#note-cat"/></svg></span><span class="experience-tag">我试过</span></div><div class="tool-name"><h3>猫抓</h3><span>浏览器资源嗅探</span></div><p class="tool-description">把网页里的资源列出来，<br />再慢慢找到想要的那一个。</p><p class="personal-note">试过的浏览器工具之一，适合愿意多看一步的时候。</p><details class="tool-detail"><summary>翻开这条手记 <span aria-hidden="true">＋</span></summary><p>它擅长列出和筛选页面资源，并不意味着每个页面都能直接保存。项目页提供官方扩展商店入口和说明，安装时从那里出发。</p></details><a class="tool-visit" href="https://github.com/xifangczy/cat-catch" target="_blank" rel="noopener noreferrer">查看猫抓项目 <svg aria-hidden="true"><use href="#note-out"/></svg><span class="notes-sr-only">，在新标签页打开</span></a>
+          </article>
+          <article class="tool-card tone-lilac" id="tool-tampermonkey" data-category="browser" data-keywords="Tampermonkey 篡改猴 油猴 用户脚本 网页 浏览器 扩展 自动化">
+            <div class="tool-card-top"><span class="tool-icon"><svg aria-hidden="true"><use href="#note-script"/></svg></span><span class="experience-tag">我试过</span></div><div class="tool-name"><h3>Tampermonkey</h3><span>用户脚本管理</span></div><p class="tool-description">给浏览器准备一个，<br />可以按需添加功能的脚本抽屉。</p><p class="personal-note">同样是网页上的小需求，有时也可以换个做法。</p><details class="tool-detail"><summary>翻开这条手记 <span aria-hidden="true">＋</span></summary><p>扩展负责管理脚本，具体功能来自你选择的脚本。先读说明，装自己真正需要的功能；不再使用时，也记得关掉或移除。</p></details><a class="tool-visit" href="https://www.tampermonkey.net/" target="_blank" rel="noopener noreferrer">访问 Tampermonkey 官网 <svg aria-hidden="true"><use href="#note-out"/></svg><span class="notes-sr-only">，在新标签页打开</span></a>
+          </article>
+          <article class="tool-card tone-mint" id="tool-gopeed" data-category="download" data-keywords="Gopeed 下载 开源 下载器 备选">
+            <div class="tool-card-top"><span class="tool-icon"><svg aria-hidden="true"><use href="#note-cloud"/></svg></span><span class="experience-tag is-mentioned">文档提及</span></div><div class="tool-name"><h3>Gopeed</h3><span>开源下载器</span></div><p class="tool-description">给下载这件小事，<br />再留一个可以比较的选择。</p><p class="personal-note">当时的教程推荐它，我自己用的是 Motrix。</p><details class="tool-detail"><summary>翻开这条手记 <span aria-hidden="true">＋</span></summary><p>把它留作备选入口。是否顺手，可以从自己需要的下载方式、设备和界面习惯来比较，不必因为别人推荐就一次装上所有工具。</p></details><a class="tool-visit" href="https://gopeed.com/" target="_blank" rel="noopener noreferrer">访问 Gopeed 官网 <svg aria-hidden="true"><use href="#note-out"/></svg><span class="notes-sr-only">，在新标签页打开</span></a>
+          </article>
+        </div>
+        <div class="tools-empty" id="tools-empty" hidden><svg aria-hidden="true"><use href="#note-search"/></svg><h3>这个关键词，抽屉里暂时还没有。</h3><p>试试“下载”“视频”或“浏览器”，也可以清空条件，重新逛一圈。</p><button type="button" class="notes-button" id="tools-reset">查看全部工具</button></div>
+        <noscript><p class="tools-noscript">所有工具与手记都在下方，启用 JavaScript 后还可以按用途搜索和筛选。</p></noscript>
+      </section>
+
+      <section class="fieldnotes-section" id="fieldnotes" aria-labelledby="fieldnotes-title">
+        <header class="section-heading"><div><span class="section-index">03 / 经验手记</span><h2 id="fieldnotes-title">把问题写清楚，经验就能留下来。</h2><p>每一则都按「遇到什么—试过什么—现在怎么做—适合谁」整理，之后也照这个方式继续添。</p></div><span class="hand-note">小问题，也值得认真解决。</span></header>
+        <div class="fieldnote-library-bar">
+          <div class="fieldnote-filters" id="fieldnote-filters" role="group" aria-label="按主题查看经验手记" hidden>
+            <button type="button" data-note-filter="all" aria-pressed="true">全部手记</button>
+            <button type="button" data-note-filter="media" aria-pressed="false">下载与格式</button>
+            <button type="button" data-note-filter="choice" aria-pressed="false">工具怎么选</button>
+            <button type="button" data-note-filter="ai" aria-pressed="false">AI 与排障</button>
+          </div>
+          <p class="fieldnote-updated">最近整理 <time datetime="2026-10-25">2026.10.25</time></p>
+        </div>
+        <p id="fieldnote-result-count" class="fieldnote-result-count" role="status" aria-live="polite">收录 4 则经验手记</p>
+        <div class="fieldnote-grid" id="fieldnote-grid">
+          <details class="fieldnote" id="note-audio-format" data-topic="media" data-keywords="音乐 歌曲 剪辑 MP3 FLAC 格式 加密 导出">
+            <summary><span class="note-topic">下载与格式</span><h3>下载的歌，为什么拖不进剪辑软件？</h3><span class="fieldnote-date">整理于 <time datetime="2026-10-25">2026.10.25</time></span><span class="detail-toggle" aria-hidden="true">＋</span></summary>
+            <div class="fieldnote-body"><dl class="note-structure"><div><dt>遇到</dt><dd>下载好的音乐文件，剪辑软件却认不出来。</dd></div><div><dt>发现</dt><dd>平台专用或加密格式，和 MP3、FLAC 等常见格式并不一样。</dd></div><div><dt>现在怎么做</dt><dd>先确认平台支持的正式导出方式和文件格式；只改扩展名不会完成转换。</dd></div><div><dt>适合</dt><dd>准备把自己有权使用的音乐放进剪辑项目时，先做这一步检查。</dd></div></dl></div>
+          </details>
+          <details class="fieldnote" id="note-download-troubleshooting" data-topic="media" data-keywords="下载 网盘 Motrix Gopeed 链接 速度 排查">
+            <summary><span class="note-topic">下载与格式</span><h3>换一个下载器，就一定会变快吗？</h3><span class="fieldnote-date">整理于 <time datetime="2026-10-25">2026.10.25</time></span><span class="detail-toggle" aria-hidden="true">＋</span></summary>
+            <div class="fieldnote-body"><dl class="note-structure"><div><dt>遇到</dt><dd>网盘里的文件下不动，第一反应常常是换一个下载器。</dd></div><div><dt>试过 / 观察</dt><dd>页面、下载地址和本地下载工具各自负责不同环节；我平时用 Motrix，原教程也提到 Gopeed。</dd></div><div><dt>现在怎么做</dt><dd>先看来源、权限、下载链接和任务状态卡在哪一步，再决定是否换工具。</dd></div><div><dt>适合</dt><dd>下载失败、速度异常，或不确定问题发生在哪一段时。</dd></div></dl><a class="note-inline-link" href="#tool-motrix">查看 Motrix 手记 <span aria-hidden="true">↑</span></a></div>
+          </details>
+          <details class="fieldnote" id="note-tool-choice" data-topic="choice" data-keywords="在线 本地 工具 选择 抠图 隐私 安装 需求">
+            <summary><span class="note-topic">工具怎么选</span><h3>先用网站，还是安装一个本地工具？</h3><span class="fieldnote-date">整理于 <time datetime="2026-10-25">2026.10.25</time></span><span class="detail-toggle" aria-hidden="true">＋</span></summary>
+            <div class="fieldnote-body"><dl class="note-structure"><div><dt>遇到</dt><dd>同一件事，搜索结果里既有网站，也有要安装的软件。</dd></div><div><dt>试过 / 观察</dt><dd>在线工具少一步安装；本地工具需要配置，但使用方式和资料处理路径不同。</dd></div><div><dt>现在怎么做</dt><dd>先写下要完成的任务，再比较效果、是否需要上传文件、设置成本和使用频率。</dd></div><div><dt>适合</dt><dd>第一次挑工具，或发现收藏了很多工具却不知道何时用时。</dd></div></dl></div>
+          </details>
+          <details class="fieldnote" id="note-ai-troubleshooting" data-topic="ai" data-keywords="AI 提问 配置 报错 系统 工具 步骤 排障">
+            <summary><span class="note-topic">AI 与排障</span><h3>把“不会弄”，换成一个说得清的问题。</h3><span class="fieldnote-date">整理于 <time datetime="2026-10-25">2026.10.25</time></span><span class="detail-toggle" aria-hidden="true">＋</span></summary>
+            <div class="fieldnote-body"><dl class="note-structure"><div><dt>遇到</dt><dd>只说“帮我配置一下”，别人很难知道你卡在哪里。</dd></div><div><dt>可以补充</dt><dd>电脑系统、工具名称、想完成的目标、已经尝试的步骤和完整报错。</dd></div><div><dt>现在怎么做</dt><dd>请对方一次说明一步，完成后再继续；看不懂的地方就追问。</dd></div><div><dt>适合</dt><dd>向 AI、教程作者或群友求助时，减少来回猜测。</dd></div></dl><blockquote id="question-template">我使用的是【系统】，正在用【工具】完成【目标】。目前卡在【步骤】，提示是【报错原文】。请一次告诉我一步，等我完成后再继续。</blockquote><button type="button" class="copy-question" id="copy-question"><svg aria-hidden="true"><use href="#note-copy"/></svg>复制提问模板</button></div>
+          </details>
+        </div>
+        <div class="fieldnote-empty" id="fieldnote-empty" hidden><strong>这个主题暂时还没有手记。</strong><button type="button" id="fieldnote-reset">回到全部手记</button></div>
+      </section>
+
+      <section class="share-note" aria-labelledby="share-title"><div class="share-note-main"><span class="section-index">04 / 一起补全</span><h2 id="share-title">这个抽屉，<br />给你也留了个位置。</h2><p>我不太想把分享变成一个人的“单口相声”。<br />你觉得普通的小办法，也许正好能帮到另一个人。</p><div class="share-actions"><a class="notes-button is-primary" href="message.html#sticky-form">分享一个好办法 <svg aria-hidden="true"><use href="#note-arrow"/></svg></a><button type="button" class="share-group" id="footerOpenContact">进群一起折腾 <span aria-hidden="true">↗</span></button></div></div><div class="open-topics"><p>下一页，想和大家聊</p><ul><li><span>PR 的素材，平时都去哪儿找？</span><svg aria-hidden="true"><use href="#note-star"/></svg></li><li><span>电子书与学习资料，怎么整理？</span><svg aria-hidden="true"><use href="#note-star"/></svg></li><li><span>AI、Skills，还有新发现的工具。</span><svg aria-hidden="true"><use href="#note-star"/></svg></li></ul><small>软件、网站、技巧、踩坑经历，都欢迎。</small></div></section>
+    </main>
+    <footer class="notes-footer"><p>整理自站主的《我的电脑学习经历和一些工具分享》<br /><span>记录个人体验，工具的具体功能与支持情况以项目说明为准。</span></p><a href="#notes-main">回到这一页的开头 ↑</a><span class="footer-garden">My Garden</span></footer>
+  </div>
+  <nav class="glass-capsule-nav box" id="capsuleNav" aria-label="快捷导航">
+		<!-- 顶部品牌徽章 -->
+		<button type="button" class="capsule-header" title="展开 / 收起导航" aria-expanded="false" aria-label="展开快捷导航">
+			<span class="capsule-sparkle">✦</span>
+			<span class="capsule-title">MY WORLD</span>
+		</button>
+
+		<div class="capsule-divider"></div>
+
+		<!-- 导航项列表 (手绘线稿 SVG 图标 + 层次感尺寸) -->
+		<div class="capsule-menu">
+			<!-- 1. 启程站台 (木门线稿) -->
+			<a href="../index.html" class="capsule-item nav-door" title="启程站台">
+				<div class="icon-wrap">
+					<svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M5 21V9C5 5.134 8.134 2 12 2C15.866 2 19 5.134 19 9V21" />
+						<path d="M3 21H21" />
+						<path d="M12 2V21" />
+						<circle cx="9.5" cy="12" r="0.9" fill="currentColor" />
+					</svg>
+				</div>
+				<span class="item-label">启程站台</span>
+				<span class="item-arrow">›</span>
+			</a>
+
+			<!-- 2. 夏日手账 (指南针线稿 - 当前激活) -->
+			<a href="home.html" class="capsule-item nav-compass" title="夏日手账">
+				<div class="icon-wrap">
+					<svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+						<circle cx="12" cy="12" r="9" />
+						<path d="M12 3V5.5" />
+						<polygon points="12,6.5 14.2,12 12,11.2 9.8,12" fill="currentColor" opacity="0.85" />
+						<polygon points="12,17.5 14.2,12 12,12.8 9.8,12" />
+						<circle cx="12" cy="1.2" fill="currentColor" />
+					</svg>
+				</div>
+				<span class="item-label">夏日手账</span>
+				<span class="item-arrow">›</span>
+			</a>
+
+			<!-- 3. 兴趣档案 (篝火线稿) -->
+			<a href="detail.html" class="capsule-item nav-fire" title="兴趣档案">
+				<div class="icon-wrap">
+					<svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M5 20L19 20" />
+						<path d="M6 21.5L18 18.5" />
+						<path d="M18 21.5L6 18.5" />
+						<path d="M12 3C10.2 6.2 7.8 8.5 7.8 12C7.8 14.5 9.7 16.5 12 16.5C14.3 16.5 16.2 14.5 16.2 12C16.2 8.5 13.8 6.2 12 3Z" />
+						<path d="M12 9.5C11.2 10.8 10.5 11.8 10.5 12.8C10.5 13.8 11.2 14.5 12 14.5C12.8 14.5 13.5 13.8 13.5 12.8C13.5 11.8 12.8 10.8 12 9.5Z" />
+					</svg>
+				</div>
+				<span class="item-label">兴趣档案</span>
+				<span class="item-arrow">›</span>
+			</a>
+			<!-- 电脑手记：工具与经验分享 -->
+			<a href="toolbox.html" class="capsule-item nav-tools active" aria-current="page" title="电脑手记">
+				<div class="icon-wrap"><svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 8h5M7 11h9M7 14h6"/></svg></div>
+				<span class="item-label">电脑手记</span><span class="item-arrow">›</span>
+			</a>
+
+			<!-- 4. 纸条信箱 (信箱/树洞线稿) -->
+			<a href="message.html" class="capsule-item nav-mail" title="纸条信箱">
+				<div class="icon-wrap">
+					<svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M12 15V21" />
+						<path d="M9 21H15" />
+						<path d="M6 15V9.5C6 6.8 8.2 4.5 11 4.5H15C16.7 4.5 18 5.8 18 7.5V15H6Z" />
+						<path d="M6 10H18" />
+						<path d="M18 9V6L21 7.5L18 9" />
+					</svg>
+				</div>
+				<span class="item-label">纸条信箱</span>
+				<span class="item-arrow">›</span>
+			</a>
+
+			<!-- 5. 联络 / 私域补给站 (微信·群聊) -->
+			
+		</div>
+
+		<!-- 底部角色感微章 (Traveler Badge) -->
+		<div class="capsule-footer" title="Personal Archive · 个人手账档案">
+			<span class="traveler-beacon"></span>
+			<span class="traveler-tag">PERSONAL ARCHIVE · 35MM</span>
+		</div>
+	</nav>
+  
+  <p id="notes-toast" class="notes-toast" role="status" hidden></p>
+  <script src="../js/analytics.js?v=20261025-footprints01" defer></script>
+  <script src="../js/navigation.js?v=20261025-notes02" defer></script>
+  
+  <script src="../js/ui-sound.js?v=20260921-audio" defer></script>
+  <script src="../js/page-transition.js?v=20261026-loading01" defer></script>
+  <script src="../js/site-audio.js?v=20261101-score01" defer></script>
+</body>
+</html>

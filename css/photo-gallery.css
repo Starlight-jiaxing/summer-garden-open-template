@@ -1,0 +1,259 @@
+#photo.photo-universe-section {
+	position: relative;
+	z-index: 1001;
+	max-width: none;
+	padding: 56px max(20px, calc((100vw - 1240px) / 2));
+	margin-bottom: 0;
+	border-radius: 0;
+	box-shadow: none;
+	background: #f7f8f3;
+	overflow: clip;
+}
+
+#photo .photo-header-clean { margin-bottom: 24px; }
+#photo .photo-meta-en { color: #60766b; font-style: normal; letter-spacing: 1.5px; }
+#photo .section-title { color: #25382e; font-size: clamp(27px, 3vw, 34px); letter-spacing: 0; }
+#photo .photo-intro { color: #66756b; font-family: inherit; font-size: 14px; }
+#photo .photo-archive-index { margin-top: 24px; gap: clamp(15px, 3vw, 36px); flex-wrap: wrap; }
+#photo .photo-archive-btn { min-width: 44px; min-height: 44px; transition: transform .2s ease; }
+#photo .photo-archive-btn:hover { transform: translateY(-2px); }
+#photo .photo-archive-btn .archive-label { font-size: 14px; letter-spacing: 0; }
+#photo .photo-archive-btn:focus-visible,
+#photo button:focus-visible,
+#photo .photo-stage-viewport:focus-visible { outline: 2px solid #467553; outline-offset: 3px; }
+
+#photo .photo-stage-viewport {
+	width: 100%;
+	max-width: 1240px;
+	height: min(570px, 56vw);
+	min-height: 470px;
+	margin: 0 auto;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	background: radial-gradient(ellipse at center, #fcfcf8 0%, #f1f4ee 76%, #edf1e9 100%);
+	perspective: 1250px;
+	perspective-origin: 50% 47%;
+	touch-action: pan-y;
+}
+
+#photo .exhibition-ambient { opacity: .8; }
+#photo .ambient-focus-mark { width: 12px; height: 12px; }
+#photo .ambient-focus-mark::before,
+#photo .ambient-focus-mark::after { background: rgba(101, 126, 109, .13); }
+#photo .ambient-coord-text { color: rgba(58, 87, 68, .38); letter-spacing: 1px; font-size: 10px; }
+#photo .photo-3d-world { top: 47%; left: 50%; }
+
+#photo .photo-polaroid-card {
+	left: -163px;
+	top: -202px;
+	width: 326px;
+	height: 404px;
+	padding: 11px 11px 16px;
+	border-radius: 3px;
+	font: inherit;
+	text-align: left;
+	appearance: none;
+	backface-visibility: visible;
+	animation: none;
+	transition: box-shadow .25s ease, border-color .25s ease;
+	will-change: transform, opacity;
+	box-shadow: 0 14px 30px rgba(29, 48, 35, .11), 0 2px 5px rgba(29, 48, 35, .08);
+}
+#photo .photo-polaroid-card[hidden] { display: none !important; }
+#photo .photo-polaroid-card.frame-polaroid { background: #faf9f5; border: 1px solid #deded3; }
+#photo .photo-polaroid-card.frame-postcard { background: #e9ede6; border: 1px solid #cdd8d1; }
+#photo .photo-polaroid-card.frame-film { background: #33423b; border: 1px solid #26382e; }
+#photo .photo-polaroid-card.is-hero-card {
+	background: #fbfaf6;
+	border: 1px solid #d3d6cc;
+	box-shadow: 0 28px 54px rgba(27, 45, 31, .23), 0 4px 9px rgba(27, 45, 31, .1);
+}
+#photo .photo-polaroid-card.is-hero-card:hover {
+	box-shadow: 0 32px 58px rgba(27, 45, 31, .29), 0 0 0 2px rgba(88, 129, 99, .22);
+}
+#photo .photo-polaroid-card.frame-polaroid::before { display: none; }
+#photo .photo-polaroid-card:not(.is-hero-card) .card-film-title,
+#photo .photo-polaroid-card:not(.is-hero-card) .card-film-note,
+#photo .photo-polaroid-card:not(.is-hero-card) .card-place,
+#photo .photo-polaroid-card:not(.is-hero-card) .card-file-name { display: none; }
+#photo .photo-polaroid-card.frame-film .card-photo-wrapper { border: 0; }
+#photo .photo-polaroid-card.frame-film .film-sprockets {
+	background-image: repeating-linear-gradient(90deg, transparent 0 9px, #9daa9d 9px 16px, transparent 16px 25px);
+	height: 5px;
+	opacity: .55;
+}
+#photo .photo-polaroid-card.frame-postcard .card-washi-tape { background: rgba(174, 197, 183, .7); }
+#photo .photo-polaroid-card.is-hero-card .film-sprockets,
+#photo .photo-polaroid-card.is-hero-card .card-washi-tape { display: none !important; }
+
+#photo .card-photo-wrapper {
+	width: 100%;
+	height: 268px;
+	flex: none;
+	border-radius: 1px;
+	background: #e6e9e2;
+}
+#photo .card-photo-wrapper img { width: 100%; height: 100%; object-fit: contain; -webkit-user-drag: none; }
+#photo .card-film-header { margin-top: 9px; color: #526358; font-size: 11px; }
+#photo .card-frame-badge,
+#photo .photo-polaroid-card.is-hero-card .card-frame-badge {
+	padding: 0;
+	border: 0;
+	background: none !important;
+	color: #456750 !important;
+	font-family: monospace;
+	font-size: 11px;
+}
+#photo .frame-film:not(.is-hero-card) .card-film-header { color: #c6d0c9; }
+#photo .frame-film:not(.is-hero-card) .card-frame-badge { color: #d9e8db !important; }
+#photo .card-film-title { margin-top: 7px; color: #273b2e; font-size: 15px; letter-spacing: 0; }
+#photo .card-film-note { margin-top: 3px; color: #586b5d; font-size: 12px; font-style: normal; font-family: inherit; }
+#photo .card-place { margin-top: 3px; color: #6b7d70; font: 10px monospace; }
+#photo .card-file-name { margin-top: auto; color: #7b897e; font: 10px monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+#photo .gallery-dock {
+	position: relative;
+	left: auto;
+	bottom: auto;
+	transform: none;
+	width: min(980px, 100%);
+	max-width: none;
+	margin: 0 auto;
+	padding: 10px 0;
+	gap: 14px;
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	backdrop-filter: none;
+}
+#photo .dock-btn {
+	width: 44px;
+	height: 44px;
+	flex: 0 0 44px;
+	border-radius: 50%;
+	background: #fbfcf8;
+	border: 1px solid #ccd8cc;
+	color: #2b4835;
+	box-shadow: none;
+}
+#photo .dock-btn:hover { background: #e5eee5; border-color: #598367; color: #26452f; transform: none; box-shadow: none; }
+#photo .dock-btn-play { margin-left: 10px; background: #e5eee5; }
+#photo .dock-thumb-container {
+	flex: 1 1 0;
+	min-width: 0;
+	max-width: none;
+	padding: 6px 4px;
+	scroll-behavior: smooth;
+}
+#photo .dock-thumb-track {
+	width: max-content;
+	min-height: 62px;
+	gap: 8px;
+	padding: 8px 10px;
+	background: #39473e;
+	border-top: 5px dotted #a5b3a5;
+	border-bottom: 5px dotted #a5b3a5;
+}
+#photo .dock-thumb-chip,
+#photo .dock-thumb-chip.is-active {
+	width: 48px;
+	height: 40px;
+	flex: 0 0 48px;
+	padding: 0;
+	border: 2px solid transparent;
+	border-radius: 1px;
+	background: #25352b;
+	opacity: .75;
+	transform: none;
+	box-shadow: none;
+}
+#photo .dock-thumb-chip.is-active { border-color: #84bb8c; opacity: 1; transform: scale(1.13); z-index: 1; box-shadow: 0 0 0 1px #263e2e; }
+#photo .dock-thumb-chip:hover { opacity: 1; transform: translateY(-2px); }
+#photo .photo-counter { color: #5c7061; font: 11px monospace; text-align: center; margin: 4px 0 0; }
+
+/* 照片显影暗房动效：1. 日期标记先出 -> 2. 照片显影去模糊 -> 3. 备忘语浮现 */
+#photo.is-revealed .photo-polaroid-card.is-hero-card .card-date-badge,
+#photo .photo-polaroid-card.is-hero-card.is-developing .card-date-badge {
+	animation: heroDateAppear 0.4s ease-out 0.05s forwards;
+}
+
+#photo.is-revealed .photo-polaroid-card.is-hero-card .card-photo-wrapper img,
+#photo .photo-polaroid-card.is-hero-card.is-developing .card-photo-wrapper img {
+	animation: photoDevelopBath 0.65s cubic-bezier(0.2, 0.8, 0.2, 1) 0.12s forwards;
+}
+
+#photo.is-revealed .photo-polaroid-card.is-hero-card .card-film-title,
+#photo.is-revealed .photo-polaroid-card.is-hero-card .card-film-note,
+#photo .photo-polaroid-card.is-hero-card.is-developing .card-film-title,
+#photo .photo-polaroid-card.is-hero-card.is-developing .card-film-note {
+	animation: heroMemoAppear 0.5s ease-out 0.38s forwards;
+}
+
+@keyframes heroDateAppear {
+	from {
+		opacity: 0;
+		transform: translateY(-3px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes photoDevelopBath {
+	0% {
+		filter: blur(8px) contrast(0.75) brightness(1.2);
+		opacity: 0.7;
+	}
+	50% {
+		filter: blur(3px) contrast(0.9) brightness(1.08);
+		opacity: 0.92;
+	}
+	100% {
+		filter: blur(0px) contrast(1) brightness(1);
+		opacity: 1;
+	}
+}
+
+@keyframes heroMemoAppear {
+	from {
+		opacity: 0;
+		transform: translateY(4px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+
+@media (max-width: 768px) {
+	#photo.photo-universe-section { padding: 35px 14px; }
+	#photo .photo-archive-index { gap: 10px 20px; }
+	#photo .photo-stage-viewport { height: 430px; min-height: 0; }
+	#photo .photo-3d-world { top: 48%; }
+	#photo .photo-polaroid-card { width: 236px; height: 333px; left: -118px; top: -166px; padding: 8px 8px 12px; }
+	#photo .card-photo-wrapper { height: 213px; }
+	#photo .card-film-title { font-size: 13px; }
+	#photo .card-film-note { font-size: 11px; }
+	#photo .card-file-name { font-size: 9px; }
+	#photo .gallery-dock { gap: 7px; }
+	#photo .dock-btn { width: 40px; height: 40px; flex-basis: 40px; }
+	#photo .dock-btn-play { margin-left: 1px; }
+	#photo .dock-thumb-container { padding: 6px 0; }
+	#photo .ambient-coord-text { display: none; }
+}
+
+@media (max-width: 420px) {
+	#photo .photo-archive-index { gap: 5px 14px; }
+	#photo .photo-archive-btn .archive-label { font-size: 12px; }
+	#photo .photo-stage-viewport { height: 390px; }
+	#photo .photo-polaroid-card { width: 210px; height: 307px; left: -105px; top: -153px; }
+	#photo .card-photo-wrapper { height: 188px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	#photo *, #photo *::before, #photo *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}

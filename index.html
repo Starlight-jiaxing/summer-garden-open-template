@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script>
+	(function () {
+		var r = document.documentElement;
+		window.JXStationBoot = { started: performance.now(), release: function () {
+			window.dispatchEvent(new Event("station:release"));
+			r.classList.remove("station-booting", "station-returning");
+			document.querySelectorAll("[data-station-inert]").forEach(function (e) { e.inert = false; delete e.dataset.stationInert; });
+		} };
+		if (performance.getEntriesByType("navigation")[0]?.type === "back_forward") return;
+		try { if (sessionStorage.getItem("jxgarden-station-entered")) r.classList.add("station-returning"); } catch (e) {}
+		r.classList.add("station-booting");
+		setTimeout(window.JXStationBoot.release, 4800);
+	})();
+	</script>
+	<script src="js/station-loading.js?v=20261104-slim01" defer></script>
+	<title>Your Name · Personal Station</title>
+	<link rel="icon" href="img/demo.svg" sizes="16x16 32x32 48x48">
+	<link rel="icon" type="image/svg+xml" href="img/demo.svg" sizes="any">
+	<link rel="apple-touch-icon" href="img/demo.svg" sizes="180x180">
+	<meta name="description" content="站主的个人站台：认识我，沿着兴趣档案、照片收藏、电脑手记与墙上来信慢慢探索。">
+	<!-- 引入优雅字体：Great Vibes(手写签名) + Lora/Noto Serif(诗意衬线) + Space Mono(车票等宽字体) -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600;1,700&family=Great+Vibes&family=Italianno&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+	<noscript><link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Italianno&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet"></noscript>
+	<link rel="preload" as="image" href="img/demo.svg" fetchpriority="high">
+	<link rel="stylesheet" href="css/base.css?v=20261026-loading01" />
+	<link rel="stylesheet" href="css/index.css?v=20261026-webp01" />
+	<link rel="stylesheet" href="css/site-audio.css?v=20261101-score01" />
+	<script>
+	try { var j = JSON.parse(localStorage.getItem("jxgarden-journey-v1") || "null"); if (j && j.version === 1 && j.reading) { var r = document.documentElement; if (["paper","night"].indexOf(j.reading.mode) !== -1) r.dataset.gardenReading = j.reading.mode; if ([16,18,20].indexOf(j.reading.size) !== -1) r.style.setProperty("--journey-reading-size", j.reading.size + "px"); r.style.setProperty("--journey-reading-line", j.reading.space === "loose" ? "2.15" : "1.85"); } } catch (e) {}
+	setTimeout(function () { if (!window.JXGardenJourney) delete document.documentElement.dataset.gardenReading; }, 4500);
+	</script>
+	<link rel="stylesheet" href="css/garden-journey.css?v=20261101-stardust02">
+	<script src="js/garden-journey.js?v=20261027-journey01" defer></script>
+	<link rel="stylesheet" href="css/garden-companion.css?v=20261101-stardust02">
+	<script src="js/garden-companion.js?v=20261105-memory01" defer></script>
+<script src="js/site-config.js" defer></script>
+</head>
+<body data-station-page="夏日花园" data-station-image="img/demo.svg">
+	<aside id="stationLoader" class="station-loader" data-step="1" aria-hidden="true" aria-labelledby="stationLoaderTitle">
+		<div class="arrival-corner" aria-hidden="true"><strong>My Garden</strong>PERSONAL STATION · 35MM</div>
+		<section class="arrival-ticket">
+			<header class="arrival-ticket-head"><span class="arrival-ticket-code">JX / ARRIVAL TICKET</span><span>VOL. 09 · 2026</span></header>
+			<div class="arrival-ticket-main">
+				<p class="arrival-eyebrow">YOUR NEXT STOP / SUMMER GARDEN</p>
+				<h2 id="stationLoaderTitle">下一站，夏日花园。</h2>
+				<p class="arrival-subtitle">A quiet place. A little room for your world.</p>
+				<svg class="arrival-landscape" viewBox="0 0 440 110" fill="none" aria-hidden="true" focusable="false">
+					<path d="M0 79C47 65 59 33 104 44S160 79 212 56 264 25 311 44 382 74 440 43V91H0Z" fill="#eef1df"/>
+					<path d="M0 78C47 64 62 34 104 44S162 79 212 56 267 26 312 44 383 74 440 43" stroke="#aaba9a" stroke-width="1.2"/>
+					<path d="M347 46V76M334 61L347 42 360 61M335 69L347 51 359 69" stroke="#82966d" stroke-linecap="round" stroke-linejoin="round"/>
+					<circle cx="395" cy="27" r="9" stroke="#c5bc87"/>
+					<path d="M0 91H440M0 97H440" stroke="#9aa98b"/>
+					<path d="M0 94H440" stroke="#c0c8b0" stroke-width="8" stroke-dasharray="1 12"/>
+					<g class="arrival-train">
+						<path d="M9 59H53C58 59 62 63 63 68L68 84H6V63C6 61 7 59 9 59Z" fill="#e2e7b9" stroke="#446749" stroke-width="1.5"/>
+						<path d="M6 77H65M17 59L22 53H41L47 59" stroke="#446749" stroke-width="1.5"/>
+						<path d="M13 64H25V74H13ZM30 64H42V74H30ZM47 64H57L61 74H47Z" fill="#b7d7cc" stroke="#446749"/>
+						<circle cx="20" cy="87" r="4" fill="#446749"/><circle cx="54" cy="87" r="4" fill="#446749"/>
+						<path d="M9 84H66" stroke="#446749" stroke-width="2"/>
+					</g>
+				</svg>
+			</div>
+			<div class="arrival-ticket-bottom">
+				<div><p class="arrival-status" data-station-status role="status" aria-live="polite">正在铺开这一页手账…</p><ol class="arrival-stops" aria-hidden="true"><li><i></i>车票</li><li><i></i>手账</li><li><i></i>风景</li></ol></div>
+				<button class="arrival-skip" type="button" onclick="window.JXStationBoot.release()">先进去看看<span aria-hidden="true">→</span></button>
+			</div>
+		</section>
+		<p class="arrival-note" aria-hidden="true">BLUE SKIES, RUSTED RAILS &amp; QUIET DAYS.</p>
+	</aside>
+
+	<!-- 1. 动感电影级背景层 (Ken Burns 缓慢呼吸推进动效) -->
+	<div class="bg-animated-layer"></div>
+
+	<!-- 2. 灵动夏日光斑浮尘微粒子 -->
+	<div class="floating-particles" aria-hidden="true">
+		<span style="left: 10%; width: 6px; height: 6px; animation-duration: 12s; animation-delay: 0s;"></span>
+		<span style="left: 25%; width: 10px; height: 10px; animation-duration: 16s; animation-delay: 2s;"></span>
+		<span style="left: 45%; width: 4px; height: 4px; animation-duration: 10s; animation-delay: 4s;"></span>
+		<span style="left: 60%; width: 8px; height: 8px; animation-duration: 14s; animation-delay: 1s;"></span>
+		<span style="left: 75%; width: 5px; height: 5px; animation-duration: 18s; animation-delay: 3s;"></span>
+		<span style="left: 90%; width: 9px; height: 9px; animation-duration: 13s; animation-delay: 5s;"></span>
+		<span style="left: 35%; width: 7px; height: 7px; animation-duration: 15s; animation-delay: 6s;"></span>
+		<span style="left: 80%; width: 6px; height: 6px; animation-duration: 11s; animation-delay: 2.5s;"></span>
+	</div>
+
+	<!-- 3. 四周档案感氛围细节 (Station Archive Details) -->
+	<div class="station-archive-marks" aria-hidden="true">
+		<div class="archive-mark mark-top-left">
+			<span class="mark-vol">VOL. 09</span>
+			<span class="mark-dot">/</span>
+			<span class="mark-title">SUMMER DIARY</span>
+			<span class="mark-coord">00.00° N · 00.00° E</span>
+		</div>
+
+		<div class="archive-mark mark-top-right">
+			<div class="mark-station-meta">
+				<span class="mark-sys">PERSONAL STATION</span>
+				<span class="mark-year">ARCHIVE 2026</span>
+			</div>
+			<div class="archive-post-stamp">
+				<span>YOUR WORLD</span>
+				<span>35MM</span>
+			</div>
+		</div>
+
+		<div class="archive-mark mark-handwritten-note">
+			<span class="note-pin">✦</span>
+			<span class="note-text">“有些旅程没有终点，只是不断打开新的页面。”</span>
+		</div>
+
+		<div class="archive-mark mark-bottom-center">
+			<span class="mark-meta-strip">MEMORY SAVED · 35MM RAILWAY CUT · SUMMER GARDEN</span>
+		</div>
+	</div>
+
+	<!-- 4. 行程轨道线与经停站点 (Journey Route Track - 沿背景铁轨走线) -->
+	<nav class="journey-route-layer" id="journeyRouteLayer" aria-label="花园旅程地图 · 快速前往各站">
+		<svg class="route-svg" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+			<!-- 背景淡导轨 -->
+			<path class="route-track-bg" d="M 60 760 C 220 710, 320 660, 420 690 S 560 810, 720 780" />
+			<!-- 前景点亮线 -->
+			<path class="route-track-glow" id="routeTrackPath" d="M 60 760 C 220 710, 320 660, 420 690 S 560 810, 720 780" />
+		</svg>
+
+		<!-- 沿线站点徽记：沿铁轨与中央按钮下缘自然分布，不遮挡中央文字 -->
+		<a class="route-station station-1" id="stationStart" href="html/home.html" aria-label="第一站，认识我：打开夏日手账" title="第一站 · 认识我" style="left: 6%; bottom: 18%;">
+			<span class="station-dot"></span>
+			<span class="station-label">01 / ABOUT</span>
+		</a>
+		<a class="route-station station-2" href="html/detail.html" aria-label="第二站，兴趣档案：音乐、游戏、阅读与收藏" title="第二站 · 兴趣档案" style="left: 22%; bottom: 25%;">
+			<span class="station-dot"></span>
+			<span class="station-label">02 / INTERESTS</span>
+		</a>
+		<a class="route-station station-3" href="html/toolbox.html" aria-label="第三站，电脑手记：电脑技巧与工具分享" title="第三站 · 电脑手记" style="left: 38%; bottom: 12%;">
+			<span class="station-dot"></span>
+			<span class="station-label">03 / NOTES</span>
+		</a>
+		<a class="route-station station-4" id="stationNextStop" href="html/message.html" aria-label="第四站，墙上的来信：阅读留言并留下回信" title="第四站 · 墙上的来信" style="left: 50%; bottom: 4%;">
+			<span class="station-dot"></span>
+			<span class="station-label">04 / LETTERS</span>
+		</a>
+	</nav>
+
+	<!-- 5. 核心舞台主体 (Center Card) -->
+	<div id="bkground">
+		<main class="my-information">
+			<!-- 头像视窗 -->
+			<div class="avatar-wrapper" title="Your Name (Reea)">
+				<div class="avatar-box"></div>
+			</div>
+
+			<!-- 1. 签名艺术标题 -->
+			<h1 class="signature-title">Your Name</h1>
+
+			<!-- 2. 工程档案感专业铭牌 (Vehicle Engineering @ YOUR WORLD) -->
+			<div class="eng-spec-plate" id="engSpecPlate" aria-label="Professional Archive">
+				<div class="eng-main-row">
+					<span class="eng-title">Vehicle Engineering</span>
+					<span class="eng-affil">@ YOUR WORLD</span>
+				</div>
+				<div class="eng-rail-track" aria-hidden="true">
+					<span class="track-tick tick-left"></span>
+					<span class="track-line"></span>
+					<span class="track-tick tick-right"></span>
+				</div>
+				<div class="eng-sub-row">
+					<span class="eng-sub-label">ROUTE · MOTION · SYSTEM</span>
+				</div>
+			</div>
+
+			<!-- 3. 精炼站台诗意短句 (Lora 衬线体) -->
+			<div class="poetry-intro">
+				<p class="quote-line">“Blue skies, rusted rails, and quiet mechanics.”</p>
+				<p class="quote-line">“Welcome to my personal station.”</p>
+			</div>
+
+			<!-- 4. 章节内容轻量文字索引 (Next Stops Index) -->
+			<nav class="chapter-index-nav" aria-label="推荐浏览路线">
+				<span class="index-lead">FIRST VISIT <span class="index-lead-note">· A SHORT WALK THROUGH THE GARDEN</span></span>
+				<div class="index-links">
+					<a class="index-item" href="html/home.html" aria-label="第一站：认识我"><span class="index-num">01</span> ABOUT</a>
+					<a class="index-item" href="html/detail.html" aria-label="第二站：兴趣档案"><span class="index-num">02</span> INTERESTS</a>
+					<a class="index-item" href="html/toolbox.html" aria-label="第三站：电脑手记"><span class="index-num">03</span> NOTES</a>
+					<a class="index-item" href="html/message.html" aria-label="第四站：墙上的来信"><span class="index-num">04</span> LETTERS</a>
+				</div>
+			</nav>
+
+			<!-- 5. 沉静半透明车站入口牌: Enter the Journey → -->
+			<a href="html/home.html" class="enter-btn" id="btnEnterJourney" title="启程 · 进入夏日手账，从这里认识我">
+				<span class="btn-text">Enter the Journey</span>
+				<span class="btn-arrow">→</span>
+			</a>
+		</main>
+	</div>
+
+
+	<!-- 7. 声音控制开关 (右下角优雅胶囊) -->
+	<div class="audio-control-wrap">
+		<button type="button" class="audio-toggle-btn" id="btnAudioToggle" title="点击播放 Summer Station 背景音乐" aria-label="背景音乐开关" aria-pressed="false">
+			<span class="audio-icon" id="audioIcon">🔊</span>
+			<span class="audio-text" id="audioText">SUMMER STATION</span>
+		</button>
+	</div>
+
+	<!-- 引入页面专属交互与音频合成引擎 -->
+	<script src="js/analytics.js?v=20261025-footprints01" defer></script>
+	<script src="js/portal.js?v=20261026-loading01" defer></script>
+	<script src="js/site-audio.js?v=20261101-score01" defer></script>
+</body>
+</html>

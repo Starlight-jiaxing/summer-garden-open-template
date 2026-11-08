@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script>
+	(function () {
+		var r = document.documentElement;
+		window.JXStationBoot = { started: performance.now(), release: function () {
+			window.dispatchEvent(new Event("station:release"));
+			r.classList.remove("station-booting", "station-returning");
+			document.querySelectorAll("[data-station-inert]").forEach(function (e) { e.inert = false; delete e.dataset.stationInert; });
+		} };
+		if (performance.getEntriesByType("navigation")[0]?.type === "back_forward") return;
+		try { if (sessionStorage.getItem("jxgarden-station-entered")) r.classList.add("station-returning"); } catch (e) {}
+		r.classList.add("station-booting");
+		setTimeout(window.JXStationBoot.release, 4800);
+	})();
+	</script>
+	<script src="../js/station-loading.js?v=20261104-slim01" defer></script>
+	<title>兴趣营地 · 我的热爱宇宙</title>
+	<link rel="icon" href="../img/demo.svg" sizes="16x16 32x32 48x48" />
+	<link rel="icon" type="image/svg+xml" href="../img/demo.svg" sizes="any" />
+	<link rel="apple-touch-icon" href="../img/demo.svg" sizes="180x180" />
+	<link rel="stylesheet" href="../css/base.css?v=20261026-loading01" />
+	<link rel="stylesheet" href="../css/detail.css?v=20261104-slim01" />
+	<link rel="stylesheet" href="../css/photo-gallery.css?v=20260924-v2-somersault" />
+	<link rel="stylesheet" href="../css/contact-modal.css?v=20261024-community01" />
+	<link rel="stylesheet" href="../css/chapter-motion.css?v=20261026-loading01" />
+	<link rel="stylesheet" href="../css/page-transition.css?v=20261026-loading01" />
+	<link rel="stylesheet" href="../css/site-audio.css?v=20261101-score01" />
+	<style>
+		/* 筋斗云防闪烁与防样式冲突底衬兜底 */
+		.somersault-cloud-btn {
+			position: fixed !important;
+			right: 32px !important;
+			bottom: 32px !important;
+			width: 52px !important;
+			height: 52px !important;
+			border-radius: 50% !important;
+			background: rgba(18, 16, 14, 0.92) !important;
+			border: 1.5px solid rgba(223, 190, 123, 0.45) !important;
+			box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 14px rgba(223, 190, 123, 0.18) !important;
+			z-index: 9999 !important;
+		}
+		.somersault-cloud-btn .cloud-tooltip {
+			position: absolute !important;
+			opacity: 0 !important;
+			pointer-events: none !important;
+		}
+		@media (max-width: 768px) {
+			.somersault-cloud-btn {
+				right: 16px !important;
+				bottom: 18px !important;
+				width: 46px !important;
+				height: 46px !important;
+			}
+			.somersault-cloud-btn .cloud-tooltip {
+				display: none !important;
+			}
+		}
+	</style>
+	<script>
+	try { var j = JSON.parse(localStorage.getItem("jxgarden-journey-v1") || "null"); if (j && j.version === 1 && j.reading) { var r = document.documentElement; if (["paper","night"].indexOf(j.reading.mode) !== -1) r.dataset.gardenReading = j.reading.mode; if ([16,18,20].indexOf(j.reading.size) !== -1) r.style.setProperty("--journey-reading-size", j.reading.size + "px"); r.style.setProperty("--journey-reading-line", j.reading.space === "loose" ? "2.15" : "1.85"); } } catch (e) {}
+	setTimeout(function () { if (!window.JXGardenJourney) delete document.documentElement.dataset.gardenReading; }, 4500);
+	</script>
+	<link rel="stylesheet" href="../css/garden-journey.css?v=20261101-stardust02">
+	<script src="../js/garden-journey.js?v=20261027-journey01" defer></script>
+	<link rel="stylesheet" href="../css/garden-companion.css?v=20261101-stardust02">
+	<script src="../js/garden-companion.js?v=20261105-memory01" defer></script>
+<script src="../js/site-config.js" defer></script>
+</head>
+<body data-station-page="兴趣营地">
+	<aside id="stationLoader" class="station-loader" data-step="1" aria-hidden="true" aria-labelledby="stationLoaderTitle">
+		<div class="arrival-corner" aria-hidden="true"><strong>My Garden</strong>PERSONAL STATION · 35MM</div>
+		<section class="arrival-ticket">
+			<header class="arrival-ticket-head"><span class="arrival-ticket-code">JX / ARRIVAL TICKET</span><span>VOL. 09 · 2026</span></header>
+			<div class="arrival-ticket-main">
+				<p class="arrival-eyebrow">YOUR NEXT STOP / PASSIONS &amp; COLLECTIONS</p>
+				<h2 id="stationLoaderTitle">下一站，兴趣营地。</h2>
+				<p class="arrival-subtitle">A quiet place. A little room for your world.</p>
+				<svg class="arrival-landscape" viewBox="0 0 440 110" fill="none" aria-hidden="true" focusable="false">
+					<path d="M0 79C47 65 59 33 104 44S160 79 212 56 264 25 311 44 382 74 440 43V91H0Z" fill="#eef1df"/>
+					<path d="M0 78C47 64 62 34 104 44S162 79 212 56 267 26 312 44 383 74 440 43" stroke="#aaba9a" stroke-width="1.2"/>
+					<path d="M347 46V76M334 61L347 42 360 61M335 69L347 51 359 69" stroke="#82966d" stroke-linecap="round" stroke-linejoin="round"/>
+					<circle cx="395" cy="27" r="9" stroke="#c5bc87"/>
+					<path d="M0 91H440M0 97H440" stroke="#9aa98b"/>
+					<path d="M0 94H440" stroke="#c0c8b0" stroke-width="8" stroke-dasharray="1 12"/>
+					<g class="arrival-train">
+						<path d="M9 59H53C58 59 62 63 63 68L68 84H6V63C6 61 7 59 9 59Z" fill="#e2e7b9" stroke="#446749" stroke-width="1.5"/>
+						<path d="M6 77H65M17 59L22 53H41L47 59" stroke="#446749" stroke-width="1.5"/>
+						<path d="M13 64H25V74H13ZM30 64H42V74H30ZM47 64H57L61 74H47Z" fill="#b7d7cc" stroke="#446749"/>
+						<circle cx="20" cy="87" r="4" fill="#446749"/><circle cx="54" cy="87" r="4" fill="#446749"/>
+						<path d="M9 84H66" stroke="#446749" stroke-width="2"/>
+					</g>
+				</svg>
+			</div>
+			<div class="arrival-ticket-bottom">
+				<div><p class="arrival-status" data-station-status role="status" aria-live="polite">正在铺开这一页手账…</p><ol class="arrival-stops" aria-hidden="true"><li><i></i>车票</li><li><i></i>手账</li><li><i></i>风景</li></ol></div>
+				<button class="arrival-skip" type="button" onclick="window.JXStationBoot.release()">先进去看看<span aria-hidden="true">→</span></button>
+			</div>
+		</section>
+		<p class="arrival-note" aria-hidden="true">BLUE SKIES, RUSTED RAILS &amp; QUIET DAYS.</p>
+	</aside>
+
+	<!-- 顶部引言 -->
+	<div id="intro">
+		<div class="intro-content">
+			<h2>🏮 兴趣档案 · Passions & Collections</h2>
+			<p>在示例学校的日常图纸与专业课程之外，这里是我留给自己的安静角落。</p>
+			<p>在这份长长的主题手账里，收拢着我珍藏的旋律、游戏世界、文字沉淀与生活胶片。</p>
+			<p>欢迎你慢慢翻阅，愿在此间，能找到与你相似的共鸣。</p>
+		</div>
+	</div>
+
+	<!-- 顶部杂志目录式文本导航 -->
+	<nav id="nav" class="magazine-nav" aria-label="页面目录导航">
+		<a href="#music" class="nav-link is-active"><span class="nav-active-dot"></span>私藏旋律</a>
+		<span class="nav-slash">/</span>
+		<a href="#game" class="nav-link">游戏驿站</a>
+		<span class="nav-slash">/</span>
+		<a href="#reading" class="nav-link">纸墨书阁</a>
+		<span class="nav-slash">/</span>
+		<a href="#photo" class="nav-link">胶片切片</a>
+	</nav>
+
+	<!-- ==========================================================================
+	     1. 🎵 音乐板块 (Music) · 私人歌单手账 / 黑胶收藏页
+	     ========================================================================== -->
+	<section id="music" class="camp-section vinyl-section-quiet">
+		<!-- 极淡雅纸张氛围背景 (细微水准线) -->
+		<div class="quiet-paper-lines" aria-hidden="true">
+			<span class="paper-line"></span>
+			<span class="paper-line"></span>
+		</div>
+
+		<!-- 极简手账标题区 (第 1 拍：短标 + 色影聚合大标题 + 诗意副标) -->
+		<div class="section-header-block music-header-clean">
+			<span class="section-eyebrow music-meta-en">SUMMER PLAYLIST // 01 · VINYL FRAGMENTS</span>
+			<h2 class="section-clean-title splash-heading music-splash" data-splash="私藏旋律">私藏旋律</h2>
+			<p class="section-clean-subtitle music-clean-subtitle">那些陪我走过某个夏天的歌。</p>
+		</div>
+
+		<!-- 轻量私人播放横条 (第 2 拍：核心主画面 / 视听控制台) -->
+		<div id="vinyl-now-playing-bar" class="section-hero-visual now-playing-quiet is-paused">
+			<audio id="real-audio-player" preload="metadata"></audio>
+			<div id="audio-toast-tip" class="audio-toast-tip" style="display: none;" role="status"></div>
+			<div class="np-quiet-left">
+				<div class="np-quiet-disc">
+					<img id="np-disc-img" src="../img/demo.svg" alt="当前唱片" class="np-disc-spin" />
+				</div>
+				<div class="np-quiet-meta">
+					<div class="np-quiet-title-row">
+						<span class="np-quiet-dot"></span>
+						<span class="np-quiet-title" id="np-song-title">《示例曲目一》</span>
+					</div>
+					<span class="np-quiet-artist" id="np-song-artist">示例音乐</span>
+					<span class="np-playback-status" id="np-playback-status" role="status" aria-live="polite" aria-atomic="true">点击播放</span>
+				</div>
+			</div>
+
+			<div class="np-quiet-center">
+				<div class="np-quiet-quote" id="np-lyric-quote">“听到前奏就会想起高中毕业那个夏天，一个人坐火车来这座城市的清晨。”</div>
+				<div class="np-quiet-track-row">
+					<span class="np-quiet-time" id="np-current-time">00:00</span>
+					<div class="np-quiet-track" id="np-progress-track">
+						<div class="np-quiet-progress" id="np-progress-bar" style="width: 0%;"></div>
+					</div>
+					<span class="np-quiet-time" id="np-total-time">05:01</span>
+				</div>
+			</div>
+
+			<div class="np-quiet-right">
+				<button type="button" class="np-quiet-playbtn" id="np-play-toggle-btn" title="播放 / 暂停" aria-label="播放或暂停">
+					<span id="np-play-icon" class="play-icon">▶</span>
+				</button>
+				<button type="button" class="np-quiet-notelink" id="np-open-card-btn" title="翻阅这首歌的手账卡">手记 ↗</button>
+			</div>
+		</div>
+
+		<!-- 黑胶手账展墙 (第 3 拍：卡片手账详细记录逐步展开) -->
+		<div class="section-content-body vinyl-wall-clean">
+			<!-- SIDE A 分区淡标 -->
+			<div class="shelf-section-header">
+				<span class="shelf-section-mark">SIDE A</span>
+				<span class="shelf-section-sep">·</span>
+				<span class="shelf-section-title">旅人与原野</span>
+			</div>
+
+			<div class="vinyl-clean-grid">
+				<!-- 卡片 1: 示例曲目一 (微倾斜) -->
+				<div class="vinyl-clean-card tilt-left is-playing is-paused" data-song-id="courage" title="轻触播放 / 暂停">
+					<div class="card-vinyl-holder">
+						<div class="card-vinyl-jacket">
+							<img src="../img/demo.svg" alt="示例曲目一" class="card-jacket-img" loading="lazy" decoding="async" />
+						</div>
+						<div class="card-vinyl-disc">
+							<img src="../img/demo.svg" alt="黑胶碟片" class="card-disc-img" loading="lazy" decoding="async" />
+						</div>
+					</div>
+					<div class="card-clean-info">
+						<div class="card-song-head">
+							<h3 class="card-song-title">《示例曲目一》</h3>
+							<span class="card-song-artist">示例音乐</span>
+						</div>
+						<p class="card-memory-note">听到前奏就会想起高中毕业那个夏天，一个人坐火车来这座城市的清晨。</p>
+					</div>
+				</div>
+
+				<!-- 卡片 2: 示例曲目二 (微倾斜) -->
+				<div class="vinyl-clean-card tilt-right" data-song-id="summer" title="轻触播放 / 暂停">
+					<div class="card-vinyl-holder">
+						<div class="card-vinyl-jacket">
+							<img src="../img/demo.svg" alt="示例曲目二" class="card-jacket-img" loading="lazy" decoding="async" />
+						</div>
+						<div class="card-vinyl-disc">
+							<img src="../img/demo.svg" alt="黑胶碟片" class="card-disc-img" loading="lazy" decoding="async" />
+						</div>
+					</div>
+					<div class="card-clean-info">
+						<div class="card-song-head">
+							<h3 class="card-song-title">《示例曲目二》</h3>
+							<span class="card-song-artist">示例音乐</span>
+						</div>
+						<p class="card-memory-note">像夏天傍晚突然吹过来的一阵风，心浮气躁的时候放它总能静下来。</p>
+					</div>
+				</div>
+
+				<!-- 卡片 3: 示例曲目三 (微倾斜) -->
+				<div class="vinyl-clean-card tilt-soft-left" data-song-id="ocean" title="轻触播放 / 暂停">
+					<div class="card-vinyl-holder">
+						<div class="card-vinyl-jacket">
+							<img src="../img/demo.svg" alt="示例曲目三" class="card-jacket-img" loading="lazy" decoding="async" />
+						</div>
+						<div class="card-vinyl-disc">
+							<img src="../img/demo.svg" alt="黑胶碟片" class="card-disc-img" loading="lazy" decoding="async" />
+						</div>
+					</div>
+					<div class="card-clean-info">
+						<div class="card-song-head">
+							<h3 class="card-song-title">《示例曲目三》</h3>
+							<span class="card-song-artist">示例音乐</span>
+						</div>
+						<p class="card-memory-note">不是最热闹的一首，但在海边一个人看落日和独自走路时很踏实。</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- SIDE B 分区淡标 -->
+			<div class="shelf-section-header side-b-header">
+				<span class="shelf-section-mark">SIDE B</span>
+				<span class="shelf-section-sep">·</span>
+				<span class="shelf-section-title">房间与夜行</span>
+			</div>
+
+			<div class="vinyl-clean-grid">
+				<!-- 卡片 4: 示例曲目四 (微倾斜) -->
+				<div class="vinyl-clean-card tilt-soft-right" data-song-id="room" title="轻触播放 / 暂停">
+					<div class="card-vinyl-holder">
+						<div class="card-vinyl-jacket">
+							<img src="../img/demo.svg" alt="示例曲目四" class="card-jacket-img" loading="lazy" decoding="async" />
+						</div>
+						<div class="card-vinyl-disc">
+							<img src="../img/demo.svg" alt="黑胶碟片" class="card-disc-img" loading="lazy" decoding="async" />
+						</div>
+					</div>
+					<div class="card-clean-info">
+						<div class="card-song-head">
+							<h3 class="card-song-title">《示例曲目四》</h3>
+							<span class="card-song-artist">示例音乐</span>
+						</div>
+						<p class="card-memory-note">适合在房间里画图做三维建模累了的时候循环，像阳光切过百叶窗的跳动。</p>
+					</div>
+				</div>
+
+				<!-- 卡片 5: 示例曲目五 (微倾斜) -->
+				<div class="vinyl-clean-card tilt-left" data-song-id="passion" title="轻触播放 / 暂停">
+					<div class="card-vinyl-holder">
+						<div class="card-vinyl-jacket">
+							<img src="../img/demo.svg" alt="示例曲目五" class="card-jacket-img" loading="lazy" decoding="async" />
+						</div>
+						<div class="card-vinyl-disc">
+							<img src="../img/demo.svg" alt="黑胶碟片" class="card-disc-img" loading="lazy" decoding="async" />
+						</div>
+					</div>
+					<div class="card-clean-info">
+						<div class="card-song-head">
+							<h3 class="card-song-title">《示例曲目五》</h3>
+							<span class="card-song-artist">示例音乐</span>
+						</div>
+						<p class="card-memory-note">大二深夜攻坚机械原理与备战竞赛时的热血伴奏，按下播放键就有继续冲刺的力气。</p>
+					</div>
+				</div>
+
+				<!-- 卡片 6: 示例曲目六 (微倾斜) -->
+				<div class="vinyl-clean-card tilt-right" data-song-id="companion" title="轻触播放 / 暂停">
+					<div class="card-vinyl-holder">
+						<div class="card-vinyl-jacket">
+							<img src="../img/demo.svg" alt="示例曲目六" class="card-jacket-img" loading="lazy" decoding="async" />
+						</div>
+						<div class="card-vinyl-disc">
+							<img src="../img/demo.svg" alt="黑胶碟片" class="card-disc-img" loading="lazy" decoding="async" />
+						</div>
+					</div>
+					<div class="card-clean-info">
+						<div class="card-song-head">
+							<h3 class="card-song-title">《示例曲目六》</h3>
+							<span class="card-song-artist">示例音乐</span>
+						</div>
+						<p class="card-memory-note">和好友在秋天林道上骑单车的那趟短途出行，微风拂过衣角，阳光正好。</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 歌手常听双辑手账卡带 (Tape & Sleeve 风格) -->
+		<div class="singer-row mixtape-archive-row" aria-label="私人常听双辑歌单">
+			<!-- Tape A: 示例音乐 · 人声私藏辑 -->
+			<article class="mixtape-card tape-zhoushen">
+				<!-- 顶部和纸胶带装饰 -->
+				<div class="tape-washi-strip tape-washi-left" aria-hidden="true"></div>
+
+				<!-- 封套顶栏元数据 -->
+				<div class="tape-header">
+					<div class="tape-tag-badge">
+						<span class="tape-pill-side">SIDE A</span>
+						<span class="tape-tag-name">VOCAL COMPANION</span>
+					</div>
+					<span class="tape-catalog-no">ZS-2026 // NO.01</span>
+				</div>
+
+				<!-- 卡片主体 -->
+				<div class="tape-body">
+					<div class="tape-cover-wrap">
+						<div class="tape-cover-frame">
+							<img src="../img/demo.svg" alt="示例音乐" class="tape-artist-photo" loading="lazy" decoding="async" />
+							<div class="tape-spool-overlay" aria-hidden="true"></div>
+						</div>
+						<div class="tape-artist-caption">
+							<span class="artist-name-zh">示例音乐</span>
+							<span class="artist-genre-en">Healing Vocals</span>
+						</div>
+					</div>
+
+					<div class="tape-tracklist-wrap">
+						<header class="tracklist-header">
+							<h4 class="tracklist-title">空灵人声与治愈长夜</h4>
+							<p class="tracklist-curator-note">“这座城市晚自习回寝的路上，那些抚平浮躁的声波。”</p>
+						</header>
+
+						<ol class="mixtape-tracklist">
+							<li class="mixtape-track-item" data-song-id="bigFish">
+								<span class="track-idx">01</span>
+								<div class="track-meta">
+									<div class="track-title-row">
+										<span class="track-name">示例曲目 7</span>
+										<span class="track-artist-tag">示例音乐</span>
+									</div>
+									<span class="track-note">海浪般温柔的低回与辽阔，循环过无数次</span>
+								</div>
+							</li>
+							<li class="mixtape-track-item" data-song-id="brightness">
+								<span class="track-idx">02</span>
+								<div class="track-meta">
+									<div class="track-title-row">
+										<span class="track-name">示例曲目 8</span>
+										<span class="track-artist-tag">示例音乐</span>
+									</div>
+									<span class="track-note">引吭破空的京剧戏腔，每次听都心潮澎湃</span>
+								</div>
+							</li>
+							<li class="mixtape-track-item" data-song-id="forgetWorry">
+								<span class="track-idx">03</span>
+								<div class="track-meta">
+									<div class="track-title-row">
+										<span class="track-name">示例曲目 9</span>
+										<span class="track-artist-tag">示例音乐</span>
+									</div>
+									<span class="track-note">给疲惫日常的一剂温热良药</span>
+								</div>
+							</li>
+							<li class="mixtape-track-item" data-song-id="threeMeals">
+								<span class="track-idx">04</span>
+								<div class="track-meta">
+									<div class="track-title-row">
+										<span class="track-name">示例曲目 10</span>
+										<span class="track-artist-tag">示例音乐</span>
+									</div>
+									<span class="track-note">平凡人间烟火气里的微小幸福</span>
+								</div>
+							</li>
+							<li class="mixtape-track-item" data-song-id="believeDream">
+								<span class="track-idx">05</span>
+								<div class="track-meta">
+									<div class="track-title-row">
+										<span class="track-name">示例曲目 11</span>
+										<span class="track-artist-tag">示例音乐</span>
+									</div>
+									<span class="track-note">在安静处发光，始终相信明日晴朗</span>
+								</div>
+							</li>
+						</ol>
+					</div>
+				</div>
+
+				<!-- 底部落款章 -->
+				<footer class="tape-footer">
+					<span class="tape-stamp-text">✦ PERSONAL FAVORITES ARCHIVE</span>
+					<span class="tape-duration-tag">5 TRACKS · REPEAT ALL NIGHT</span>
+				</footer>
+			</article>
+
+			<!-- Tape B: 示例音乐 · 提瓦特交响原声 -->
+			<article class="mixtape-card tape-genshin">
+				<!-- 顶部和纸胶带装饰 -->
+				<div class="tape-washi-strip tape-washi-right" aria-hidden="true"></div>
+
+				<!-- 封套顶栏元数据 -->
+				<div class="tape-header">
+					<div class="tape-tag-badge">
+						<span class="tape-pill-side">SIDE B</span>
+						<span class="tape-tag-name">TEYVAT SOUNDTRACK</span>
+					</div>
+					<span class="tape-catalog-no">HOYO-2026 // NO.02</span>
+				</div>
+
+				<!-- 卡片主体 -->
+				<div class="tape-body">
+					<div class="tape-cover-wrap">
+						<div class="tape-cover-frame">
+							<img src="../img/demo.svg" alt="派蒙 · 示例音乐" class="tape-artist-photo" loading="lazy" decoding="async" />
+							<div class="tape-spool-overlay" aria-hidden="true"></div>
+						</div>
+						<div class="tape-artist-caption">
+							<span class="artist-name-zh">示例音乐</span>
+							<span class="artist-genre-en">Teyvat Symphony</span>
+						</div>
+					</div>
+
+					<div class="tape-tracklist-wrap">
+						<header class="tracklist-header">
+							<h4 class="tracklist-title">提瓦特幻想交响诗篇</h4>
+							<p class="tracklist-curator-note">“戴上耳机的瞬间，便再次踏入无垠的奇幻世界。”</p>
+						</header>
+
+						<ol class="mixtape-tracklist">
+							<li class="mixtape-track-item" data-song-id="mistMoon">
+								<span class="track-idx">01</span>
+								<div class="track-meta">
+									<div class="track-title-row">
+										<span class="track-name">示例曲目 12</span>
+										<span class="track-tag-badge">沉玉仙幽</span>
+									</div>
+									<span class="track-note">The Hazy Moonlit Mist · 仙山水墨清冷琴韵</span>
+								</div>
+							</li>
+							<li class="mixtape-track-item" data-song-id="devastation">
+								<span class="track-idx">02</span>
+								<div class="track-meta">
+									<div class="track-title-row">
+										<span class="track-name">示例曲目 13</span>
+										<span class="track-tag-badge">璃月华章</span>
+									</div>
+									<span class="track-note">Devastation and Redemption · 戏腔交响出圈神作</span>
+								</div>
+							</li>
+							<li class="mixtape-track-item" data-song-id="chasingStarlight">
+								<span class="track-idx">03</span>
+								<div class="track-meta">
+									<div class="track-title-row">
+										<span class="track-name">示例曲目 14</span>
+										<span class="track-tag-badge">诗歌庆典</span>
+									</div>
+									<span class="track-note">清脆灵动，充满少年意气的结伴漫游</span>
+								</div>
+							</li>
+							<li class="mixtape-track-item" data-song-id="moonVeil">
+								<span class="track-idx">04</span>
+								<div class="track-meta">
+									<div class="track-title-row">
+										<span class="track-name">示例曲目 15</span>
+										<span class="track-tag-badge">银月初显</span>
+									</div>
+									<span class="track-note">The Moon's Mist-Woven Veil · 提瓦特清幽夜色</span>
+								</div>
+							</li>
+							<li class="mixtape-track-item" data-song-id="mirroredMoon">
+								<span class="track-idx">05</span>
+								<div class="track-meta">
+									<div class="track-title-row">
+										<span class="track-name">示例曲目 16</span>
+										<span class="track-tag-badge">哥伦比娅</span>
+									</div>
+									<span class="track-note">Song to the Mirrored Moon · 纯净空灵的圣洁吟唱</span>
+								</div>
+							</li>
+						</ol>
+					</div>
+				</div>
+
+				<!-- 底部落款章 -->
+				<footer class="tape-footer">
+					<span class="tape-stamp-text">✦ TEYVAT ARCHIVE SECURED</span>
+					<span class="tape-duration-tag">5 TRACKS · GENSHIN IMPACT OST</span>
+				</footer>
+			</article>
+		</div>
+	</section>
+
+	<!-- ==========================================================================
+	     2. 🎮 游戏驿站 (Gaming - 用户特别要求的新模块)
+	     ========================================================================== -->
+	<!-- ==========================================================================
+	     2. 🎮 游戏驿站 (Gaming) · 虚拟宇宙与心流探索
+	     ========================================================================== -->
+	<section id="game" class="camp-section game-section-modern" aria-label="游戏驿站与平行宇宙探索">
+		<!-- 第 1 拍：短标 + 存档点亮聚合大标题 + 诗意副标 -->
+		<div class="section-header-block game-header-clean">
+			<div class="game-checkpoint-badge">
+				<span class="checkpoint-beacon">✦</span>
+				<span class="checkpoint-text">CHECKPOINT // 02 · GAME LAB</span>
+				<span class="checkpoint-state">SAVED</span>
+			</div>
+			<h2 class="section-clean-title splash-heading game-splash" data-splash="游戏驿站">游戏驿站</h2>
+			<p class="section-clean-subtitle">“游戏不仅是消遣，更是我们穿梭不同平行宇宙、经历奇迹与冒险的第二人生。”</p>
+		</div>
+
+		<!-- ==========================================================================
+		     特展一：《原神》提瓦特漫游手记（左右对景结构）
+		     ========================================================================== -->
+		<div class="game-showcase-genshin" id="teyvatArchive" aria-label="原神·提瓦特旅行影像卷宗">
+			<!-- 左侧：随滚动展开的提瓦特旅行影像卷宗 -->
+			<div class="genshin-visual-side">
+				<div class="genshin-frame-container contact-print-container" aria-roledescription="滚动影像档案">
+					<div class="genshin-top-meta">
+						<span class="genshin-meta-pill"><span class="genshin-star-symbol">✦</span> CONTACT PRINT // <span id="teyvatArchiveNo">01</span></span>
+						<span class="genshin-meta-region">ALL FRAMES IN VIEW</span>
+					</div>
+					<div class="genshin-media-wrap" id="teyvatArchiveStage">
+						<div class="contact-main-view" aria-live="polite">
+							<figure class="contact-main-slide is-active" data-title="同伴合影">
+								<div class="contact-main-media is-collage"><img data-scene-src="../img/demo.svg" alt="提瓦特收藏影像：同伴合影" width="736" height="828" loading="lazy" decoding="async" /></div>
+							</figure>
+							<figure class="contact-main-slide" data-title="旅途画面">
+								<div class="contact-main-media is-landscape rotate-ccw"><img data-scene-src="../img/demo.svg" alt="提瓦特收藏影像：旅途画面" width="736" height="1309" loading="lazy" /></div>
+							</figure>
+							<figure class="contact-main-slide" data-title="水色诗篇">
+								<div class="contact-main-media is-landscape rotate-ccw"><img data-scene-src="../img/demo.svg" alt="提瓦特收藏影像：水色诗篇" width="736" height="1312" loading="lazy" /></div>
+							</figure>
+							<figure class="contact-main-slide" data-title="枫丹群像">
+								<div class="contact-main-media is-landscape rotate-cw"><img data-scene-src="../img/demo.svg" alt="提瓦特收藏影像：枫丹群像" width="736" height="1308" loading="lazy" /></div>
+							</figure>
+							<figure class="contact-main-slide" data-title="版本纪行">
+								<div class="contact-main-media is-portrait"><img data-scene-src="../img/demo.svg" alt="提瓦特收藏影像：版本纪行" width="736" height="1308" loading="lazy" /></div>
+							</figure>
+							<div class="contact-focus-mark" aria-hidden="true"></div>
+						</div>
+						<div class="contact-main-caption">
+							<span id="contactMainIndex">FRAME 01 / 05</span>
+							<strong id="contactMainTitle">同伴合影</strong>
+							<em>完整影像</em>
+						</div>
+
+						<div class="contact-sheet-overview">
+							<div class="contact-sheet-label"><span>CONTACT SHEET</span><em>滚动或点选查看</em></div>
+							<div class="contact-thumbnail-grid" aria-label="五张旅行影像总览">
+								<div class="contact-moving-viewfinder" aria-hidden="true"></div>
+								<button type="button" class="contact-thumb is-active" data-archive-index="0" aria-label="查看同伴合影" aria-current="true">
+									<span class="contact-thumb-media is-collage"><img data-scene-src="../img/demo.svg" alt="" width="736" height="828" loading="lazy" decoding="async" /></span><span class="contact-thumb-label"><b>01</b> 同伴合影</span>
+								</button>
+								<button type="button" class="contact-thumb" data-archive-index="1" aria-label="查看旅途画面">
+									<span class="contact-thumb-media is-landscape rotate-ccw"><img data-scene-src="../img/demo.svg" alt="" width="736" height="1309" loading="lazy" /></span><span class="contact-thumb-label"><b>02</b> 旅途画面</span>
+								</button>
+								<button type="button" class="contact-thumb" data-archive-index="2" aria-label="查看水色诗篇">
+									<span class="contact-thumb-media is-landscape rotate-ccw"><img data-scene-src="../img/demo.svg" alt="" width="736" height="1312" loading="lazy" /></span><span class="contact-thumb-label"><b>03</b> 水色诗篇</span>
+								</button>
+								<button type="button" class="contact-thumb" data-archive-index="3" aria-label="查看枫丹群像">
+									<span class="contact-thumb-media is-landscape rotate-cw"><img data-scene-src="../img/demo.svg" alt="" width="736" height="1308" loading="lazy" /></span><span class="contact-thumb-label"><b>04</b> 枫丹群像</span>
+								</button>
+								<button type="button" class="contact-thumb" data-archive-index="4" aria-label="查看版本纪行">
+									<span class="contact-thumb-media is-portrait"><img data-scene-src="../img/demo.svg" alt="" width="736" height="1308" loading="lazy" /></span><span class="contact-thumb-label"><b>05</b> 版本纪行</span>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="genshin-bottom-bar">
+						<span class="genshin-coord"><span class="genshin-star-symbol">✦</span> <span id="teyvatArchiveTitle">同伴合影</span></span>
+						<span class="contact-sheet-status">SELECTED PRINT · <b id="contactSheetStatus">01</b></span>
+					</div>
+				</div>
+			</div>
+
+			<!-- 右侧：旅行者手账自述与心境笔记 (48% 宽度) -->
+			<div class="genshin-dossier-side">
+				<header class="genshin-dossier-header">
+					<div class="genshin-header-top">
+						<div class="genshin-fate-badge">
+							<span class="genshin-star-symbol">✦</span>
+							<span class="genshin-badge-text">提瓦特漫游手记</span>
+						</div>
+						<div class="genshin-traveler-uid-pill" title="旅行者专属 UID: 288469260">
+							<span class="uid-tag">UID</span>
+							<span class="uid-star">✦</span>
+							<span class="uid-number">288469260</span>
+						</div>
+					</div>
+					<div class="genshin-title-group">
+						<h3 class="genshin-game-title">《原神》</h3>
+						<span class="genshin-sub-title">Genshin Impact · 视听与漫游档案</span>
+					</div>
+				</header>
+
+				<!-- 旅行者专属心境札记自述 -->
+				<div class="genshin-reflection-card">
+					<div class="reflection-quote-mark reflection-quote-open">“✦</div>
+					<p class="reflection-text" id="genshinReflectionText">
+						我是在 4.0 枫丹版本踏入这片大陆的。那时尚未接触端游的浩瀚，手机里的消遣翻来覆去不过寥寥几款，出于对满网议论的好奇，我想探寻这里究竟藏着怎样的天地。初入提瓦特最难忘的，是总有高等级玩家抢着申请进门带萌新，起初我还以为带人会有丰厚的叠加悬赏，后来才懂得，原来世间真有不图回报的热忱与善意。<br><br>
+						手机画质有限，但我对剧情有近乎偏执的珍重：凡是有配音的魔神主线，我宁可悉数压在任务栏里攒着，也绝不肯在低画质与卡顿里草草消耗初见的震撼。那时平日奔波、闲暇极少，难得的空隙里，我只想买一份真正舒展透亮的视听享受。为了看清枫丹水下那一泓毫无瑕疵的波光，我自费续费了云原神时长，也成了我人生中第一笔真正的大额充值 💸。<br><br>
+						探索至今，原神音乐成了我最深的日常寄托。上方的歌单只是常听的零碎拾遗，而在 B站年度报告里循环登顶、陪伴我最久的，始终是《纳塔交响音乐现场》。没有故作高深的由头，只因那版交响里喷薄而出的炽热与生命力，恰是当时我（我们）最渴望借来前行的力量。留下这串 UID，不问练度，只记录一段被音符与善意温暖过的真实岁月。
+					</p>
+					<div class="reflection-quote-mark reflection-quote-close">✦”</div>
+				</div>
+
+				<!-- 简洁的 B站纳塔交响音乐现场外跳按钮 -->
+				<div class="genshin-bili-wrap">
+					<a href="https://www.bilibili.com/video/BV18E4m1d7b7/?share_source=copy_web&vd_source=3edb76de48d2dd3e5ded4e2828dc0c9a" target="_blank" rel="noopener noreferrer" class="genshin-bili-btn" title="前往哔哩哔哩观看《原神》纳塔交响音乐现场">
+						<span class="bili-btn-icon" aria-hidden="true">
+							<svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
+								<path d="M8 5v14l11-7z"/>
+							</svg>
+						</span>
+						<span class="bili-btn-badge">B站年度循环之最</span>
+						<span class="bili-btn-title">《原神》纳塔交响音乐现场</span>
+						<span class="bili-btn-arrow" aria-hidden="true">↗</span>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- ========================================================================== 
+		     特展二：《黑神话：悟空》西行云海 · 天命长卷（一体化东方暗金展台）
+		     ========================================================================== -->
+		<div class="game-showcase-wukong wukong-unified-scroll" id="wukongShowcase" aria-label="黑神话悟空·游玩手记">
+			<!-- 卷首揭幕与云海定格：滚动时先抬起卷面，再停留于原画 -->
+			<div class="wukong-reveal-track" id="wukongRevealTrack">
+				<div class="wukong-pinned-scene">
+					<div class="wukong-hero-media-wrap">
+						<img data-scene-src="../img/demo.svg" alt="黑神话：悟空四大天王与云海群山原画" class="wukong-hero-img" width="2560" height="1452" loading="lazy" decoding="async" />
+						<div class="wukong-mist-gradient-overlay" aria-hidden="true"></div>
+						<div class="wukong-cinematic-copy">
+							<p>踏过大漠残阳与漫天神佛，走过长路，才更认得真实的自己。</p>
+						</div>
+						<a href="#wukongStoryBar" class="wukong-entry-anchor" id="wukongJournalAnchor" title="展开西行游玩手记">
+							<span class="entry-anchor-text">展开手札</span>
+							<span class="entry-anchor-arrow" aria-hidden="true">↓</span>
+						</a>
+					</div>
+					<div class="wukong-curtain-sheet">
+						<div class="wukong-curtain-meta">
+							<span>BLACK MYTH: WUKONG</span>
+							<span>西行手札 · VOL.02</span>
+						</div>
+						<div class="wukong-curtain-copy">
+							<span class="wukong-curtain-eyebrow">A JOURNEY THROUGH THE CLOUD SEA</span>
+							<h3>重走西行路<br /><em>直面天命</em></h3>
+							<p>不是为了成仙作祖，而是在漫天神佛与命运面前，认出真实的自己。</p>
+							<div class="wukong-curtain-prompt"><span>向下，揭开这段西行</span><span aria-hidden="true">↓</span></div>
+						</div>
+						<span class="wukong-curtain-index" aria-hidden="true">卷<br />二</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="wukong-bottom-sheet" id="wukongStorySheet">
+				<div class="wukong-sheet-inner">
+					<header class="wukong-sheet-heading wukong-reveal-item">
+						<div>
+							<span class="wukong-sheet-overline">THE DESTINY JOURNAL · VOL.02</span>
+							<h3>西行手札 <span class="wukong-chop-seal seal-header" aria-label="西行印鉴">西行</span> <span>把这段旅程，写给同行的人</span></h3>
+						</div>
+						<div class="wukong-sheet-words" aria-label="缘起、磨砺、天命">
+							<span>缘起</span><i aria-hidden="true">·</i><span>磨砺</span><i aria-hidden="true">·</i><span>天命</span>
+						</div>
+					</header>
+
+			<!-- 听觉灵魂：黄风岭“陕北说书 · 听风令”互动胶囊条 -->
+			<div class="wukong-storyteller-bar wukong-reveal-item" id="wukongStoryBar">
+				<button class="storyteller-play-btn" id="storytellerPlayBtn" type="button" disabled aria-label="陕北说书音频待补充" title="原音频文件尚未补充">
+					<span class="storyteller-icon" aria-hidden="true">🪕</span>
+					<span class="storyteller-play-label">陕北说书 · 听风令</span>
+				</button>
+				<div class="storyteller-lyric-track">
+					<span class="storyteller-quote-mark">“</span>
+					<span class="storyteller-lyric-text" id="storytellerLyricText">黄风起兮大漠黄，踏碎灵山万重障。终了，终了！是非成败，转头皆空…</span>
+					<span class="storyteller-quote-mark">”</span>
+				</div>
+				<div class="storyteller-status-badge">
+					<span class="storyteller-pulse-dot"></span>
+					<span class="storyteller-status-text" id="storytellerStatusText">音频待补充 · 熊竹英</span>
+				</div>
+				<audio id="wukongStoryAudio" preload="none"></audio>
+			</div>
+
+			<!-- 核心手札：对开古卷叙事流 -->
+			<div class="wukong-journal-content">
+				<!-- 可交互章节导航：缘起 · 入局 → 磨砺 · 破局 → 直面 · 天命（支持点击滚动与滚动高亮） -->
+				<nav class="wukong-chapter-nav wukong-reveal-item" id="wukongChapterNav" aria-label="手记章节导航">
+					<button type="button" class="chapter-nav-btn is-active" data-target="#wukongPartOrigin">
+						<span class="nav-btn-dot"></span>
+						<span class="nav-btn-text">缘起 · 入局</span>
+					</button>
+					<span class="nav-connector" aria-hidden="true">──→</span>
+					<button type="button" class="chapter-nav-btn" data-target="#wukongPartTrials">
+						<span class="nav-btn-dot"></span>
+						<span class="nav-btn-text">磨砺 · 破局</span>
+					</button>
+					<span class="nav-connector" aria-hidden="true">──→</span>
+					<button type="button" class="chapter-nav-btn" data-target="#wukongPartDestiny">
+						<span class="nav-btn-dot"></span>
+						<span class="nav-btn-text">直面 · 天命</span>
+					</button>
+				</nav>
+
+				<div class="wukong-book-spread">
+					<!-- 左半幅：卷上 · 缘起与宏卷 -->
+					<section class="wukong-page-column page-left wukong-reveal-item" id="wukongPartOrigin" aria-label="卷上 · 缘起与宏卷">
+						<!-- 4 个角落如意回纹包角 (Corner Filigrees) -->
+						<svg class="corner-filigree corner-tl" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 18V6C2 3.8 3.8 2 6 2H18" stroke="#dfbe7b" stroke-width="1.4" stroke-linecap="round"/><path d="M5 13V6.5C5 5.7 5.7 5 6.5 5H13" stroke="#dfbe7b" stroke-width="1.1" stroke-linecap="round"/><circle cx="8.5" cy="8.5" r="1.5" fill="#dfbe7b"/><path d="M2 2L5 5" stroke="#dfbe7b" stroke-width="1.2" stroke-linecap="round"/></svg>
+						<svg class="corner-filigree corner-tr" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 18V6C2 3.8 3.8 2 6 2H18" stroke="#dfbe7b" stroke-width="1.4" stroke-linecap="round"/><path d="M5 13V6.5C5 5.7 5.7 5 6.5 5H13" stroke="#dfbe7b" stroke-width="1.1" stroke-linecap="round"/><circle cx="8.5" cy="8.5" r="1.5" fill="#dfbe7b"/><path d="M2 2L5 5" stroke="#dfbe7b" stroke-width="1.2" stroke-linecap="round"/></svg>
+						<svg class="corner-filigree corner-bl" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 18V6C2 3.8 3.8 2 6 2H18" stroke="#dfbe7b" stroke-width="1.4" stroke-linecap="round"/><path d="M5 13V6.5C5 5.7 5.7 5 6.5 5H13" stroke="#dfbe7b" stroke-width="1.1" stroke-linecap="round"/><circle cx="8.5" cy="8.5" r="1.5" fill="#dfbe7b"/><path d="M2 2L5 5" stroke="#dfbe7b" stroke-width="1.2" stroke-linecap="round"/></svg>
+						<svg class="corner-filigree corner-br" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 18V6C2 3.8 3.8 2 6 2H18" stroke="#dfbe7b" stroke-width="1.4" stroke-linecap="round"/><path d="M5 13V6.5C5 5.7 5.7 5 6.5 5H13" stroke="#dfbe7b" stroke-width="1.1" stroke-linecap="round"/><circle cx="8.5" cy="8.5" r="1.5" fill="#dfbe7b"/><path d="M2 2L5 5" stroke="#dfbe7b" stroke-width="1.2" stroke-linecap="round"/></svg>
+						<!-- 佛窟背光暗纹金沙水印 (Aureole Watermark) -->
+						<svg class="wukong-column-watermark" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="100" cy="100" r="90" stroke="#dfbe7b" stroke-width="1.2" stroke-dasharray="4 4"/><circle cx="100" cy="100" r="70" stroke="#dfbe7b" stroke-width="1"/><circle cx="100" cy="100" r="45" stroke="#dfbe7b" stroke-width="1.5"/><path d="M100 15 C100 45 80 60 100 80 C120 60 100 45 100 15 Z" fill="#dfbe7b"/><path d="M100 185 C100 155 80 140 100 120 C120 140 100 155 100 185 Z" fill="#dfbe7b"/><path d="M15 100 C45 100 60 80 80 100 C60 120 45 100 15 100 Z" fill="#dfbe7b"/><path d="M185 100 C155 100 140 80 120 100 C140 120 155 100 185 100 Z" fill="#dfbe7b"/><path d="M40 40 C60 60 70 50 85 70 C70 85 60 70 40 40 Z" fill="#dfbe7b"/><path d="M160 40 C140 60 130 50 115 70 C130 85 140 70 160 40 Z" fill="#dfbe7b"/><path d="M40 160 C60 140 70 150 85 130 C70 115 60 130 40 160 Z" fill="#dfbe7b"/><path d="M160 160 C140 140 130 150 115 130 C130 115 140 130 160 160 Z" fill="#dfbe7b"/></svg>
+						<div class="wukong-page-header">
+							<span class="page-chapter-title">【 卷上 · 缘起与宏卷 】</span>
+						</div>
+						
+						<!-- 章节开头突出个人真实感受金句 -->
+						<div class="wukong-quote-highlight">
+							<p>“若不是大学里兄弟领进门，我大概真要错过这片真正属于我们自己的苍茫古刹。”</p>
+						</div>
+
+						<article class="wukong-passage">
+							<h4 class="passage-title">血脉觉醒，得遇引路之人</h4>
+							<p class="passage-text">
+								曾浅尝过《法环》，但异域语言与神话的隔阂终究未解其味。直到大学时光里，被最好的兄弟拉进黑神话的世界——推开殿门的那一刻，我第一次亲眼见识到何为<strong>真正属于我们自己的国产 3A 巅峰</strong>。
+							</p>
+						</article>
+
+						<article class="wukong-passage">
+							<h4 class="passage-title">步步惊心，行走的史诗大片</h4>
+							<p class="passage-text">
+								行于山野古道与残阳风烟之间，漫天神佛威压而下，帧帧如画。每一次过剧情都是毫无妥协的院线级视听洗礼。沉迷在这片东方神话奇景中，往往回过神来窗外已不知东方之既白。
+							</p>
+						</article>
+
+						<!-- 短句收尾 -->
+						<div class="passage-closing">
+							<span class="closing-dash">—</span>
+							<p class="closing-text">踏入这场西行，不仅是通关一款游戏，更像与老友共赴的一场旷日梦境。<span class="wukong-chop-seal seal-inline" title="破妄印鉴">破妄</span></p>
+						</div>
+					</section>
+
+					<!-- 中轴极简微光细线 -->
+					<div class="wukong-book-spine" aria-hidden="true">
+						<span class="spine-line"></span>
+						<span class="spine-emblem" aria-hidden="true">❖</span>
+						<span class="spine-line"></span>
+					</div>
+
+					<!-- 右半幅：卷下 · 磨砺与破局 -->
+					<section class="wukong-page-column page-right wukong-reveal-item" id="wukongPartTrials" aria-label="卷下 · 磨砺与破局">
+						<!-- 4 个角落如意回纹包角 (Corner Filigrees) -->
+						<svg class="corner-filigree corner-tl" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 18V6C2 3.8 3.8 2 6 2H18" stroke="#dfbe7b" stroke-width="1.4" stroke-linecap="round"/><path d="M5 13V6.5C5 5.7 5.7 5 6.5 5H13" stroke="#dfbe7b" stroke-width="1.1" stroke-linecap="round"/><circle cx="8.5" cy="8.5" r="1.5" fill="#dfbe7b"/><path d="M2 2L5 5" stroke="#dfbe7b" stroke-width="1.2" stroke-linecap="round"/></svg>
+						<svg class="corner-filigree corner-tr" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 18V6C2 3.8 3.8 2 6 2H18" stroke="#dfbe7b" stroke-width="1.4" stroke-linecap="round"/><path d="M5 13V6.5C5 5.7 5.7 5 6.5 5H13" stroke="#dfbe7b" stroke-width="1.1" stroke-linecap="round"/><circle cx="8.5" cy="8.5" r="1.5" fill="#dfbe7b"/><path d="M2 2L5 5" stroke="#dfbe7b" stroke-width="1.2" stroke-linecap="round"/></svg>
+						<svg class="corner-filigree corner-bl" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 18V6C2 3.8 3.8 2 6 2H18" stroke="#dfbe7b" stroke-width="1.4" stroke-linecap="round"/><path d="M5 13V6.5C5 5.7 5.7 5 6.5 5H13" stroke="#dfbe7b" stroke-width="1.1" stroke-linecap="round"/><circle cx="8.5" cy="8.5" r="1.5" fill="#dfbe7b"/><path d="M2 2L5 5" stroke="#dfbe7b" stroke-width="1.2" stroke-linecap="round"/></svg>
+						<svg class="corner-filigree corner-br" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 18V6C2 3.8 3.8 2 6 2H18" stroke="#dfbe7b" stroke-width="1.4" stroke-linecap="round"/><path d="M5 13V6.5C5 5.7 5.7 5 6.5 5H13" stroke="#dfbe7b" stroke-width="1.1" stroke-linecap="round"/><circle cx="8.5" cy="8.5" r="1.5" fill="#dfbe7b"/><path d="M2 2L5 5" stroke="#dfbe7b" stroke-width="1.2" stroke-linecap="round"/></svg>
+						<!-- 佛窟背光暗纹金沙水印 (Aureole Watermark) -->
+						<svg class="wukong-column-watermark" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="100" cy="100" r="90" stroke="#dfbe7b" stroke-width="1.2" stroke-dasharray="4 4"/><circle cx="100" cy="100" r="70" stroke="#dfbe7b" stroke-width="1"/><circle cx="100" cy="100" r="45" stroke="#dfbe7b" stroke-width="1.5"/><path d="M100 15 C100 45 80 60 100 80 C120 60 100 45 100 15 Z" fill="#dfbe7b"/><path d="M100 185 C100 155 80 140 100 120 C120 140 100 155 100 185 Z" fill="#dfbe7b"/><path d="M15 100 C45 100 60 80 80 100 C60 120 45 100 15 100 Z" fill="#dfbe7b"/><path d="M185 100 C155 100 140 80 120 100 C140 120 155 100 185 100 Z" fill="#dfbe7b"/><path d="M40 40 C60 60 70 50 85 70 C70 85 60 70 40 40 Z" fill="#dfbe7b"/><path d="M160 40 C140 60 130 50 115 70 C130 85 140 70 160 40 Z" fill="#dfbe7b"/><path d="M40 160 C60 140 70 150 85 130 C70 115 60 130 40 160 Z" fill="#dfbe7b"/><path d="M160 160 C140 140 130 150 115 130 C130 115 140 130 160 160 Z" fill="#dfbe7b"/></svg>
+						<div class="wukong-page-header">
+							<span class="page-chapter-title">【 卷下 · 磨砺与破局 】</span>
+						</div>
+
+						<!-- 章节开头突出个人真实感受金句 -->
+						<div class="wukong-quote-highlight">
+							<p>“数不清倒在强悍妖王脚下多少回，但千百次折戟换来的一记‘识破’，胜过所有虚幻的掌声。”</p>
+						</div>
+
+						<article class="wukong-passage">
+							<h4 class="passage-title">百折不回，受苦磨砺与破局</h4>
+							<p class="passage-text">
+								动作魂游的纯正快感，从来伴随着结结实实的受苦。面对强悍妖王，在一次次抓狂、倒地与重开中摸索招式与出刀时机；当千百次翻滚化作破空的势如雷霆，<strong>那一刻见招拆招的成就感</strong>无可替代。
+							</p>
+						</article>
+
+						<article class="wukong-passage">
+							<h4 class="passage-title">重走西游，踏平坎坷成大道</h4>
+							<p class="passage-text">
+								体验、沉浸、受苦、享受。重走这趟西行路，求的从不是封神成圣，而是在漫天神佛与莫测宿命面前，依然能挺直脊梁直面天命的骨气。感谢西行，更感谢同行之人。
+							</p>
+						</article>
+
+						<!-- 短句收尾 -->
+						<div class="passage-closing">
+							<span class="closing-dash">—</span>
+							<p class="closing-text">长棍在手，前路纵有万重险关，踏平坎坷终成大道。<span class="wukong-chop-seal seal-inline" title="天命印鉴">天命</span></p>
+						</div>
+					</section>
+				</div>
+
+				<!-- 底部：这段旅程留下的三个词（简洁记忆轴，点击节点查看对应真实说明） -->
+				<section class="wukong-memory-section wukong-reveal-item" id="wukongPartDestiny" aria-label="这段旅程留下的三个词">
+					<div class="memory-header">
+						<span class="memory-seal-dot">❖</span>
+						<h4 class="memory-title">这段旅程留下的三个词</h4>
+						<span class="memory-hint">（点击节点重温心迹印记）</span>
+					</div>
+
+					<div class="wukong-memory-timeline" role="tablist" aria-label="西行旅程记忆轴">
+						<button type="button" class="timeline-node is-active" role="tab" id="nodeWord1" aria-selected="true" aria-controls="panelWord1" data-index="0">
+							<span class="node-marker">01</span>
+							<span class="node-name">识破</span>
+							<span class="node-sub">战法心流</span>
+						</button>
+						<div class="timeline-connector-bar" aria-hidden="true"></div>
+						<button type="button" class="timeline-node" role="tab" id="nodeWord2" aria-selected="false" aria-controls="panelWord2" data-index="1">
+							<span class="node-marker">02</span>
+							<span class="node-name">磨砺</span>
+							<span class="node-sub">百折不退</span>
+						</button>
+						<div class="timeline-connector-bar" aria-hidden="true"></div>
+						<button type="button" class="timeline-node" role="tab" id="nodeWord3" aria-selected="false" aria-controls="panelWord3" data-index="2">
+							<span class="node-marker">03</span>
+							<span class="node-name">天命</span>
+							<span class="node-sub">直面初心</span>
+						</button>
+					</div>
+
+					<!-- 记忆轴展开详情卡片（克制平滑切换） -->
+					<div class="wukong-memory-cards">
+						<div class="memory-detail-panel is-active" id="panelWord1" role="tabpanel" aria-labelledby="nodeWord1">
+							<div class="panel-seal">识破</div>
+							<div class="panel-text">
+								<h5 class="panel-heading">【常驻战法 · 势起奔雷】</h5>
+								<p class="panel-desc">偏好劈棍与立棍。在毫无容错的毫厘闪避与金铁刀鸣间，体会到极致的见招拆招；每一次成功识破化解妖王重击，都是心流与专注的瞬间释放。</p>
+							</div>
+						</div>
+						<div class="memory-detail-panel" id="panelWord2" role="tabpanel" aria-labelledby="nodeWord2" hidden>
+							<div class="panel-seal">磨砺</div>
+							<div class="panel-text">
+								<h5 class="panel-heading">【难忘鏖战 · 百折不退】</h5>
+								<p class="panel-desc">难忘黄风漫天、大漠狂风与妖王压迫下的数百次折戟倒地。面对强敌没有捷径，在一遍遍重开中摸透出招节拍，死磕到底，方得破局。</p>
+							</div>
+						</div>
+						<div class="memory-detail-panel" id="panelWord3" role="tabpanel" aria-labelledby="nodeWord3" hidden>
+							<div class="panel-seal">天命</div>
+							<div class="panel-text">
+								<h5 class="panel-heading">【西行心迹 · 直面初心】</h5>
+								<p class="panel-desc">重走西游路，所求从来不是成仙作祖，而是在漫天神佛威压与莫测命运面前，挺直脊梁直面天命。见天地，见众生，亦见真实的自己。</p>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ==========================================================================
+	     3. 📚 阅读书阁 (Reading - 翻页式私人阅读札记)
+	     ========================================================================== -->
+	<section id="reading" class="camp-section reading-section-journal">
+		<!-- 纯净轻盈卷首标题 (第 1 拍：短标 + 墨迹洇开大标题 + 诗意副标) -->
+		<div class="section-header-block reading-header-clean">
+			<span class="section-eyebrow reading-archive-tag">READING ARCHIVE // 03 · PRIVATE NOTES</span>
+			<h2 class="section-clean-title splash-heading reading-splash" data-splash="纸墨书阁">纸墨书阁</h2>
+			<p class="section-clean-subtitle reading-subtitle-main">“在字里行间里照见自己，文字是抵御喧嚣最安静的力量。”</p>
+		</div>
+
+		<!-- 翻页手账笔记本工作台 (第 2 拍：核心主画面 / 实体书阁台面) -->
+		<div class="section-hero-visual notebook-desk-container">
+			<!-- 顶部垂下的丝带书签 -->
+			<div class="notebook-ribbon" title="丝带书签"></div>
+
+			<!-- 摊开的笔记本实体 -->
+			<div class="open-notebook" id="openNotebook">
+				<!-- 真实书页自然折角 -->
+				<div class="notebook-corner-fold"></div>
+
+				<!-- 左页：典藏书籍封面与阅读痕迹 -->
+				<div class="notebook-page page-left" id="pageLeft">
+					<div class="page-inner-content">
+						<!-- 封面与侧边微夹书签 -->
+						<div class="book-cover-frame" id="bookCoverFrame">
+							<div class="book-cover-ribbon-marker"></div>
+							<div class="book-spine-ridge"></div>
+							<img loading="lazy" decoding="async" id="journalCoverImg" data-scene-src="../img/demo.svg" alt="书籍封面" class="journal-cover-img" />
+						</div>
+
+						<!-- 手写边注小纸片 -->
+						<div class="handwritten-marginalia-note" id="handwrittenNoteWrapper">
+							<span class="marginalia-pin">✦</span>
+							<p class="marginalia-text" id="journalHandwrittenNote">“城里的人想出去，城外的人想冲进来。”</p>
+						</div>
+
+						<!-- 个人藏书阅读痕迹与专属手账物件 -->
+						<div class="book-meta-stamp">
+							<div class="book-reading-log">
+								<div class="log-item">
+									<span class="log-key">阅读媒介</span>
+									<span class="log-val medium-tag" id="journalReadMedium">📖 实体书</span>
+								</div>
+								<div class="log-item">
+									<span class="log-key">阅读时间</span>
+									<span class="log-val" id="journalReadTime">开学前后</span>
+								</div>
+								<div class="log-item">
+									<span class="log-key">阅读状态</span>
+									<span class="log-val status-pill" id="journalReadStatus">已读</span>
+								</div>
+								<div class="log-item">
+									<span class="log-key">读后状态</span>
+									<span class="log-val status-meme-badge" id="journalPostReadStatus">笑着破防</span>
+								</div>
+								<div class="log-item">
+									<span class="log-key">阅读坐标</span>
+									<span class="log-val coord-badge" id="journalCoordinateBadge">人间讽刺 / 围困</span>
+								</div>
+							</div>
+							<!-- 专属手账角落图腾/票根物件容器 -->
+							<div class="journal-corner-artifact" id="journalBookSticker" title="随书手账印记">
+								<div class="artifact-ticket" title="出入城随心往返票根">
+									<div class="ticket-head">TICKET · NO.1947</div>
+									<div class="ticket-route">城内 ⇄ 城外</div>
+									<div class="ticket-no">出入自由 · 自行破防</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 笔记本中间立体柔和折缝装订线 -->
+				<div class="notebook-spine-crease">
+					<div class="crease-shadow-overlay"></div>
+					<span class="spine-stitch"></span>
+					<span class="spine-stitch"></span>
+					<span class="spine-stitch"></span>
+					<span class="spine-stitch"></span>
+				</div>
+
+				<!-- 右页：私人阅读札记与心声四部曲 -->
+				<div class="notebook-page page-right" id="pageRight">
+					<div class="page-inner-content" id="pageRightContent">
+						<!-- 页眉与阅读坐标 -->
+						<div class="journal-page-header">
+							<span class="journal-page-no" id="journalPageNo">PAGE NO. 01 / 04</span>
+							<span class="journal-coordinate-tag" id="journalHeaderCoord">【阅读坐标】 人间讽刺 / 围困</span>
+						</div>
+
+						<!-- 书名与作者 -->
+						<div class="journal-book-heading">
+							<h3 id="journalBookTitle">《围城》</h3>
+							<span class="journal-book-author" id="journalBookAuthor">钱钟书 著</span>
+						</div>
+
+						<!-- 1. 摘一句 -->
+						<div class="journal-note-section section-quote">
+							<div class="note-section-title">
+								<span class="section-dot">✦</span>
+								<span>摘一句</span>
+							</div>
+							<div class="journal-quote-box">
+								<span class="quote-mark">“</span>
+								<p class="quote-content" id="journalQuoteContent">
+									在这里写下读书时的感想。
+								</p>
+							</div>
+						</div>
+
+						<!-- 2. 我读到的东西 -->
+						<div class="journal-note-section section-insight">
+							<div class="note-section-title">
+								<span class="section-dot">✎</span>
+								<span>我读到的东西</span>
+							</div>
+							<p class="insight-content" id="journalInsightContent">
+								年少看方鸿渐觉得滑稽可笑，如今看却满是普通人无法逃脱的狼狈与犹疑。生活里的“围城”何止婚姻？那些未曾抵达的远方总是最好的，直到我们真正置身其中。
+							</p>
+						</div>
+
+						<!-- 3. 留下的关键词 -->
+						<div class="journal-note-section section-keywords">
+							<div class="note-section-title">
+								<span class="section-dot">🏷️</span>
+								<span>留下的关键词</span>
+							</div>
+							<div class="keywords-list" id="journalKeywordsList">
+								<span class="keyword-tag">#人间讽刺</span>
+								<span class="keyword-tag">#无形围困</span>
+								<span class="keyword-tag">#清醒自省</span>
+							</div>
+						</div>
+
+						<!-- 4. 读后余味 -->
+						<div class="journal-note-section section-epilogue">
+							<div class="note-section-title">
+								<span class="section-dot">☕</span>
+								<span>读后余味</span>
+							</div>
+							<p class="epilogue-content" id="journalEpilogueContent">
+								刻薄背后藏着对人性的极致体察。承认自己的平庸与局限，大概是与生活握手言和的第一步。
+							</p>
+						</div>
+
+						<!-- 翻页控制小注脚 -->
+						<div class="journal-page-footer">
+							<button type="button" class="page-turn-btn prev-btn" id="prevBookBtn" title="上一本">
+								<span>← 上一本</span>
+							</button>
+							<span class="reading-hint">点击底部书脊或按钮翻阅 ↷</span>
+							<button type="button" class="page-turn-btn next-btn" id="nextBookBtn" title="下一本">
+								<span>下一本 →</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 底部书脊索引架 (第 3 拍：书架藏书索引与扩展交互) -->
+		<div class="section-content-body bookshelf-index-wrapper">
+			<div class="book-spines-row" id="bookSpinesRow">
+				<!-- 书脊 1: 《围城》 暗红 -->
+				<div class="book-spine active" data-index="0" style="--spine-color: #7b3232; --spine-accent: #eed8b8;">
+					<div class="spine-top-lines"></div>
+					<div class="spine-title-vertical">《围城》</div>
+					<div class="spine-author-vertical">钱钟书</div>
+					<div class="spine-bottom-tag">VOL.1</div>
+				</div>
+
+				<!-- 书脊 2: 《额尔古纳河右岸》 森林绿 -->
+				<div class="book-spine" data-index="1" style="--spine-color: #2d4e37; --spine-accent: #d3e5d7;">
+					<div class="spine-top-lines"></div>
+					<div class="spine-title-vertical">《额尔古纳河右岸》</div>
+					<div class="spine-author-vertical">迟子建</div>
+					<div class="spine-bottom-tag">VOL.2</div>
+				</div>
+
+				<!-- 书脊 3: 《奥德赛》 海蓝 -->
+				<div class="book-spine" data-index="2" style="--spine-color: #36516b; --spine-accent: #ded5be;">
+					<div class="spine-top-lines"></div>
+					<div class="spine-title-vertical">《奥德赛》</div>
+					<div class="spine-author-vertical">荷马</div>
+					<div class="spine-bottom-tag">VOL.3</div>
+				</div>
+
+				<!-- 书脊 4: 《三体》 深宇宙蓝 -->
+				<div class="book-spine" data-index="3" style="--spine-color: #1b2636; --spine-accent: #9fc2e2;">
+					<div class="spine-top-lines"></div>
+					<div class="spine-title-vertical">《三体》</div>
+					<div class="spine-author-vertical">刘慈欣</div>
+					<div class="spine-bottom-tag">VOL.4</div>
+				</div>
+			</div>
+
+			<div class="bookshelf-shelf-ledge">
+				<div class="shelf-wood-surface">
+					<!-- 书架上的 4 个刻度指示小绿点 -->
+					<div class="shelf-indicator-track">
+						<span class="shelf-slot-dot active" data-index="0"></span>
+						<span class="shelf-slot-dot" data-index="1"></span>
+						<span class="shelf-slot-dot" data-index="2"></span>
+						<span class="shelf-slot-dot" data-index="3"></span>
+					</div>
+				</div>
+				<div class="shelf-wood-bevel"></div>
+			</div>
+
+			<div class="bookshelf-instruction-caption">
+				<span>✦ 藏书架索引 · 抽出书脊翻阅札记</span>
+			</div>
+		</div>
+	</section>
+
+	<!-- ==========================================================================
+	     4. 📷 瞬息光影 · 3D 记忆星轨 (Photo - 3D Celestial Orbit Wall)
+	     ========================================================================== -->
+	<section id="photo" class="camp-section photo-universe-section">
+		<!-- 第 1 拍：短标 + 底片对焦聚合大标题 + 诗意副标 -->
+		<div class="section-header-block photo-header-clean">
+			<span class="section-eyebrow photo-meta-en">PHOTO ARCHIVE // 04 · 26 FRAMES</span>
+			<h2 class="section-clean-title splash-heading photo-splash" data-splash="瞬息光影 · 记忆展厅">瞬息光影 · 记忆展厅</h2>
+			<p class="section-clean-subtitle photo-intro">沿着照片的轨道，慢慢回看。</p>
+
+			<!-- 照片档案索引 (Archive Index Navigation) -->
+			<nav class="photo-archive-index" id="photoFilterNav" role="tablist" aria-label="照片档案索引">
+				<button type="button" class="photo-archive-btn is-active" data-cat="all" role="tab" aria-selected="true"><span class="archive-idx">00</span><span class="archive-label">全部</span></button>
+				<button type="button" class="photo-archive-btn" data-cat="summer" role="tab" aria-selected="false"><span class="archive-idx">01</span><span class="archive-label">夏日</span></button>
+				<button type="button" class="photo-archive-btn" data-cat="night" role="tab" aria-selected="false"><span class="archive-idx">02</span><span class="archive-label">夜晚</span></button>
+				<button type="button" class="photo-archive-btn" data-cat="campus" role="tab" aria-selected="false"><span class="archive-idx">03</span><span class="archive-label">校园</span></button>
+				<button type="button" class="photo-archive-btn" data-cat="travel" role="tab" aria-selected="false"><span class="archive-idx">04</span><span class="archive-label">旅途</span></button>
+				<button type="button" class="photo-archive-btn" data-cat="daily" role="tab" aria-selected="false"><span class="archive-idx">05</span><span class="archive-label">日常</span></button>
+			</nav>
+		</div>
+
+		<!-- 3D 记忆展厅交互舞台 (第 2 拍：核心主画面 / 3D 沉浸展区) -->
+		<div class="section-hero-visual photo-stage-viewport" id="photoStageViewport" tabindex="0" aria-label="照片展厅，使用左右方向键切换照片">
+				<!-- 展厅氛围装饰层 (Exhibition Ambient) -->
+			<div class="exhibition-ambient">
+				<!-- 极淡椭圆轨道线 -->
+				<svg class="ambient-orbit-svg" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+					<ellipse cx="600" cy="310" rx="480" ry="180" fill="none" stroke="rgba(110,135,119,0.12)" stroke-width="1"/>
+				</svg>
+				<!-- 四角相机对焦标记 -->
+				<div class="ambient-focus-mark" style="top:15%;left:12%"></div>
+				<div class="ambient-focus-mark" style="top:15%;right:12%"></div>
+				<div class="ambient-focus-mark" style="bottom:18%;left:12%"></div>
+				<div class="ambient-focus-mark" style="bottom:18%;right:12%"></div>
+				<!-- 散落坐标与胶片编号注释 -->
+				<span class="ambient-coord-text" style="top:8%;left:6%">ARCHIVE / 001—026</span>
+				<span class="ambient-coord-text" id="photoAmbientCoord" style="bottom:12%;right:5%"></span>
+				<span class="ambient-coord-text" id="photoAmbientDate" style="top:8%;right:6%"></span>
+			</div>
+
+			<!-- 3D 展厅视角世界容器 -->
+			<div class="photo-3d-world" id="photo3DWorld">
+				<!-- 照片卡片由 photo-gallery.js 建立 -->
+			</div>
+
+		</div>
+
+			<div class="gallery-dock" id="galleryDock" role="toolbar" aria-label="照片展厅控制器">
+				<button type="button" class="dock-btn dock-btn-nav" id="btnDockPrev" title="上一张 (←)">
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+				</button>
+
+				<div class="dock-thumb-container" id="dockThumbContainer">
+					<div class="dock-thumb-track" id="dockThumbTrack">
+						<!-- 胶片缩略图由 photo-gallery.js 建立 -->
+					</div>
+				</div>
+
+				<button type="button" class="dock-btn dock-btn-nav" id="btnDockNext" title="下一张 (→)">
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+				</button>
+
+				<button type="button" class="dock-btn dock-btn-play" id="btnDockPlay" title="暂停自动播放" aria-label="暂停自动播放" aria-pressed="true">
+					<span class="dock-btn-icon" id="dockPlayIcon" aria-hidden="true">Ⅱ</span>
+				</button>
+			</div>
+			<p class="photo-counter" id="photoCounter" aria-live="polite"></p>
+	</section>
+
+	<!-- 手账收尾致辞 -->
+	<div id="end">
+		<h3>✦ 感谢你陪我走过这趟热爱之旅</h3>
+		<p>热爱是平淡生活里的一束光，提醒我们除了日常的繁杂，世界还有无限广阔的可爱之处。</p>
+		<p>如果你也曾为提瓦特的一阵晚风驻足、在西行路上直面过天命，或者刚好喜欢同一种旋律——</p>
+		<p>欢迎前往我的纸条信箱，留下一张属于你的便签，我们交流分享！</p>
+		<a href="message.html" class="invite-btn" data-page-transition="letter" id="dropNoteBtn">前往纸条信箱留下一张便签 ➔</a>
+	</div>
+
+	<!-- 全局悬浮式手绘风玻璃胶囊导航 (Anime Doodle Glass Capsule Nav) -->
+	<nav class="glass-capsule-nav box" id="capsuleNav" aria-label="快捷导航">
+		<!-- 顶部品牌徽章 -->
+		<button type="button" class="capsule-header" title="展开 / 收起导航" aria-label="展开快捷导航" aria-expanded="false">
+			<span class="capsule-sparkle">✦</span>
+			<span class="capsule-title">MY WORLD</span>
+		</button>
+
+		<div class="capsule-divider"></div>
+
+		<!-- 导航项列表 (手绘线稿 SVG 图标 + 层次感尺寸) -->
+		<div class="capsule-menu">
+			<!-- 1. 启程站台 (木门线稿) -->
+			<a href="../index.html" class="capsule-item nav-door" title="启程站台">
+				<div class="icon-wrap">
+					<svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M5 21V9C5 5.134 8.134 2 12 2C15.866 2 19 5.134 19 9V21" />
+						<path d="M3 21H21" />
+						<path d="M12 2V21" />
+						<circle cx="9.5" cy="12" r="0.9" fill="currentColor" />
+					</svg>
+				</div>
+				<span class="item-label">启程站台</span>
+				<span class="item-arrow">›</span>
+			</a>
+
+			<!-- 2. 夏日手账 (指南针线稿) -->
+			<a href="home.html" class="capsule-item nav-compass" title="夏日手账">
+				<div class="icon-wrap">
+					<svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+						<circle cx="12" cy="12" r="9" />
+						<path d="M12 3V5.5" />
+						<polygon points="12,6.5 14.2,12 12,11.2 9.8,12" fill="currentColor" opacity="0.85" />
+						<polygon points="12,17.5 14.2,12 12,12.8 9.8,12" />
+						<circle cx="12" cy="1.2" fill="currentColor" />
+					</svg>
+				</div>
+				<span class="item-label">夏日手账</span>
+				<span class="item-arrow">›</span>
+			</a>
+
+			<!-- 3. 兴趣档案 (篝火线稿 - 当前激活) -->
+			<a href="detail.html" class="capsule-item nav-fire active" title="兴趣档案">
+				<div class="icon-wrap">
+					<svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M5 20L19 20" />
+						<path d="M6 21.5L18 18.5" />
+						<path d="M18 21.5L6 18.5" />
+						<path d="M12 3C10.2 6.2 7.8 8.5 7.8 12C7.8 14.5 9.7 16.5 12 16.5C14.3 16.5 16.2 14.5 16.2 12C16.2 8.5 13.8 6.2 12 3Z" />
+						<path d="M12 9.5C11.2 10.8 10.5 11.8 10.5 12.8C10.5 13.8 11.2 14.5 12 14.5C12.8 14.5 13.5 13.8 13.5 12.8C13.5 11.8 12.8 10.8 12 9.5Z" />
+					</svg>
+				</div>
+				<span class="item-label">兴趣档案</span>
+				<span class="item-arrow">›</span>
+			</a>
+			<!-- 电脑手记：工具与经验分享 -->
+			<a href="toolbox.html" class="capsule-item nav-tools" title="电脑手记">
+				<div class="icon-wrap"><svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 8h5M7 11h9M7 14h6"/></svg></div>
+				<span class="item-label">电脑手记</span><span class="item-arrow">›</span>
+			</a>
+
+			<!-- 4. 纸条信箱 (信箱/树洞线稿) -->
+			<a href="message.html" class="capsule-item nav-mail" title="纸条信箱">
+				<div class="icon-wrap">
+					<svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M12 15V21" />
+						<path d="M9 21H15" />
+						<path d="M6 15V9.5C6 6.8 8.2 4.5 11 4.5H15C16.7 4.5 18 5.8 18 7.5V15H6Z" />
+						<path d="M6 10H18" />
+						<path d="M18 9V6L21 7.5L18 9" />
+					</svg>
+				</div>
+				<span class="item-label">纸条信箱</span>
+				<span class="item-arrow">›</span>
+			</a>
+
+			<!-- 5. 联络 / 私域补给站 (微信·群聊) -->
+			
+		</div>
+
+		<!-- 底部角色感微章 (Traveler Badge) -->
+		<div class="capsule-footer" title="Personal Archive · 个人手账档案">
+			<span class="traveler-beacon"></span>
+			<span class="traveler-tag">PERSONAL ARCHIVE · 35MM</span>
+		</div>
+	</nav>
+
+	<!-- 东方神话 · 筋斗云腾云直上返回顶部 (Somersault Cloud Back-to-Top) -->
+	<button class="somersault-cloud-btn" id="somersaultCloudBtn" type="button" aria-label="筋斗云 · 腾云直上返回顶部" title="筋斗云 · 腾云直上">
+		<!-- 环形阅读进度圈 (SVG Circular Scroll Progress) -->
+		<svg class="cloud-progress-svg" viewBox="0 0 56 56" aria-hidden="true">
+			<defs>
+				<linearGradient id="cloudGoldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+					<stop offset="0%" stop-color="#ffe39f" />
+					<stop offset="50%" stop-color="#dfbe7b" />
+					<stop offset="100%" stop-color="#b3883b" />
+				</linearGradient>
+			</defs>
+			<circle class="cloud-progress-track" cx="28" cy="28" r="25" fill="none" stroke="rgba(223, 190, 123, 0.16)" stroke-width="2.4" />
+			<circle class="cloud-progress-bar" id="cloudProgressBar" cx="28" cy="28" r="25" fill="none" stroke="url(#cloudGoldGradient)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="157.08" stroke-dashoffset="157.08" />
+		</svg>
+
+		<!-- 筋斗云与如意金箍棒核心视觉 (Cloud & Golden Cudgel Core) -->
+		<div class="cloud-core" aria-hidden="true">
+			<!-- 如意金箍棒 (Golden Cudgel Needle) -->
+			<div class="cloud-cudgel">
+				<span class="cudgel-arrow-tip"></span>
+				<span class="cudgel-gold-cap cudgel-top"></span>
+				<span class="cudgel-shaft"></span>
+				<span class="cudgel-gold-cap cudgel-bottom"></span>
+			</div>
+			<!-- 祥云纹矢量图形 (Dunhuang Ruyi Somersault Cloud SVG) -->
+			<svg class="cloud-svg" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<!-- 柔润半透云气底衬 -->
+				<path class="cloud-body-fill" d="M6 16.5 C3 16.5 2 13 4.5 10.5 C6.5 8.5 9 8.5 11 9.5 C12 6 15 4 18 4 C21 4 24 6 25 9.5 C27 8.5 29.5 8.5 31.5 10.5 C34 13 33 16.5 30 16.5 C26 16.5 22 18 18 18 C14 18 10 16.5 6 16.5 Z" />
+				<!-- 祥云主轮廓线条 -->
+				<path class="cloud-contour" d="M4 14.5 C2.5 13 2.5 10.5 4.5 9 C6.8 7.5 9.5 8.2 11 10 C12.2 6.5 14.8 4.5 18 4.5 C21.2 4.5 23.8 6.5 25 10 C26.5 8.2 29.2 7.5 31.5 9 C33.5 10.5 33.5 13 32 14.5 C30 16.5 26.5 17.5 22 17 C19.5 18.2 16.5 18.2 14 17 C9.5 17.5 6 16.5 4 14.5 Z" />
+				<!-- 祥云内部双回纹螺线 -->
+				<path class="cloud-spiral spiral-1" d="M9 13.5 C8 12.5 8 11 9.5 10.5 C11 10 12 11.2 11.5 12.5 C11 13.5 9.5 14 8 13" />
+				<path class="cloud-spiral spiral-2" d="M27 13.5 C28 12.5 28 11 26.5 10.5 C25 10 24 11.2 24.5 12.5 C25 13.5 26.5 14 28 13" />
+			</svg>
+			<!-- 腾云尾迹水墨仙气 (Cloud Wisps) -->
+			<div class="cloud-wisps">
+				<span class="cloud-wisp wisp-1"></span>
+				<span class="cloud-wisp wisp-2"></span>
+				<span class="cloud-wisp wisp-3"></span>
+			</div>
+		</div>
+
+		<!-- 悬浮印章提示 (Floating Tooltip) -->
+		<span class="cloud-tooltip" aria-hidden="true">
+			<span class="tooltip-text">腾云直上</span>
+			<span class="tooltip-percent" id="cloudPercentText">0%</span>
+		</span>
+	</button>
+
+	<!-- 页脚版权与说明 -->
+	<div id="footer">
+		<div class="footer-links">
+			<a href="#music">音乐</a> ·
+			<a href="#game">游戏</a> ·
+			<a href="#reading">阅读</a> ·
+			<a href="#photo">摄影</a> ·
+			<a href="javascript:void(0)" id="footerOpenContact" style="color: #0284c7; font-weight: 500;">💬 联络 · 补给站</a>
+		</div>
+		<p>个人手账档案 · 记录生活与热爱的地方</p>
+		<span class="author-badge">Summer Diary · 35mm Handcrafted Notebook · Your Name</span>
+	</div>
+
+	<!-- 手写歌词卡 / 故事卡弹窗 (抽取式手账卡片) -->
+	<div id="lyric-card-modal" class="lyric-modal-overlay" aria-hidden="true">
+		<div class="lyric-modal-backdrop" id="lyric-modal-backdrop"></div>
+		<div class="lyric-paper-card" role="dialog" aria-modal="true">
+			<button type="button" class="lyric-card-close" id="lyric-card-close" title="放回封套">&times;</button>
+			<div class="paper-texture-overlay"></div>
+			<div class="paper-header">
+				<div class="paper-disc-badge">
+					<img loading="lazy" decoding="async" id="modal-disc-img" src="../img/demo.svg" alt="唱片" class="modal-spinning-disc" />
+				</div>
+				<div class="paper-header-info">
+					<div class="paper-tag-row">
+						<span class="paper-quiet-label">私人手记 · 唱片底签</span>
+					</div>
+					<h3 class="paper-song-title" id="modal-song-title">《示例曲目一》</h3>
+					<p class="paper-song-artist" id="modal-song-artist">示例音乐</p>
+				</div>
+			</div>
+
+			<div class="paper-body">
+				<div class="paper-quote-block">
+					<span class="paper-quote-deco left">“</span>
+					<p class="paper-quote-text" id="modal-quote-text">在这里写下你喜欢的旋律与故事。</p>
+					<span class="paper-quote-deco right">”</span>
+				</div>
+
+				<div class="paper-memory-section">
+					<div class="paper-sec-title">
+						<span class="sec-icon">🔖</span>
+						<span>记忆切片</span>
+					</div>
+					<div class="paper-memory-tags" id="modal-memory-tags">
+						<span>跑道</span>
+						<span>远山</span>
+						<span>独自出发的清晨</span>
+					</div>
+				</div>
+
+				<div class="paper-story-section">
+					<div class="paper-sec-title">
+						<span class="sec-icon">📖</span>
+						<span>这首歌陪我度过的某个时刻</span>
+					</div>
+					<p class="paper-story-text" id="modal-story-text">
+						高中毕业那个夏天，独自拖着行李箱踏上开往这座城市的列车。耳机里反复循环着这首歌，车窗外是一闪而过的原野与电线杆。当时心里满是对大学和未来的忐忑与憧憬。后来在示例学校很多迷茫自省的深夜，每一次觉得撑不下去的时候，示例音乐克制却坚定的声音总在提醒我：‘平凡’不是认输或平庸，而是在认清真实的生活后，依然有跨越山海去热爱的勇气。
+					</p>
+				</div>
+			</div>
+
+			<div class="paper-footer">
+				<div class="paper-nav-btns">
+					<button type="button" class="paper-nav-btn" id="modal-prev-btn">← 上一张唱片</button>
+					<button type="button" class="paper-play-btn" id="modal-play-btn">▶ 设为当前播放</button>
+					<button type="button" class="paper-nav-btn" id="modal-next-btn">下一张唱片 →</button>
+				</div>
+				<div class="paper-author-sign">
+					<span>站主 的旋律手账 · 35mm fragments</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Lightbox 全屏大图胶片放映室 (由 main.js 控制) -->
+	<div id="lightbox-modal" class="lightbox-modal" role="dialog" aria-modal="true" aria-label="照片全屏预览">
+		<button type="button" class="close-btn" id="lb-close-btn" title="关闭预览 (ESC)">&times;</button>
+		
+		<div class="lightbox-viewport">
+			<button type="button" class="lb-nav-btn prev" id="lb-prev-btn" title="上一张 (←)">❮</button>
+			<div class="lightbox-media-container">
+				<img id="lightbox-img" alt="放大照片" />
+				<div class="lightbox-feedback"><p id="lb-status" role="status" aria-live="polite"></p><button id="lb-retry-btn" type="button" hidden>重新显影</button></div>
+			</div>
+			<button type="button" class="lb-nav-btn next" id="lb-next-btn" title="下一张 (→)">❯</button>
+		</div>
+
+		<div class="lightbox-caption" id="lightbox-caption">
+			<div class="lb-caption-head">
+				<span class="lb-frame-badge" id="lb-frame-badge">FRAME 01</span>
+				<span class="lb-date-text" id="lb-date-text">2026.06.18</span>
+			</div>
+			<h4 class="lb-title-text" id="lb-title-text">《初夏晴空与长椅》</h4>
+			<p class="lb-note-text" id="lb-note-text">阳光穿过树梢落下的斑驳光点</p>
+		</div>
+	</div>
+
+	<!-- ==========================================================================
+	     私域与社群双卡片弹窗 (Community & Contact Dual Modal)
+	     左侧：个人微信联系 | 右侧：互帮互助群
+	     ========================================================================== -->
+	
+	<script src="../js/analytics.js?v=20261025-footprints01" defer></script>
+	<script src="../js/navigation.js?v=20261009" defer></script>
+	<script src="../js/main.js?v=20261104-slim01" defer></script>
+	<script src="../js/photo-gallery.js?v=20261104-slim01" defer></script>
+	
+	<script src="../js/ui-sound.js?v=20260921-audio" defer></script>
+	<script src="../js/page-transition.js?v=20261026-loading01" defer></script>
+	<script src="../js/site-audio.js?v=20261101-score01" defer></script>
+</body>
+</html>

@@ -1,0 +1,1171 @@
+/* ==========================================================================
+   森林树屋营地 · 全局基础样式 (base.css)
+   ========================================================================== */
+
+:root {
+	/* 森林主题色彩变量 */
+	--primary-green: #4c7737;
+	--accent-green: #8cc269;
+	--dark-green: #2e7d32;
+	--light-green: #e8f5e9;
+	--mint-green: #c8f9d6;
+	--forest-bg: #f7fff2;
+	--wood-brown: #8b5a2b;
+	--wood-light: #f5ebe1;
+	--warm-gold: #f59e0b;
+	--text-main: #2c3e50;
+	--text-muted: #666666;
+	--card-bg: rgba(255, 255, 255, 0.92);
+	--glass-bg: rgba(255, 255, 255, 0.82);
+	--shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.08);
+	--shadow-md: 0 8px 20px rgba(46, 125, 50, 0.15);
+	--shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.18);
+	--radius-sm: 8px;
+	--radius-md: 16px;
+	--radius-lg: 24px;
+	--radius-round: 50%;
+	--transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 样式重置 */
+*, *::before, *::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+	color: var(--text-main);
+	line-height: 1.6;
+	background-color: var(--forest-bg);
+	overflow-x: hidden;
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+	transition: var(--transition);
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
+
+/* 清除浮动类 */
+.clearfix::after,
+.clearfix::before {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+/* ==========================================================================
+   左侧悬浮式手绘风玻璃胶囊导航 (Anime Doodle Glass Capsule Nav)
+   特性：
+   1. 手绘线稿 SVG 图标替代 Emoji (木门、指南针、篝火、信箱)
+   2. 抛弃通用 AI 绿色渐变，采用日系水墨素描 / 磨砂晶质设计语言
+   3. 按钮尺寸与层级差异化（Active 饱满突出、普通灵动、入口轻巧、底部附带角色微章）
+   4. 动态微交互：Hover 时图标轻旋倾斜、右侧箭头滑出、微光掠影
+   ========================================================================== */
+.glass-capsule-nav,
+.box {
+	position: fixed;
+	left: 20px;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 1000;
+	width: 56px; /* 默认收起态：仅容纳图标的极简胶囊 */
+	padding: 12px 6px 10px 6px;
+	border-radius: 28px;
+	/* 日系通透磨砂纸质晶质感 */
+	background: rgba(255, 255, 255, 0.72);
+	-webkit-backdrop-filter: blur(20px) saturate(180%);
+	backdrop-filter: blur(20px) saturate(180%);
+	border: 1.5px solid rgba(226, 232, 240, 0.85);
+	box-shadow: 
+		0 16px 36px -4px rgba(15, 23, 42, 0.08),
+		0 4px 12px -2px rgba(15, 23, 42, 0.04),
+		inset 0 1px 1px rgba(255, 255, 255, 0.95);
+	overflow: hidden;
+	box-sizing: border-box;
+	user-select: none;
+	cursor: pointer;
+	/* 丝滑贝塞尔平滑展开动效 */
+	transition: 
+		width 0.38s cubic-bezier(0.25, 0.8, 0.25, 1),
+		padding 0.38s cubic-bezier(0.25, 0.8, 0.25, 1),
+		background 0.3s ease,
+		border-color 0.3s ease,
+		box-shadow 0.35s ease;
+}
+
+/* 鼠标悬停、获焦或点击锁定激活时展开 */
+.glass-capsule-nav:hover,
+.glass-capsule-nav:focus-within,
+.glass-capsule-nav.is-expanded,
+.box:hover,
+.box:focus-within,
+.box.is-expanded {
+	width: 178px; /* 平滑舒展宽度 */
+	padding: 14px 10px 12px 10px;
+	background: rgba(255, 255, 255, 0.88);
+	border-color: rgba(203, 213, 225, 0.9);
+	box-shadow: 
+		0 20px 40px -4px rgba(15, 23, 42, 0.12),
+		0 6px 16px -2px rgba(15, 23, 42, 0.06),
+		inset 0 1px 2px rgba(255, 255, 255, 0.95);
+}
+
+/* ==========================================================================
+   胶囊顶部标头指示区 (✦ MY WORLD)
+   ========================================================================== */
+.glass-capsule-nav .capsule-header,
+.box .nav-title {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	height: 44px;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+	border: 0;
+	background: none;
+	color: inherit;
+	font: inherit;
+}
+
+/* 顶部四芒星手绘微章 */
+.glass-capsule-nav .capsule-sparkle {
+	width: 42px;
+	min-width: 42px;
+	height: 34px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 15px;
+	color: #475569;
+	transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease;
+}
+
+.glass-capsule-nav:hover .capsule-sparkle,
+.glass-capsule-nav.is-expanded .capsule-sparkle {
+	transform: rotate(90deg) scale(1.25);
+	color: #0f172a;
+}
+
+/* 顶部标题文本 (✦ MY WORLD) */
+.glass-capsule-nav .capsule-title,
+.box .nav-title {
+	font-size: 11.5px;
+	font-weight: 800;
+	color: #1e293b;
+	letter-spacing: 1.8px;
+	text-transform: uppercase;
+	white-space: nowrap;
+	opacity: 0;
+	max-width: 0;
+	overflow: hidden;
+	margin: 0;
+	transition: 
+		opacity 0.28s ease,
+		max-width 0.38s cubic-bezier(0.25, 0.8, 0.25, 1),
+		margin 0.35s ease;
+}
+
+.glass-capsule-nav:hover .capsule-title,
+.glass-capsule-nav.is-expanded .capsule-title,
+.box:hover .nav-title,
+.box.is-expanded .nav-title {
+	opacity: 1;
+	max-width: 120px;
+	margin-left: 6px;
+}
+
+/* 胶囊内部柔光极细分割线 */
+.glass-capsule-nav .capsule-divider {
+	height: 1px;
+	background: linear-gradient(90deg, transparent, rgba(203, 213, 225, 0.8), transparent);
+	margin: 4px auto 8px auto;
+	width: 22px;
+	transition: width 0.38s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.glass-capsule-nav:hover .capsule-divider,
+.glass-capsule-nav.is-expanded .capsule-divider {
+	width: 100%;
+}
+
+/* 导航项容器 */
+.glass-capsule-nav .capsule-menu {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+/* ==========================================================================
+   单个导航项排版与尺寸层次 (拒绝每个按钮一模一样大)
+   ========================================================================== */
+.glass-capsule-nav a.capsule-item,
+.box a {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	width: 100%;
+	border-radius: 14px;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	color: #475569;
+	position: relative;
+	box-sizing: border-box;
+	overflow: hidden;
+	transition: 
+		background 0.25s ease,
+		transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+		box-shadow 0.25s ease,
+		color 0.25s ease,
+		border-color 0.25s ease;
+}
+
+/* 层次 1：常规功能项高度 38px */
+.glass-capsule-nav a.capsule-item {
+	height: 38px;
+	border: 1px solid transparent;
+}
+
+/* 层次 2：入口项 (森林玄关) 略有轻微虚线区分感 */
+.glass-capsule-nav a.capsule-item.nav-door {
+	height: 36px;
+	opacity: 0.88;
+}
+
+/* 层次 3：当前激活项 (Active) 放大至 44px，富有沉稳饱满的聚焦感 */
+.glass-capsule-nav a.capsule-item.active,
+.box a.active {
+	height: 44px;
+	margin: 3px 0;
+	border-radius: 16px;
+	background: #1e293b;
+	color: #f8fafc;
+	box-shadow: 
+		0 6px 20px rgba(30, 41, 59, 0.24),
+		inset 0 1px 1px rgba(255, 255, 255, 0.18);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	opacity: 1;
+}
+
+/* 层次 4：联络/补给站特色入口 (柔和蓝调微光，提示这是互动触点) */
+.glass-capsule-nav a.capsule-item.nav-contact {
+	height: 38px;
+	position: relative;
+}
+.glass-capsule-nav a.capsule-item.nav-contact .nav-svg-icon {
+	color: #0284c7;
+	transition: color 0.2s ease, transform 0.2s ease;
+}
+.glass-capsule-nav a.capsule-item.nav-contact:hover {
+	background: #1e293b;
+	color: #38bdf8;
+	border-color: rgba(56, 189, 248, 0.3);
+}
+.glass-capsule-nav a.capsule-item.nav-contact:hover .nav-svg-icon {
+	color: #38bdf8;
+	transform: scale(1.08);
+}
+
+/* 图标包裹区 (在 56px 胶囊收起态下正好居中对齐) */
+.glass-capsule-nav .icon-wrap,
+.glass-capsule-nav .item-icon {
+	width: 42px;
+	min-width: 42px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* 手绘线稿 SVG 基础样式 */
+.glass-capsule-nav .nav-svg-icon {
+	width: 20px;
+	height: 20px;
+	stroke: currentColor;
+	transition: 
+		transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1),
+		stroke 0.25s ease;
+	display: block;
+}
+
+/* 导航文字标题：默认收起态为 0 宽度与透明 */
+.glass-capsule-nav .item-label {
+	font-size: 13.5px;
+	font-weight: 600;
+	letter-spacing: 0.3px;
+	color: inherit;
+	white-space: nowrap;
+	opacity: 0;
+	max-width: 0;
+	overflow: hidden;
+	margin: 0;
+	transition: 
+		opacity 0.28s ease,
+		max-width 0.38s cubic-bezier(0.25, 0.8, 0.25, 1),
+		margin 0.35s ease;
+}
+
+/* 展开时文字平滑淡入扩展 */
+.glass-capsule-nav:hover .item-label,
+.glass-capsule-nav.is-expanded .item-label {
+	opacity: 1;
+	max-width: 90px;
+	margin-left: 2px;
+}
+
+/* 右侧轻巧灵动箭头 (Hover 时滑出) */
+.glass-capsule-nav .item-arrow {
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 1;
+	color: #94a3b8;
+	margin-left: auto;
+	margin-right: 10px;
+	opacity: 0;
+	transform: translateX(-8px);
+	transition: 
+		opacity 0.22s ease,
+		transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+		color 0.2s ease;
+	pointer-events: none;
+}
+
+/* ==========================================================================
+   交互动效：鼠标悬停微旋转、箭头滑出、背景微光掠影
+   ========================================================================== */
+
+/* 背景微光扫光条 */
+.glass-capsule-nav a.capsule-item::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: -120%;
+	width: 70%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+	transform: skewX(-20deg);
+	transition: left 0.55s ease;
+	pointer-events: none;
+}
+
+.glass-capsule-nav a.capsule-item:hover::before {
+	left: 160%;
+}
+
+/* 未激活项 Hover 状态：柔光浮起、图标微旋、箭头滑入 */
+.glass-capsule-nav a.capsule-item:not(.active):hover,
+.box a:not(.active):hover {
+	background: rgba(255, 255, 255, 0.95);
+	color: #0f172a;
+	border-color: rgba(203, 213, 225, 0.85);
+	transform: translateY(-1px);
+	box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+	opacity: 1;
+}
+
+/* 图标倾斜轻旋微动效 */
+.glass-capsule-nav a.capsule-item:hover .nav-svg-icon {
+	transform: rotate(-12deg) scale(1.18);
+}
+
+/* 箭头平滑滑入 */
+.glass-capsule-nav a.capsule-item:hover .item-arrow {
+	opacity: 1;
+	transform: translateX(0);
+	color: #0f172a;
+}
+
+/* 激活项 Hover 增强 */
+.glass-capsule-nav a.capsule-item.active:hover {
+	transform: scale(1.02);
+	box-shadow: 0 8px 24px rgba(30, 41, 59, 0.32);
+}
+
+.glass-capsule-nav a.capsule-item.active .item-arrow {
+	color: #cbd5e1;
+}
+
+/* 激活项图标带有定风珠般微光呼吸 */
+.glass-capsule-nav a.capsule-item.active .nav-svg-icon {
+	animation: activeIconGlow 3s ease-in-out infinite;
+}
+
+@keyframes activeIconGlow {
+	0%, 100% {
+		transform: scale(1);
+		filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.6));
+	}
+	50% {
+		transform: scale(1.06);
+		filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.9));
+	}
+}
+
+/* ==========================================================================
+   胶囊底部角色微章 (YOUR NAME'S ISLAND 角色感)
+   ========================================================================== */
+.glass-capsule-nav .capsule-footer {
+	margin-top: 6px;
+	padding-top: 6px;
+	border-top: 1px dashed rgba(226, 232, 240, 0.85);
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	height: 24px;
+	padding-left: 0;
+}
+
+/* 呼吸小绿点 (探险者雷达信标) */
+.glass-capsule-nav .traveler-beacon {
+	width: 42px;
+	min-width: 42px;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+.glass-capsule-nav .traveler-beacon::after {
+	content: "";
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: #10b981;
+	box-shadow: 0 0 8px #10b981;
+	animation: beaconPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes beaconPulse {
+	0%, 100% {
+		transform: scale(0.9);
+		opacity: 0.7;
+	}
+	50% {
+		transform: scale(1.25);
+		opacity: 1;
+		box-shadow: 0 0 12px #10b981;
+	}
+}
+
+.glass-capsule-nav .traveler-tag {
+	font-size: 10px;
+	font-weight: 700;
+	color: #64748b;
+	letter-spacing: 1.2px;
+	text-transform: uppercase;
+	white-space: nowrap;
+	opacity: 0;
+	max-width: 0;
+	overflow: hidden;
+	margin: 0;
+	transition: 
+		opacity 0.28s ease,
+		max-width 0.38s cubic-bezier(0.25, 0.8, 0.25, 1),
+		margin 0.35s ease;
+}
+
+.glass-capsule-nav:hover .traveler-tag,
+.glass-capsule-nav.is-expanded .traveler-tag {
+	opacity: 1;
+	max-width: 120px;
+	margin-left: 2px;
+}
+
+/* ==========================================================================
+   通用右侧悬浮返回顶部基础兜底 (.box-right)
+   ========================================================================== */
+.box-right:not(.somersault-cloud-btn) {
+	width: 56px;
+	height: 56px;
+	position: fixed;
+	right: 32px;
+	bottom: 32px;
+	z-index: 999;
+	background: var(--primary-green);
+	border-radius: var(--radius-round);
+	box-shadow: 0 6px 18px rgba(46, 125, 50, 0.35);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: var(--transition);
+	border: 2px solid #ffffff;
+}
+
+.box-right:not(.somersault-cloud-btn) a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	color: #ffffff;
+	font-size: 22px;
+}
+
+.box-right:not(.somersault-cloud-btn):hover {
+	background: var(--accent-green);
+	transform: translateY(-5px);
+	box-shadow: 0 10px 22px rgba(46, 125, 50, 0.45);
+}
+
+/* ==========================================================================
+   东方神话 · 筋斗云腾云直上返回顶部 (.somersault-cloud-btn)
+   ========================================================================== */
+.somersault-cloud-btn {
+	position: fixed;
+	right: 32px;
+	bottom: 32px;
+	width: 56px;
+	height: 56px;
+	border-radius: 50%;
+	background: rgba(18, 16, 14, 0.88);
+	-webkit-backdrop-filter: blur(12px);
+	backdrop-filter: blur(12px);
+	border: 1px solid rgba(223, 190, 123, 0.35);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.42), 0 0 14px rgba(223, 190, 123, 0.16);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	z-index: 999;
+	padding: 0;
+	margin: 0;
+	outline: none;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transform: translateY(20px) scale(0.88);
+	transition: opacity 0.35s cubic-bezier(0.2, 0.8, 0.25, 1),
+	            transform 0.35s cubic-bezier(0.2, 0.8, 0.25, 1),
+	            visibility 0.35s,
+	            border-color 0.25s ease,
+	            box-shadow 0.25s ease;
+}
+
+/* 激活入场显示状态 */
+.somersault-cloud-btn.is-visible {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
+	transform: translateY(0) scale(1);
+}
+
+/* 键盘焦点样式 */
+.somersault-cloud-btn:focus-visible {
+	outline: 2px solid #dfbe7b;
+	outline-offset: 3px;
+	box-shadow: 0 0 0 4px rgba(223, 190, 123, 0.3);
+}
+
+/* 1. 环形阅读进度圈 SVG */
+.cloud-progress-svg {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	transform: rotate(-90deg);
+	pointer-events: none;
+	border-radius: 50%;
+}
+
+.cloud-progress-track {
+	fill: none;
+	stroke: rgba(223, 190, 123, 0.14);
+	stroke-width: 2.4;
+}
+
+.cloud-progress-bar {
+	fill: none;
+	stroke: url(#cloudGoldGradient);
+	stroke-width: 2.4;
+	stroke-linecap: round;
+	stroke-dasharray: 157.08;
+	stroke-dashoffset: 157.08;
+	transition: stroke-dashoffset 0.12s linear;
+}
+
+/* 2. 核心视觉容器 */
+.cloud-core {
+	position: relative;
+	width: 36px;
+	height: 36px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+
+/* 如意金箍棒 (Golden Cudgel Needle) */
+.cloud-cudgel {
+	position: absolute;
+	top: 3px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 3.5px;
+	height: 24px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	z-index: 3;
+	transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* 尖头向上指针 */
+.cudgel-arrow-tip {
+	width: 0;
+	height: 0;
+	border-left: 2.5px solid transparent;
+	border-right: 2.5px solid transparent;
+	border-bottom: 4px solid #ffd97d;
+	margin-bottom: -1px;
+	filter: drop-shadow(0 -1px 2px rgba(255, 217, 125, 0.6));
+}
+
+/* 金箍环 */
+.cudgel-gold-cap {
+	width: 3.5px;
+	height: 3.5px;
+	background: linear-gradient(180deg, #ffe5a3, #dfbe7b);
+	border-radius: 1px;
+	box-shadow: 0 0 3px rgba(255, 229, 163, 0.6);
+}
+
+/* 棒身：朱砂红 */
+.cudgel-shaft {
+	width: 2.5px;
+	flex: 1;
+	background: linear-gradient(180deg, #991b1b, #7f1d1d);
+	box-shadow: inset 0.5px 0 0 rgba(255, 255, 255, 0.25);
+}
+
+/* 祥云矢量图形 */
+.cloud-svg {
+	position: absolute;
+	bottom: 2px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 32px;
+	height: 22px;
+	z-index: 2;
+	overflow: visible;
+	transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.cloud-body-fill {
+	fill: rgba(247, 242, 231, 0.14);
+}
+
+.cloud-contour {
+	stroke: #f7f2e7;
+	stroke-width: 1.35;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.cloud-spiral {
+	stroke: #dfbe7b;
+	stroke-width: 1.1;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	opacity: 0.9;
+}
+
+/* 腾云尾迹水墨仙气 */
+.cloud-wisps {
+	position: absolute;
+	bottom: -4px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 26px;
+	height: 10px;
+	display: flex;
+	justify-content: space-around;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.cloud-wisp {
+	width: 3px;
+	height: 7px;
+	background: radial-gradient(circle, rgba(255, 229, 163, 0.8) 0%, rgba(223, 190, 123, 0) 70%);
+	border-radius: 50%;
+	animation: wispDrift 1.2s infinite ease-in-out;
+}
+.wisp-1 { animation-delay: 0s; }
+.wisp-2 { animation-delay: 0.4s; height: 9px; }
+.wisp-3 { animation-delay: 0.8s; }
+
+@keyframes wispDrift {
+	0%, 100% { transform: translateY(0) scale(0.8); opacity: 0.3; }
+	50% { transform: translateY(4px) scale(1.1); opacity: 0.8; }
+}
+
+/* 3. 悬浮印章微标 Tooltip */
+.cloud-tooltip {
+	position: absolute;
+	right: calc(100% + 14px);
+	top: 50%;
+	transform: translateY(-50%) translateX(6px);
+	padding: 5px 10px;
+	border-radius: 8px;
+	background: rgba(18, 16, 14, 0.94);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(223, 190, 123, 0.4);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+	white-space: nowrap;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.2, 0.8, 0.25, 1), visibility 0.25s;
+	font-family: inherit;
+}
+
+.cloud-tooltip::after {
+	content: "";
+	position: absolute;
+	right: -5px;
+	top: 50%;
+	transform: translateY(-50%) rotate(45deg);
+	width: 8px;
+	height: 8px;
+	background: rgba(18, 16, 14, 0.94);
+	border-top: 1px solid rgba(223, 190, 123, 0.4);
+	border-right: 1px solid rgba(223, 190, 123, 0.4);
+}
+
+.tooltip-text {
+	font-size: 12px;
+	font-weight: 500;
+	letter-spacing: 0.08em;
+	color: #f7f2e7;
+}
+
+.tooltip-percent {
+	font-size: 11px;
+	font-family: var(--font-mono, monospace);
+	color: #dfbe7b;
+	font-weight: 600;
+}
+
+/* 4. 悬停交互态 (Hover State) */
+.somersault-cloud-btn:hover {
+	border-color: rgba(223, 190, 123, 0.65);
+	box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5), 0 0 20px rgba(223, 190, 123, 0.32);
+	transform: translateY(-4px) scale(1.04);
+}
+
+.somersault-cloud-btn:hover .cloud-core {
+	transform: translateY(-2px);
+}
+
+.somersault-cloud-btn:hover .cloud-cudgel {
+	filter: drop-shadow(0 0 6px rgba(255, 217, 125, 0.85));
+	transform: translateX(-50%) translateY(-2px);
+}
+
+.somersault-cloud-btn:hover .cloud-svg {
+	filter: drop-shadow(0 0 8px rgba(223, 190, 123, 0.5));
+}
+
+.somersault-cloud-btn:hover .cloud-wisps {
+	opacity: 1;
+}
+
+.somersault-cloud-btn:hover .cloud-tooltip {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(-50%) translateX(0);
+}
+
+/* 5. 点击“腾云直上”升空飞驰动画 (.is-ascending) */
+.somersault-cloud-btn.is-ascending {
+	pointer-events: none;
+	animation: cloudLiftOff 0.7s cubic-bezier(0.1, 0.85, 0.25, 1) forwards;
+}
+
+.somersault-cloud-btn.is-ascending .cloud-wisps {
+	opacity: 1;
+}
+
+.somersault-cloud-btn.is-ascending .cloud-wisp {
+	animation: cloudExhaustBurst 0.6s ease-out forwards;
+}
+
+@keyframes cloudLiftOff {
+	0% {
+		transform: translateY(0) scale(1);
+		opacity: 1;
+	}
+	15% {
+		/* 聚能下蹲微弹 */
+		transform: translateY(6px) scale(1.08, 0.92);
+		opacity: 1;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 24px rgba(223, 190, 123, 0.6);
+	}
+	30% {
+		/* 破空拔起 */
+		transform: translateY(-20px) scale(0.95, 1.05);
+		opacity: 0.95;
+	}
+	100% {
+		/* 极速冲霄直上并隐去 */
+		transform: translateY(-130px) scale(0.55);
+		opacity: 0;
+		box-shadow: 0 0 32px rgba(223, 190, 123, 0);
+	}
+}
+
+@keyframes cloudExhaustBurst {
+	0% {
+		transform: translateY(0) scale(1);
+		opacity: 0.8;
+	}
+	100% {
+		transform: translateY(22px) scale(0.2);
+		opacity: 0;
+	}
+}
+
+/* 6. 移动端与小屏响应式适配 */
+@media (max-width: 768px) {
+	.somersault-cloud-btn {
+		width: 48px;
+		height: 48px;
+		right: 16px;
+		bottom: 18px;
+	}
+	.somersault-cloud-btn .cloud-core {
+		width: 30px;
+		height: 30px;
+	}
+	.somersault-cloud-btn .cloud-cudgel {
+		height: 20px;
+		top: 2px;
+	}
+	.somersault-cloud-btn .cloud-svg {
+		width: 27px;
+		height: 18px;
+	}
+	/* 触摸屏隐藏悬浮 Tooltip 避免遮挡 */
+	.cloud-tooltip {
+		display: none !important;
+	}
+}
+
+/* 7. 减弱动效偏好适配 */
+@media (prefers-reduced-motion: reduce) {
+	.somersault-cloud-btn,
+	.somersault-cloud-btn:hover,
+	.cloud-core,
+	.cloud-cudgel,
+	.cloud-svg,
+	.cloud-wisp {
+		transition: none !important;
+		animation: none !important;
+		transform: none !important;
+	}
+	.somersault-cloud-btn.is-ascending {
+		animation: none !important;
+		opacity: 0 !important;
+	}
+}
+
+/* ==========================================================================
+   页尾 Footer
+   ========================================================================== */
+#footer {
+	width: 100%;
+	text-align: center;
+	background-color: #e8f5e9;
+	padding: 36px 20px;
+	margin-top: 60px;
+	color: #4a5568;
+	border-top: 2px solid #d4ecd5;
+}
+
+#footer .footer-links {
+	margin-bottom: 16px;
+}
+
+#footer .footer-links a {
+	font-size: 15px;
+	color: var(--primary-green);
+	font-weight: 600;
+	margin: 0 12px;
+	padding: 4px 8px;
+	border-radius: var(--radius-sm);
+}
+
+#footer .footer-links a:hover {
+	background-color: #ffffff;
+	color: var(--dark-green);
+}
+
+#footer p {
+	font-size: 13px;
+	line-height: 22px;
+	color: #718096;
+}
+
+#footer .author-badge {
+	display: inline-block;
+	background-color: #ffffff;
+	padding: 4px 12px;
+	border-radius: 20px;
+	margin-top: 10px;
+	font-size: 12px;
+	color: var(--primary-green);
+	border: 1px solid #c8e6c9;
+}
+
+/* 响应式媒体查询微调 */
+@media (max-width: 900px) {
+	.glass-capsule-nav,
+	.box {
+		left: 12px;
+		width: 50px;
+		padding: 12px 5px;
+	}
+	.glass-capsule-nav .capsule-icon,
+	.glass-capsule-nav .item-icon {
+		width: 38px;
+		min-width: 38px;
+		font-size: 17px;
+	}
+	.glass-capsule-nav:hover,
+	.glass-capsule-nav:focus-within,
+	.glass-capsule-nav.is-expanded,
+	.box:hover,
+	.box:focus-within,
+	.box.is-expanded {
+		width: 156px;
+		padding: 14px 8px;
+	}
+}
+
+@media (max-width: 600px) {
+	.glass-capsule-nav,
+	.box {
+		left: 8px;
+		width: 46px;
+		padding: 10px 4px;
+		border-radius: 28px;
+	}
+	.glass-capsule-nav .capsule-icon,
+	.glass-capsule-nav .item-icon {
+		width: 36px;
+		min-width: 36px;
+		font-size: 16px;
+	}
+	.glass-capsule-nav:hover,
+	.glass-capsule-nav:focus-within,
+	.glass-capsule-nav.is-expanded,
+	.box:hover,
+	.box:focus-within,
+	.box.is-expanded {
+		width: 148px;
+	}
+}
+
+:where(a, button, input, textarea, select):focus-visible {
+	outline: 2px solid #487964;
+	outline-offset: 4px;
+}
+
+@media (max-width: 768px) {
+	.glass-capsule-nav {
+		top: auto;
+		bottom: calc(16px + env(safe-area-inset-bottom));
+		left: 12px;
+		transform: none;
+		max-height: calc(100dvh - 32px);
+		overflow-y: auto;
+	}
+	.glass-capsule-nav:not(.is-expanded) {
+		width: 58px;
+		height: 58px;
+		padding: 5px;
+		overflow: hidden;
+	}
+	.glass-capsule-nav:not(.is-expanded) :is(.capsule-menu, .capsule-divider, .capsule-footer, .capsule-title) {
+		display: none;
+	}
+	.glass-capsule-nav.is-expanded {
+		width: 178px;
+		height: auto;
+		padding: 10px;
+		border-radius: 12px;
+	}
+	.glass-capsule-nav .capsule-header { width: 100%; min-height: 44px; }
+	.glass-capsule-nav:not(.is-expanded) .capsule-header { justify-content: center; }
+	.glass-capsule-nav .capsule-item { min-height: 44px; }
+	input, textarea, select { font-size: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html { scroll-behavior: auto; }
+	*, *::before, *::after {
+		animation-duration: .01ms !important;
+		animation-delay: 0s !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: .01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* A small paper arrival ticket. No image, web font, canvas or forced wait. */
+.station-loader {
+	--arrival-paper: #f4f3e9;
+	--arrival-ink: #264638;
+	--arrival-muted: #637061;
+	--arrival-line: #c5cebb;
+	position: fixed;
+	inset: 0;
+	z-index: 40000;
+	display: grid;
+	place-items: center;
+	padding: max(24px, env(safe-area-inset-top)) 24px max(24px, env(safe-area-inset-bottom));
+	background: var(--arrival-paper);
+	color: var(--arrival-ink);
+	font-family: "Songti SC", "SimSun", Georgia, serif;
+	font-style: normal;
+	text-align: left;
+	line-height: 1.5;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition: opacity .18s ease, visibility 0s .18s;
+}
+.station-booting .station-loader { opacity: 1; visibility: visible; pointer-events: auto; transition-delay: 0s; }
+.station-loader::before {
+	content: "";
+	position: absolute;
+	inset: 18px;
+	border: 1px solid var(--arrival-line);
+	opacity: .5;
+	pointer-events: none;
+}
+.arrival-corner {
+	position: absolute;
+	top: max(34px, env(safe-area-inset-top));
+	left: clamp(36px, 5vw, 80px);
+	font: 11px/1.6 Consolas, monospace;
+	letter-spacing: .12em;
+}
+.arrival-corner strong { display: block; font: 500 23px/1.3 Georgia, serif; letter-spacing: .01em; }
+.arrival-note {
+	position: absolute;
+	bottom: max(32px, env(safe-area-inset-bottom));
+	left: 32px;
+	right: 32px;
+	color: var(--arrival-muted);
+	font: 11px/1.7 Consolas, monospace;
+	letter-spacing: .12em;
+	text-align: center;
+}
+.arrival-ticket {
+	position: relative;
+	width: min(100%, 560px);
+	margin-block: 80px;
+	border: 1px solid var(--arrival-line);
+	border-radius: 3px;
+	background: #fffef6;
+	box-shadow: 0 18px 46px rgba(43, 61, 40, .07);
+	animation: stationTicketIn .3s ease .12s both;
+}
+.arrival-ticket-bottom::before, .arrival-ticket-bottom::after {
+	content: "";
+	position: absolute;
+	top: -10px;
+	width: 18px;
+	height: 18px;
+	border: 1px solid var(--arrival-line);
+	border-radius: 50%;
+	background: var(--arrival-paper);
+}
+.arrival-ticket-bottom::before { left: -10px; border-left-color: transparent; }
+.arrival-ticket-bottom::after { right: -10px; border-right-color: transparent; }
+.arrival-ticket-head { display: flex; justify-content: space-between; gap: 16px; padding: 16px 28px; border-bottom: 1px solid var(--arrival-line); }
+.arrival-ticket-code, .arrival-ticket-head span:last-child { font: 11px/1.5 Consolas, monospace; letter-spacing: .09em; }
+.arrival-ticket-code { font-weight: 700; }
+.arrival-ticket-main { padding: 30px 34px 24px; }
+.arrival-eyebrow { color: var(--arrival-muted); font: 10px/1.5 Consolas, monospace; letter-spacing: .16em; }
+.arrival-ticket h2 { margin: 12px 0 8px; color: var(--arrival-ink); font: 400 clamp(26px, 4.5vw, 38px)/1.4 "Songti SC", "SimSun", Georgia, serif; letter-spacing: .04em; }
+.arrival-subtitle { color: var(--arrival-muted); font: 400 13px/1.7 Georgia, serif; font-style: italic; }
+.arrival-landscape { display: block; width: 100%; height: 110px; margin-top: 12px; overflow: hidden; }
+.arrival-landscape .arrival-train { animation: stationTrainRun 3.2s cubic-bezier(.45, 0, .2, 1) infinite alternate; }
+.arrival-ticket-bottom { position: relative; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; padding: 21px 32px; border-top: 1px dashed var(--arrival-line); }
+.arrival-status { margin: 0; color: var(--arrival-ink); font: 13px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; }
+.arrival-stops { display: flex; gap: 13px; margin-top: 9px; padding: 0; list-style: none; }
+.arrival-stops li { display: inline-flex; align-items: center; gap: 5px; color: var(--arrival-muted); font: 10px/1.5 Consolas, "Microsoft YaHei", monospace; }
+.arrival-stops i { width: 5px; height: 5px; border: 1px solid #8b9b83; border-radius: 50%; }
+.station-loader[data-step="1"] .arrival-stops li:first-child i,
+.station-loader[data-step="2"] .arrival-stops li:nth-child(-n+2) i,
+.station-loader[data-step="3"] .arrival-stops i { background: var(--arrival-ink); border-color: var(--arrival-ink); }
+.arrival-skip { display: inline-flex; align-items: center; gap: 13px; min-height: 44px; padding: 0 6px 0 10px; border: 0; border-radius: 4px; background: transparent; color: var(--arrival-ink); font: 12px/1.4 "Microsoft YaHei", sans-serif; cursor: pointer; }
+.arrival-skip:hover { background: #ebf0e2; }
+.arrival-skip:active { background: #dde6d2; }
+.arrival-skip:focus-visible { outline: 2px solid var(--arrival-ink); outline-offset: 3px; }
+.arrival-skip span { font-size: 20px; }
+.station-returning .station-loader { inset: 0 0 auto; height: 3px; padding: 0; display: block; background: transparent; pointer-events: none; }
+.station-returning .station-loader > *, .station-returning .station-loader::before { display: none; }
+.station-returning .station-loader::after { content: ""; display: block; width: 32%; height: 3px; background: #547d50; animation: stationRailLoading 1.3s ease-in-out infinite; }
+.station-booting .bg-animated-layer { animation-play-state: paused; }
+.site-tab-hidden *, .site-tab-hidden *::before, .site-tab-hidden *::after { animation-play-state: paused !important; }
+@keyframes stationTicketIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes stationTrainRun { from { transform: translateX(16px); } to { transform: translateX(306px); } }
+@keyframes stationRailLoading { from { transform: translateX(-110%); } to { transform: translateX(420%); } }
+@media (max-width: 540px) {
+	.station-loader { padding-inline: 28px; }
+	.arrival-corner { top: 34px; left: 34px; }
+	.arrival-ticket-head { padding: 14px 20px; }
+	.arrival-ticket-main { padding: 26px 24px 20px; }
+	.arrival-ticket-bottom { padding: 17px 22px; }
+	.arrival-ticket h2 { font-size: 27px; }
+	.arrival-landscape { height: 94px; }
+	.arrival-skip { padding-left: 0; }
+	.arrival-note { font-size: 10px; }
+}
+@media (max-height: 520px) {
+	.arrival-ticket { margin-block: 42px 22px; }
+	.arrival-corner { top: 15px; font-size: 9px; }
+	.arrival-corner strong { font-size: 18px; }
+	.arrival-ticket-main { padding-block: 12px; }
+	.arrival-landscape { height: 50px; margin-top: 0; }
+	.arrival-ticket h2 { font-size: 24px; margin-block: 3px; }
+	.arrival-ticket-bottom { padding-block: 10px; }
+	.arrival-note { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.arrival-ticket, .arrival-landscape .arrival-train, .station-returning .station-loader::after { animation: none; }
+	.arrival-train { transform: translateX(155px); }
+	.station-returning .station-loader::after { width: 100%; }
+	.station-loader { transition: none; }
+}
