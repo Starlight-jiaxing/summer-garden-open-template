@@ -1,31 +1,91 @@
-# Summer Garden · 个人网站模板
+<div align="center">
+  <h1>Summer Garden</h1>
+  <p><strong>夏日手账风的开源个人网站模板</strong></p>
+  <p>把喜欢的音乐、读过的书、走过的路，慢慢收进自己的小花园。</p>
+  <p>
+    <a href="#页面预览">看看页面</a> ·
+    <a href="#快速开始">快速开始</a> ·
+    <a href="docs/SETUP.md">定制与部署</a> ·
+    <a href="https://github.com/Starlight-jiaxing/summer-garden-open-template/issues">反馈与交流</a>
+  </p>
+</div>
 
-一个夏日手账风格的个人网站模板，包含站台首页、个人介绍、兴趣档案、电脑手记和留言墙。电脑手记包含四张经历卡片与后续计划区域。
+---
 
-## 本地运行
+**Summer Garden** 是一个可以改成你自己网站的个人空间模板。从夏日站台出发，写一段自我介绍，收藏音乐、游戏、书籍和照片，也留一页记录学习与折腾的过程。
 
-需要 Python 3.10 或更新版本。Windows 双击 `start-site.cmd`，或在项目目录运行：
+如果你想搭建个人主页、整理兴趣收藏，或从一个完整的小项目开始学习网页制作，可以先把它运行起来，再一点点换成自己的故事。
+
+## 页面预览
+
+![电脑手记页面：墨绿色文字、纸张底纹与手账卡片](docs/images/toolbox-preview.png)
+
+<p align="center"><sub>模板预览 · 电脑手记</sub></p>
+
+<details>
+<summary>展开看看手账里的经历卡片</summary>
+
+![电脑手记的经历卡片，按起点、过程、视野与进阶展开](docs/images/story-preview.png)
+
+</details>
+
+## 这座小花园里有什么
+
+| 页面 | 可以放些什么 |
+| --- | --- |
+| **夏日站台** | 用一页有仪式感的入口，邀请访客走进你的世界 |
+| **个人主页** | 自我介绍、生活片段，以及想让别人认识的你 |
+| **兴趣营地** | 喜欢的音乐、游戏、书籍和照片，各有自己的角落 |
+| **电脑手记** | 学习经历、工具收藏、踩过的坑，还有下一步想做的事 |
+| **留言墙** | 留下问候、回复访客，让个人网站也能有来有往 |
+
+页面里还藏着音乐播放器、相册浏览、页间过渡和一只陪你逛花园的小鲸鱼。布局兼顾电脑与手机，文字、图片和样式都可以继续修改。
+
+前端使用 **HTML、CSS 和 JavaScript**，配套后端使用 **Python 标准库**。本地运行不需要安装 npm 依赖或执行打包命令。
+
+## 快速开始
+
+先安装 **Python 3.10 或更新版本**，然后[下载源码 ZIP](https://github.com/Starlight-jiaxing/summer-garden-open-template/archive/refs/heads/main.zip) 并解压。也可以使用 Git：
 
 ```bash
+git clone https://github.com/Starlight-jiaxing/summer-garden-open-template.git
+cd summer-garden-open-template
 python server.py
 ```
 
-浏览器打开 <http://127.0.0.1:8765/>。通过 HTTP 打开才能使用留言接口。留言存在本机 `data/`，不会进入 Git。
+使用 ZIP 下载时，在解压后的项目文件夹里运行 `python server.py`；Windows 用户也可以直接双击 **`start-site.cmd`**。
+
+启动后，在浏览器打开 **[http://127.0.0.1:8765/](http://127.0.0.1:8765/)**，就能开始逛这座花园。留言等功能需要保持 Python 服务运行。
 
 ## 改成你的网站
 
-1. 编辑 `js/site-config.js` 中的 `siteName` 和 `ownerName`。
-2. 修改 `index.html` 与 `html/` 下各页面的介绍、文章和卡片文字。
-3. 用拥有再分发权的作品替换 `img/demo.svg`、`img/demo-whale.svg`。相册示例数据位于 `js/photo-gallery.js`。
-4. `audio/demo.wav` 为程序合成的示例音；曲目数据位于 `js/main.js`，背景音乐路径位于 `js/site-audio.js`。仅使用你有权发布的音频。
-5. 联系二维码默认已关闭，可自行添加经过授权的联系方式。
+可以从三个小地方开始：换上你的名字，写一段介绍，再放入第一张照片。其余内容，等你有空时慢慢补齐。
 
-## 留言、管理与统计
+| 想修改的内容 | 从这里开始 |
+| --- | --- |
+| 站点名称与站主昵称 | [`js/site-config.js`](js/site-config.js) |
+| 页面文字、经历与工具卡片 | [`index.html`](index.html) 和 [`html/`](html/) |
+| 图片与相册 | [`img/`](img/) 和 [`js/photo-gallery.js`](js/photo-gallery.js) |
+| 曲目与背景音乐 | [`js/main.js`](js/main.js)、[`js/site-audio.js`](js/site-audio.js) 和 [`audio/`](audio/) |
+| 配色、排版与页面样式 | [`css/`](css/) |
 
-留言由 `server.py` 提供，首次运行会在 `data/` 建立独立文件。设置站主密码：在项目目录运行 `python init_admin.py`，按提示设置至少 16 个字符的密码。生产环境需要 HTTPS、反向代理、备份和设置 `ADMIN_ALLOWED_ORIGINS`；不要把 `data/` 暴露到公网。统计默认关闭；需要时设置环境变量 `ENABLE_ANALYTICS=1`，并向访问者说明统计用途。
+项目附带可替换的示例图片和一段短音频，方便先体验页面。更换素材、设置留言管理密码和部署网站的步骤，都放在 **[定制与部署指南](docs/SETUP.md)** 中。
 
-此项目的 Python 后端需要持续运行的服务器。静态托管服务只能展示前端，不能运行留言或管理接口。
+## 部署你的小花园
 
-## 许可与素材
+- **展示页面**：可以使用静态托管，展示介绍、兴趣、手记和前端交互。
+- **使用完整留言功能**：需要一台能够持续运行 `server.py` 的服务器，提供留言和管理接口。
 
-项目代码按 MIT 许可；第三方鲸鱼交互代码的原作者及许可见 `licenses/whale-widget.txt`。原站个人照片、二维码、歌曲、书籍封面和第三方图片未包含；当前 SVG 与 WAV 为模板示例。
+具体配置见[部署说明](docs/SETUP.md#部署到公网)。
+
+## 交流与贡献
+
+发现问题、有新的想法，欢迎[提交 Issue](https://github.com/Starlight-jiaxing/summer-garden-open-template/issues)。修复问题、改进文档或完善页面，也欢迎提交 Pull Request。
+
+如果你用它搭建了自己的网站，欢迎来分享你的版本。
+
+## 许可与致谢
+
+项目采用 **[MIT License](LICENSE)**，欢迎使用、修改和分发，请保留相应的许可声明。
+
+示例素材与第三方代码说明见 [ASSETS.md](ASSETS.md)；小鲸鱼交互代码的作者与许可见 [whale-widget.txt](licenses/whale-widget.txt)。感谢开源作者们的分享，也期待这座小花园在不同的人手里长出新的样子。
