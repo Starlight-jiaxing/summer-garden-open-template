@@ -1,4 +1,4 @@
-/* My Garden: browser-local passport, optional wayfinding and quiet reading. */
+/* JX Garden: browser-local passport, optional wayfinding and quiet reading. */
 (function () {
 	"use strict";
 	const KEY = "jxgarden-journey-v1";
@@ -90,7 +90,7 @@
 			<dialog class="journey-dialog" id="journeyDialog" aria-labelledby="journeyTitle">
 				<div class="journey-book">
 					<aside class="journey-cover" aria-label="护照封面">
-						<div class="journey-cover-brand"><span class="journey-monogram">jx</span><span>My Garden</span></div>
+						<div class="journey-cover-brand"><span class="journey-monogram">jx</span><span>JX Garden</span></div>
 						<div class="journey-cover-title"><span>属于这段小旅途</span><h2>旅人护照</h2><p>循着铁轨，慢慢走。<br>沿途的微光，都可以留下。</p></div>
 						<div class="journey-cover-seal" aria-hidden="true">${icon("leaf")}<span>夏日花园</span><small>沿途留印</small></div>
 						<div class="journey-cover-bottom"><p id="journeyProgress">还没有留下印记</p><div class="journey-progress-track" aria-hidden="true"><i></i></div><span>不记名 · 自由漫游</span></div>

@@ -764,8 +764,151 @@ function initVinylWall() {
 	const musicSection = document.getElementById("music");
 	if (!musicSection) return;
 
-	// 示例曲目字典，可替换为你有权使用的音频
-	const VINYL_SONGS = Object.fromEntries(["courage", "summer", "ocean", "room", "passion", "companion", "bigFish", "brightness", "forgetWorry", "threeMeals", "believeDream", "mistMoon", "devastation", "chasingStarlight", "moonVeil", "mirroredMoon"] .map((id, i) => [id, {id, title: "示例曲目 " + (i + 1), artist: "示例音乐", src: "../audio/demo.wav", discImg: "../img/demo.svg", coverImg: "../img/demo.svg", totalTimeStr: "00:04", memoryNote: "替换成你的音乐与故事。", lyric: "示例文字", memoryTags: ["示例"], story: "在此填写你的音乐故事。"}]));
+	// 6 首曲目私人歌单字典（对应图库/音乐/本地真实音频文件）
+	const VINYL_SONGS = {
+		courage: {
+			id: "courage",
+			title: "《平凡之路》",
+			artist: "朴树",
+			src: "../audio/stream-20261028/courage.mp3",
+			discImg: "../img/vinyl_courage.webp",
+			coverImg: "../img/cover_courage.webp",
+			totalTimeStr: "05:01",
+			memoryNote: "听到前奏就会想起高中毕业那个夏天，一个人坐火车来合肥的清晨。",
+			lyric: "我曾经跨过山和大海，也穿过人山人海，直到看见平凡，才是唯一的答案。",
+			memoryTags: ["跑道", "远山", "独自出发的清晨"],
+			story: "高中毕业那个夏天，独自拖着行李箱踏上开往合肥的列车。耳机里反复循环着这首歌，车窗外是一闪而过的原野与电线杆。当时心里满是对大学和未来的忐忑与憧憬。后来在合工大很多迷茫自省的深夜，每一次觉得撑不下去的时候，朴树克制却坚定的声音总在提醒我：‘平凡’不是认输或平庸，而是在认清真实的生活后，依然有跨越山海去热爱的勇气。"
+		},
+		summer: {
+			id: "summer",
+			title: "《风仪之舞》",
+			artist: "HOYO-MiX · 苑迪萌",
+			src: "../audio/stream-20261028/summer.mp3",
+			discImg: "../img/vinyl_summer.webp",
+			coverImg: "../img/cover_summer.webp",
+			totalTimeStr: "02:24",
+			memoryNote: "像夏天傍晚突然吹过来的一阵风，心浮气躁的时候放它总能静下来。",
+			lyric: "若水流转，若雪凝芳；若愿此舞，如白鹭振翅，拂过盛夏微澜。",
+			memoryTags: ["晚风", "树影", "盛夏溪流"],
+			story: "第一次听到这段神里绫华月下踏水起舞的旋律，就被其中竹笛与弦乐交织出的清凉意境深深打动。合肥的七八月常常酷暑难耐，每当在实验室画完一整套悬架结构图纸或调通动力学模型，我总喜欢在傍晚走出工程馆，戴上耳机坐在翡翠湖畔的绿荫长椅上。微风吹过树梢，这段旋律就像一阵穿堂而过的山间凉风，把所有浮躁抚平，留下盛夏最纯粹的明净。"
+		},
+		ocean: {
+			id: "ocean",
+			title: "《化身孤岛的鲸》",
+			artist: "周深",
+			src: "../audio/stream-20261028/ocean.mp3",
+			discImg: "../img/vinyl_ocean.webp",
+			coverImg: "../img/cover_ocean.webp",
+			totalTimeStr: "04:25",
+			memoryNote: "不是最热闹的一首，但在海边一个人看落日和独自走路时很踏实。",
+			lyric: "我是只化身孤岛的蓝鲸，有着最巨大的身影，陪伴你度过无风无浪的长夜。",
+			memoryTags: ["浪花", "晚霞", "漫漫长夜"],
+			story: "曾经有一段独自在海边防波堤看日落的经历。海风裹挟着咸涩的气息，潮水一下下拍打着礁石，夕阳把整片海面染成温柔的紫粉色。耳机里周深空灵清澈的声线缓缓展开，那一刻突然觉得，每个人或许生来都是一座孤岛，但在浩瀚的数字电波与音乐世界里，总能遇到相互守望的岛屿与游鲸。它是那些漫长夜晚里最温暖的声学拥抱。"
+		},
+		room: {
+			id: "room",
+			title: "《Dancing Butterflies》",
+			artist: "The New Asia Ensemble",
+			src: "../audio/stream-20261028/room.mp3",
+			discImg: "../img/vinyl_room.webp",
+			coverImg: "../img/cover_room.webp",
+			totalTimeStr: "04:33",
+			memoryNote: "适合在房间里画图做仿真累的时候循环，像阳光切过百叶窗的跳动。",
+			lyric: "东方韵律与灵动鼓点的翩跹交织，如同一对蝴蝶穿过午后百叶窗的光束。",
+			memoryTags: ["窗台", "暖茶", "午后书桌"],
+			story: "这是我私藏的‘心流专注 BGM’。周末的下午，把书桌收拾得干干净净，泡上一杯温热的绿茶，窗外的阳光穿过百叶窗，在桌面上投下斑驳明亮的光条。音乐里有扬琴与打击乐的轻盈跳动，没有歌词的打扰，只有纯粹而生动的节奏感。每当在这个安静的小房间里梳理机械设计思路或整理个人主页时，灵感就会像蝴蝶一样自在飞舞。"
+		},
+		passion: {
+			id: "passion",
+			title: "《快意新词》",
+			artist: "HOYO-MiX · 赵鑫",
+			src: "../audio/stream-20261028/passion.mp3",
+			discImg: "../img/vinyl_passion.webp",
+			coverImg: "../img/cover_passion.webp",
+			totalTimeStr: "01:18",
+			memoryNote: "大二深夜死磕机械设计和竞赛备战时的热血伴奏，按下播放键就有继续冲刺的力气。",
+			lyric: "少年意气凌云志，一曲新词快意生；弦歌骤起处，敢与星海争光。",
+			memoryTags: ["宵灯", "机械制图", "深夜攻坚"],
+			story: "大二攻坚汽车构造与机械设计、备战方程式赛车竞赛时，常常在深夜面对满屏的三维建模和动力学仿真奋战到凌晨两三点。每当思维陷入僵局，我就会戴上耳机打开这首《快意新词》。民乐大提琴与急促琵琶的破空之声，瞬间点燃浑身的斗志。伴着激昂的鼓点一气呵成完成装配体干涉检查与受力分析，仿真计算全部收敛通过的一瞬间，那种少年侠客般的快意无与伦比。"
+		},
+		companion: {
+			id: "companion",
+			title: "《山风拂萝衣》",
+			artist: "陈致逸 / HOYO-MiX",
+			src: "../audio/stream-20261028/companion.mp3",
+			discImg: "../img/vinyl_companion.webp",
+			coverImg: "../img/cover_companion.webp",
+			totalTimeStr: "02:11",
+			memoryNote: "和好友在秋天林道上骑单车的那趟短途出行，微风拂过衣角，阳光正好。",
+			lyric: "轻策庄梯田间的炊烟与竹林，山风拂过衣角，带来远方同行的脚步声。",
+			memoryTags: ["单车", "梯田", "挚友同行"],
+			story: "有一年深秋，我和几位好友租了单车去郊外骑行。阳光透过落叶金黄的林道，大家并排骑行，大声笑着聊起各自未来的理想与规划，没有任何对升学或工作的焦虑。这首悠扬的笛子与木吉他小调，就像那趟旅途中始终陪伴身旁的温煦山风。岁月流转，我们各自奔向不同的人生轨迹，但只要旋律响起，就能瞬间回到那段并肩同行的无忧时光。"
+		}
+	};
+
+	// 歌单卡带里的补充曲目：与图库/音乐中的真实文件一一对应。
+	Object.assign(VINYL_SONGS, {
+		bigFish: {
+			id: "bigFish", title: "《大鱼》", artist: "周深", src: "../audio/stream-20261028/bigFish.mp3",
+			discImg: "../img/vinyl_courage.webp", coverImg: "../img/cover_courage.webp", totalTimeStr: "05:18",
+			memoryNote: "海浪般温柔的低回与辽阔，循环过无数次。", lyric: "海浪般温柔的低回与辽阔。",
+			memoryTags: ["周深", "人声", "MP3"], story: "这首曲目使用图库音乐目录中的 MP3 文件，可直接播放。"
+		},
+		brightness: {
+			id: "brightness", title: "《光亮》", artist: "周深", src: "../audio/stream-20261028/brightness.mp3",
+			discImg: "../img/vinyl_courage.webp", coverImg: "../img/cover_courage.webp", totalTimeStr: "04:49",
+			memoryNote: "引吭破空的京剧戏腔，每次听都心潮澎湃。", lyric: "引吭破空的京剧戏腔。",
+			memoryTags: ["周深", "戏腔", "MP3"], story: "这首曲目使用图库音乐目录中的 MP3 文件，可直接播放。"
+		},
+		forgetWorry: {
+			id: "forgetWorry", title: "《花开忘忧》", artist: "周深",
+			src: "../audio/stream-20261028/forgetWorry.mp3", discImg: "../img/vinyl_courage.webp", coverImg: "../img/cover_courage.webp", totalTimeStr: "04:13",
+			memoryNote: "给疲惫日常的一剂温热良药。", lyric: "给疲惫日常的一剂温热良药。",
+			memoryTags: ["周深", "日常", "MP3"], story: "这首歌使用图库音乐目录中的 MP3 文件，可直接在网页播放器中播放。"
+		},
+		threeMeals: {
+			id: "threeMeals", title: "《三餐四季》", artist: "周深", src: "../audio/stream-20261028/threeMeals.mp3",
+			discImg: "../img/vinyl_courage.webp", coverImg: "../img/cover_courage.webp", totalTimeStr: "04:20",
+			memoryNote: "平凡人间烟火气里的微小幸福。", lyric: "平凡人间烟火气里的微小幸福。",
+			memoryTags: ["周深", "烟火气", "MP3"], story: "这首曲目使用图库音乐目录中的 MP3 文件，可直接播放。"
+		},
+		believeDream: {
+			id: "believeDream", title: "《请笃信一个梦》", artist: "周深", src: "../audio/stream-20261028/believeDream.mp3",
+			discImg: "../img/vinyl_courage.webp", coverImg: "../img/cover_courage.webp", totalTimeStr: "04:22",
+			memoryNote: "在安静处发光，始终相信明日晴朗。", lyric: "在安静处发光，始终相信明日晴朗。",
+			memoryTags: ["周深", "愿望", "MP3"], story: "这首曲目使用图库音乐目录中的 MP3 文件，可直接播放。"
+		},
+		mistMoon: {
+			id: "mistMoon", title: "《云楼烟霭月斜白》", artist: "HOYO-MiX · 沉玉仙幽",
+			src: "../audio/stream-20261028/mistMoon.mp3", discImg: "../img/vinyl_summer.webp", coverImg: "../img/cover_summer.webp", totalTimeStr: "01:56",
+			memoryNote: "The Hazy Moonlit Mist · 仙山水墨清冷琴韵。", lyric: "仙山水墨清冷琴韵。",
+			memoryTags: ["提瓦特", "沉玉谷", "MP3"], story: "这首曲目使用图库音乐目录中的 MP3 文件，可直接播放。"
+		},
+		devastation: {
+			id: "devastation", title: "《神女劈观·唤情》", artist: "HOYO-MiX · 璃月华章",
+			src: "../audio/stream-20261028/devastation.mp3", discImg: "../img/vinyl_passion.webp", coverImg: "../img/cover_passion.webp", totalTimeStr: "02:41",
+			memoryNote: "Devastation and Redemption · 戏腔交响出圈神作。", lyric: "戏腔交响出圈神作。",
+			memoryTags: ["璃月", "戏腔", "MP3"], story: "这首曲目使用图库音乐目录中的 MP3 文件，可直接播放。"
+		},
+		chasingStarlight: {
+			id: "chasingStarlight", title: "《共逐星华》", artist: "HOYO-MiX · 诗歌庆典",
+			src: "../audio/stream-20261028/chasingStarlight.mp3", discImg: "../img/vinyl_companion.webp", coverImg: "../img/cover_companion.webp", totalTimeStr: "02:34",
+			memoryNote: "清脆灵动，充满少年意气的结伴漫游。", lyric: "清脆灵动的结伴漫游。",
+			memoryTags: ["诗歌庆典", "同行", "MP3"], story: "这首曲目使用图库音乐目录中的 MP3 文件，可直接播放。"
+		},
+		moonVeil: {
+			id: "moonVeil", title: "《詹诸张幕遮银阙》", artist: "HOYO-MiX · 银月初显",
+			src: "../audio/stream-20261028/moonVeil.mp3", discImg: "../img/vinyl_ocean.webp", coverImg: "../img/cover_ocean.webp", totalTimeStr: "02:11",
+			memoryNote: "The Moon's Mist-Woven Veil · 提瓦特清幽夜色。", lyric: "提瓦特清幽夜色。",
+			memoryTags: ["夜色", "月光", "MP3"], story: "这首曲目使用图库音乐目录中的 MP3 文件，可直接播放。"
+		},
+		mirroredMoon: {
+			id: "mirroredMoon", title: "《献向镜水的月光》", artist: "HOYO-MiX, 真栗 · 哥伦比娅",
+			src: "../audio/stream-20261028/mirroredMoon.mp3", discImg: "../img/vinyl_summer.webp", coverImg: "../img/cover_summer.webp", totalTimeStr: "03:27",
+			memoryNote: "Song to the Mirrored Moon · 纯净空灵的圣洁吟唱。", lyric: "纯净空灵的圣洁吟唱。",
+			memoryTags: ["镜水", "吟唱", "MP3"], story: "这首曲目使用图库音乐目录中的 MP3 文件，可直接播放。"
+		}
+	});
 
 	const songKeys = Object.keys(VINYL_SONGS);
 	let currentSongId = "courage";
@@ -1205,7 +1348,7 @@ function initReadingJournal() {
 			readStatus: "已读",
 			postReadStatus: "笑着破防",
 			coordinate: "人间讽刺 / 围困",
-			cover: "../img/demo.svg",
+			cover: "../img/user_cover_weicheng.webp",
 			handwrittenNote: "“城里的人想出去，城外的人想冲进来。”",
 			stickerHtml: `
 				<div class="artifact-ticket" title="出入城随心往返票根">
@@ -1214,7 +1357,7 @@ function initReadingJournal() {
 					<div class="ticket-no">出入自由 · 自行破防</div>
 				</div>
 			`,
-			quote: "在这里写下你自己的读书感想。",
+			quote: "围在城里的人想冲出来，城外的人想冲进去。对婚姻也罢，职业也罢，人生的愿望大都如此。",
 			insight: "年少看方鸿渐觉得滑稽可笑，如今看却满是普通人无法逃脱的狼狈与犹疑。生活里的“围城”何止婚姻？那些未曾抵达的远方总是最好的，直到我们真正置身其中。",
 			keywords: ["#人间讽刺", "#无形围困", "#清醒自省"],
 			epilogue: "刻薄背后藏着对人性的极致体察。承认自己的平庸与局限，大概是与生活握手言和的第一步。",
@@ -1229,7 +1372,7 @@ function initReadingJournal() {
 			readStatus: "已读",
 			postReadStatus: "后劲很大",
 			coordinate: "土地记忆 / 消逝",
-			cover: "../img/demo.svg",
+			cover: "../img/user_cover_eerguna.webp",
 			handwrittenNote: "“听见风穿过白桦林的声音。”",
 			stickerHtml: `
 				<div class="artifact-birch" title="白桦叶脉与河流足迹">
@@ -1243,7 +1386,7 @@ function initReadingJournal() {
 					<span class="birch-caption">额尔古纳 · 白桦与雪</span>
 				</div>
 			`,
-			quote: "在这里写下你自己的读书感想。",
+			quote: "我是雨和雪的老朋友了，雨雪看我，也是这么看的。",
 			insight: "鄂温克人在大兴安岭林海中的百年流转，有一种沉静而浩瀚的生命力。风穿过白桦林的声音、驯鹿的喘息、萨满的歌谣，在钢筋水泥构筑的现代世界里，让人重新找回敬畏。",
 			keywords: ["#土地记忆", "#生命消逝", "#自然敬畏"],
 			epilogue: "生命如昼夜交替般坦然，死亡不是终结，只是回归了大地的怀抱。",
@@ -1258,7 +1401,7 @@ function initReadingJournal() {
 			readStatus: "在读",
 			postReadStatus: "在读中",
 			coordinate: "远行归乡 / 命运",
-			cover: "../img/demo.svg",
+			cover: "../img/user_cover_odyssey.webp",
 			handwrittenNote: "“漫长漂泊，只为确认归途的自己。”",
 			stickerHtml: `
 				<div class="artifact-odyssey" title="古希腊帆船与归航罗盘">
@@ -1272,7 +1415,7 @@ function initReadingJournal() {
 					<span class="odyssey-caption">ITHACA · 10 YRS</span>
 				</div>
 			`,
-			quote: "在这里写下你自己的读书感想。",
+			quote: "你要忍耐，我的心；你曾忍受过比这更残酷的折磨。",
 			insight: "奥德修斯历经十载漂泊与海妖风暴，抗拒了永生诱惑，一心回到故土伊萨卡。每一个人的人生都是一场奥德赛，出发是为了求索世界，而归途是为了确认自己到底是谁。",
 			keywords: ["#远行归乡", "#命运抗争", "#英雄意志"],
 			epilogue: "所有的漂泊与风暴，最终都会化作写在自己命途上的年轮。",
@@ -1287,7 +1430,7 @@ function initReadingJournal() {
 			readStatus: "已读",
 			postReadStatus: "夯爆了",
 			coordinate: "宇宙文明 / 仰望",
-			cover: "../img/demo.svg",
+			cover: "../img/user_cover_santi.webp",
 			handwrittenNote: "“宇宙很冷，但人类仍在仰望。”",
 			stickerHtml: `
 				<div class="artifact-santi" title="三体混沌星轨与宇宙坐标">
@@ -1304,7 +1447,7 @@ function initReadingJournal() {
 					<span class="santi-caption">1987A · 2200CE</span>
 				</div>
 			`,
-			quote: "在这里写下你自己的读书感想。",
+			quote: "给岁月以文明，而不是给文明以岁月。",
 			insight: "它最震撼我的不是科幻设定，而是当文明被放进宇宙尺度后，人类的勇敢和恐惧都变得很小，又很亮。",
 			keywords: ["#宇宙文明", "#仰望星空", "#冷峻理性"],
 			epilogue: "合上书走出自习室，秋夜的风很凉，抬头看头顶浩瀚的星空，忽然觉得眼前的繁杂学业与烦恼都被稀释了。",

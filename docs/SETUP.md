@@ -31,7 +31,7 @@ window.SITE_CONFIG = {
 };
 ```
 
-保留文件下方的配置应用代码。它会替换页面中预留的 `My Garden` 和 `Your Name` 文本；个人介绍、签名和经历等正文仍在各 HTML 页面中编辑。
+保留文件下方的配置应用代码。它会替换页面中对应的 `JX Garden` 和 `Zhang Jiaxing` 文本；中文姓名、学校、个人介绍、签名和经历等正文仍需要在各 HTML 页面中编辑。
 
 ### 页面与文字
 
@@ -47,10 +47,10 @@ window.SITE_CONFIG = {
 
 ### 图片、相册与音乐
 
-- **图片**：示例风景和鲸鱼位于 `img/`。如果换用其他文件名或格式，需要同步修改 HTML、CSS 或 JavaScript 中的引用。
-- **相册**：照片列表位于 [`js/photo-gallery.js`](../js/photo-gallery.js)，可替换图片路径、标题和描述。
-- **曲目**：音乐数据位于 [`js/main.js`](../js/main.js)，背景音乐路径位于 [`js/site-audio.js`](../js/site-audio.js)。所有示例曲目目前都使用 `audio/demo.wav` 这段四秒音频，替换时请逐项修改路径与曲目信息。
-- **联系方式**：联系二维码默认关闭，需要时可自行补充公开的联系入口。
+- **图片**：原站背景、头像、封面和角色图片位于 `img/`，部分插图位于 `图库/`。如果换用其他文件名或格式，需要同步修改 HTML、CSS 或 JavaScript 中的引用。
+- **相册**：原站的照片预览位于 `photos/previews/`，照片列表位于 [`js/photo-gallery.js`](../js/photo-gallery.js)。替换时请同步修改图片、标题和描述；原相册坐标未包含在开源版中。
+- **曲目**：原站的 16 首曲目与一首背景音乐位于 `audio/stream-20261028/`。曲目数据位于 [`js/main.js`](../js/main.js)，背景音乐路径位于 [`js/site-audio.js`](../js/site-audio.js)。替换时请同步修改路径、标题和封面。
+- **联系方式**：页面保留了原站联系入口和二维码。请在各 HTML 页面及 `img/` 中替换成你自己的信息和图片。
 
 发布或再分发时，请使用自己有权发布的图片、音频和其他素材。素材与第三方代码说明见 [ASSETS.md](../ASSETS.md)。
 
@@ -112,8 +112,10 @@ summer-garden-open-template/
 ├── html/                # 主页、兴趣、手记、留言与管理页面
 ├── css/                 # 页面样式
 ├── js/                  # 页面交互与内容配置
-├── img/                 # 示例图片
-├── audio/               # 示例音频
+├── img/                 # 原站背景、头像与封面
+├── 图库/                # 原站插图
+├── photos/previews/     # 原站相册预览
+├── audio/               # 原站音乐与背景音频
 ├── docs/                # 使用指南与页面预览
 ├── licenses/            # 第三方代码许可
 ├── server.py            # 本地服务与留言接口

@@ -1,10 +1,10 @@
-/* My Garden adapter for DeepSeek Balance Whale Widget v0.4.2 (5247dd6).
+/* JX Garden adapter for DeepSeek Balance Whale Widget v0.4.2 (5247dd6).
  * Press/rebound and snap-zone logic adapted from MeteorNOX, Copyright (c) 2026, MIT.
  * Full code license and separate artwork provenance: /licenses/whale-widget.txt.
  * DSH accounting, account access, network polling and sound modules are not loaded. */
 (function () {
 	"use strict";
-	const spriteUrl = new URL("../img/demo-whale.svg", document.currentScript.src).href;
+	const spriteUrl = new URL("../img/garden-whale.webp?v=20261027-whale02", document.currentScript.src).href;
 	function init() {
 		if (document.getElementById("gardenCompanion")) return;
 		const key = "jxgarden-companion-v1";

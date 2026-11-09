@@ -14,16 +14,20 @@
 
 **Summer Garden** 是一个可以改成你自己网站的个人空间模板。从夏日站台出发，写一段自我介绍，收藏音乐、游戏、书籍和照片，也留一页记录学习与折腾的过程。
 
+仓库保留了原站的背景、音乐、图片和页面内容。下载后可以先体验原来的样子，再把姓名、介绍、照片和联系方式换成你自己的内容。
+
 如果你想搭建个人主页、整理兴趣收藏，或从一个完整的小项目开始学习网页制作，可以先把它运行起来，再一点点换成自己的故事。
 
 ## 页面预览
 
-![电脑手记页面：墨绿色文字、纸张底纹与手账卡片](docs/images/toolbox-preview.png)
+![Summer Garden 夏日站台首页，蓝天、列车和人物插画组成入口背景](docs/images/station-preview.png)
 
-<p align="center"><sub>模板预览 · 电脑手记</sub></p>
+<p align="center"><sub>夏日站台 · 原站资源预览</sub></p>
 
 <details>
-<summary>展开看看手账里的经历卡片</summary>
+<summary>展开看看音乐与电脑手记</summary>
+
+![兴趣营地的音乐播放器与唱片收藏](docs/images/music-preview.png)
 
 ![电脑手记的经历卡片，按起点、过程、视野与进阶展开](docs/images/story-preview.png)
 
@@ -65,11 +69,11 @@ python server.py
 | --- | --- |
 | 站点名称与站主昵称 | [`js/site-config.js`](js/site-config.js) |
 | 页面文字、经历与工具卡片 | [`index.html`](index.html) 和 [`html/`](html/) |
-| 图片与相册 | [`img/`](img/) 和 [`js/photo-gallery.js`](js/photo-gallery.js) |
+| 图片与相册 | [`img/`](img/)、[`photos/previews/`](photos/previews/) 和 [`js/photo-gallery.js`](js/photo-gallery.js) |
 | 曲目与背景音乐 | [`js/main.js`](js/main.js)、[`js/site-audio.js`](js/site-audio.js) 和 [`audio/`](audio/) |
 | 配色、排版与页面样式 | [`css/`](css/) |
 
-项目附带可替换的示例图片和一段短音频，方便先体验页面。更换素材、设置留言管理密码和部署网站的步骤，都放在 **[定制与部署指南](docs/SETUP.md)** 中。
+原站的图片和音频已随项目提供，播放和展示效果可以直接体验。更换素材、设置留言管理密码和部署网站的步骤，都放在 **[定制与部署指南](docs/SETUP.md)** 中。
 
 ## 部署你的小花园
 
@@ -86,6 +90,6 @@ python server.py
 
 ## 许可与致谢
 
-项目采用 **[MIT License](LICENSE)**，欢迎使用、修改和分发，请保留相应的许可声明。
+项目代码采用 **[MIT License](LICENSE)**，欢迎使用、修改和分发，请保留相应的许可声明。
 
-示例素材与第三方代码说明见 [ASSETS.md](ASSETS.md)；小鲸鱼交互代码的作者与许可见 [whale-widget.txt](licenses/whale-widget.txt)。感谢开源作者们的分享，也期待这座小花园在不同的人手里长出新的样子。
+图片、音乐等素材的权利和代码许可分别计算，使用前请阅读 [ASSETS.md](ASSETS.md)；小鲸鱼交互代码的作者与许可见 [whale-widget.txt](licenses/whale-widget.txt)。感谢开源作者们的分享，也期待这座小花园在不同的人手里长出新的样子。

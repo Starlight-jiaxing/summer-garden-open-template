@@ -11,7 +11,49 @@ function initMemoryGallery() {
 	const ambientDate = document.getElementById("photoAmbientDate");
 	if (!stage || !world || !strip) return;
 
-	const photos = Array.from({length: 6}, (_, index) => ({frame: String(index + 1).padStart(2, "0"), filename: "demo.svg", category: ["summer", "night", "daily", "campus", "travel"][index % 5], title: "示例照片 " + (index + 1), note: "换成你的照片与故事。", date: "", place: "", src: "../img/demo.svg", thumb: "../img/demo.svg", display: "../img/demo.svg", frameStyle: ["film", "postcard", "polaroid"][index % 3]}));
+	// Dates come from camera filenames. Exported images have no reliable capture date.
+	const records = [
+		["IMG_20250617_142644.webp", "summer", "树下的晴天", "蓝天、步道和树影。"],
+		["IMG_20250617_191009.webp", "summer", "傍晚的草地", "云层下留着一线晚光。"],
+		["MVIMG_20251002_190918.webp", "night", "夜色中的灯饰", "发光的装置立在夜空下。"],
+		["MVIMG_20251029_112045.webp", "daily", "笔直的步道", "道路向树木深处延伸。"],
+		["MVIMG_20251229_204947.webp", "daily", "黑板上的速写", "一幅粉笔画留在绿色黑板上。"],
+		["MVIMG_20260101_214820.webp", "night", "桥边的灯笼", "暖色灯笼照亮夜晚的栏杆。"],
+		["MVIMG_20260101_215643.webp", "night", "夜里的彩灯", "彩色灯饰悬在夜色中。"],
+		["MVIMG_20260104_091429.webp", "daily", "树影与街道", "晨光落在树下的人行道。"],
+		["IMG_20260404_164642.webp", "daily", "树旁的白鹅", "白鹅停在树干旁。"],
+		["IMG_20260404_173444.webp", "summer", "粉色的花", "一朵盛开的粉色花。"],
+		["IMG_20260404_173635.webp", "summer", "绿色叶片", "叶片铺满了整个画面。"],
+		["IMG_20260517_211300.webp", "daily", "一碗甜品", "浅色甜品放在木盘里。"],
+		["IMG_20260531_160331.webp", "campus", "楼前的草坪", "树荫与建筑围出一块草地。"],
+		["IMG_20260603_215546.webp", "daily", "草地上的猫", "两只猫停在草地边。"],
+		["IMG_20260617_185435.webp", "travel", "路上的傍晚", "车流沿着城市道路前行。"],
+		["IMG_20260618_093243.webp", "campus", "门前的路牌", "红色路牌立在建筑前。"],
+		["IMG_20260618_101524.webp", "travel", "广场一角", "树木、路面和一辆红色车。"],
+		["IMG_20260618_102550.webp", "travel", "林间台阶", "石阶穿过一片树林。"],
+		["IMG_20260618_195729.webp", "night", "夜间车窗", "车窗外是红色灯光。"],
+		["IMG_20260619_184753.webp", "travel", "街道与公交车", "一辆蓝色公交车经过街边。"],
+		["IMG_20260703_210055.webp", "daily", "桌上的纸签", "一张绿色纸签放在桌面。"],
+		["IMG_20260705_181438.webp", "summer", "晴天与建筑", "树影映在明亮的城市街边。"],
+		["IMG_20260719_163847.webp", "travel", "屋檐与树", "深色屋檐藏在树木之间。"],
+		["mmexport1768389082919.webp", "night", "灯下的亭子", "灯光勾勒出亭子的轮廓。"],
+		["mmexport1780117107740.webp", "daily", "树上的猫", "一只猫坐在树枝旁。"],
+		["mmexport1780239583827.webp", "campus", "室内投影", "屏幕前有人站着。"]
+	];
+	const gps = []; // Add your own photo locations if desired.
+	const photos = records.map(([filename, category, title, note], index) => {
+		const match = filename.match(/^(?:MV)?IMG_(\d{4})(\d{2})(\d{2})_/);
+		const stem = filename.replace(/\.webp$/i, "");
+		return {
+			frame: String(index + 1).padStart(2, "0"), filename, category, title, note,
+			date: match ? `${match[1]}.${match[2]}.${match[3]}` : "",
+			place: gps[index] ? `${gps[index][0].toFixed(2)}°N ${gps[index][1].toFixed(2)}°E` : "",
+			src: `../photos/previews/${stem}-display.webp`,
+			thumb: `../photos/previews/${stem}-thumb.webp`,
+			display: `../photos/previews/${stem}-display.webp`,
+			frameStyle: ["film", "postcard", "polaroid", "film", "postcard"][index % 5]
+		};
+	});
 	const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
 	const canHover = window.matchMedia("(hover: hover)");
 	let visible = photos;

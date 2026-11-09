@@ -3178,7 +3178,7 @@
 	position: absolute;
 	inset: -3%;
 	z-index: 0;
-	background: url("../img/demo.svg") center / cover no-repeat;
+	background: url("../img/wukong_hero_web.webp?v=20261026-webp01") center / cover no-repeat;
 	filter: blur(18px) brightness(0.42) saturate(0.8);
 	transform: scale(1.04);
 }

@@ -2,7 +2,7 @@
 (function () {
 	"use strict";
 
-	const MUSIC_URL = new URL("../audio/demo.wav", document.currentScript.src).href;
+	const MUSIC_URL = new URL("../audio/stream-20261028/station.mp3", document.currentScript.src).href;
 	const PREFERENCE_KEY = "jxgarden-background-music-v1";
 	const POSITION_KEY = "jxgarden-background-music-position-v1";
 	const TARGET_VOLUME = 0.1;
